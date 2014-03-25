@@ -1,5 +1,34 @@
-INSTALL.txt
-LICENSE.txt
-README.txt
-demos/
-extras/documentation
+# doc
+docs/*
+
+# librairies externes
+library/*
+
+# sitemap
+public/sitemap.xml
+
+# blog
+public/blog/
+
+### Fichiers sensibles
+
+# config prod
+application/configs/application.ini
+
+### Fichiers temporaires et fichiers système
+
+# cache zend
+var/
+
+# cache moteur de recherche (?)
+application/modules/Core/data/*
+
+# dechets windows / macos
+Thumbs.db
+*.DS_Store
+
+# fichiers vim
+*~
+*.swp
+*.swo
+
