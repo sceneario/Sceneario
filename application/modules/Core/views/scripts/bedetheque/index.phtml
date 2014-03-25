@@ -1,0 +1,65 @@
+     
+<!-- CONTENU -->
+
+<header class="header-mauve" id="bedetheque">
+	<p>Aujourd'hui, la bédéthèque de Sceneario c'est : <span><?php echo $this->nbCritiques ?></span> chroniques sur <span><?php echo $this->nbAlbums ?></span> albums par <span><?php echo $this->nbAuteurs ?></span> auteurs</p>
+</header>
+
+<div class="clear" style="height:50px;"></div>
+
+<!-- Nouveautés -->
+<section class="itemBedetheque">
+    <h1>Nouveautés <a href="<?php echo $this->customUrl(array('tag' => 'nouveautes'), 'listalbum') ?>">Tout afficher ></a></h1>
+    <?php /*
+    <div class="checkboxes">
+            <input type="checkbox" name="bd" value="bd"> <span>BD</span>
+            <input type="checkbox" name="manga" value="manga"> <span>Manga</span>
+            <input type="checkbox" name="comics" value="comics"> <span>Comics</span>
+    </div>
+    */?>
+    <div class="separateur"></div>
+
+    <div class="albums-slider">
+        <?php echo $this->partial('partials/listingAlbum.phtml', 
+                                  array('albums' => $this->newAlbums) ) ; ?>
+    </div><!-- albums-slider -->
+</section>
+
+<!-- Derniers ajouts -->
+<section class="itemBedetheque">
+	<h1>Derniers ajouts</h1>
+	
+	<div class="separateur"></div>
+	
+	<div class="albums-slider">
+            <?php echo $this->partial('partials/listingAlbum.phtml', 
+                                      array('albums' => $this->recentAlbums) ) ; ?>
+	</div><!-- albums-slider -->
+</section>
+
+<!-- Coup de coeur -->
+<section class="itemBedetheque">
+	<h1>Coup de coeur <a href="<?php echo $this->customUrl(array(), 'coupdecoeur') ?>">Tout afficher ></a></h1>
+	
+	<div class="separateur"></div>
+	
+	<div class="albums-slider">
+            <?php echo $this->partial('partials/listingAlbum.phtml', 
+                                       array('albums' => $this->coupsDeCoeurAlbums) ) ; ?>
+	</div><!-- albums-slider -->
+</section>
+
+<!-- Les plus vues -->
+<section class="itemBedetheque">
+	<h1>Les plus vues</a></h1>
+	
+	<div class="separateur"></div>
+	
+	<div class="albums-slider">
+            <?php echo $this->partial('partials/listingAlbum.phtml', 
+                                  array('albums' => $this->mostViewedAlbums) ) ; ?>
+	</div><!-- albums-slider -->
+</section>
+
+<!-- Reinitialisation des float -->
+<div class="clear"></div>

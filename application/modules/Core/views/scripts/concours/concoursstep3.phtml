@@ -1,0 +1,39 @@
+<!-- CONTENU -->
+<h1 class="concours">&Agrave; gagner en ce moment sur Sceneario !</h1>
+
+<div class="whiteblock940">
+ 
+        <figure class="center">
+           <?php
+                $filename =  '/images/concours/' . $this->concoursEnCours->getNomConcours() . '.jpg' ;
+                if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
+                     $filename = "/img/temp/scev6-tempconcours.jpg";      
+                endif; ?>
+            <img src="<?php echo $filename ?>" alt="" class="illus">
+                ?>
+		<figcaption><span><?php echo $this->concoursEnCours->getLibelleConcours() ?></span></figcaption>
+	</figure>
+     
+	<hgroup>
+            <h2>Du <?php echo $this->dateFormat($this->concoursEnCours->getDateDebut() , 'day_month_year_with_slash') 
+                          . ' au ' .  $this->dateFormat($this->concoursEnCours->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
+            <h3><?php echo strip_tags($this->concoursEnCours->getEntete()) ?></h3>
+	</hgroup>
+        <?php echo $this->linkAlbum ?>
+	
+	<!-- Reinitialisation des float -->
+	<div class="clear"></div>
+	
+	<div class="separateur"></div>
+	
+	<p class="confirm"><?php echo $this->message ?></p>
+	
+	<!-- Reinitialisation des float -->
+<div class="clear"></div>
+	
+    <p class="reglement"><a target="_blank" href="<?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours() , 
+                                                         'idConcours'  => $this->concoursEnCours->getNomConcours()), 'concoursreglement') ?>">Voir le réglement du concours</a></p>
+</div>
+
+<!-- Reinitialisation des float -->
+<div class="clear"></div>

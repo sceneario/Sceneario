@@ -1,0 +1,298 @@
+h1.calendrier {
+	font-size: 17px;
+	font-weight: bold;
+	color:#8d8d8d;
+	margin:0;
+	margin-bottom:20px;
+}
+
+section.calendrier {
+	width:940px;
+	min-height:700px;
+	
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #fff;
+	-moz-box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	-webkit-box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	
+	margin-top:20px;
+	margin-bottom:50px;
+	padding-bottom:5px;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+section.calendrier header {
+	width:100%;
+	height:45px;
+	position:relative;
+	margin:0;
+}
+
+section.calendrier header h1 {
+	color: #ab3277;
+	font-size: 15px;
+	font-weight: bold;
+	width:100%;
+	text-align:center;
+	height:45px;
+	line-height:45px;
+	margin:0;
+	padding:0;
+}
+
+section.calendrier header a {
+	position:absolute;
+	width:28px;
+	height:28px;
+	display:block;
+	background:url('../img/sprite-calendar.png') no-repeat;
+	text-indent:-8000px;
+	top:12px;
+}
+
+section.calendrier header a.previous {
+	left:20px;
+}
+
+section.calendrier header a.previous:hover {
+	background-position:0 -29px;
+}
+
+section.calendrier header a.next {
+	right:20px;
+	background-position:-29px 0;
+}
+
+section.calendrier header a.next:hover {
+	background-position:-29px -29px;
+}
+
+section.calendrier > ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+	margin-left:20px;
+	margin-top:5px;
+}
+
+section.calendrier > ul li {
+	float:left;
+	color: #818181;
+	font-size: 12px;
+	width:120px;
+	margin-right:10px;
+	text-align:center;
+}
+
+section.calendrier table {
+	border:0;
+	margin-left:10px;
+	margin-top:0px;
+	border-collapse:separate;
+	border-spacing: 8px;
+}
+
+section.calendrier table td {
+	width:120px;
+	height:100px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #f4f4f4;
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.14);
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.14);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.14);
+	
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.05) 0%, rgba(255,255,255,.05) 100%);
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.05) 0%, rgba(255,255,255,.05) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.05) 0%, rgba(255,255,255,.05) 100%);
+	background-image: linear-gradient(bottom, rgba(0,0,0,.05) 0%, rgba(255,255,255,.05) 100%);
+	vertical-align:top;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+section.calendrier table td > h1 {
+	color: #545454;
+	font-size: 14px;
+	font-weight:normal;
+	margin-left:10px;
+}
+
+section.calendrier table td.inactive > h1 {
+	color: #bfbfbf;
+	font-size: 14px;
+	font-weight:normal;
+	margin-left:10px;
+}
+
+section.calendrier table td ul {
+	width:100%;
+	height:75px;
+	margin:0;
+	padding:0;
+	list-style:none;
+	margin-top:-3px;
+}
+
+section.calendrier table td ul li {
+	width:120px;
+	height:16px;
+
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.2) 0%, rgba(255,255,255,.2) 100%);
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.2) 0%, rgba(255,255,255,.2) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.2) 0%, rgba(255,255,255,.2) 100%);
+	background-image: linear-gradient(bottom, rgba(0,0,0,.2) 0%, rgba(255,255,255,.2) 100%);
+	margin-top:3px;
+	cursor:pointer;
+	position:relative;
+	
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.7);
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.7);
+	box-shadow: 0 1px 1px rgba(0,0,0,.3), inset 0 1px 1px rgba(255,255,255,.7);
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+section.calendrier table td ul li.expo {
+	background-color: #b20011;
+}
+
+section.calendrier table td ul li.fest {
+	background-color: #e26500;
+}
+
+section.calendrier table td ul li.cine {
+	background-color: #4e9700;
+}
+
+section.calendrier table td ul li.tv {
+	background-color: #009eb1;
+}
+
+section.calendrier table td ul li.aut {
+	background-color: #e177a9;
+}
+
+section.calendrier table td ul li.sal {
+	background-color: #cbc516;
+}
+
+section.calendrier table td ul li.dedi {
+	background-color: #97008b;
+}
+
+section.calendrier table td ul li h2 {
+	margin:0;
+	padding:0;
+	color: #fff;
+	font-size: 9px;
+	font-weight: bold;
+	margin-left:3px;
+	line-height:16px;
+}
+
+section.calendrier table td ul li > span {
+	display:none;
+	width:250px;
+	min-height:120px;
+	position:absolute;
+	bottom:20px;
+	left:-70px;
+	z-index:3000;
+	
+	background-color: #2b2b2b;
+	-moz-box-shadow: 0 1px 0 #191919, inset 0 1px 1px rgba(255,255,255,.4);
+	-webkit-box-shadow: 0 1px 0 #191919, inset 0 1px 1px rgba(255,255,255,.4);
+	box-shadow: 0 1px 0 #191919, inset 0 1px 1px rgba(255,255,255,.4);
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDI0NyAxMjAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxsaW5lYXJHcmFkaWVudCBpZD0iaGF0MCIgZ3JhZGllbnRVbml0cz0ib2JqZWN0Qm91bmRpbmdCb3giIHgxPSI1MCUiIHkxPSIxMDAlIiB4Mj0iNTAlIiB5Mj0iLTEuNDIxMDg1NDcxNTIwMmUtMTQlIj4KPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMCIgc3RvcC1vcGFjaXR5PSIwLjIiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9IjAuMiIvPgogICA8L2xpbmVhckdyYWRpZW50PgoKPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjI0NyIgaGVpZ2h0PSIxMjAiIGZpbGw9InVybCgjaGF0MCkiIC8+Cjwvc3ZnPg==);
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.2) 0%, rgba(255,255,255,.2) 100%);
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.2) 0%, rgba(255,255,255,.2) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.2) 0%, rgba(255,255,255,.2) 100%);
+	background-image: linear-gradient(bottom, rgba(0,0,0,.2) 0%, rgba(255,255,255,.2) 100%);
+	padding:12px;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+section.calendrier table td ul li > span hgroup {
+	background:url(../img/separateur-gris.png) bottom left repeat-x;
+	padding-bottom:10px;
+}
+
+section.calendrier table td ul li > span h1 {
+	color: #cbcbcb;
+	text-transform:uppercase;
+	font-size: 10px;
+	margin:0;
+}
+
+section.calendrier table td ul li > span h2 {
+	color: #fff;
+	font-weight:normal;
+	text-transform:none;
+	font-size: 14px;
+	margin:0;
+}
+
+section.calendrier table td ul li > span p {
+	color: #bebebe;
+	font-weight:normal;
+	text-transform:none;
+	font-size: 12px;
+}
+
+section.calendrier table td ul li span.arrow {
+	width:11px;
+	height:9px;
+	display:block;
+	position:absolute;
+	bottom:-9px;
+	left:130px;
+	background:url('../img/calendar-arrow.png') no-repeat;
+}
+
+section.calendrier p.legende {
+	font-size: 12px;
+	margin-left:20px;
+	color: #888;
+	margin-bottom:10px;
+}
+
+section.calendrier p.legende span.cinema {
+	color:#4e9700;
+}
+
+section.calendrier p.legende span.festival {
+	color:#e26500;
+}
+
+section.calendrier p.legende span.dedicace {
+	color:#97008b;
+}
+
+section.calendrier p.legende span.tv {
+	color:#009eb1;
+}
+
+section.calendrier p.legende span.salon {
+	color:#cbc516;
+}
+
+section.calendrier p.legende span.autres {
+	color:#e177a9;
+}
+
+section.calendrier p.legende span.exposition {
+	color:#b20011;
+}

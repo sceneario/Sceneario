@@ -1,0 +1,325 @@
+h1.concours {
+	color: #a12c6d;
+	font-size: 18px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 #fff;
+	margin:0;
+	padding:0;
+	margin-bottom:20px;
+}
+
+div.whiteblock940 {
+	width: 940px;
+	min-height: 402px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #fff;
+	-moz-box-shadow: 0 3px 5px rgba(0,0,0,.15);
+	-webkit-box-shadow: 0 3px 5px rgba(0,0,0,.15);
+	box-shadow: 0 3px 5px rgba(0,0,0,.15);
+	margin-bottom:20px;
+	padding-bottom:10px;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.whiteblock940 figure {
+	width:940px;
+	height:310px;
+	position:relative;
+}
+
+div.whiteblock940 figure img {
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+div.whiteblock940 figure figcaption {
+	position:absolute;
+	top:16px;
+	left:-2px;
+	padding-right: 30px;
+	padding-left: 20px;
+	height:48px;
+	background:url('../img/concours-title.png') no-repeat right center;
+	/*-moz-box-shadow: 0 2px 2px rgba(0,0,0,.3), inset 0 1px 0 #01dbe6;
+	-webkit-box-shadow: 0 2px 2px rgba(0,0,0,.3), inset 0 1px 0 #01dbe6;
+	box-shadow: 0 2px 2px rgba(0,0,0,.3), inset 0 1px 0 #01dbe6;*/
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.whiteblock940 figure figcaption span {
+	display:block;
+	height:48px;
+	color: #fff;
+	font-size: 24px;
+	text-shadow: 0 -1px 0 #008892;
+	text-align:center;
+	line-height:45px;
+}
+
+div.whiteblock940 hgroup {
+	width:600px;
+	float:left;
+	margin-top:20px;
+	margin-left:20px;
+}
+
+div.whiteblock940 hgroup h2 {
+	color: #7e7e7e;
+	font-size: 13px;
+	font-weight: bold;
+	margin:0;
+	padding:0;
+}
+
+div.whiteblock940 hgroup h3 {
+	color: #00b3be;
+	font-size: 18px;
+	font-weight: bold;
+	margin:0;
+	padding:0;
+}
+
+div.whiteblock940 a.big_button {
+	display:block;
+	width: 172px;
+	height: 46px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #b1136d;
+	-moz-box-shadow: 0 3px 0 #691743, inset 0 2px 0 #d64c9a;
+	-webkit-box-shadow: 0 3px 0 #691743, inset 0 2px 0 #d64c9a;
+	box-shadow: 0 3px 0 #691743, inset 0 2px 0 #d64c9a;
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDE3MiA0NiIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGxpbmVhckdyYWRpZW50IGlkPSJoYXQwIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjUwJSIgeTE9IjEwMCUiIHgyPSI1MCUiIHkyPSItMS40MjEwODU0NzE1MjAyZS0xNCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDAwIiBzdG9wLW9wYWNpdHk9IjAuMyIvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMC4zIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjQ2IiBmaWxsPSJ1cmwoI2hhdDApIiAvPgo8L3N2Zz4=);
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background-image: linear-gradient(bottom, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	float:right;
+	color: #fff;
+	font-size: 17px;
+	font-weight: bold;
+	text-shadow: 0 -2px 0 #7d2955;
+	text-transform:uppercase;
+	line-height:48px;
+	text-indent:20px;
+	margin-top:20px;
+	margin-right:20px;
+	position:relative;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.whiteblock940 a.big_button img {
+	position:absolute;
+	right:20px;
+	top:15px;
+}
+
+div.whiteblock300 figure {
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	display:block;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.whiteblock300 h2 a {
+	color:#a12c6d;
+}
+
+div.bloc2col.rounded div.whiteblock300 {
+	padding-bottom:10px;
+}
+
+div.whiteblock300 span {
+	display:block;
+	position:absolute;
+	right:-4px;
+	top:120px;
+	background:url('../img/concours-title2.png') no-repeat;
+	width:168px;
+	height:37px;
+	color: #fff;
+	font-size: 13px;
+	font-weight: bold;
+	text-shadow: 0 -1px 0 rgba(0,143,154,.95);
+	line-height:33px;
+	text-indent:20px;
+}
+
+div.whiteblock940 a.fiche_album {
+	float:right;
+	color: #a12c6d;
+	font-size:15px;
+	margin-right:20px;
+	margin-top:40px;
+}
+
+div.whiteblock940 div.separateur {
+	width:96%;
+	height:2px;
+	background:url(../img/separateur_general.jpg);
+	margin-left:20px;
+	margin-top:10px;
+}
+
+div.whiteblock940 form {
+	width:760px;
+	margin:auto;
+	margin-top:40px;
+}
+
+div.whiteblock940 form label {
+	color: #858585;
+	font-size: 16px;
+	display:block;
+}
+
+div.whiteblock940 form input {
+	width: 740px;
+	height: 45px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #eaeaea;
+	-moz-box-shadow: inset 0 2px 1px #d6d6d6;
+	-webkit-box-shadow: inset 0 2px 1px #d6d6d6;
+	box-shadow: inset 0 2px 1px #d6d6d6;
+	border:0;
+	display:block;
+	margin-top:10px;
+	margin-bottom:20px;
+	text-indent:15px;
+	color: #a12c6d;
+	font-size: 18px;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.whiteblock940 form a.submit {
+	display:block;
+	width: 292px;
+	height: 46px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #b1136d;
+	-moz-box-shadow: 0 3px 0 #691743, inset 0 2px 0 #d64c9a;
+	-webkit-box-shadow: 0 3px 0 #691743, inset 0 2px 0 #d64c9a;
+	box-shadow: 0 3px 0 #691743, inset 0 2px 0 #d64c9a;
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDE3MiA0NiIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGxpbmVhckdyYWRpZW50IGlkPSJoYXQwIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjUwJSIgeTE9IjEwMCUiIHgyPSI1MCUiIHkyPSItMS40MjEwODU0NzE1MjAyZS0xNCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDAwIiBzdG9wLW9wYWNpdHk9IjAuMyIvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iMC4zIi8+CiAgIDwvbGluZWFyR3JhZGllbnQ+Cgo8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTcyIiBoZWlnaHQ9IjQ2IiBmaWxsPSJ1cmwoI2hhdDApIiAvPgo8L3N2Zz4=);
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	background-image: linear-gradient(bottom, rgba(0,0,0,.3) 0%, rgba(255,255,255,.3) 100%);
+	color: #fff;
+	font-size: 17px;
+	font-weight: bold;
+	text-shadow: 0 -2px 0 #7d2955;
+	text-transform:uppercase;
+	line-height:48px;
+	text-indent:20px;
+	margin-top:20px;
+	margin-right:20px;
+	text-align:left;
+	float:right;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.whiteblock940 form a.submit img {
+	float:right;
+	margin-top:15px;
+	margin-right:25px;
+}
+
+div.whiteblock940 p.reglement {
+	margin-left:20px;
+}
+
+div.whiteblock940 p.reglement a {
+	color: #999;
+	font-size: 12px;
+}
+
+div.whiteblock940 form h2 {
+	color: #858585;
+	font-size: 16px;
+	font-weight:normal;
+}
+
+div.whiteblock940 form p {
+	color: #858585;
+	font-size: 13px;
+	width:600px;
+	margin-bottom:30px;
+}
+
+div.whiteblock940 form.coords input {
+	width:365px !important;
+}
+
+div.whiteblock940 form div.leftForm {
+	float:left;
+	margin-right:20px;
+}
+
+div.whiteblock940 form div.rightForm {
+	float:left;
+}
+
+div.whiteblock940 form div.rightForm div.cp {
+	width:150px !important;
+	float:left;
+	margin-right:15px;
+}
+
+div.whiteblock940 form div.rightForm div.cp label {
+	width:150px !important;
+}
+
+div.whiteblock940 form div.rightForm div.cp input {
+	width:150px !important;
+}
+
+div.whiteblock940 form div.rightForm div.ville {
+	width:200px !important;
+	float:left;
+}
+
+div.whiteblock940 form div.rightForm div.ville label {
+	width:200px !important;
+}
+
+div.whiteblock940 form div.rightForm div.ville input {
+	width:200px !important;
+}
+
+div.whiteblock940 p.confirm {
+	color: #858585;
+	font-size: 16px;
+	text-align:center;
+	margin:30px 0 30px 0;
+}

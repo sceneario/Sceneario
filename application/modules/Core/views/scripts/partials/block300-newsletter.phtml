@@ -1,0 +1,27 @@
+<?php if (!null == $this->data) : ?>
+
+<div id="bloc-newsletter" class="bloc-newsletter whiteblock300">
+  <header>
+    <h1>Inscription à la newsletter Sceneario</h1>
+  </header>
+  <div class="alert"></div>
+  <?php print $this->data; ?>
+</div>
+<?php endif; ?>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#bloc-newsletter form').submit(function(e) {
+      $('#bloc-newsletter .alert').hide();
+      $('#bloc-newsletter .alert').removeClass('success');
+      $('#bloc-newsletter .alert').removeClass('error');
+      $.post($(this).attr('action'), $(this).serialize(), function(ret) {
+        var data = jQuery.parseJSON(ret);
+        $('#bloc-newsletter .alert').addClass(data.status == true ? 'success' : 'error');
+        $('#bloc-newsletter .alert').html(data.message);
+	$('#bloc-newsletter .alert').show();
+      });
+      e.preventDefault();
+      return false;
+    });
+  });
+</script>

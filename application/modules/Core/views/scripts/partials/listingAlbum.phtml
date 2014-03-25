@@ -1,0 +1,21 @@
+<?php
+
+/*
+ * Retourne une liste formatée contenant les albums demandés
+ */
+if(!null == $this->albums):
+?>
+<ul class="albums-wrapper">
+    <?php foreach($this->albums as $key => $album ):?>
+        <li><a href="<?php echo $this->customUrl(array('titleSerie' =>  $album->collection . ' ' . $album->tome ,
+                                                       'titleAlbum' =>  $album->titre ,
+                                                       'idAlbum'=> $album->idAlbum), 'album' ) ?>">
+     
+         <?php echo $this->displayNormalImage($this->customUrl(array('isbn'   => $album->isbn ,'format' => 'bedetheque'), 'couverture'), 
+                          $album->collection . " #" . $album->tome ." - ".  $album->titre  ) ?>         
+        </a></li>
+    <?php endforeach; ?>
+</ul><!-- albums-wrapper -->
+<?php
+endif;
+?>

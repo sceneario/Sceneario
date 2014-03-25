@@ -1,0 +1,115 @@
+/*header#bedetheque {
+	opacity: 0.99;
+}*/
+header#bedetheque p form {
+	outline: 1px dotted red;
+}
+header#bedetheque p strong {
+	font-size: 24px;
+	position: relative;
+	top:2px;
+	margin-right: 10px;
+}
+header#bedetheque p select {
+	margin: 0px 5px;
+}
+header#bedetheque input[type=submit] {
+	float: none;
+	position: relative;
+	top:-3px;
+	text-transform: uppercase;
+	font-weight: bold;
+	width: 40px;
+}
+header#bedetheque p {
+	color:white;
+	font-weight:bold;
+	font-size:14px;
+	
+	-webkit-text-shadow: 0px -1px 0px #707070;
+	-moz-text-shadow: 0px -1px 0px #707070;
+	-ms-text-shadow: 0px -1px 0px #707070;
+	-o-text-shadow: 0px -1px 0px #707070;
+	text-shadow: 0px -1px 0px #707070;
+}
+
+header#bedetheque p span {
+	display:inline-block;
+	width:89px;
+	height:27px;
+	background:url(../img/compteur-bg.jpg) no-repeat;
+	margin-right:5px;
+	margin-left:5px;
+	margin-top:4px;
+	color:#3a3939;
+	font-weight:bold;
+	font-size:15px;
+	letter-spacing:8px;
+	padding:0;
+	text-align:left;
+	text-indent:8px;
+	line-height:27px;
+	
+	-webkit-text-shadow: 0px 0px 0px #707070;
+	-moz-text-shadow: 0px 0px 0px #707070;
+	-ms-text-shadow: 0px 0px 0px #707070;
+	-o-text-shadow: 0px 0px 0px #707070;
+	text-shadow: 0px 0px 0px #707070;
+}
+@-moz-document url-prefix()
+{
+    header#bedetheque p span {
+		font-size:12px;
+    }
+}
+section.itemBedetheque {
+	margin-bottom:30px;
+}
+
+section.itemBedetheque h1 {
+	font-size:16px;
+	font-weight:bold;
+	color:#00abb6;
+	float:left;
+	margin-top:0;
+}
+
+section.itemBedetheque h1 a {
+	font-size:11px;
+	color:#616161;
+	font-weight:normal;
+	text-transform:none;
+	text-decoration:none;
+	margin-left:10px;
+}
+
+section.itemBedetheque h1 a:hover {
+	color:black;
+}
+
+section.itemBedetheque div.checkboxes {
+	float:right;
+	font-size:12px;
+	color:#616161;
+	height:15px;
+	line-height:15px;
+	margin-top:5px;
+}
+
+
+section.itemBedetheque div.checkboxes input {
+	float:left;
+	margin:0 5px;
+	margin-left:10px;
+}
+
+section.itemBedetheque div.checkboxes span {
+	float:left;
+	display:inline-block;
+	margin-top:-1px;
+}
+
+section.itemBedetheque div.albums-slider {
+	background:url(../img/separateur_general.jpg) repeat-x top left;
+	float:left;
+}

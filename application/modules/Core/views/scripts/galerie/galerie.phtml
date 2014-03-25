@@ -1,0 +1,40 @@
+	                
+<!-- CONTENU -->
+
+<div class="galerieWrapper">
+	<h1><a href="">Galerie</a> - <?php echo $this->titre ?></h1>
+	
+	<div class="galerieSlider  <?php echo $this->previewClass ?>">
+		
+		<ul>
+                    <?php
+                    foreach($this->images as $image):
+                    ?>    
+                       <li><a href="<?php echo $image['big'] ?>" rel="lightbox[gal]" title=""><img <?php echo $this->norotateClass ?> src="<?php  echo $image['med'] ?>" /></a></li>
+                    <?php    
+                    endforeach;
+                    ?>
+		</ul>
+		
+	</div>
+	
+	<a href="javascript:void(0);" class="prev"></a>
+	<a href="javascript:void(0);" class="next"></a>
+	
+	<div class="sliderPagination">
+            <?php foreach($this->images as $image): ?>
+                <a href="#">&nbsp;</a>
+            <?php endforeach; ?>
+	</div>
+	
+	<?php
+             echo $this -> socialButtons($this->currentUrl());
+        ?>
+	
+</div>
+
+
+<!-- Reinitialisation des float -->
+<div class="clear"></div>
+
+     

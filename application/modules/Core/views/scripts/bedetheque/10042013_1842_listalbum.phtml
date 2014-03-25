@@ -1,0 +1,169 @@
+
+        
+<!-- CONTENU -->
+
+<header class="header-mauve"  id="bedetheque">
+ 
+         	<?php echo $this->textHeader ?>
+
+</header>
+
+<div class="leftRecherche">
+	<header >
+           
+            <p class="left">
+            Résultats <?php echo $this -> pageRequested > 1 
+                                 ? $this->resultsPerPage * ($this -> pageRequested-1) 
+                                 : 1 ?> 
+                à <?php echo ($this->countResults < $this->resultsPerPage) 
+                             ?  $this->countResults 
+                             :  ((($this->resultsPerPage * $this -> pageRequested) < $this->countResults) 
+                                                                                   ? $this->resultsPerPage * $this -> pageRequested
+                                                                                   : $this->countResults ) ;
+
+                ?> sur <?php echo $this->countResults ?></p>
+             
+            <p class="right">Afficher 
+                <script>
+                function createUrl(count){
+                    var currentUrl = window.location.href;
+                    var url ;
+                    var resultPerPage = 'results='+count;
+
+                    if(currentUrl.indexOf('results=') != -1){
+                        var nb = currentUrl.indexOf('results=') ;
+                        currentUrl = currentUrl.substring(0, nb-1);
+                    }
+                    
+                    if(currentUrl.indexOf('?') == -1){
+                        url = currentUrl + '?' + resultPerPage ;
+                    }else{
+                        url = currentUrl + '&' + resultPerPage ;
+                    }
+                    
+                    self.location.href = url ;
+                }
+                </script>
+                    <select name="" onchange=" createUrl(this.value) " >
+                        <option <?php if(isset($_GET['results']) && $_GET['results'] == 10 )echo "SELECTED" ?> value="10">10</option>
+                        <option <?php if(isset($_GET['results']) && $_GET['results'] == 20 )echo "SELECTED" ?> value="20">20</option>
+                        <option <?php if(isset($_GET['results']) && $_GET['results'] == 30 )echo "SELECTED" ?> value="30">30</option>
+                        <option <?php if(isset($_GET['results']) && $_GET['results'] == 50 )echo "SELECTED" ?> value="50">50</option>
+                    </select> 
+            résultats par page</p>
+       
+	</header>
+	<?php if (count($this->paginator)): ?>
+	
+        
+
+<?php foreach ($this->paginator as $key => $hit): ?>
+  <?php
+    $coverUri = $this->customUrl(array('isbn'   => $hit->isbn ,'format' => 'small'), 'couverture') ;
+            ?>
+            
+        <div class="item">
+            <?php if($hit->idAlbum != '_ALBUM_A_PARAITRE_'): ?>
+            <a href="<?php echo $this->customUrl( array('titleSerie' => $hit->titreSerie , 
+                                                        'titleAlbum' => $hit->titreAlbum, 
+                                                        'idAlbum'    => $hit->idAlbum ) , 
+                                                        'album'); ?>" class="masque"></a>
+	
+            <?php echo $this->displayImage($coverUri, 'cover-' . $hit->isbn, 'cover'  ) ?>    
+            <?php endif ;?>
+                <div class="search-content">
+                    <hgroup>
+                        <h1><?php echo $hit->titreSerie ?></h1>
+                        <h2><?php echo $hit->titreAlbum ?></h2>
+                    </hgroup>
+
+                    <p>
+                    <?php  echo $hit->auteurs ?>
+
+                    <?php if($hit->editeur != ''):?>
+                        <br />Editions <?php echo $hit->editeur  ?>
+                    <?php endif ?>
+                    </p>
+                    <?php 
+
+                    if($hit->genres != ''): ?>
+                        <p><?php echo $hit->genres ?></p>
+                    <?php endif; ?>
+                 </div>
+                <div class="clear"></div>
+	</div>
+        
+  
+<?php endforeach; ?>
+
+<?php endif; ?>
+       
+<div class="separateur"></div>
+ 
+<?php
+
+
+echo $this->paginationControl( $this->paginator,
+                               'Sliding',
+                               'paginationControl-interview-type.phtml' ); ?>
+	
+</div>
+
+<div class="rightRecherche">
+        <?php /* 
+        <!-- ABSENT DANS LA BETA -->
+	<!-- Mon compte -->
+	<section class="mon-compte">
+		<h1><img src="img/user.png" alt="">Mon compte</h1>
+		<ul>
+			<li>Albums dans ma bédéthèque <span>0407</span></li>
+			<li>Albums à acheter <span>0036</span></li>
+			<li>Albums manquants à mes séries <span>0559</span></li>
+		</ul>
+		<a href="">Accéder à ma bédéthèque</a>
+	</section>
+        */ ?>
+	<!-- Pub 300x250 -->
+	<div class="pub">
+            <?php echo $this->partial('partials/pubs300large.phtml'); ?>
+            <!-- Recherche300pub -->
+            <div id='div-gpt-ad-1350913318651-0'>
+                <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913318651-0'); });
+                </script>
+            </div>
+            <!-- Recherche300interne -->
+            <div id='div-gpt-ad-1350913404071-0'>
+                <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913404071-0'); });
+                </script>
+            </div>
+	</div><!-- pub -->
+	
+	
+	<!-- Concours -->
+        <?php /*
+	<section class="concours">
+		<header>
+			<a href="#">Tout afficher &rsaquo;</a>
+			<h1>Concours</h1>
+		</header>
+		<figure class="center">
+			<img src="img/temp/concours_illus.jpg" alt="" class="illus">
+			<img src="img/block300_pink_masque.png" alt="" class="masque">
+		</figure>
+		<h2>Du 5 au 24 Juin, gagnez l'un des 2 premiers tomes de la série GANGS</h2>
+		<a href="#" class="more">Participer &rsaquo;</a>
+	</section>
+	*/ ?>
+	<div class="clear"></div>
+	
+	<!-- Facebook like box -->
+	<div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" 
+             data-border-color="#fff" data-stream="false" data-header="false"></div><!-- Facebook like box --> 
+</div>
+
+<!-- Reinitialisation des float -->
+<div class="clear"></div>
+
+    

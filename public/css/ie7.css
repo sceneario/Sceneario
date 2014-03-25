@@ -1,0 +1,33 @@
+div.rightSide ul.call-sections {
+	position:absolute;
+	top:0px;
+	left:0;
+}
+
+div.rightSide ul.call-sections li{
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	cursor:pointer;
+	
+	filter:progid:DXImageTransform.Microsoft.Shadow(color=#ffffff, Direction=0, Strength=0);
+}
+div.rightSide section.album-details section {
+	padding-top:20px;
+}
+
+div.fb-like {
+	float:left;
+}
+
+a.twitter-share-button {
+	float:left;
+}
+
+div.fb-like-box {
+	width:300px;
+}
+
+section.calendrier table {
+	margin-left:-5px;
+}

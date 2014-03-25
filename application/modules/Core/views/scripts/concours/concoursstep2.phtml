@@ -1,0 +1,79 @@
+<!-- CONTENU -->
+<h1 class="concours">&Agrave; gagner en ce moment sur Sceneario !</h1>
+
+<div class="whiteblock940">
+	 
+        <figure class="center">
+		<?php
+                $filename =  '/images/concours/' . $this->concoursEnCours->getNomConcours() . '.jpg' ;
+                if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
+                     $filename = "/img/temp/scev6-tempconcours.jpg";      
+                endif; ?>
+            <img src="<?php echo $filename ?>" alt="" class="illus">
+                ?>
+		<figcaption><span><?php echo $this->concoursEnCours->getLibelleConcours() ?></span></figcaption>
+	</figure>
+         
+     
+        
+	<hgroup>
+            <h2>Du <?php echo $this->dateFormat($this->concoursEnCours->getDateDebut() , 'day_month_year_with_slash') 
+                          . ' au ' .  $this->dateFormat($this->concoursEnCours->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
+            <h3><?php echo strip_tags($this->concoursEnCours->getEntete()) ?></h3>
+	</hgroup>
+        <?php echo $this->linkAlbum ?>
+	
+	<!-- Reinitialisation des float -->
+	<div class="clear"></div>
+	
+	<div class="separateur"></div>
+	 
+	<form id="form_coord" action="<?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours() , 
+                                                         'idConcours'  => $this->concoursEnCours->getNomConcours()),   'concoursstep3') ?>" method="post" class="coords">
+		<h2>Vos coordonnées</h2>
+		<p>Pour valider votre participation, veuillez remplir les champs ci-dessous. Tous les champs sont obligatoires. Une seule participation par personne sera prise en compte par jour. Attention votre email doit être valide, nous l'utiliserons pour vous contacter si vous remportez le concours.</p>
+		
+		<div class="leftForm">
+			<label for="nom">Nom</label>
+			<input type="text" class="participant_details" name="participant_details[nom]" id="nom" value="" required="required">
+			
+			<label for="email">Adresse email</label>
+			<input type="text" class="participant_details" name="participant_details[email]" id="email" value="" required="required" pattern="[a-zA-Z0-9.-_]+@[a-z]+.[a-z]{2,4}">
+			
+			<label for="adresse">Adresse postale</label>
+			<input type="text" class="participant_details" name="participant_details[adresse]" id="adresse" value="" required="required">
+		</div>
+		
+		<div class="rightForm">
+			<label for="prenom">Prénom</label>
+			<input type="text" class="participant_details" name="participant_details[prenom]" id="prenom" value="" required="required">
+			
+			<label for="email2">Entrez à nouveau votre adresse email</label>
+			<input type="text" class="participant_details" name="participant_details[email2]" id="email2" value="" required="required" pattern="[a-zA-Z0-9.-_]+@[a-z]+.[a-z]{2,4}">
+			
+			<div class="cp">
+				<label for="cp">Code Postal</label>
+				<input type="text" class="participant_details" name="participant_details[cp]" id="cp" value="" required="required" pattern="[0-9]{5}">
+			</div>
+			
+			<div class="ville">
+				<label for="ville">Ville</label>
+				<input type="text" class="participant_details" name="participant_details[ville]" id="ville" value="" required="required">
+			</div>
+		</div>
+		<input type="hidden" name="concours_process[step2]" value="1">
+                <input type="hidden" name="concours_process[token]" value="<?php echo $this->concoursToken ?>">
+                <input type="hidden" name="participant_serialized_reponses" value='<?php echo $this->postConcoursReponses ?>'>
+		<a href="javascript:void(0);"   id="submitconcourstep2" class="submit">Valider mes réponses <img src="/img/concours-fleche.png" alt=""></a>
+                <div id="messageValidation"></div>
+        </form>
+	
+	<!-- Reinitialisation des float -->
+<div class="clear"></div>
+	
+	<p class="reglement"><a target="_blank" href="<?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours() , 
+                                                         'idConcours'  => $this->concoursEnCours->getNomConcours()), 'concoursreglement') ?>">Voir le réglement du concours</a></p>
+</div>
+
+<!-- Reinitialisation des float -->
+<div class="clear"></div>

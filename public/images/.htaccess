@@ -1,0 +1,16 @@
+# .htaccess
+AuthUserFile /home/sceneari/v5/.htpasswd
+AuthGroupFile /home/sceneari/v5/.htgroups
+AuthName "Acces Restreint"
+AuthType Basic
+<Files "./*/*.jpg">
+require group grp_superuser
+</Files>
+
+AddType video/ogg  .ogv
+AddType video/ogg  .ogc
+AddType video/avi  .avi
+AddType video/mp4  .mp4
+AddType video/webm .webm
+
+options -indexes

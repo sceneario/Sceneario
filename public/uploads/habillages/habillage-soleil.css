@@ -1,0 +1,30 @@
+body {
+	margin-top: 0px;
+	background:  #8a8bb6;
+	background-image: none;
+}
+#habillage-container {
+	position: absolute;
+	z-index: 0;
+	width: 100%;
+	top: 110px;
+}
+#habillage {
+	width: 980px;
+	margin: 0 auto;
+	position: relative;
+	left: 0px;
+	outline: 0px dotted red;
+}
+#habillage img {
+	position: absolute;
+	left: -210px;
+}
+#pub {
+	display: none;
+	height: 1px;
+}
+#content-container #content {
+	background: url(../../img/bg_grey.png);
+	margin-top: 185px;
+}

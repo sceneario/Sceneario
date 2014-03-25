@@ -1,0 +1,38 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+Redirect 301 /galeries.php /galerie
+Redirect 301 /salons.php /expositions-salons
+Redirect 301 /Recommande.php /bande-dessinee/recommandes.html
+Redirect 301 /ListeNouveautes.php /bande-dessinee/nouveautes.html
+Redirect 301 /ListeParutions.php /bande-dessinee/prochaines-parutions.html
+
+ErrorDocument 410 http://www.sceneario.com/404
+Redirect 410 /forum
+Redirect 410 /Bdcouverte.php
+Redirect 410 /mobile.php
+Redirect 410 /BDcouverte.php
+Redirect 410 /ScenarD.php
+
+#SetEnv APPLICATION_ENV testing
+SetEnv APPLICATION_ENV production
+
+# ----------------------------------------------------------------------
+# OPTIMISATION DE L'AFFICHAGE POUR LES UTILISATEURS D'INTERNET EXPLORER
+# ----------------------------------------------------------------------
+# Force IE à utiliser sa dernière version pour le rendu
+# Utilisation de ChromeFrame s'il est installé
+#
+# /!\ Attention à ce que le module headers soit activé
+# Ce code permet de retirer la balise meta (X-UA-Compatible) qui n'est pas valide W3C
+
+<IfModule mod_headers.c>
+  Header set X-UA-Compatible "IE=Edge,chrome=1"
+  <FilesMatch "\.(js|css|gif|png|jpe?g|pdf|xml|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|oex|xpi|safariextz|vcf)$" >
+    Header unset X-UA-Compatible
+  </FilesMatch>
+</IfModule>

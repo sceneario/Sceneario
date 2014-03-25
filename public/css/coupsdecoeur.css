@@ -1,0 +1,148 @@
+div.leftCDC {
+	width:620px;
+	float:left;
+	margin:0;
+	margin-top:0px;
+	margin-right:15px;
+}
+
+div.leftCDC > h1 {
+	color: #00b1bd;
+	font-size: 17px;
+	margin-top:0;
+	font-weight: bold;
+	margin-bottom:0;
+}
+
+div.leftCDC section h1 {
+	color: #b32674;
+	font-size: 15px;
+	font-weight:normal;
+	margin-top:10px;
+	padding-bottom:10px;
+	margin-bottom:0;
+	background:url(../img/separateur_general.jpg) bottom left repeat-x;
+}
+
+div.leftCDC div.social-links {
+	margin-top:10px;
+	margin-bottom:30px;
+}
+
+div.leftCDC div.social-links iframe {
+	margin-top:-3px;
+}
+
+div.leftCDC div.social-links iframe.twitter-share-button {
+	width:95px !important;
+	margin-left:15px;
+}
+
+div.leftCDC ul {
+	margin:0;
+	padding:20px 20px 20px 0;
+	list-style:none;
+	min-height:230px;
+	background:url(../img/separateur_general.jpg) bottom left repeat-x #f1f2f3;
+}
+
+div.leftCDC ul li {
+	float:left;
+	position:relative;
+	width:170px;
+	height:235px;
+	margin-left:35px;
+	text-align: center;
+}
+
+div.leftCDC ul li:first-child {
+	margin-left:20px;
+}
+
+div.leftCDC ul li img.cover {
+	position:absolute;
+	top:0;
+	left:0;
+	
+	height: auto;
+	width: auto;
+	max-width: 166px;
+	max-height: 229px;
+	
+	-moz-box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	-o-box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	-ms-box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	-webkit-box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.leftCDC ul li img.ruban {
+	position:absolute;
+	top:0;
+	left:5px;
+}
+
+div.leftCDC section.equipe {
+	background:url(../img/separateur_general.jpg) bottom left repeat-x;
+	padding-bottom:2px;
+}
+
+div.leftCDC section.equipe h2 {
+	margin:0;
+	padding:0;
+	color: #797979;
+	font-size: 13px;
+	font-weight:normal;
+	margin-left:20px;
+	margin-top:10px;
+	margin-bottom:0;
+}
+
+div.leftCDC section.equipe div.cdc_wrapper {
+	background:#f1f2f3;
+	width:310px;
+	height:230px;
+	float:left;
+	overflow:hidden;
+}
+
+div.leftCDC section.equipe ul {
+	background:none;
+	padding:0;
+	margin:0;
+	margin-top:20px;
+	margin-left:20px;
+	display:block;
+	min-height:170px;
+	margin-bottom:0;
+}
+
+div.leftCDC section.equipe ul li {
+	margin:0;
+	padding:0;
+	width:121px;
+	height:167px;
+	position:relative;
+	margin-right:20px;
+}
+
+div.leftCDC section.equipe ul li img.cover {
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+div.leftCDC section.equipe ul li img.coeur {
+	position:absolute;
+	top:-2px;
+	right:-2px;
+}
+
+div.rightCDC {
+	width:300px;
+	float:left;
+	position:relative;
+	margin-top:0px;
+}

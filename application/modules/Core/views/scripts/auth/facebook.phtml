@@ -1,0 +1,29 @@
+
+    <!--
+   <div class="fb-login-button" scope="email,user_checkins">
+    Login with Facebook
+   </div>-->
+
+ <h1>php-sdk</h1>
+
+    <?php if ($this->user): ?>
+      <a href="<?php echo $this->logoutUrl; ?>">Logout</a>
+    <?php else: ?>
+      <div>
+        Login using OAuth 2.0 handled by the PHP SDK:
+        <a href="<?php echo $this->loginUrl; ?>">Login with Facebook</a>
+      </div>
+    <?php endif ?>
+
+    <h3>PHP Session</h3>
+    <pre><?php //print_r($_SESSION); ?></pre>
+
+    <?php if ($this->user): ?>
+      <h3>You</h3>
+      <img src="https://graph.facebook.com/<?php echo $this->user; ?>/picture">
+
+      <h3>Your User Object (/me)</h3>
+      <pre><?php echo $this->user_profile['name'] ;//print_r($this->user_profile); ?></pre>
+    <?php else: ?>
+      <strong><em>You are not Connected.</em></strong>
+    <?php endif ?>

@@ -1,0 +1,51 @@
+<!-- CONTENU -->
+<?php if($this->concoursEnCours != null): ?>
+<h1 class="concours">&Agrave; gagner en ce moment sur Sceneario !</h1>
+<?php endif; ?>
+
+
+<?php
+foreach($this->concoursEnCours as $concourEnCours):
+    echo $this->partial('partials/concoursEnCours.phtml', array('data' => $concourEnCours ));
+endforeach;
+?>
+
+<h1 class="concours">Les concours précédents</h1>
+
+<div class="bloc2col rounded">
+<?php foreach($this->concoursPrecedentsOrdered as $key => $concoursPrecedents): 
+        foreach( $concoursPrecedents as $k => $concPrec ):
+        #print_r($concPrec->getDateFin());
+    ?>
+    <a href="<?php echo $this->customUrl( array( 
+                                                 'nomConcours' => $concPrec->getLibelleConcours() , 
+                                                 'idConcours'  => $concPrec->getNomConcours()) , 'concoursstep1') ?>">
+        <div class="whiteblock300"  >
+            <?php  
+            $filename =  '/images/concours/' . $concPrec->getNomConcours() . '.jpg' ;
+            $backgroundSize = ' background-size:cover; background-position:center center;';
+            if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
+                $filename = "/img/temp/scev6-tempconcours-small.jpg" ;
+                $backgroundSize = '';
+            endif; ?>
+		<figure class="center" style="background:url('<?php echo $filename ?>') no-repeat ; <?php echo $backgroundSize ?> ">
+                    <img src="/img/block300_white_masque.png" alt="" class="masque">
+		</figure>
+		<h2><?php echo $concPrec->getLibelleConcours() ?></h2>
+		<p><?php echo strip_tags($concPrec->getEntete() ) ?></p>
+                <?php if($concPrec->getResultats() != ''): ?>
+                    <span>Résultats disponibles</span>
+                <?php endif; ?>
+	</div></a><!-- whiteblock300 -->
+        <?php endforeach; ?>
+        <?php #if($key == 0 || $key == 1) :?>
+               </div><!-- bloc2col -->
+               <div class="bloc2col rounded" <?php if($key > 0){ echo ' style="border:0px solid red;margin-right:0;"';} ?>>
+        <?php #endif ?>
+<?php endforeach; ?>
+</div><!-- bloc2col -->
+	
+	  
+
+<!-- Reinitialisation des float -->
+<div class="clear"></div>

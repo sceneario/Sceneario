@@ -1,0 +1,104 @@
+/* -----------------------------------------
+* LAYOUT DE LA PAGE D'INFORMATION POUR IE6
+* Author : Grégory Bellencontre
+-------------------------------------------- */
+  
+body {
+	background:url('../img/background.png');
+	font-family:Arial;
+}
+  
+div.wrapper {
+	width:80%;
+	margin:50px auto 50px auto;
+	border:1px solid #cccccc;
+	padding:20px;
+	background:white;
+}
+
+div.wrapper h1 {
+	font-size:1.2em;
+	clear:both;
+	color:#2e4aa6;
+}
+
+div.wrapper p {
+	font-size:0.9em;
+	text-align:justify;
+	line-height:1.4em;
+}
+
+div.wrapper ul {
+	width:585px;
+	height:100px;
+	margin:45px auto 0 auto;
+	padding:0;
+}
+
+div.wrapper ul li {
+	list-style:none;
+	float:left;
+}
+
+div.wrapper ul li a {
+	display:block;
+	color:black;
+	text-decoration:none;
+	font-size:0.75em;
+	text-align:center;
+	text-transform:uppercase;
+	padding-top:100px;
+}
+
+div.wrapper ul li a.chrome {
+	width:93px;
+	height:42px;
+	background:url('../img/chrome.gif') no-repeat;
+	margin-right:30px;
+}
+
+div.wrapper ul li a.firefox {
+	width:94px;
+	height:40px;
+	background:url('../img/firefox.gif') no-repeat;
+	margin-right:30px;
+}
+
+div.wrapper ul li a.safari {
+	width:93px;
+	height:48px;
+	background:url('../img/safari.gif') no-repeat;
+	margin-right:30px;
+}
+
+div.wrapper ul li a.opera {
+	width:82px;
+	height:38px;
+	background:url('../img/opera.gif') no-repeat;
+	margin-right:30px;
+}
+
+div.wrapper ul li a.ie {
+	width:99px;
+	height:41px;
+	background:url('../img/ie.gif') no-repeat;
+}
+
+div.wrapper a.chromeframe {
+	width:105px;
+	height:50px;
+	background:url('../img/chromeframe.gif') no-repeat;
+	display:block;
+	margin:30px auto 0 auto;
+	
+	color:black;
+	text-decoration:none;
+	font-size:0.75em;
+	text-align:center;
+	text-transform:uppercase;
+	padding-top:100px;
+}
+
+div.wrapper a:hover {
+	color:#1a46d3;
+}

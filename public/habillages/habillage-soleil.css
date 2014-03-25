@@ -1,0 +1,25 @@
+body {
+	margin-top: 0px;
+	background: #000;
+	background-image: none;
+}
+#habillage {
+	width: 980px;
+	margin: 0 auto;
+	position: relative;
+}
+#habillage_soleil {
+	position:absolute;
+	z-index:0;
+	left:-200px;
+	top:-60px;
+}
+#content-container #content {
+	margin-top: 210px;
+	background: url(../img/bg_grey.png);
+}
+
+#pub {
+	display: none;
+	height: 1px;
+}

@@ -1,0 +1,72 @@
+<!-- CONTENU -->
+<h1 class="concours">&Agrave; gagner en ce moment sur Sceneario !</h1>
+
+<div class="whiteblock940">
+   
+        <figure class="center">
+		<?php
+                $filename =  '/images/concours/' . $this->concoursEnCours->getNomConcours() . '.jpg' ;
+                if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
+                     $filename = "/img/temp/scev6-tempconcours.jpg";      
+                endif; ?>
+            <img src="<?php echo $filename ?>" alt="" class="illus">
+                ?>
+		<figcaption><span><?php echo $this->concoursEnCours->getLibelleConcours() ?></span></figcaption>
+	</figure>
+    
+	<hgroup>
+            <h2>Du <?php echo $this->dateFormat($this->concoursEnCours->getDateDebut() , 'day_month_year_with_slash') 
+                          . ' au ' .  $this->dateFormat($this->concoursEnCours->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
+            <h3><?php echo strip_tags($this->concoursEnCours->getEntete()) ?></h3>
+	</hgroup>
+        <?php echo $this->linkAlbum ?>
+	<!-- Reinitialisation des float -->
+	<div class="clear"></div>
+	
+	<div class="separateur"></div>
+        
+	<form id="form_questions" action="<?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours() , 
+                                                         'idConcours'  => $this->concoursEnCours->getNomConcours()), 'concoursstep2') ?>" method="post">
+           
+        
+         <?php 
+         if($this->concoursTermine == false):   
+            foreach($this->concoursQuestion as $key => $question): 
+                    $codeQuestion = 1 ;//$question->getNumQuestion() ;
+                ?>
+		<label for="q1">Question 1 : <strong><?php echo $question->getQuestion() ?> ?</strong></label>
+		<input type="text" class="concours_reponses" name="concours_reponses[reponse_q_1]" id="q1" value="" placeholder="Réponse :" required="required">
+		
+		
+            <?php endForeach; ?>
+                <label for="qsubsid">Question subsidiaire : <strong>Sur toute la durée de ce concours, combien y aura-t-il de réponses ?</strong></label>
+		<input class="concours_reponses" type="text" name="concours_reponses[reponse_q_subsidiaire]" id="qsubsid" value="" placeholder="Réponse:" required="required" pattern="[0-9]+">
+                <input type="hidden" name="concours_process[token]" value="<?php echo uniqid(true) ?>">
+                <input type="hidden" name="concours_process[step1]" value="1">
+                <a href="javascript:void(0);"   id="submitconcourstep1" class="submit">Valider mes réponses <img src="/img/concours-fleche.png" alt=""></a>
+                <div id="messageValidation"></div>
+        </form>
+	<?php
+        else:
+            
+            if($this->concoursEnCours->getResultats() != ''): 
+                $resultat = trim(($this->concoursEnCours->getResultats() ), '<br>') ;
+                $resultat = trim(($this->concoursEnCours->getResultats() )) ;
+                ?>
+                <h2>Voici les résultats du concours Sceneario.com :</h2>
+                <p><?php echo strip_tags(trim(str_replace('<br>', ' / ', $resultat ), '/  /')); ?></p><?php
+                
+            endif;
+        endif;
+        ?>
+	<!-- Reinitialisation des float -->
+<div class="clear"></div>
+	
+	<p class="reglement"><a target="_blank" href="
+            <?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours() , 
+                                               'idConcours'  => $this->concoursEnCours->getNomConcours()), 
+                                        'concoursreglement') ?>">Voir le réglement du concours</a></p>
+</div>
+
+<!-- Reinitialisation des float -->
+<div class="clear"></div>

@@ -1,0 +1,93 @@
+
+;MERCI DE NE PAS TOUCHER A CES REGLAGES
+;MERCI DE NE PAS TOUCHER A CES REGLAGES
+;MERCI DE NE PAS TOUCHER A CES REGLAGES
+;MERCI DE NE PAS TOUCHER A CES REGLAGES
+;MERCI DE NE PAS TOUCHER A CES REGLAGES
+;MERCI DE NE PAS TOUCHER A CES REGLAGES
+
+[production]
+includePaths.library = APPLICATION_PATH "/../library"
+bootstrap.path = APPLICATION_PATH "/Bootstrap.php"
+bootstrap.class = "Bootstrap"
+appnamespace = "Core"
+phpSettings.error_log = APPLICATION_PATH "/../var/log/php.log"
+phpSettings.display_errors = 0
+phpSettings.display_startup_errors = 0
+resources.frontController.params.displayExceptions = 0
+phpSettings.date.timezone = "Europe/Paris"
+phpSettings.memory_limit = "128M"
+phpSettings.session.use_cookies = 1
+phpSettings.session.use_only_cookies = 1
+phpSettings.session.use_trans_sid = 0
+phpSettings.session.cookie_httponly = 1
+phpSettings.session.cookie_lifetime = 600
+phpSettings.session.cookie_domain = ".sceneario.com"
+phpSettings.session.cookie_secure = 0
+phpSettings.session.strict = 0
+phpSettings.session.cache_limiter = nocache
+phpSettings.session.cache_expire = 30
+phpSettings.session.hash_function = 1
+phpSettings.session.hash_bits_per_character = 6
+phpSettings.session.name = "analytics_token"
+phpSettings.session.gc_divisor = 1000
+phpSettings.session.gc_probability = 1
+phpSettings.session.gc_maxlifetime = 600
+phpSettings.session.save_handler = files
+phpSettings.session.save_path = APPLICATION_PATH "/../var/session"
+phpSettings.session.entropy_length = 16                 
+phpSettings.session.entropy_file = /dev/urandom 
+
+;Config de base
+;resources.modules = ""
+;resources.view = ""
+resources.modules[] = ""
+resources.view[] = ""
+
+
+resources.layout.layout = "default"
+resources.layout.layoutPath = APPLICATION_PATH "/modules/Core/layouts/"
+resources.view.basePath = APPLICATION_PATH "/modules/Core/views/"
+
+resources.frontController.defaultModule   = "Core"
+resources.frontController.params.prefixDefaultModule = false
+resources.frontController.moduleDirectory = APPLICATION_PATH "/modules"
+resources.frontController.controllerDirectory = APPLICATION_PATH "/modules/Core/controllers"
+;resources.frontController.actionhelperpaths.Core_Action_Helper = "APPLICATION_PATH "/modules/Core/controllers/Action/Helper"
+
+resources.multidb.dbcore.adapter  = "pdo_mysql"
+resources.multidb.dbcore.host     = "localhost"
+resources.multidb.dbcore.username = "XXX"
+resources.multidb.dbcore.password = "XXX"
+resources.multidb.dbcore.dbname   = "XXX"
+resources.multidb.dbcore.charset  = "UTF8"
+resources.multidb.dbcore.isDefaultTableAdapter = true
+resources.multidb.dbcore.defaultMetadataCache = "metadata"
+
+[staging : production]
+
+[testing : production]
+;MERCI DE NE PAS TOUCHER A CES REGLAGES
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1
+
+
+[development : production]
+phpSettings.session.cookie_domain = ".sceneario.dev"
+phpSettings.display_startup_errors = 1
+phpSettings.display_errors = 1
+resources.frontController.params.displayExceptions = 1
+
+;DB
+resources.multidb.dbcore.adapter  = "pdo_mysql"
+resources.multidb.dbcore.host     = "localhost"
+resources.multidb.dbcore.username = "XXX"
+resources.multidb.dbcore.password = "XXX"
+resources.multidb.dbcore.dbname   = "XXX"
+resources.multidb.dbcore.charset  = "UTF8"
+resources.multidb.dbcore.isDefaultTableAdapter = true
+resources.multidb.dbcore.defaultMetadataCache = "metadata"
+
+
+

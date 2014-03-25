@@ -1,0 +1,23 @@
+.albums-slider ul {
+	width:10000px;
+}
+
+div.rightSide section.album-details,div.rightSide div.acheter,div.rightSide ul.call-sections li {
+	filter:none;
+}
+
+div.search {
+	height:60px;
+}
+
+section.calendrier table {
+	margin-left:5px;
+}
+
+section.calendrier table td {
+	border:1px solid #cccccc;
+}
+
+section.calendrier table td ul li {
+	margin-bottom:3px;
+}

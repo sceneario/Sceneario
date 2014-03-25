@@ -1,0 +1,92 @@
+
+        
+<!-- CONTENU -->
+
+<header class="header-mauve">
+	<div class="search">
+		<form action="<?php echo $this->customUrl( array('tag' => '') , 'recherche') ?>" method="get">
+			<input type="text" name="tag" value='<?php echo isset($this->requeteUser)? $this->requeteUser : '' ?>' placeholder="Rechercher">
+			
+			<div class="menu">
+                            <a href="javascript:void(0);">Tout le site</a>
+                            <ul>
+                                <li>Titre ou série</li>
+                                <li>Les auteurs</li>
+                                <li>Les éditeurs</li>
+                                <li>ISBN</li>
+                                <li>Les rédacteurs</li>
+                            </ul>
+			</div>
+			<input type="hidden" name="filter" value="">
+			<input type="submit" name="" value="Rechercher">
+		</form>
+		
+		<p>ou</p>
+			
+		<form action="<?php echo $this->customUrl( array('tag' => '') , 'recherche') ?>" method="get">
+                    <div class="menu">
+                        <a href="">Rechercher par thème</a>
+                        <ul>
+                        <?php foreach($this->genres as  $genre): ?>
+                        <li><?php echo  $genre   ?></li>
+                        <?php endforeach; ?>   
+                        </ul>
+                    </div>
+                    <input type="hidden" name="tag" value="">
+                    <input type="submit" name="" value="Rechercher">
+		</form>
+	</div><!-- search -->
+</header>
+
+<div class="leftRecherche">
+	<header>
+	  <p>Votre recherche n'a retournée aucun résultat.</p>
+	</header>
+       
+<div class="separateur"></div>
+ 	
+</div>
+
+<div class="rightRecherche">
+    	<?php 
+	   echo $this->userAccountWidget('user_dashboard');
+	   echo $this->lastConcoursBloc($this) ; 
+	?>
+        
+	<!-- Pub 300x250 -->
+	<div class="pub">
+            <?php echo $this->partial('partials/pubs300large.phtml'); ?>
+            <!-- Recherche300pub -->
+            <div id='div-gpt-ad-1350913318651-0'>
+                <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913318651-0'); });
+                </script>
+            </div>
+            <!-- Recherche300interne -->
+            <div id='div-gpt-ad-1350913404071-0'>
+                <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913404071-0'); });
+                </script>
+            </div>
+	</div><!-- pub -->
+	
+    
+    
+		<?php 
+		echo $this->lastInterviewBloc($this);
+		echo $this->lastGalleryBloc($this);
+		echo $this->lastExpoBloc($this);
+		echo $this->lastGalleryBloc($this, 'preview');
+		echo $this->registerNewsletter($this);
+		?>
+		<div class="clear"></div>
+	
+	<!-- Facebook like box -->
+	<div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" 
+             data-border-color="#fff" data-stream="false" data-header="false"></div><!-- Facebook like box --> 
+</div>
+
+<!-- Reinitialisation des float -->
+<div class="clear"></div>
+
+    

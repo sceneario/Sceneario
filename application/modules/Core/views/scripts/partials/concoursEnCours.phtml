@@ -1,0 +1,27 @@
+<?php if(isset($this->data)): ?>
+
+<div class="whiteblock940">
+   
+    <figure class="center">
+            
+            <?php 
+             
+            $filename =  '/images/concours/' . $this->data->getNomConcours() . '.jpg' ;
+            if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
+                 $filename = "/img/temp/scev6-tempconcours.jpg";      
+            endif; ?>
+            <img src="<?php echo $filename ?>" alt="" class="illus">
+           
+            <figcaption><span><?php echo $this->data->getLibelleConcours() ?></span></figcaption>
+    </figure>
+ 
+    <hgroup>
+        <h2>Du <?php echo $this->dateFormat($this->data->getDateDebut() , 'day_month_year_with_slash') 
+                          . ' au ' .  $this->dateFormat($this->data->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
+        <h3><?php echo strip_tags($this->data->getEntete()) ?></h3>
+    </hgroup>
+    <a href="<?php echo $this->customUrl( array( 'nomConcours' => $this->data->getLibelleConcours() , 
+                                                 'idConcours'  => $this->data->getNomConcours()) , 'concoursstep1') ?>" class="big_button">Participez 
+        <img src="/img/concours-fleche.png" alt=""></a>
+</div>
+<?php endif ; ?>

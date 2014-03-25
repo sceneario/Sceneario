@@ -1,0 +1,35 @@
+body {
+	background: #cd9e80;
+	overflow-x: hidden;
+}
+#content-container {
+	/*background: no-repeat top center url(http://www.avoir-alire.com/bedeo/background-sceneario.jpg);*/
+	background-repeat: no-repeat;
+	background-position: center 110px;
+}
+#content-container #content {
+	background: url(../img/bg_grey.png);
+	margin-top: 200px;
+}
+
+#pub {
+	display: none;
+	height: 1px;
+}
+#habillage-container {
+	position: absolute;
+	z-index: 0;
+	width: 100%;
+	top: 110px;
+}
+#habillage {
+	width: 980px;
+	margin: 0 auto;
+	position: relative;
+	left: 0px;
+	outline: 0px dotted red;
+}
+#habillage img {
+	position: absolute;
+	left: -150px;
+}

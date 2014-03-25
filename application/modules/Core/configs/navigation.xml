@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <production>
+        <accueil>
+            <label>Accueil</label>
+            <route>accueil</route>
+            <visible>1</visible>
+        </accueil>
+         <actualites>
+            <label>Actualités</label>
+            <route>blog</route>
+            <visible>1</visible>
+            <pages>
+                <blog>
+                    <label>Blog</label>
+                    <route>blog</route>
+                    <visible>0</visible>
+                </blog>
+
+                <calendrier>
+                    <label>Calendrier</label>
+                    <route>calendrier</route>
+                    <visible>0</visible>
+                </calendrier>
+            </pages>
+        </actualites>
+          <bedetheque>
+            <label>Bédéthèque</label>
+            <route>bedetheque</route>
+            <visible>1</visible>
+            <pages>
+                <nouveaute>
+                    <label>Nouveautés</label>
+                    <route>listalbum</route>
+                     <params>
+                        <tag>nouveautes</tag>
+                    </params>
+                    <visible>1</visible>
+                </nouveaute>
+                <aparaitre>
+                    <label>A paraitre</label>
+                    <route>listalbum</route>
+                    <params>
+                        <tag>prochaines-parutions</tag>
+                    </params>
+                    <visible>1</visible>
+                </aparaitre>
+
+                <coupdecoeur>
+                    <label>Coup de coeur</label>
+                    <route>coupdecoeur</route>
+                    <visible>1</visible>
+                </coupdecoeur>
+
+                <recommande>
+                    <label>Recommandés</label>
+                    <route>listalbum</route>
+                    <params>
+                        <tag>recommandes</tag>
+                    </params>
+                    <visible>1</visible>
+                </recommande>
+            </pages>
+        </bedetheque> 
+          <toutelabd>
+            <label>Toute la bd</label>
+            <route>pagedelancement</route>
+            <visible>1</visible>
+      
+            <pages>
+                <interview>
+                    <label>Interviews</label>
+                    <route>listinterview</route>
+                    <visible>1</visible>
+                </interview>
+                <expo>
+                    <label>Expositions, salons</label>
+                    <route>listexpo</route>
+                    <visible>1</visible>
+                </expo>
+                <gallery>
+                    <label>Galeries</label>
+                    <route>listgalerie</route>
+                    <visible>1</visible>
+                </gallery>
+                 <preview>
+                    <label>Previews</label>
+                    <route>listpreview</route>
+                    <visible>1</visible>
+                </preview>
+                <bdcouverte>
+                    <label>BDcouverte</label>
+                    <route>bdcouverte</route>
+                    <visible>0</visible>
+                </bdcouverte>
+            </pages>
+        </toutelabd> 
+          <concours>
+            <label>Concours</label>
+            <route>concours</route>
+            <visible>1</visible>
+        </concours>  
+    </production>
+</config>

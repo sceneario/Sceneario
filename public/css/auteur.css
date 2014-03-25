@@ -1,0 +1,249 @@
+div.leftSide figure {
+	width: 300px;
+	margin-bottom:20px;
+}
+
+div.leftSide figure img {
+	width: 300px;
+	-moz-box-shadow: 0 5px 5px rgba(0,0,0,.3);
+	-webkit-box-shadow: 0 5px 5px rgba(0,0,0,.3);
+	box-shadow: 0 5px 5px rgba(0,0,0,.3);
+	display:block;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.leftSide section.prix_recompenses {
+	width: 300px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #fff;
+	-moz-box-shadow: 0 5px 5px rgba(0,0,0,.05), inset 0 -2px 0 #d7d7d7;
+	-webkit-box-shadow: 0 5px 5px rgba(0,0,0,.05), inset 0 -2px 0 #d7d7d7;
+	box-shadow: 0 5px 5px rgba(0,0,0,.05), inset 0 -2px 0 #d7d7d7;
+	margin-bottom:20px;
+	overflow:hidden;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.leftSide section.prix_recompenses header h1 {
+	margin:0;
+	font-size:14px;
+	color: #00b1bd;
+	height:36px;
+	background:url('../img/recompense.png') no-repeat 15px center;
+	width:300px;
+	line-height:36px;
+	text-indent:40px;
+}
+
+div.leftSide section.prix_recompenses ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+div.leftSide section.prix_recompenses ul li {
+	margin:0;
+	padding:8px 0 8px 10px;
+	border-top:1px solid #e0e0e0;
+	font-size:11px;
+	position:relative;
+}
+
+div.leftSide section.prix_recompenses ul li:nth-child(odd) {
+	background:#f7f7f7;
+}
+
+div.leftSide section.prix_recompenses ul li span {
+	color:#717171;
+	display:block;
+	width:175px;
+}
+
+div.leftSide section.prix_recompenses ul li p {
+	margin:0;
+	padding:0;
+	color:#464646;
+	display:block;
+	width:175px;
+}
+
+div.leftSide section.prix_recompenses ul li a {
+	font-weight:bold;
+	font-size:12px;
+	color:#9f2b69;
+	display:block;
+	max-width:100px;
+	/*position:absolute;
+	right:15px;
+	top:12px;*/
+	float:right;
+	margin: 10px;
+	text-align:right;
+	line-height: 12px;
+}
+
+div.rightSide hgroup.auteur {
+	margin-top:0px;
+	margin-bottom:10px;
+}
+
+div.rightSide hgroup.auteur h1 {
+	text-transform:none;
+	font-weight:bold;
+	margin:0;
+	padding-top:0;
+	
+	text-shadow: 0px 1px 0px #fff;
+	-webkit-text-shadow: 0px 1px 0px #fff;
+	-moz-text-shadow: 0px 1px 0px #fff;
+	-ms-text-shadow: 0px 1px 0px #fff;
+	-o-text-shadow: 0px 1px 0px #fff;
+	
+	color: #00b3bd;
+	font-size: 40px;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.rightSide hgroup.auteur h2 {
+	color: #5b5b5b;
+	font-size: 12px;
+	margin:-3px 0 0 0;
+	text-shadow: 0px 0px 0px #fff;
+	-webkit-text-shadow: 0px 0px 0px #fff;
+	-moz-text-shadow: 0px 0px 0px #fff;
+	-ms-text-shadow: 0px 0px 0px #fff;
+	-o-text-shadow: 0px 0px 0px #fff;
+	font-weight:normal;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.rightSide section.biographie {
+	margin-top:30px;
+	margin-bottom:40px;
+	width:97%;
+}
+
+div.rightSide section.biographie h1 {
+	color: #9f2b69;
+	font-size: 17px;
+	text-shadow: 0 1px 0 #fff;
+}
+
+div.rightSide section.biographie div.bioWrapper {
+	-moz-column-count:2;
+	-webkit-column-count:2;
+	-o-column-count:2;
+	column-count:2;
+	-moz-column-gap:18px;
+	-webkit-column-gap:18px;
+	-o-column-gap:18px;
+	column-gap:18px;
+}
+
+div.rightSide section.biographie div.bioWrapper p {
+	text-align:justify;
+	font-size:12px;
+	margin:0;
+	padding:0;
+	color:#626262;
+	margin-bottom:20px;
+	line-height:16px;
+}
+
+div.rightSide section.albums-auteur {
+	width:100%;
+}
+
+div.rightSide section.albums-auteur  h1 {
+	color: #9f2b69;
+	font-size: 17px;
+	text-shadow: 0 1px 0 #fff;
+	margin-bottom:20px;
+}
+
+div.rightSide section.albums-auteur ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+	width:100%;
+	margin-left:5px;
+}
+div.rightSide section.albums-auteur li {
+	width:120px;
+	float:left;
+	margin-right:30px;
+	margin-bottom: 10px;
+	min-height:250px;
+	position: relative;
+}
+
+div.rightSide section.albums-auteur li img {
+	max-width: 120px;
+
+	-moz-box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	-webkit-box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	box-shadow: 0 5px 5px rgba(0,0,0,.15);
+	margin-bottom:5px;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.rightSide section.albums-auteur li a {
+	color: #00b3bd;
+	font-size: 15px;
+}
+
+div.rightSide section.albums-auteur li span {
+	font-size:11px;
+	color:#646464;
+	display:block;
+}
+
+a.button_large {
+	width: 570px;
+	height: 52px;
+	display:block;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	background-color: #fff;
+	-moz-box-shadow: 0 5px 5px rgba(0,0,0,.05), inset 0 -2px 0 #d7d7d7;
+	-webkit-box-shadow: 0 5px 5px rgba(0,0,0,.05), inset 0 -2px 0 #d7d7d7;
+	box-shadow: 0 5px 5px rgba(0,0,0,.05), inset 0 -2px 0 #d7d7d7;
+	background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDU3MCA1MiIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGxpbmVhckdyYWRpZW50IGlkPSJoYXQwIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjUwJSIgeTE9IjEwMCUiIHgyPSI1MCUiIHkyPSItMS40MjEwODU0NzE1MjAyZS0xNCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDAwIiBzdG9wLW9wYWNpdHk9IjAuMDUiLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9IjAuMDUiLz4KICAgPC9saW5lYXJHcmFkaWVudD4KCjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI1NzAiIGhlaWdodD0iNTIiIGZpbGw9InVybCgjaGF0MCkiIC8+Cjwvc3ZnPg==);
+	background-image: -moz-linear-gradient(bottom, rgba(0,0,0,.05) 0%, rgba(255,255,255,.05) 100%);
+	background-image: -o-linear-gradient(bottom, rgba(0,0,0,.05) 0%, rgba(255,255,255,.05) 100%);
+	background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,.05) 0%, rgba(255,255,255,.05) 100%);
+	background-image: linear-gradient(bottom, rgba(0,0,0,.05) 0%, rgba(255,255,255,.05) 100%);
+	
+	color: #9f2b69;
+	font-size: 17px;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+	text-align:center;
+	line-height:52px;
+	margin-left:5px;
+	margin-bottom:50px;
+	
+	behavior:url(compat/PIE-1/PIE.htc);
+}
+
+div.rightSide div.bloc2col {
+	margin:0;
+	margin-right: 20px;
+}
+
+div.rightSide div.bloc2col + div.bloc2col {
+	margin:0px;
+}
