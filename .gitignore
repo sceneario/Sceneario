@@ -1,27 +1,42 @@
 # doc
-docs/*
+/docs/*
+/public/doc/*
 
 # librairies externes
-library/*
+/library/*
 
 # sitemap
-public/sitemap.xml
+/public/sitemap.xml
 
 # blog
-public/blog/
+/public/blog/
+
+# tests
+/tests/
+
+# uploads
+/public/uploads
 
 ### Fichiers sensibles
 
 # config prod
-application/configs/application.ini
+/application/configs/application.ini
+
+# apache
+.htgroups
+.htpasswd
+
+# google analytics
+/public/google*.html
 
 ### Fichiers temporaires et fichiers système
 
 # cache zend
-var/
+/var
 
 # cache moteur de recherche (?)
-application/modules/Core/data/*
+/application/modules/Core/data/*
+public/CORE_PATHdata
 
 # dechets windows / macos
 Thumbs.db
