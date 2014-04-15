@@ -46,8 +46,7 @@ class SearchController extends GlobalController
         /*
          * Requete utilisateur
          */
-        $userRequest   = isset($_GET['tag']) ? stripslashes(strip_tags($_GET['tag'])) 
-                                             : null   ; //$this->getRequest()->getParam('tag')
+        $userRequest   = isset($_GET['tag']) ? stripslashes(strip_tags($_GET['tag'])) : null; //$this->getRequest()->getParam('tag')
         
         $userRequestInSearchField = $userRequest ;
        # echo $userRequestInSearchField ;
@@ -60,8 +59,7 @@ class SearchController extends GlobalController
             $this->_forward('error');
         }
         
-        $userFilter    = isset($_GET['filter']) ? strip_tags($_GET['filter']) 
-                                                : null ; //
+        $userFilter    = isset($_GET['filter']) ? strip_tags($_GET['filter']) : null;
         
         /*
          * On limite le nbre de résultat
@@ -76,6 +74,11 @@ class SearchController extends GlobalController
          * Besoin pour la pagination
          */
         $_GET['cleanedTag'] = $userRequest ;
+        
+        /*
+         * Nettoyage de la requète utilisateur
+         */
+        $userRequest = $this->sanitize ($userRequest);
         
         /*
          * Redirection provenant de certaines routes
@@ -113,23 +116,23 @@ class SearchController extends GlobalController
             switch($userFilter){
                 case 'Les auteurs':
                     Zend_Search_Lucene_Search_QueryParser::setDefaultOperator(Zend_Search_Lucene_Search_QueryParser::B_OR);
-                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'scenaristes'),null);
-                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'dessinateurs'),null);
-                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'coloristes'),null);
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedScenaristes'),null);
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedDessinateurs'),null);
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedColoristes'),null);
                     break;
                 case 'Les éditeurs':
-                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'editeur'),true);
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedEditeur'),true);
                     break;
                 case 'ISBN':
                     $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'isbn'),true);
                     break;
                 case 'Titre ou série':
                      Zend_Search_Lucene_Search_QueryParser::setDefaultOperator(Zend_Search_Lucene_Search_QueryParser::B_OR);
-                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'titreSerie'),null);
-                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'titreAlbum'),null);
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedTitreSerie'),null);
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedTitreAlbum'),null);
                     break;
                 case 'Les rédacteurs':
-                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'redacteurs'),null);
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedRedacteurs'),null);
                     break;
             }
             $userRequest = $mulipleUserQuery ;
@@ -161,7 +164,12 @@ class SearchController extends GlobalController
          * Gestion des exceptions
          */
         try {
-	    $hits      = $index->find($userQuery, 'idAlbum', SORT_NUMERIC, SORT_DESC) ;  
+	    // $hits      = $index->find($userQuery, 'idAlbum', SORT_NUMERIC, SORT_DESC) ;  
+	    $hits = $index->find ($userQuery,
+			'titreSerieOnly', SORT_REGULAR, SORT_ASC,
+			'tome', SORT_NUMERIC, SORT_ASC,
+			'titreAlbum', SORT_REGULAR, SORT_ASC
+			);  
         } catch (Zend_Search_Lucene_Search_QueryParserException $e) {
             echo "Query syntax error: " . $e->getMessage() . "\n";
             exit;
@@ -500,11 +508,13 @@ class SearchController extends GlobalController
                 $tome = ' #' . @$albumsData[0]->tome ;
             }
 
-            $dataToIndex['idAlbum']    =  $idAlbum;
-            $dataToIndex['titreAlbum'] =  @$albumsData[0]->titre;
-            $dataToIndex['titreSerie'] =  @$albumsData[0]->collection . $tome ;
-            $dataToIndex['isbn']       =  @$albumsData[0]->isbn;
-            
+            $dataToIndex['idAlbum']			=  $idAlbum;
+            $dataToIndex['titreAlbum']		=  @$albumsData[0]->titre;
+            $dataToIndex['titreSerie']		=  @$albumsData[0]->collection . $tome ;
+            $dataToIndex['isbn']			=  @$albumsData[0]->isbn;
+            $dataToIndex['titreSerieOnly']	=  @$albumsData[0]->collection;
+            $dataToIndex['tome']			=  @$albumsData[0]->tome();
+
        
 
             foreach($albumsData as $data){
@@ -633,74 +643,140 @@ class SearchController extends GlobalController
         $dataToIndex   = array();
 
         $editeurMapper = new Core_Model_Mapper_Tblediteur();
-        $editeurInfos  = $editeurMapper->find($albumsData->getFKidEditeur(), 
-                                          new Core_Model_Tblediteur);
+        $editeurInfos  = $editeurMapper->find($albumsData->getFKidEditeur(), new Core_Model_Tblediteur);
         $tome = '';
         if($albumsData->getTome() != ''){
             $tome = ' #' . $albumsData->getTome() ;
         }
 
-        $dataToIndex['idAlbum']    =  $idAlbum;
-        $dataToIndex['titreAlbum'] =  $albumsData->getTitre();
-        $dataToIndex['titreSerie'] =  $albumsData->getCollection() . $tome ;
-        $dataToIndex['isbn']       =  $albumsData->getIsbn();
+        $dataToIndex['idAlbum']				=  $idAlbum;
+        $dataToIndex['titreAlbum']			=  $albumsData->getTitre();
+        $dataToIndex['titreSerie']			=  $albumsData->getCollection() . $tome;
+        $dataToIndex['isbn']				=  $albumsData->getIsbn();
+        $dataToIndex['titreSerieOnly']		=  $albumsData->getCollection();
+        $dataToIndex['tome']				=  $albumsData->getTome();
+        $dataToIndex['sanitizedTitreAlbum']	=  $this->sanitize ($albumsData->getTitre());
+        $dataToIndex['sanitizedTitreSerie']	=  $this->sanitize ($albumsData->getCollection());
 
-        $dataToIndex['redacteurs'] = '';
         // recuperation des redacteurs de l'avis
-        $albumRedacteurs = $mpAlb->getAlbumCritic($idAlbum);
-        foreach($albumRedacteurs as $key => $r) {
-            $dataToIndex['redacteurs'] .= $r->pseudo;
-            if($key >= 0 && $key < count($albumRedacteurs)-1){
-                $dataToIndex['redacteurs'] .= ' / ';
-            }
+        $data = array ();
+        foreach ($mpAlb->getAlbumCritic ($idAlbum) as $val){
+            $data[] = $val->pseudo;
         }
+		$dataToIndex['redacteurs'] = implode (' / ', $data);
+		$dataToIndex['sanitizedRedacteurs'] = $this->sanitize ($dataToIndex['redacteurs']);
 
-        $dataToIndex['dessinateurs'] = '';
         //recuperation des dessinateurs
-        $albumDessinateurs = $mpAlb->getAlbumDessinateurs($idAlbum);
-        foreach($albumDessinateurs as $key => $d){
-            $dataToIndex['dessinateurs'] .= $d->prenomAuteur . ' ' . $d->nomAuteur ; 
-            if($key >= 0 && $key < count($albumDessinateurs)-1){
-                $dataToIndex['dessinateurs'] .= ' / ';
-            }
+        $data = array ();
+        foreach ($mpAlb->getAlbumDessinateurs($idAlbum) as $val){
+            $data[] = $val->prenomAuteur . ' ' . $val->nomAuteur;
         }
+		$dataToIndex['dessinateurs'] = implode (' / ', $data);
+		$dataToIndex['sanitizedDessinateurs'] = $this->sanitize ($dataToIndex['dessinateurs']);
 
-        $dataToIndex['coloristes'] = '';
         //recuperation des coloristes
-        $albumColoristes   = $mpAlb->getAlbumColoristes($idAlbum);
-        foreach($albumColoristes as $key => $c){
-            $dataToIndex['coloristes'] .= $c->prenomAuteur . ' ' . $c->nomAuteur; 
-            if($key >= 0 && $key < count($albumColoristes)-1){
-                $dataToIndex['coloristes'] .= ' / ';
-            }
+        $data = array ();
+        foreach ($mpAlb->getAlbumColoristes($idAlbum) as $val){
+            $data[] = $val->prenomAuteur . ' ' . $val->nomAuteur;
         }
+		$dataToIndex['coloristes'] = implode (' / ', $data);
+		$dataToIndex['sanitizedColoristes'] = $this->sanitize ($dataToIndex['coloristes']);
 
-        $dataToIndex['scenaristes'] = '';
         //recuperation des scenaristes
-        $albumScenaristes  = $mpAlb->getAlbumScenaristes($idAlbum);
-        foreach($albumScenaristes as $key => $s){
-            $dataToIndex['scenaristes'] .= $s->prenomAuteur . ' ' . $s->nomAuteur; 
-            if($key >= 0 && $key < count($albumScenaristes)-1){
-                $dataToIndex['scenaristes'] .= ' / ';
-            }
+        $data = array ();
+        foreach ($mpAlb->getAlbumScenaristes($idAlbum) as $val){
+            $data[] = $val->prenomAuteur . ' ' . $val->nomAuteur;
         }
+		$dataToIndex['scenaristes'] = implode (' / ', $data);
+		$dataToIndex['sanitizedScenaristes'] = $this->sanitize ($dataToIndex['scenaristes']);
 
-        $dataToIndex['genres'] = '';
         //recuperation des mots clés
-        $albumKeywords     = $mpAlb->getAlbumKeywords($idAlbum);
-        foreach($albumKeywords as $kkey => $k){
-            #echo $k->libelle;
-            $dataToIndex['genres'] .= $k->libelle ; 
-            if($kkey >= 0 && $kkey < count($albumKeywords)-1){
-                $dataToIndex['genres'] .= ' / ';
-            }
+        $data = array ();
+        foreach ($mpAlb->getAlbumKeywords($idAlbum) as $val){
+            $data[] = $val->libelle;
         }
+		$dataToIndex['genres'] = implode (' / ', $data);
+		$dataToIndex['sanitizedGenres'] = $this->sanitize ($dataToIndex['genres']);
 
-        $nomEditeur        = $editeurInfos->getPrenomEditeur() != '' ? $editeurInfos->getPrenomEditeur() 
-                                                                . ' ' . $editeurInfos->getNomEditeur() :
-                                                                $editeurInfos->getNomEditeur() ;
+		if ($editeurInfos->getPrenomEditeur() != ''){
+			$nomEditeur =  $editeurInfos->getPrenomEditeur() . ' ' . $editeurInfos->getNomEditeur();
+		}else{
+			$nomEditeur = $editeurInfos->getNomEditeur();
+		}
 
-        @$dataToIndex['editeur'] = $nomEditeur; 
-        return @$dataToIndex;
-    }   
+        $dataToIndex['editeur'] = $nomEditeur;
+        $dataToIndex['sanitizedEditeur'] = $this->sanitize ($nomEditeur);
+
+        return $dataToIndex;
+    }
+
+	function sanitize ($text)
+	{
+		$diacritics = array (
+			'à', 'â', 'ä', 'á', 'ã', 'å',
+			'î', 'ï', 'ì', 'í', 
+			'ô', 'ö', 'ò', 'ó', 'õ', 'ø', 
+			'ù', 'û', 'ü', 'ú', 
+			'é', 'è', 'ê', 'ë', 
+			'ÿ', 'ý', 
+			'ç', 'ñ',
+			'À', 'Â', 'Ä', 'Á', 'Ã', 'Å',
+			'Î', 'Ï', 'Ì', 'Í', 
+			'Ô', 'Ö', 'Ò', 'Ó', 'Õ', 'Ø', 
+			'Ù', 'Û', 'Ü', 'Ú', 
+			'É', 'È', 'Ê', 'Ë', 
+			'Ÿ', 'Ý', 
+			'Ç', 'Ñ', 
+			);
+		$undiacrited = array (
+			'a', 'a', 'a', 'a', 'a', 'a', 
+			'i', 'i', 'i', 'i', 
+			'o', 'o', 'o', 'o', 'o', 'o', 
+			'u', 'u', 'u', 'u', 
+			'e', 'e', 'e', 'e', 
+			'y', 'y', 
+			'c', 'n', 
+			'A', 'A', 'A', 'A', 'A', 'A', 
+			'I', 'I', 'I', 'I', 
+			'O', 'O', 'O', 'O', 'O', 'O', 
+			'U', 'U', 'U', 'U', 
+			'E', 'E', 'E', 'E', 
+			'Y', 'Y', 
+			'C', 'N', 
+			);
+
+		$stripWordSize = 1;
+
+		$stripWords = array (
+			'le', 'la', 'les',
+			'de', 'des',
+			'en', 'au', 'aux'
+			);
+
+		$text = str_replace ($diacritics, $undiacrited, $text);
+
+		$text = mb_strtolower ($text, 'utf-8');
+
+		$text = preg_replace ('/[^a-z0-9]/', ' ', $text);
+
+		$text = preg_replace ('/[[:space:]]/', ' ', $text);
+
+		$return = array ();
+		$words = explode (' ', $text);
+
+		foreach ($words as $word)
+		{
+			if	(
+				(mb_strlen ($word, 'utf-8') <= $stripWordSize) or
+				in_array ($word, $stripWords)
+				)
+			{
+				continue;
+			}
+
+			$return[] = $word;
+		}
+
+		return implode (' ', $return);
+	}
 }
