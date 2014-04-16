@@ -31,7 +31,7 @@ div.leftSide section.prix_recompenses {
 	behavior:url(compat/PIE-1/PIE.htc);
 }
 
-div.leftSide section.prix_recompenses header h1 {
+div.leftSide section.prix_recompenses header h3 {
 	margin:0;
 	font-size:14px;
 	color: #00b1bd;
@@ -132,7 +132,7 @@ div.rightSide section.biographie {
 	width:97%;
 }
 
-div.rightSide section.biographie h1 {
+div.rightSide section.biographie h3 {
 	color: #9f2b69;
 	font-size: 17px;
 	text-shadow: 0 1px 0 #fff;
@@ -162,8 +162,13 @@ div.rightSide section.biographie div.bioWrapper p {
 div.rightSide section.albums-auteur {
 	width:100%;
 }
+div.rightSide section.albums-auteur h2 {
+	margin: 0;
+	font-weight: normal;
+	font-size: 15px;
+}
 
-div.rightSide section.albums-auteur  h1 {
+div.rightSide section.albums-auteur h3 {
 	color: #9f2b69;
 	font-size: 17px;
 	text-shadow: 0 1px 0 #fff;

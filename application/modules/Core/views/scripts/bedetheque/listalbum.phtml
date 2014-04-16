@@ -62,7 +62,7 @@
     $coverUri = $this->customUrl(array('isbn'   => $hit->isbn ,'format' => 'small'), 'couverture') ;
             ?>
            
-        <div class="item" id="id-<?php echo $hit->idAlbum ?>">
+        <div class="item clearfix" id="id-<?php echo $hit->idAlbum ?>">
             
             <?php if(Zend_Registry::isRegistered('currentUserID') && $this->bedetheque && !isset($_GET['user'])): ?>
             <div style="position:absolute;z-index:1000;right:10px;top:0px;"><a style="display:block;padding:10px;" href="javascript:void(0);" onclick="javascript:deleteAlbumFromBdtech(<?php echo $hit->idAlbum ?>);">×</a></div>
@@ -72,15 +72,15 @@
             <a href="<?php echo $this->customUrl( array('titleSerie' => $hit->titreSerie , 
                                                         'titleAlbum' => $hit->titreAlbum, 
                                                         'idAlbum'    => $hit->idAlbum ) , 
-                                                        'album'); ?>" class="masque"></a>
+                                                        'album'); ?>" class="item-link clearfix">
 	
-            <?php echo $this->displayImage($coverUri, 'cover-' . $hit->isbn, 'cover'  ) ?>    
+            <?php echo $this->displayImage($coverUri, $hit->titreAlbum .' - '. $hit->titreSerie, 'cover'  ) ?>
             <?php endif ;?>
              
                 <div class="search-content">
                    
                     <hgroup>
-                        <h1><?php echo $hit->titreSerie ?></h1>
+                        <h2 class="titreSerie"><?php echo $hit->titreSerie ?></h2>
                         <h2><?php echo $hit->titreAlbum ?></h2>
                     </hgroup>
 
@@ -96,8 +96,8 @@
                     if($hit->genres != ''): ?>
                         <p><?php echo $hit->genres ?></p>
                     <?php endif; ?>
-                 </div>
-                <div class="clear"></div>
+                </div>
+            </a>
 	</div>
         
   

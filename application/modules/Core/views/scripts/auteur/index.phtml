@@ -15,7 +15,7 @@
 	<?php if(count($this->albumPrices) > 0): ?>
 	<section class="prix_recompenses">
 		<header>
-                    <h1>Prix & récompenses</h1>
+                    <h3>Prix & récompenses</h3>
 		</header>
 		<ul>
                     <?php foreach($this->albumPrices as $albumPrice): ?>
@@ -65,7 +65,7 @@
 	
 	<!-- Bloc de liens réseaux sociaux -->
 	<div class="social_links">
-            <h1><img src="/img/slinks_titre.png" alt="Suivez-nous !"></h1>
+            <div class="social_links-title"><img src="/img/slinks_titre.png" alt="Suivez-nous !"></div>
             <ul>
                 <li><a href="#"><img src="/img/slinks_icon_fb.png" alt=""></a></li>
                 <li><a href="#"><img src="/img/slinks_icon_twitter.png" alt=""></a></li>
@@ -110,7 +110,7 @@
 	</div>
 	<?php if(isset($this->bio) && $this->bio != ''): ?>
 	<section class="biographie">
-		<h1>Biographie</h1>
+		<h3>Biographie</h3>
 		<div class="bioWrapper">
                         <p><?php echo $this->bio ?></p>
 			<?php /*<p>C'est à BDBulle, la librairie de la femme de Sokal que Jean David Morvan découvre toute la BD dite adulte en cherchant la suite de Métro Cassiopée direction Châtelet dans la série Valérian. Il a 11 ans et repart avec La terre de la bombe, L'Indien Français, Les Innommables, Bastos et Zakousky, Comanche, L'Incal, Thorgal et surtout le magazine Gomme. Il redouble sa quatrième, il rencontre alors Christian Lerolle, un des deux Color Twins, et lors de sa seconde terminale Frank Guréghian, l'autre moitié du duo. Il commence à collaborer à un fanzine, Hors Gabarit, avec un copain croisé en classe de seconde, Sylvain Savoia. En 1989, Jean David Morvan intègre l'école Saint-Luc de Bruxelles pour apprendre le métier de dessinateur. Dès lors, il arrête de dessiner, et fréquente la librairie Forbidden Zone où il croise de nombreux professionnels de la BD et découvre comics et mangas. Au festival de Villeneuve d'Asc, il s'improvise scénariste pour ses copains, et, à sa grande surprise Reflets Perdus présenté avec Savoia est accepté par les éditions Zenda. L'année suivante, il passe le concours des Beaux-Arts d'où il est "viré pour non-assistance aux cours". Premier album et service militaire en poche, le chemin reste semé d'embûches... Alors que Zenda est racheté par Glénat, Akira arrive en France avec fracas et succès. Morvan propose alors Nomad avec Savoia. Le dessinateur lui présente Buchet qui s'attèle au design. Dans la foulée, son éditeur lui présente Trantkat et HK voit le jour. Pendant un an, la farandole des projets refusés continue jusqu'au jour où Guy Delcourt accepte Sillage. Les anciens projets reprennent vie : 7 secondes avec Parel, Zorn et Dirna en compagnie de Bessadi et Trannoy (Soleil)… Dans le même temps, il réalise avec Munuera des histoires courtes du très hautain Sir Pyle. Suivent des projets plus récents, tels que Le cycle de Tschaï avec Li-An, adaptation d'une série de romans de Jack Vance, La Mandiguerre avec Tamiazzo, Continuum avec Ponce, ou encore Jolin la teigne en compagnie de Ruben. Scénariste boulimique, Morvan n'arrête pas d'imaginer… À venir : Le Bonheur avec Lejeune ou Trois, et l'ange sous le dessin de Colombo, sans oublier un péplum grec mis en scène par Munuera. Viennent de sortir le sixième tome de Sillage, série où chaque album narre une histoire autonome; le cinquième tome du Cycle de Tschaï, ainsi que Lord Clancharlie ( en collaboration avec Delestret), adaptation personelle du roman de Victor Hugo, L'Homme qui Rit. </p>
@@ -121,7 +121,7 @@
   
         ?>
 	<section class="albums-auteur">
-		<h1>Les albums de <?php echo $this->nomAuteur ?> chroniqués par Sceneario.com :</h1>
+		<h3>Les albums de <?php echo $this->nomAuteur ?> chroniqués par Sceneario.com :</h3>
 		<ul>
 		
 			<?php foreach($this->albumsAuteur as $keyAlbum => $album): 
@@ -146,10 +146,10 @@
                                 }*/ 
                                 
                                 ?> 
-				<a href="<?php echo $url ?>">
+				<h2><a href="<?php echo $url ?>">
                                     <?php echo substr($album->collection,0, $limitTitle) ;
                                         echo strlen($album->collection) > $limitTitle ? '...' : '';
-                                    ?></a>
+                                    ?></a></h2>
                                 <?php if( $album->tomes >  0 ): ?>
 				<span>(<?php echo $album->tomes ?> tome<?php echo $album->tomes >  1 ? 's' : ''  ?>)</span>
                                 <?php endif;?>

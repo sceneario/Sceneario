@@ -2,16 +2,19 @@
 <!-- CONTENU -->
 
 <div class="leftActu">
-	<h1><a href="<?php echo $this -> customUrl(array(),'listexpo') ?>">Expositions, salons</a> <?php echo $this -> titre ?></h1>
-	
+	<div class="interview-title">
+		<h2><a href="<?php echo $this->customUrl(array(),'listexpo') ?>">Expositions, salons</a></h2> -
+		<h1><a href="<?php echo $this->currentUrl(); ?>"><?php echo $this->titre; ?></a></h1>
+	</div>
 	<section class="interview-wrapper">
 		<figure  style="background-image:url(<?php echo $this -> imageUri ?>);background-repeat:no-repeat;">
-			<img src="/img/block620_white_masque.png" alt="" class="masque">
+			<img class="visuallyhidden" src="<?php echo $this->imageUri; ?>" alt="<?php echo $this->titre; ?>" />
+			<img src="/img/block620_white_masque.png" alt="<?php echo $this->titre; ?>" class="masque">
 		</figure>
 		
 		<hgroup>
 			<h1><?php echo $this -> titre ; ?></h1>
-			<h2><?php echo $this -> expo ->getDate() ; ?></h2>
+			<span><?php echo $this -> expo ->getDate() ; ?></span>
 		</hgroup>
 		   
 		<div id="texte"><?php echo $this -> expoHtml ; ?></div>

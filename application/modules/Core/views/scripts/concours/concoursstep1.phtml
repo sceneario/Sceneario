@@ -9,9 +9,8 @@
                 if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
                      $filename = "/img/temp/scev6-tempconcours.jpg";      
                 endif; ?>
-            <img src="<?php echo $filename ?>" alt="" class="illus">
-                ?>
-		<figcaption><span><?php echo $this->concoursEnCours->getLibelleConcours() ?></span></figcaption>
+            <img src="<?php echo $filename ?>" alt="<?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" class="illus" />
+		<figcaption><h1><?php echo $this->concoursEnCours->getLibelleConcours() ?></h1></figcaption>
 	</figure>
     
 	<hgroup>

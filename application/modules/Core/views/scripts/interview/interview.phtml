@@ -2,11 +2,18 @@
 <!-- CONTENU -->
 
 <div class="leftActu">
-	<h1><a href="<?php echo $this -> customUrl(array(),'listinterview') ?>">Interview</a><?php echo $this -> nomAuteur ?></h1>
-	
+	<div class="interview-title">
+		<h2><a href="<?php echo $this->customUrl(array(), 'listinterview'); ?>">Interview</a></h2> -
+		<h1><a href="<?php echo $this->currentUrl(); ?>">
+            <?php foreach ($this->auteurs as $k => $auteur) : ?>
+                <?php echo $auteur->getPrenomAuteur().' '.$auteur->getNomAuteur().($k+1 < count($this->auteurs) ? ' - ' : ''); ?>
+            <?php endforeach; ?>
+        </a></h1>
+	</div>
 	<section class="interview-wrapper">
 		<figure  style="background-image:url(<?php echo $this -> imageInterview ?>);background-repeat:no-repeat;">
-			<img src="/img/block620_white_masque.png" alt="" class="masque">
+			<img class="visuallyhidden" src="<?php echo $this -> imageInterview ?>" alt="<?php echo $this -> titreInterview ; ?>" />
+			<img src="/img/block620_white_masque.png" alt="<?php echo $this -> titreInterview ; ?>" class="masque">
 		</figure>
 		
 		<hgroup>

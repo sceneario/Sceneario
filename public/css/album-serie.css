@@ -189,11 +189,12 @@ div.rightSide hgroup h1 a {
 	-o-text-shadow: 0px 0px 0px #fff;
 }
 
-div.rightSide hgroup h2 {
+div.rightSide hgroup h1.album-title {
 	color:#00b3be;
 	font-size:26px;
 	margin:-3px 0 0 0;
-	
+	text-transform:none;
+	font-weight: bold;
 	text-shadow: 0px 1px 0px #fff;
 	-webkit-text-shadow: 0px 1px 0px #fff;
 	-moz-text-shadow: 0px 1px 0px #fff;
@@ -231,6 +232,13 @@ div.rightSide table td.label {
 div.rightSide table td.info {
 	color:#505050;
 }
+div.rightSide table td.info h2 {
+	margin: 0;
+	font-size: 12px;
+	font-weight: normal;
+	display: inline;
+}
+
 
 div.rightSide div.social-links {
 	margin-top:10px;
@@ -432,11 +440,13 @@ div.rightSide article hgroup {
 	margin-bottom:0;
 }
 
-div.rightSide article hgroup h1 {
+div.rightSide article hgroup h3 {
+	color:#9f2b69;
+	font-weight:normal;
+	margin:0;
 	font-size:17px;
-	text-transform:none;
 	line-height:1.5em;
-	
+
 	text-shadow: 0px 1px 0px #fff;
 	-webkit-text-shadow: 0px 1px 0px #fff;
 	-moz-text-shadow: 0px 1px 0px #fff;
@@ -445,11 +455,12 @@ div.rightSide article hgroup h1 {
 }
 
 div.rightSide article hgroup h2 {
+	color:#00b3be;
+	margin: 0;
+	font-weight: bold;
 	font-size:22px;
-	text-transform:none;
 	line-height:1.4em;
-	margin-bottom:0;
-	
+
 	text-shadow: 0px 1px 0px #fff;
 	-webkit-text-shadow: 0px 1px 0px #fff;
 	-moz-text-shadow: 0px 1px 0px #fff;
@@ -543,7 +554,7 @@ div.rightSide section.also-like {
 	margin-top:20px;
 }
 
-div.rightSide section.also-like h1 {
+div.rightSide section.also-like h3 {
 	color:#9f2b69;
 	font-size:17px;
 	font-weight:normal;

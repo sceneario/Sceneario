@@ -2,8 +2,10 @@
 <!-- CONTENU -->
 
 <div class="galerieWrapper">
-	<h1><a href="">Galerie</a> - <?php echo $this->titre ?></h1>
-	
+	<div class="galerie-title">
+		<h2><a href="<?php echo $this->url(array(), !empty($this->isPreview) ? 'listpreview' : 'listgalerie'); ?>"><?php echo !empty($this->isPreview) ? 'Preview' : 'Galerie' ; ?></a></h2> -
+		<h1><a href="<?php echo $this->currentUrl(); ?>"><?php echo $this->titre ?></a></h1>
+	</div>
 	<div class="galerieSlider  <?php echo $this->previewClass ?>">
 		
 		<ul>

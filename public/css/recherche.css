@@ -107,8 +107,8 @@ header.header-mauve input[type=submit] {
 header.header-mauve p {
 	color:#e183b7;
 	float:left;
-	margin:0 20px;
-	line-height:50px;
+	margin: 4px 10px 0px;
+	line-height:51px;
 }
 
 header.header-mauve div.menu {
@@ -287,19 +287,16 @@ div.leftRecherche div.item {
 	position:relative;
 }
 
-
-
-div.leftRecherche div.item a.masque {
-	position:absolute;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	z-index:1;
+div.leftRecherche div.item .item-link {
+	display: block;
 }
 
 div.leftRecherche div.item:nth-child(odd) {
 	background:url(../img/separateur_general.jpg) top left repeat-x #eeeff0;
+}
+
+div.leftRecherche div.item:hover {
+	background: #f5f5f5;
 }
 
 div.leftRecherche div.item hgroup,div.leftRecherche div.item hgroup h1,div.leftRecherche div.item hgroup h2 {
@@ -323,7 +320,7 @@ div.leftRecherche div.item .search-content {
 	width: 475px;
 }
 
-div.leftRecherche div.item hgroup h1 {
+div.leftRecherche div.item hgroup .titreSerie {
 	font-size:15px;
 	color:#982861;
 	text-transform:uppercase;
@@ -445,7 +442,7 @@ section.mon-compte {
 	behavior:url(compat/PIE-1/PIE.htc);
 }
 
-section.mon-compte h1 {
+section.mon-compte h3 {
 	width:300px;
 	height:35px;
 	background:url(../img/separateur-blue.jpg) repeat-x bottom left;
@@ -455,9 +452,10 @@ section.mon-compte h1 {
 	line-height:35px;
 	text-indent:40px;
 	margin-bottom:0;
+	font-weight: bold;
 }
 
-section.mon-compte h1 img {
+section.mon-compte h3 img {
 	position:absolute;
 	top:10px;
 	left:15px;

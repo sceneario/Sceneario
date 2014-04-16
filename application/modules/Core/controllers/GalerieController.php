@@ -15,11 +15,6 @@ class GalerieController extends GlobalController
         parent::init();
         $this->_utils = new Core_Service_Utilities;
         $params = $this->getRequest()->getParams();
-        $this->view->headTitle('Galeries et préviews BD - ', 'PREPEND');
-        $this->view->headMeta()->setName('description', 'Retrouvez toutes les galeries et previews de vos artistes BD préférés grâce à Sceneario.com');
-        $this->view->headMeta()->setName('keywords', 'Préviews BD, Galeries BD, Expositions, Photos planches BD');
-        $this->view->headMeta()->setProperty('og:title', 'Galeries et préviews BD - Sceneario.com');
-        $this->view->headMeta()->setProperty('og:description', 'Retrouvez toutes les galeries et previews de vos artistes BD préférés grâce à Sceneario.com');
     }
     
     /**
@@ -33,11 +28,17 @@ class GalerieController extends GlobalController
         $mapperTblDossiers = new Core_Model_Mapper_Tbldossiers();
         $this->setGaleries($mapperTblDossiers->fetchAll(null, array( 'clause' => 'enligne = ?  AND LOWER(typeDossier) = "preview"', 
                                                                        'params' => IS_PUBLISHED), 'dateDossier DESC'));
+        $this->view->isPreview = true;
+        $this->view->headTitle('Previews BD - ', 'PREPEND');
+        $this->view->headMeta()->setName('description', 'Retrouvez toutes les previews de vos artistes BD préférés grâce à Sceneario.com');
+        $this->view->headMeta()->setName('keywords', 'Previews, Previews BD, Galeries BD, Expositions, Photos planches BD');
+        $this->view->headMeta()->setProperty('og:title', 'Previews BD - Sceneario.com');
+        $this->view->headMeta()->setProperty('og:description', 'Retrouvez toutes les previews de vos artistes BD préférés grâce à Sceneario.com');
         
         if($this->_galeries !== null){
              $this->listGaleries();
              $this->render('list');
-        } 
+        }
     }
     
     
@@ -49,12 +50,17 @@ class GalerieController extends GlobalController
         $mapperTblDossiers = new Core_Model_Mapper_Tbldossiers();
         $this->setGaleries($mapperTblDossiers->fetchAll(null, array( 'clause' => 'enligne = ? AND LOWER(typeDossier) = "carnet"', 
                                                                        'params' => IS_PUBLISHED), 'dateDossier DESC'));
+       $this->view->type = 'Galeries';
+        $this->view->headTitle('Galeries BD - ', 'PREPEND');
+        $this->view->headMeta()->setName('description', 'Retrouvez toutes les galeries de vos artistes BD préférés grâce à Sceneario.com');
+        $this->view->headMeta()->setName('keywords', 'Galeries, Galeries BD, Préviews BD, Expositions, Photos planches BD');
+        $this->view->headMeta()->setProperty('og:title', 'Galeries BD - Sceneario.com');
+        $this->view->headMeta()->setProperty('og:description', 'Retrouvez toutes les galeries de vos artistes BD préférés grâce à Sceneario.com');
         
         if($this->_galeries !== null){
              $this->listGaleries();
              $this->render('list');
         }     
-       
     }
     
     public function getGaleries()
@@ -122,16 +128,16 @@ class GalerieController extends GlobalController
         $idGalerie         = $this->getRequest()->getParam('id');
         $mapperTblDossiers = new Core_Model_Mapper_Tbldossiers();
         $galerieInfos      = $mapperTblDossiers->find($idGalerie, new Core_Model_Tbldossiers) ;
-        
+
         $this->view->previewClass  = '';   
         $this->view->norotateClass = 'class=""'; 
         
-        $isPreview = false;
+        $this->view->isPreview = false;
         
         if(strtolower($galerieInfos->getTypeDossier()) == 'preview'){ // preview
             $this->view->previewClass  = 'preview';   
             $this->view->norotateClass = 'class="norotate"';
-            $isPreview = true;
+            $this->view->isPreview = true;
         }
  
         $galDir = '/home/sceneari/images/galeries/' . $idGalerie;
@@ -149,7 +155,7 @@ class GalerieController extends GlobalController
 
                             $image = array();
                             $image['big'] = 'http://images.sceneario.com/galeries/'.$idGalerie.'/'.$file ;
-                            if($isPreview){
+                            if($this->view->isPreview){
                                 $image['med'] = 'http://images.sceneario.com/galeries/'.$idGalerie.'/'.$file ;
                             }else{
                                 $image['med'] = 'http://images.sceneario.com/galeries/'.$idGalerie.'/miniatures2/'.$file ;
@@ -168,13 +174,13 @@ class GalerieController extends GlobalController
         
         
         $this->view->headTitle($galerieInfos->getTitreDossier().' - ', 'PREPEND');
-        $this->view->headMeta()->setName('description', 'Découvrez la galerie : ' . $galerieInfos->getTitreDossier() . ' sur sceneario.com');
+        $this->view->headMeta()->setName('description', 'Découvrez la '.($this->view->isPreview ? 'preview de ' : 'galerie : '). $galerieInfos->getTitreDossier() . ' sur sceneario.com');
         $this->view->headMeta()->setName('keywords', $galerieInfos->getTitreDossier().', Préviews BD, Galeries BD, Expositions, Photos planches BD');
         $this->view->headMeta()->setProperty('og:title', $galerieInfos->getTitreDossier());
         if (isset($imageFacebook)) {
             $this->view->headMeta()->setProperty('og:image', $imageFacebook);
         }
-        $this->view->headMeta()->setProperty('og:description', 'Découvrez la '.($isPreview ? 'preview de ' : 'galerie : ').$galerieInfos->getTitreDossier().' sur sceneario.com');
+        $this->view->headMeta()->setProperty('og:description', 'Découvrez la '.($this->view->isPreview ? 'preview de ' : 'galerie : ').$galerieInfos->getTitreDossier().' sur sceneario.com');
 
         $this->view->titre  = $galerieInfos->getTitreDossier();   
         $this->view->images = $images;
