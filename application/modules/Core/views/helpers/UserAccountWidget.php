@@ -90,7 +90,7 @@ class Zend_View_Helper_UserAccountWidget
                 <!-- Mon compte -->
                 <div id="bedetheque-import" class="whiteblock300">
                     <header>
-                        <h1>Importer mon ancienne bédéthèque</h1>
+                        <h3>Importer mon ancienne bédéthèque</h3>
                     </header>
                     <div class="alert"></div>
                     <form action="/bande-dessinee/bedetheque/import" method="POST">
@@ -117,7 +117,7 @@ class Zend_View_Helper_UserAccountWidget
                     </script>
                 </div>
                <section class="mon-compte" id="widget-ma-bdtheque">
-                       <h1><img src="/img/user.png" alt="">Mon compte</h1>
+                       <h3><img src="/img/user.png" alt="">Mon compte</h3>
                        <ul>
                                <li>Albums dans ma bédéthèque <span>'.$countAlbum.'</span></li>
                                <li>Albums à acheter <span>'.$countAlbumInListAchat.'</span></li>

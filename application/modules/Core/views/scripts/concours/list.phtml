@@ -28,9 +28,11 @@ endforeach;
                 $filename = "/img/temp/scev6-tempconcours-small.jpg" ;
                 $backgroundSize = '';
             endif; ?>
-		<figure class="center" style="background:url('<?php echo $filename ?>') no-repeat ; <?php echo $backgroundSize ?> ">
-                    <img src="/img/block300_white_masque.png" alt="" class="masque">
-		</figure>
+
+        <figure class="center">
+            <img src="<?php echo $filename ?>" alt="<?php echo str_replace(array('"',"'","`"), '', $concPrec->getLibelleConcours()); ?>" class="illus"/>
+            <img src="/img/block300_white_masque.png" alt="" class="masque">
+        </figure>
 		<h2><?php echo $concPrec->getLibelleConcours() ?></h2>
 		<p><?php echo strip_tags($concPrec->getEntete() ) ?></p>
                 <?php if($concPrec->getResultats() != ''): ?>

@@ -115,9 +115,11 @@
         border:2px solid white;
     }
     
-    #adultFilter div h1{
+    #adultFilter div .heading-1{
         line-height: 30px;
         font-size: 25px;
+        font-weight: bold;
+        margin: 0.67em 0;
     }
     
     #adultFilter div p.text {
@@ -143,7 +145,7 @@
 </style>
 <div id="adultFilter">
     <div>
-        <h1>ATTENTION : CONTENU RESERVE <br />A UN PUBLIC AVERTI</h1>
+        <p class="heading-1">ATTENTION : CONTENU RESERVE <br />A UN PUBLIC AVERTI</p>
         <p class="text">Les images et textes à caractère érotique, pornographique ou violent contenus dans cette page peuvent choquer certaines sensibilités. 
         <br />En affichant cette page, vous déclarez prendre vos responsabilités vis-a-vis de ce contenu.</p>
         <p class="text">
@@ -312,7 +314,7 @@
 <footer id="mainfooter">
     <div id="header">
         <div class="social_links">
-            <h1><img src="<?php echo BASE_URL ?>img/slinks_green_titre.png" alt="Suivez-nous !"></h1>
+            <div class="social_links-title"><img src="<?php echo BASE_URL ?>img/slinks_green_titre.png" alt="Suivez-nous !"></div>
                         <ul>
                                 <li><a target="_blank" href="http://www.facebook.com/Sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_fb.png" alt=""></a></li>
                                 <li><a target="_blank" href="https://twitter.com/sceneario"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_twitter.png" alt=""></a></li>
@@ -332,13 +334,13 @@
     </div>
     
     <div id="sitemap" class="clearfix">
-        <h1>Plan du site</h1>
+        <h3>Plan du site</h3>
         <p>
             <a href="http://www.sceneario.com">Sceneario.com</a> est un site généraliste traitant de Bande Dessinée, spécialisé dans la critique de BD, de Comics et de Mangas. Avec plus de 20 000 fiches BDs résumant et analysant les parutions internationales, 550 interviews, 450 préviews, 270 comptes rendus d’expositions / salons, 180 galeries de croquis, des concours, Sceneario.com est un site de référence et un incontournable du monde de la Bande Dessinée.
         </p>
 
         <ul class="mainMenu">
-          <li><a href="/accueil.html">Sceneario</a>
+          <li><h4><a href="/accueil.html">Sceneario</a></h4>
             <ul>
                 <li><a href="/equipe">Équipe</a></li>
                 <li><a href="/newsletter">Newsletter</a></li>
@@ -350,12 +352,12 @@
                 <li><a target="_blank" href="mailto:webmaster@sceneario.com">Contact</a></li>
             </ul>
           </li>
-          <li><a href="/blog">Actualités</a>
+          <li><h4><a href="/blog">Actualités</a></h4>
             <ul>
               <li><a href="/blog">Blog</a></li>
             </ul>
           </li>
-          <li><a href="/bande-dessinee.html">Bédéthèque</a>
+          <li><h4><a href="/bande-dessinee.html">Bédéthèque</a></h4>
             <ul>
               <li><a href="/bande-dessinee/nouveautes.html">Nouveautés</a></li>
               <li><a href="/bande-dessinee/prochaines-parutions.html">A paraitre</a></li>
@@ -363,7 +365,7 @@
               <li><a href="/bande-dessinee/recommandes.html">Recommandés</a></li>
             </ul>
           </li>
-          <li><a href="/sceneario-passe-la-6eme.html">Toute la bd</a>
+          <li><h4><a href="/sceneario-passe-la-6eme.html">Toute la bd</a></h4>
             <ul>
               <li><a href="/interview">Interviews</a></li>
               <li><a href="/expositions-salons">Expositions, salons</a></li>
@@ -371,7 +373,7 @@
               <li><a href="/preview">Previews</a></li>
             </ul>
           </li>
-          <li><a href="/concours">Concours</a>
+          <li><h4><a href="/concours">Concours</a></h4>
             <ul>
               <li><a href="/concours">Tous les concours</a></li>
               <?php $c = Core_Model_Mapper_Tblconcoursent::getCurrentConcours(); ?>

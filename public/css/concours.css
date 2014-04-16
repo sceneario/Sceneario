@@ -54,7 +54,7 @@ div.whiteblock940 figure figcaption {
 	behavior:url(compat/PIE-1/PIE.htc);
 }
 
-div.whiteblock940 figure figcaption span {
+div.whiteblock940 figure figcaption h1 {
 	display:block;
 	height:48px;
 	color: #fff;
@@ -62,6 +62,8 @@ div.whiteblock940 figure figcaption span {
 	text-shadow: 0 -1px 0 #008892;
 	text-align:center;
 	line-height:45px;
+	margin: 0;
+	font-weight: normal;
 }
 
 div.whiteblock940 hgroup {
@@ -87,7 +89,7 @@ div.whiteblock940 hgroup h3 {
 	padding:0;
 }
 
-div.whiteblock940 a.big_button {
+div.whiteblock940 .big_button {
 	display:block;
 	width: 172px;
 	height: 46px;
@@ -121,7 +123,7 @@ div.whiteblock940 a.big_button {
 	behavior:url(compat/PIE-1/PIE.htc);
 }
 
-div.whiteblock940 a.big_button img {
+div.whiteblock940 .big_button img {
 	position:absolute;
 	right:20px;
 	top:15px;

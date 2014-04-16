@@ -8,8 +8,9 @@
 <div class="clear" style="height:50px;"></div>
 
 <!-- Nouveautés -->
-<section class="itemBedetheque">
-    <h1>Nouveautés <a href="<?php echo $this->customUrl(array('tag' => 'nouveautes'), 'listalbum') ?>">Tout afficher ></a></h1>
+<section class="itemBedetheque clearfix">
+    <h1><a href="<?php echo $this->customUrl(array('tag' => 'nouveautes'), 'listalbum') ?>">Nouveautés</a></h1>
+    <a class="show_all" href="<?php echo $this->customUrl(array('tag' => 'nouveautes'), 'listalbum') ?>">Tout afficher ></a>
     <?php /*
     <div class="checkboxes">
             <input type="checkbox" name="bd" value="bd"> <span>BD</span>
@@ -26,7 +27,7 @@
 </section>
 
 <!-- Derniers ajouts -->
-<section class="itemBedetheque">
+<section class="itemBedetheque clearfix">
 	<h1>Derniers ajouts</h1>
 	
 	<div class="separateur"></div>
@@ -38,8 +39,9 @@
 </section>
 
 <!-- Coup de coeur -->
-<section class="itemBedetheque">
-	<h1>Coup de coeur <a href="<?php echo $this->customUrl(array(), 'coupdecoeur') ?>">Tout afficher ></a></h1>
+<section class="itemBedetheque clearfix">
+	<h1><a href="<?php echo $this->customUrl(array(), 'coupdecoeur') ?>">Coup de coeur</a></h1>
+	<a class="show_all" href="<?php echo $this->customUrl(array(), 'coupdecoeur') ?>">Tout afficher ></a>
 	
 	<div class="separateur"></div>
 	
@@ -50,7 +52,7 @@
 </section>
 
 <!-- Les plus vues -->
-<section class="itemBedetheque">
+<section class="itemBedetheque clearfix">
 	<h1>Les plus vues</a></h1>
 	
 	<div class="separateur"></div>

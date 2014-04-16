@@ -3,12 +3,16 @@
 <div id="slider">
     <div id="slides-wrapper">
     	<?php foreach($this->events as $evt): ?>
-			<article style="background:url(http://admin.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>) no-repeat center center;">
-	                <h1><img src="img/slider_h1_queue.png" alt="<?php echo $evt->getTitreEvt() ?>"><?php echo $evt->getTitreEvt() ?></h1>
-	                <?php if($evt->getLienEvt() !== ''): ?>
-	                	<a href="<?php echo $evt->getLienEvt() ?>" class="more">en savoir plus &rsaquo;</a>
-	                <?php endif; ?>
-	        </article>
+            <?php if($evt->getLienEvt() !== '') : ?><a href="<?php echo $evt->getLienEvt() ?>"><?php endif; ?>
+                <article style="background:url(http://admin.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>) no-repeat center center;">
+                    <img src="http://admin.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>" alt="<?php echo $evt->getTitreEvt() ?>" class="visuallyhidden" />
+                	<h1><?php echo $evt->getTitreEvt() ?></h1>
+                	<img class="h1queue" src="img/slider_h1_queue.png" alt="<?php echo $evt->getTitreEvt() ?>" />
+                    <?php if($evt->getLienEvt() !== ''): ?>
+                        <span class="more">en savoir plus &rsaquo;</span>
+                    <?php endif; ?>
+                </article>
+            <?php if($evt->getLienEvt() !== '') : ?></a><?php endif; ?>
         <?php endforeach; ?>
     </div><!-- slides-wrapper -->
     <div id="bgblack"></div>

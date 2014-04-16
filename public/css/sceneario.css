@@ -9,6 +9,17 @@ body {
 a {   outline: none; color:#00a1ab; text-decoration:none;}
 a:hover { color:#414141; }
 
+.visuallyhidden{
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px
+}
+
 /* ----------- HEADER ------------ */
 
 header #pub {
@@ -562,12 +573,16 @@ header #nav-container nav #btns-connect ul li a#btn-fb {
 	
 	behavior:url(compat/PIE-1/PIE.htc);
 }
-#slider article h1 img {
+#slider article img.h1queue {
 	position: absolute;
-	bottom: -10px;
-	left: 15px;
+	top: 258px;
+	left: 46px;
+	z-index: 4;
 }
-#slider article a {
+#slider article a, #slider article a:hover {
+	color: #fff;
+}
+#slider article .more {
 	position: absolute;
 	top: 257px;
 	left: 30px;
@@ -716,13 +731,13 @@ header #nav-container nav #btns-connect ul li a#btn-fb {
 	
 	behavior:url(compat/PIE-1/PIE.htc);
 }
-#content .social_links h1 {
+#content .social_links .social_links-title {
 	float: left;
 	width: 137px;
 	margin: 0px;
-	padding: 0px;
+	padding: 3px 0 0 0;
 	text-align: center;
-	line-height: 60px;
+	line-height: 57px;
 }
 #content .social_links ul {
 	float: left;
@@ -984,8 +999,9 @@ header #nav-container nav #btns-connect ul li a#btn-fb {
 .whiteblock300 header .more:hover {
 	color: #0097a0;
 }
-.whiteblock300 header h1 {
+.whiteblock300 header h3 {
 	margin: 0px;
+	font-weight: bold;
 	padding: 0px;
 	font-size: 14px;
 	color: #a22c6d;
@@ -1189,7 +1205,7 @@ header #nav-container nav #btns-connect ul li a#btn-fb {
 .pinkblock300 header .more:hover {
 	color: #f284c1;
 }
-.pinkblock300 header h1 {
+.pinkblock300 header h3 {
 	margin: 0px;
 	padding: 0px;
 	font-size: 14px;
@@ -1355,11 +1371,11 @@ header #nav-container nav #btns-connect ul li a#btn-fb {
 	top: 10px;
 	right: 10px;
 }
-#mainfooter div#header .social_links h1 {
+#mainfooter div#header .social_links .social_links-title {
 	float: left;
 	width: 137px;
 	margin: 0px;
-	padding: 0px;
+	padding: 5px 0 0 0;
 	text-align: center;
 }
 #mainfooter div#header .social_links ul {
@@ -1482,7 +1498,8 @@ header #nav-container nav #btns-connect ul li a#btn-fb {
 	background: #303030;
 	padding: 20px;
 }
-#sitemap h1 {
+#sitemap h3 {
+	font-weight: bold;
 	position: absolute;
 	font-size: 12px;
 	color: #0097a0;
@@ -1511,6 +1528,9 @@ header #nav-container nav #btns-connect ul li a#btn-fb {
 	padding-top: 20px;
 	padding-left: 20px;
 	background: url(../img/footer_separator.png) no-repeat left center;
+}
+#sitemap ul li h4 {
+	margin: 0;
 }
 #sitemap ul li a {
 	font-size: 11px;

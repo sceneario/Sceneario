@@ -19,14 +19,14 @@
                 <a rel="lightbox[album]" href="<?php echo $urlCouvZoom ?>" class="zoom"><?php 
                 echo $this->displayImage($this->customUrl( array('isbn'=> $this->albumInfos->getIsbn(),
                                                                  'format'=> 'big') , 'couverture' ) , 
-                                                                   $this->albumInfos->getTitre(),
+                                                                  $this->albumInfos->getCollection().' #'.$this->albumInfos->getTome().' - '.$this->albumInfos->getTitre(),
                                                                  'front') ?></a>   
                <!-- data-lightbox="lightbox" -->
                 <a rel="lightbox[album]" href="<?php echo $urlPlancheZoom?>" class="planche">
                     <?php echo $this->displayImage($this->customUrl( array('isbn'=> $this->albumInfos->getIsbn(),
                                                             'idAlbum' => $this->albumInfos->getIdAlbum(),
                                                             'format'=> 'big') , 'planche' ), 
-                                                            $this->albumInfos->getTitre(),
+                                                            $this->albumInfos->getCollection().' #'.$this->albumInfos->getTome().' - '.$this->albumInfos->getTitre(),
                                                             'behind');?></a> 
                 <?php if($this->albumIsCoupDeCoeur): ?>
 		<img src="<?php echo BASE_URL ?>img/coup-de-coeur.png" alt="Coup de coeur" class="bandeau_haut">
@@ -47,7 +47,7 @@
         if(count($this->allAlbumPrice) > 0): ?>
 	<section class="prix_recompenses">
 		<header>
-                    <h1>Prix & récompenses</h1>
+                    <h3>Prix & récompenses</h3>
 		</header>
 		<ul>
                     <?php foreach($this->allAlbumPrice as $albumPrice): 
@@ -165,13 +165,11 @@
                     <a href="<?php echo $this->customUrl(array('idSerie' => $this->serieInfos->getIdSerie(),
                                                                'nomSerie'=> $this->serieInfos->getNomSerie()
                                                                ), 'serie') */?>
-                       
-                       
                       <?php echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?> 
                     <a href="<?php echo $this->customUrl(array('tag'=> $this->serieInfos->getNomSerie()), 'recherche') ?>">voir la série ></a></h1>
 
-                <?php endif ?>    
-                <h2><?php echo $this->albumInfos->getTitre() ?></h2>
+                <?php endif ?>
+                <h1 class="album-title"><?php echo $this->albumInfos->getTitre() ?></h1>
         </hgroup>
 
         <div class="separateur"></div>
@@ -183,13 +181,13 @@
                 <tr>
                     <td class="label">Dessinateur<?php if(count($this->dessinateurs)>1){ ?>s<?php } ?>&nbsp;:</td>
                     <td class="info">
-                         <?php 
+                         <?php
                          if(isset($this->dessinateurs)):
                             foreach ($this->dessinateurs as $dessinateurs): ?>  
-                               <a href="<?php echo $this->customUrl(   array('nomAuteur'=> $dessinateurs->prenomAuteur 
+                                <h2><a href="<?php echo $this->customUrl(   array('nomAuteur'=> $dessinateurs->prenomAuteur
                                            . ' ' . $dessinateurs->nomAuteur, 'idAuteur' => $dessinateurs->idAuteur ),'auteur') ?>">
                                    <?php echo $dessinateurs->prenomAuteur 
-                                           . ' ' . $dessinateurs->nomAuteur?></a><br />
+                                           . ' ' . $dessinateurs->nomAuteur?></a></h2><br />
                            <?php endforeach ;
                          endif;?>
                     </td>
@@ -202,9 +200,9 @@
                         <?php 
                         if(isset($this->scenaristes)):
                             foreach ($this->scenaristes as $scenariste): ?>  
-                            <a href="<?php echo $this->customUrl(array('nomAuteur'=> $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur
+                            <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur
                                                                      , 'idAuteur' => $scenariste->idAuteur),'auteur') ?>">
-                                <?php echo $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur ?></a><br />
+                                <?php echo $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur ?></a></h2><br />
                         <?php endforeach ;
                         endif;?>
 
@@ -216,9 +214,9 @@
                     <td class="label">Coloriste<?php if(count($this->coloristes)>1){ ?>s<?php } ?>&nbsp;:</td>
                     <td class="info">
                         <?php foreach ($this->coloristes as $coloriste): ?>  
-                            <a href="<?php echo $this->customUrl(array('nomAuteur'=> $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur
+                            <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur
                                                                      , 'idAuteur' => $coloriste->idAuteur), 'auteur') ?>">
-                                <?php echo $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur ?></a><br />
+                                <?php echo $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur ?></a></h2><br />
                         <?php endforeach ?>
                     </td>
                 </tr>
@@ -226,7 +224,7 @@
                 <tr>
                     <td class="label">Éditions&nbsp;:</td>
                     <td class="info">
-                       <?php 
+                       <h2><?php
                        #var_dump($this->albumDetails['editeur']['url']);
                        if('http://' != $this->editeur['url'] &
                                '' != $this->editeur['url']): ?>
@@ -236,15 +234,15 @@
                        </a>
                        <?php else:
                                 echo $this->editeur['nom'] ;
-                             endif; ?>
+                             endif; ?></h2>
                     </td>
                 </tr>
                 <?php if(!null == $this->collectionInfos): ?>
                 <tr>
                     <td class="label">Collection&nbsp;:</td>
                     <td class="info">
-                         <?php /*<a href="<?php echo $this->customUrl(array('tag' => $this->collectionInfos->getNomCollection()), 'recherche') ?>">*/ ?>
-                         <?php echo $this->collectionInfos->getNomCollection() ?><?php /*</a>*/?>
+                        <?php /*<a href="<?php echo $this->customUrl(array('tag' => $this->collectionInfos->getNomCollection()), 'recherche') ?>">*/ ?>
+                        <h2><?php echo $this->collectionInfos->getNomCollection() ?><?php /*</a>*/?></h2>
                     </td>
                 </tr>
                 <?php endif ;  ?>
@@ -255,7 +253,7 @@
                 <tr>
                     <td class="label">Genre&nbsp;:</td>
                     <td class="info">
-                         <?php foreach ($this->motcles as $key => $motscles):
+                        <?php foreach ($this->motcles as $key => $motscles):
                                 $sep = '';
 
                                 if($key >= 0 && $key < count($this->motcles)-1 ) {
@@ -263,10 +261,10 @@
                                 }
                                 $searchQuote = array('"', "'") ?>  
 
-                        <a href="<?php echo $this->customUrl(array('tag'=>$motscles->libelle), 'recherche') ?>" 
+                        <h2><a href="<?php echo $this->customUrl(array('tag'=>$motscles->libelle), 'recherche') ?>"
                            title="<?php echo str_replace( $searchQuote , '' , strip_tags($motscles->definition)) ?>">
-                           <?php echo $motscles->libelle ?></a><?php echo $sep ?>
-                         <?php endforeach ?>                        
+                           <?php echo $motscles->libelle ?></a><?php echo $sep ?></h2>
+                        <?php endforeach ?>
                     </td>
                 </tr>
                 <?php endif; ?>
@@ -436,7 +434,7 @@
             foreach( $this->interview as $interview ): ?>
             <article>
                     <hgroup>
-                        <h1>A voir aussi...</h1>
+                        <h3>A voir aussi...</h3>
                         <h2><?php echo $interview->titreInterview ?></h2>
                     </hgroup>
                     <div class="articleWrapper">
@@ -455,7 +453,7 @@
         <?php if ($this->albumsconnexes !== null): ?>
         <!-- Vous aimerez également -->
         <section class="also-like">
-            <h1>Vous aimerez également</h1>
+            <h3>Vous aimerez également</h3>
             <ul>
                 <?php foreach($this->albumsconnexes as $albumConnexes): ?>
                 <li><a href="<?php echo $this->customUrl(array('titleSerie' => $albumConnexes->collection . ' ' . $albumConnexes->tome,

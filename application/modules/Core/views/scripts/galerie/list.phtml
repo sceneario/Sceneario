@@ -3,7 +3,7 @@
 <!-- CONTENU -->
 
 <header class="header-mauve" id="bedetheque">
-    <p>Aujourd'hui sur Sceneario, découvrez <span><?php echo $this->countGaleries ?></span> galeries</p>
+    <h1><?php echo !empty($this->isPreview) ? 'Previews' : 'Galeries' ; ?></h1><p>Aujourd'hui sur Sceneario, découvrez <span><?php echo $this->countGaleries ?></span> <?php echo !empty($this->isPreview) ? 'previews' : 'galeries' ; ?></p>
 </header>
 
 <div class="clear" style="height:50px;"></div>

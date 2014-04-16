@@ -351,19 +351,7 @@ jQuery(function($)
                     top:220
             },100);
 	});
-	
-	// Survol des résultats de recherche -------------------------------------------------------
-	// -----------------------------------------------------------------------------------------
-	
-	$("div.leftRecherche div.item a.masque").mouseenter(function() {
-		$(this).parent().css('backgroundColor','#f5f5f5');
-	});
-	
-	$("div.leftRecherche div.item a.masque").mouseleave(function() {
-		$("div.leftRecherche div.item").css("background","url(/img/separateur_general.jpg) top left repeat-x transparent");
-		$("div.leftRecherche div.item:nth-child(odd)").css("background","url(/img/separateur_general.jpg) top left repeat-x #eeeff0");
-	});
-	
+
 	// Survol des items du calendrier ----------------------------------------------------------
 	// -----------------------------------------------------------------------------------------
 	

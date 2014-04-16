@@ -64,7 +64,7 @@ class InterviewController extends GlobalController
 	
 	 
 	        
-	        $this -> view -> nomAuteur          = '';
+	        $this->view->auteurs = array();
 	        
 	        foreach($auteurInterviewInfos as $auteurInterview){
 		        if(isset($auteurInterview)){
@@ -81,7 +81,7 @@ class InterviewController extends GlobalController
 		                                                             
 		       
 		            #foreach()
-		            $this -> view -> nomAuteur      .= ' - ' . $auteurInfos[0] -> getPrenomAuteur() . ' ' . $auteurInfos[0] -> getNomAuteur();
+		            $this->view->auteurs[] = $auteurInfos[0];
 		        }
 	        }
 	        

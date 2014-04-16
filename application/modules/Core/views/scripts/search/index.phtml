@@ -74,13 +74,13 @@
 		<a href="<?php echo $this->customUrl( array('titleSerie' => $hit->titreSerie , 
                                                             'titleAlbum' => $hit->titreAlbum, 
                                                             'idAlbum'    => $hit->idAlbum ) , 
-                                                            'album'); ?>" class="masque"></a>
+                                                            'album'); ?>" class="item-link clearfix">
 	
-            <?php echo $this->displayImage($coverUri, 'cover-' . $hit->isbn, 'cover'  ) ?>    
+            <?php echo $this->displayImage($coverUri, $hit->titreSerie .' - '.$hit->titreAlbum, 'cover'  ) ?>
       
                 <div class="search-content">
                     <hgroup>
-                        <h1><?php echo $hit->titreSerie ?></h1>
+                        <h1 class="titreSerie"><?php echo $hit->titreSerie ?></h1>
                         <h2><?php echo $hit->titreAlbum ?></h2>
                     </hgroup>
 
@@ -98,7 +98,7 @@
                     <?php endif; ?>
 
                  </div>
-                <div class="clear"></div>
+        </a>
 	</div>
         
   

@@ -1,7 +1,8 @@
 <?php if(isset($this->data)): ?>
 
 <div class="whiteblock940">
-   
+<a href="<?php echo $this->customUrl( array( 'nomConcours' => $this->data->getLibelleConcours() ,
+                                                 'idConcours'  => $this->data->getNomConcours()) , 'concoursstep1') ?>" class="clearfix">
     <figure class="center">
             
             <?php 
@@ -10,9 +11,8 @@
             if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
                  $filename = "/img/temp/scev6-tempconcours.jpg";      
             endif; ?>
-            <img src="<?php echo $filename ?>" alt="" class="illus">
-           
-            <figcaption><span><?php echo $this->data->getLibelleConcours() ?></span></figcaption>
+            <img src="<?php echo $filename ?>" alt="<?php echo str_replace(array('"',"'","`"), '', $this->data->getLibelleConcours()); ?>" class="illus">
+            <figcaption><h1><?php echo $this->data->getLibelleConcours() ?></h1></figcaption>
     </figure>
  
     <hgroup>
@@ -20,8 +20,7 @@
                           . ' au ' .  $this->dateFormat($this->data->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
         <h3><?php echo strip_tags($this->data->getEntete()) ?></h3>
     </hgroup>
-    <a href="<?php echo $this->customUrl( array( 'nomConcours' => $this->data->getLibelleConcours() , 
-                                                 'idConcours'  => $this->data->getNomConcours()) , 'concoursstep1') ?>" class="big_button">Participez 
-        <img src="/img/concours-fleche.png" alt=""></a>
+    <span class="big_button">Participez <img src="/img/concours-fleche.png" alt="Participez au concours Sceneario"></span>
+</a>
 </div>
 <?php endif ; ?>

@@ -326,24 +326,18 @@ class BedethequeController extends GlobalController
                     #
                     $options = array('alleditor' => 'Tous les &eacute;diteurs');
                     $editeurSelecteur = $utils->generateHtmlSelector('editeur', $editeurSets, $options);
-                    
+
                     //injection du form dans la vue
-                    $this->view->textHeader = ' <form name="formFilter" id="formFilter" method="get" action=""><p><strong>Nouveautés</strong> <span>' 
-                            . $this->view->formatNumber(count($albums)) 
-                            . '</span> nouveautés en   
-                        
-                        '.$dateSelecteur.'
-
-                         chez 
-
-                        '. $editeurSelecteur .'
-                        <input id="formFilterBt" type="submit" value="ok"/></p>
+                    $this->view->textHeader = '<form name="formFilter" id="formFilter" method="get" action=""><h1>Nouveautés</h1><p><span>'
+                            .$this->view->formatNumber(count($albums))
+                            .'</span> nouveautés en '.$dateSelecteur.'chez '.$editeurSelecteur
+                            .'<input id="formFilterBt" type="submit" value="ok"/></p>
                         </form>' ;
-                } 
+                }
                 break;
             case 'recommandes':
                 $albums = $this->_mapperAlbum->getAllRecommandeAlbums() ;
-                $this->view->textHeader = '<p><strong>Recommandés</strong> par Sceneario.com</p>';
+                $this->view->textHeader = '<h1>Recommandés</h1><p>par Sceneario.com</p>';
                 break;
             case $queryAlbumAparaitre :{    
                     $mapperTblServicePress = new Core_Model_Mapper_Tblservicespress;
@@ -427,19 +421,12 @@ class BedethequeController extends GlobalController
 
                     #print_r($formattedDates);
                     #print $editeurSelecteur ;
-                    $this->view->textHeader = '<form id="formFilter" method="get" action=""><p><strong>À paraître</strong> <span>'. $this->view->formatNumber(count($albumDuMoisAP)) .'</span> albums à paraître en   
-                         
-                         
-                        '.$dateSelector.'
-
-                         chez 
-
-                         '.$editeurSelecteur.'
-                             
-                        <input id="formFilterBt" type="submit" value="ok"/></p>
-                        </form>' ;
+                    $this->view->textHeader = '<form id="formFilter" method="get" action=""><h1>À paraître</h1><p>'
+                        .'<span>'. $this->view->formatNumber(count($albumDuMoisAP)) .'</span> albums à paraître en '.$dateSelector
+                        .' chez '.$editeurSelecteur
+                        .'<input id="formFilterBt" type="submit" value="ok"/></p></form>' ;
                    # exit;
-                    
+
                     #$albums = $albumDuMoisAP ;
                     /*
                         [_idService:Core_Model_Tblservicespress:private] => 11573

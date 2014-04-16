@@ -2,20 +2,32 @@ div.galerieWrapper {
 	position: relative;
 	width: 940px;
 }
-div.galerieWrapper  > h1 {
+
+.galerie-title {
+	margin-bottom:20px;
+	box-shadow: 0px 1px 0px #fff, inset 0px -1px 0px #dfdfdf;
+	color: #9b9b9b;
+	font-size:24px;
+	line-height: 24px;
+	font-weight: bold;
+}
+.galerie-title h1, .galerie-title h2 {
 	font-size:24px;
 	line-height: 24px;
 	margin:0;
 	padding:0;
-	color:#9b9b9b;
-	margin-bottom:20px;
+	color: #9b9b9b;
+	font-weight: bold;
 	padding-bottom: 15px;
-	
 	text-shadow: 0px 1px 0px #fff;
-	
-	box-shadow: 0px 1px 0px #fff, inset 0px -1px 0px #dfdfdf;
+	display: inline-block;
 }
-div.galerieWrapper h1 a {
+
+.galerie-title h1 a {
+	color: #9b9b9b;
+}
+
+.galerie-title h2 a {
 	color: #a22c6d;
 }
 
