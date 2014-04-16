@@ -27,7 +27,7 @@ class SearchController extends GlobalController
         /*
          * Settings
          */
-        $limitResult          = 0 ;
+        $limitResult          = 1500 ;
         $requestOperator      = Zend_Search_Lucene_Search_QueryParser::B_AND ;
         /*
          * Indice de recherche floue
