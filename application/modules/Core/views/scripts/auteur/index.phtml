@@ -67,10 +67,10 @@
 	<div class="social_links">
             <div class="social_links-title"><img src="/img/slinks_titre.png" alt="Suivez-nous !"></div>
             <ul>
-                <li><a href="#"><img src="/img/slinks_icon_fb.png" alt=""></a></li>
-                <li><a href="#"><img src="/img/slinks_icon_twitter.png" alt=""></a></li>
-                <li><a href="#"><img src="/img/slinks_icon_rss.png" alt=""></a></li>
-                <li><a href="#"><img src="/img/slinks_icon_email.png" alt=""></a></li>
+                <li><a href="#"><img src="/img/slinks_icon_fb.png" alt="bande-dessinée, facebook"></a></li>
+                <li><a href="#"><img src="/img/slinks_icon_twitter.png" alt="bande-dessinée, twitter"></a></li>
+                <li><a href="#"><img src="/img/slinks_icon_rss.png" alt="bande-dessinée, rss"></a></li>
+                <li><a href="#"><img src="/img/slinks_icon_email.png" alt="bande-dessinée, email"></a></li>
             </ul>
             <div class="clear"></div>
 	</div><!-- social_links -->
@@ -135,7 +135,7 @@
                             ?>
                             <li <?php echo $styleMargin, $styleClear ; ?>>
                                 
-                                <a href="<?php echo $url ?>"><?php echo $this->displayImage($urlImage,  $album->titre ) ; ?></a><?php
+                                <a href="<?php echo $url ?>"><?php echo $this->displayImage($urlImage, 'bande-dessinée, '.$album->titre ) ; ?></a><?php
                                 $limitTitle = 20 ;
                                 /*$limitTitle = $i ;
                                 if(isset($album->collection[$i])){

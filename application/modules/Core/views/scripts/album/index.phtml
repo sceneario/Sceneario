@@ -19,20 +19,22 @@
                 <a rel="lightbox[album]" href="<?php echo $urlCouvZoom ?>" class="zoom"><?php 
                 echo $this->displayImage($this->customUrl( array('isbn'=> $this->albumInfos->getIsbn(),
                                                                  'format'=> 'big') , 'couverture' ) , 
-                                                                  $this->albumInfos->getCollection().' #'.$this->albumInfos->getTome().' - '.$this->albumInfos->getTitre(),
+                                                                  'bande-dessinée, '.$this->albumInfos->getCollection().
+                                                                  (!empty($this->albumInfos->getTome()) ? ' #'.$this->albumInfos->getTome().', ' : '').', '.$this->albumInfos->getTitre(),
                                                                  'front') ?></a>   
                <!-- data-lightbox="lightbox" -->
                 <a rel="lightbox[album]" href="<?php echo $urlPlancheZoom?>" class="planche">
                     <?php echo $this->displayImage($this->customUrl( array('isbn'=> $this->albumInfos->getIsbn(),
                                                             'idAlbum' => $this->albumInfos->getIdAlbum(),
                                                             'format'=> 'big') , 'planche' ), 
-                                                            $this->albumInfos->getCollection().' #'.$this->albumInfos->getTome().' - '.$this->albumInfos->getTitre(),
+                                                            'bande-dessinée, '.$this->albumInfos->getCollection().
+                                                                  (!empty($this->albumInfos->getTome()) ? ' #'.$this->albumInfos->getTome().', ' : '').', '.$this->albumInfos->getTitre(),
                                                             'behind');?></a> 
                 <?php if($this->albumIsCoupDeCoeur): ?>
-		<img src="<?php echo BASE_URL ?>img/coup-de-coeur.png" alt="Coup de coeur" class="bandeau_haut">
+		<img src="<?php echo BASE_URL ?>img/coup-de-coeur.png" alt="Bande-dessinée coup de coeur, meilleur bande-dessinée, <?php echo $this->albumInfos->getCollection(); ?>" class="bandeau_haut">
                 <?php endif; ?>
                 <?php if($this->albumInfos->recommande == 1): ?>
-		<img src="<?php echo BASE_URL ?>img/recommande.png" alt="Recommandé par Sceneario.com" class="bandeau_bas">
+		<img src="<?php echo BASE_URL ?>img/recommande.png" alt="Bande-dessinée recommandé, Conseil bande-dessinée, <?php echo $this->albumInfos->getCollection(); ?>" class="bandeau_bas">
                 <?php endif; ?>
         </div>
 	<footer>
@@ -463,7 +465,7 @@
 
                    <?php echo $this->displayImage($this->customUrl( array('isbn'=> $albumConnexes->isbn,
                                                                 'format'=> 'alsolike') , 'couverture' ) , 
-                                                              $albumConnexes->titre ) ?>                                             
+                                                              'conseil bande-dessinée, bande-dessinée, '.$albumConnexes->titre ) ?>
 
 
                     </a></li>

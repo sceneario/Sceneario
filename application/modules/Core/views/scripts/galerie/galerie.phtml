@@ -6,13 +6,13 @@
 		<h2><a href="<?php echo $this->url(array(), !empty($this->isPreview) ? 'listpreview' : 'listgalerie'); ?>"><?php echo !empty($this->isPreview) ? 'Preview' : 'Galerie' ; ?></a></h2> -
 		<h1><a href="<?php echo $this->currentUrl(); ?>"><?php echo $this->titre ?></a></h1>
 	</div>
-	<div class="galerieSlider  <?php echo $this->previewClass ?>">
+	<div class="galerieSlider <?php echo !empty($this->isPreview) ? 'preview' : ''; ?>">
 		
 		<ul>
                     <?php
                     foreach($this->images as $image):
                     ?>    
-                       <li><a href="<?php echo $image['big'] ?>" rel="lightbox[gal]" title=""><img <?php echo $this->norotateClass ?> src="<?php  echo $image['med'] ?>" /></a></li>
+                       <li><a href="<?php echo $image['big'] ?>" rel="lightbox[gal]" title=""><img src="<?php  echo $image['med'] ?>" class="<?php echo !empty($this->isPreview) ? 'norotate' : ''; ?>" alt="<?php echo (!empty($this->isPreview) ? 'preview bande-dessinée' : 'galerie bande-dessinée').', '.$this->titre ?>" /></a></li>
                     <?php    
                     endforeach;
                     ?>
