@@ -32,7 +32,7 @@ class ConcoursController extends GlobalController
         $concoursEnCours = $this->_concoursMapper->fetchAll(100, 
                                                            array( 'clause' => 'enligne = ? AND dateFin >= NOW()', 
                                                                   'params' => IS_PUBLISHED), 
-                                                          'dateDebut DESC') ;
+                                                          'dateFin ASC') ;
         /*
          * Injection dans la vue
          */
