@@ -9,7 +9,7 @@
                 if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
                      $filename = "/img/temp/scev6-tempconcours.jpg";      
                 endif; ?>
-            <img src="<?php echo $filename ?>" alt="<?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" class="illus" />
+            <img src="<?php echo $filename ?>" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" class="illus" />
 		<figcaption><h1><?php echo $this->concoursEnCours->getLibelleConcours() ?></h1></figcaption>
 	</figure>
     
@@ -42,7 +42,7 @@
 		<input class="concours_reponses" type="text" name="concours_reponses[reponse_q_subsidiaire]" id="qsubsid" value="" placeholder="Réponse:" required="required" pattern="[0-9]+">
                 <input type="hidden" name="concours_process[token]" value="<?php echo uniqid(true) ?>">
                 <input type="hidden" name="concours_process[step1]" value="1">
-                <a href="javascript:void(0);"   id="submitconcourstep1" class="submit">Valider mes réponses <img src="/img/concours-fleche.png" alt=""></a>
+                <a href="javascript:void(0);"   id="submitconcourstep1" class="submit">Valider mes réponses <img src="/img/concours-fleche.png" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" /></a>
                 <div id="messageValidation"></div>
         </form>
 	<?php

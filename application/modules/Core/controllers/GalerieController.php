@@ -129,17 +129,8 @@ class GalerieController extends GlobalController
         $mapperTblDossiers = new Core_Model_Mapper_Tbldossiers();
         $galerieInfos      = $mapperTblDossiers->find($idGalerie, new Core_Model_Tbldossiers) ;
 
-        $this->view->previewClass  = '';   
-        $this->view->norotateClass = 'class=""'; 
-        
-        $this->view->isPreview = false;
-        
-        if(strtolower($galerieInfos->getTypeDossier()) == 'preview'){ // preview
-            $this->view->previewClass  = 'preview';   
-            $this->view->norotateClass = 'class="norotate"';
-            $this->view->isPreview = true;
-        }
- 
+        $this->view->isPreview = (strtolower($galerieInfos->getTypeDossier()) == 'preview') ? true : false;
+
         $galDir = '/home/sceneari/images/galeries/' . $idGalerie;
         
         $images = array();

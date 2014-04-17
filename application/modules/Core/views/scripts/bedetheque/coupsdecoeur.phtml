@@ -14,8 +14,8 @@
                     ?>
                      <li>
                     <a href="<?php echo $albumUrl ?>">
-                        <?php echo $this->displayImage($coverUri, $albumSemaine['titreSerie'] . ' ' . $albumSemaine['titreAlbum'], 'cover'  ) ?>      
-                        <img src="/img/ruban<?php echo $key+1 ?>.png" alt="" class="ruban">
+                        <?php echo $this->displayImage($coverUri, 'bande-dessinée, '. $albumSemaine['titreSerie'] . ', ' . $albumSemaine['titreAlbum'], 'cover'  ) ?>
+                        <img src="/img/ruban<?php echo $key+1 ?>.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $albumSemaine['titreSerie']; ?>" class="ruban">
                     </a>
                     </li>
                 <?php endforeach; ?>
@@ -38,8 +38,8 @@
                     ?>
                      <li>
                     <a href="<?php echo $albumUrl ?>">
-                        <?php echo $this->displayImage($coverUri, $albumAnnee['titreSerie'] . ' ' . $albumAnnee['titreAlbum'], 'cover'  ) ?>      
-                        <img src="/img/ruban<?php echo $key+1 ?>.png" alt="" class="ruban">
+                        <?php echo $this->displayImage($coverUri, 'bande-dessinée, '. $albumAnnee['titreSerie'] . ', ' . $albumAnnee['titreAlbum'], 'cover'  ) ?>
+                        <img src="/img/ruban<?php echo $key+1 ?>.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $albumAnnee['titreSerie']; ?>" class="ruban">
                     </a>
                     </li>
                 <?php endforeach; ?>
@@ -73,8 +73,8 @@
 
                           <li>
                             <a href="<?php echo $albumUrl ?>">
-                                <?php echo $this->displayImage($coverUri, $a->collection . ' ' . $a->tome . ' ' . $a->titre , 'cover'  ) ?>
-                                <img src="/img/coeur-coin.png" alt="" class="coeur">
+                                <?php echo $this->displayImage($coverUri, 'bande-dessinée, '.$a->collection.(!empty($a->tome) ? ' '.$a->tome : '').', '.$a->titre , 'cover'  ) ?>
+                                <img src="/img/coeur-coin.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $a->collection; ?>" class="coeur">
                             </a>
                           </li>
                             <?php endif; ?>
