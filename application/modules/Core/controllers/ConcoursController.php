@@ -30,8 +30,8 @@ class ConcoursController extends GlobalController
     public function listAction()
     {
         $concoursEnCours = $this->_concoursMapper->fetchAll(100, 
-                                                           array( 'clause' => 'enligne = ? AND dateFin >= NOW()', 
-                                                                  'params' => IS_PUBLISHED), 
+                                                           array( 'clause' => 'enligne = ? AND dateDebut <= CURDATE() AND dateFin >= CURDATE()',
+                                                                  'params' => IS_PUBLISHED),
                                                           'dateFin ASC') ;
         /*
          * Injection dans la vue
@@ -43,8 +43,8 @@ class ConcoursController extends GlobalController
          * Concours précédents
          */
          $concoursPrecedents = $this->_concoursMapper->fetchAll(12, 
-                                                                array( 'clause' => 'enligne = ? AND dateFin < NOW()', 
-                                                                       'params' => IS_PUBLISHED), 
+                                                                array( 'clause' => 'enligne = ? AND dateFin < CURDATE()',
+                                                                       'params' => IS_PUBLISHED),
                                                                'dateFin DESC') ;
          
          $this->view->concoursPrecedents = $concoursPrecedents;
