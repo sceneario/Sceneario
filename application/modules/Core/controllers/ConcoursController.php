@@ -30,7 +30,7 @@ class ConcoursController extends GlobalController
     public function listAction()
     {
         $concoursEnCours = $this->_concoursMapper->fetchAll(100, 
-                                                           array( 'clause' => 'enligne = ? AND dateDebut <= CURDATE() AND dateFin >= CURDATE()',
+                                                           array( 'clause' => 'enligne = ? AND dateFin >= CURDATE()',
                                                                   'params' => IS_PUBLISHED),
                                                           'dateFin ASC') ;
         /*
