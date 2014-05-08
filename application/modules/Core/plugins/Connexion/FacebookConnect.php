@@ -9,9 +9,8 @@ class Core_Plugin_Connexion_FacebookConnect extends Zend_Controller_Plugin_Abstr
 {
     public function dispatchLoopStartup(Zend_Controller_Request_Abstract $request)
     {
-        if(Zend_registry::isRegistered('currentUserConnexionGoogle')
-                && Zend_registry::get('currentUserConnexionGoogle') === true){
-            
+        if($this->getRequest()->getControllerName() == 'image' ||
+            Zend_registry::isRegistered('currentUserConnexionGoogle') && Zend_registry::get('currentUserConnexionGoogle') === true){
             return;
         }
         

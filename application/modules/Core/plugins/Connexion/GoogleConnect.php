@@ -31,9 +31,8 @@ class Core_Plugin_Connexion_GoogleConnect extends Zend_Controller_Plugin_Abstrac
        #unset($_SESSION);
         #$currentUserSession = new Zend_Session_Namespace('currentUserSession');
         #var_dump(Zend_registry::get('currentUserConnexionFacebook') );
-        if(Zend_registry::isRegistered('currentUserConnexionFacebook')
-                && Zend_registry::get('currentUserConnexionFacebook') === true){
-            
+        if($this->getRequest()->getControllerName() == 'image' ||
+            Zend_registry::isRegistered('currentUserConnexionFacebook') && Zend_registry::get('currentUserConnexionFacebook') === true){
             return;
         }
         $googleConnect =  Core_Service_GoogleConnect::getInstance();
