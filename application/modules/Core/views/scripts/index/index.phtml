@@ -69,12 +69,13 @@ echo $this->partial ('partials/socialContacts.phtml');
     //temporaire
     // echo $this->randomInterviewBloc($this, 1) ; //$this == 'instance de Zend_View'  
      echo $this->lastConcoursBloc($this) ; //$this == 'instance de Zend_View' ?>
+     <?php echo $this->registerNewsletter($this) ?>
     
 </div><!-- bloc2col -->
 <div class="bloc2col">
     <?php echo $this->lastGalleryBloc($this); ?>
     <?php echo $this->lastExpoBloc($this); ?>
-    
+    <?php echo $this->lastBlogPostBloc($this, 1); ?>
     <?php 
     //temporaire
     //echo $this->randomInterviewBloc($this, 2) ; //$this == 'instance de Zend_View'
@@ -84,6 +85,7 @@ echo $this->partial ('partials/socialContacts.phtml');
 
 <div class="sidebar">
     <?php echo $this->lastGalleryBloc($this, 'preview'); ?>
+    <?php echo $this->lastBlogPostBloc($this); ?>
     <!-- Facebook like box -->
     <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div><!-- Facebook like box -->
 
@@ -104,9 +106,6 @@ echo $this->partial ('partials/socialContacts.phtml');
         </div>
 
     </div><!-- pub -->
-
-    <!-- Inscription Newsletter -->
-    <?php echo $this->registerNewsletter($this) ?>
 
 </div><!-- bloc2col -->
 
