@@ -29,10 +29,9 @@ class Zend_View_Helper_CustomUrl extends Zend_View_Helper_Url
         foreach ($urlOptions as $key => $urlOption){
             #$option        = strtolower($urlOption);
             $option        = str_replace( $search , $replace , $urlOption);
-            $options[$key] = $filterChain->filter($option);
-
+            $options[$key] = preg_replace('!\s+!', ' ', $filterChain->filter($option));
         }
-          
+
         return $this->url($options, $name, $reset, $encode);
     }
 }
