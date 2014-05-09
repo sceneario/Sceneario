@@ -12,7 +12,7 @@ class IndexController extends GlobalController
     public function init()
     {
         parent::init();
-        $this->view->headTitle('Toute la bande dessinée sur Sceneario.com', 'PREPEND');
+        $this->view->headTitle('Toute la bande dessinée sur Sceneario.com - ', 'PREPEND');
         $this->view->headMeta('http://www.sceneario.com/', 'identifier-url');
 
         /* Initialize action controller here */
