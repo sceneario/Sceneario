@@ -1,5 +1,5 @@
 <!-- CONTENU -->
-
+<div itemscope itemtype="http://schema.org/Book">
 <div class="leftSide">
 	<!-- Couverture et liens lightbox -->
 	<div class="cover">
@@ -21,7 +21,7 @@
                                                                  'format'=> 'big') , 'couverture' ) , 
                                                                   'bande-dessinée, '.$this->albumInfos->getCollection().
                                                                   ($this->albumInfos->getTome() ? ' #'.$this->albumInfos->getTome().', ' : '').', '.$this->albumInfos->getTitre(),
-                                                                 'front') ?></a>   
+                                                                 'front', 'itemprop="image"') ?></a>
                <!-- data-lightbox="lightbox" -->
                 <a rel="lightbox[album]" href="<?php echo $urlPlancheZoom?>" class="planche">
                     <?php echo $this->displayImage($this->customUrl( array('isbn'=> $this->albumInfos->getIsbn(),
@@ -29,7 +29,7 @@
                                                             'format'=> 'big') , 'planche' ), 
                                                             'bande-dessinée, '.$this->albumInfos->getCollection().
                                                                   ($this->albumInfos->getTome() ? ' #'.$this->albumInfos->getTome().', ' : '').', '.$this->albumInfos->getTitre(),
-                                                            'behind');?></a> 
+                                                            'behind', 'itemprop="image"');?></a>
                 <?php if($this->albumIsCoupDeCoeur): ?>
 		<img src="<?php echo BASE_URL ?>img/coup-de-coeur.png" alt="Bande-dessinée coup de coeur, meilleur bande-dessinée, <?php echo $this->albumInfos->getCollection(); ?>" class="bandeau_haut">
                 <?php endif; ?>
@@ -59,7 +59,7 @@
                             <li>
                                  <a href="<?php echo $albumPrice->url ?>"><?php echo $albumPrice->serie ?></a>
                                  <span><?php echo $albumPrice->festival ?></span>
-                                 <p><?php echo $albumPrice->prix ?></p>
+                                 <p itemprop="award"><?php echo $albumPrice->prix ?></p>
                                  <div class ="clear"></div>
                             </li>
                         
@@ -159,19 +159,13 @@
         </div>
 
         <hgroup>
-                <?php if(isset($this->albumInfos) 
-                        && '' != $this->albumInfos->getIdSerie()):
-                        #echo utf8_decode($this->serieInfos->getNomSerie());
-                    ?>
-                <h1><?php /* echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?> 
-                    <a href="<?php echo $this->customUrl(array('idSerie' => $this->serieInfos->getIdSerie(),
-                                                               'nomSerie'=> $this->serieInfos->getNomSerie()
-                                                               ), 'serie') */?>
-                      <?php echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?> 
-                    <a href="<?php echo $this->customUrl(array('tag'=> $this->serieInfos->getNomSerie()), 'recherche') ?>">voir la série ></a></h1>
-
-                <?php endif ?>
-                <h1 class="album-title"><?php echo $this->albumInfos->getTitre() ?></h1>
+          <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
+            <h1>
+              <span itemprop="name"><?php echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?></span>
+              <a href="<?php echo $this->customUrl(array('tag'=> $this->serieInfos->getNomSerie()), 'recherche') ?>">voir la série ></a>
+            </h1>
+          <?php endif ?>
+          <h1 class="album-title" itemprop="<?php echo (isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) ? 'alternateName' : 'name'; ?>"><?php echo $this->albumInfos->getTitre() ?></h1>
         </hgroup>
 
         <div class="separateur"></div>
@@ -187,9 +181,8 @@
                          if(isset($this->dessinateurs)):
                             foreach ($this->dessinateurs as $dessinateurs): ?>  
                                 <h2><a href="<?php echo $this->customUrl(   array('nomAuteur'=> $dessinateurs->prenomAuteur
-                                           . ' ' . $dessinateurs->nomAuteur, 'idAuteur' => $dessinateurs->idAuteur ),'auteur') ?>">
-                                   <?php echo $dessinateurs->prenomAuteur 
-                                           . ' ' . $dessinateurs->nomAuteur?></a></h2><br />
+                                           . ' ' . $dessinateurs->nomAuteur, 'idAuteur' => $dessinateurs->idAuteur ),'auteur') ?>" itemprop="author">
+                                   <?php echo $dessinateurs->prenomAuteur.' '.$dessinateurs->nomAuteur?></a></h2><br />
                            <?php endforeach ;
                          endif;?>
                     </td>
@@ -203,8 +196,8 @@
                         if(isset($this->scenaristes)):
                             foreach ($this->scenaristes as $scenariste): ?>  
                             <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur
-                                                                     , 'idAuteur' => $scenariste->idAuteur),'auteur') ?>">
-                                <?php echo $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur ?></a></h2><br />
+                                                                     , 'idAuteur' => $scenariste->idAuteur),'auteur') ?>" itemprop="author">
+                                <?php echo $scenariste->prenomAuteur.' '.$scenariste->nomAuteur ?></a></h2><br />
                         <?php endforeach ;
                         endif;?>
 
@@ -217,7 +210,7 @@
                     <td class="info">
                         <?php foreach ($this->coloristes as $coloriste): ?>  
                             <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur
-                                                                     , 'idAuteur' => $coloriste->idAuteur), 'auteur') ?>">
+                                                                     , 'idAuteur' => $coloriste->idAuteur), 'auteur') ?>" itemprop="author">
                                 <?php echo $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur ?></a></h2><br />
                         <?php endforeach ?>
                     </td>
@@ -226,17 +219,12 @@
                 <tr>
                     <td class="label">Éditions&nbsp;:</td>
                     <td class="info">
-                       <h2><?php
-                       #var_dump($this->albumDetails['editeur']['url']);
-                       if('http://' != $this->editeur['url'] &
-                               '' != $this->editeur['url']): ?>
-                       <a target="_blank" href="
-                       <?php echo $this->editeur['url'] ?>">
-                       <?php echo $this->editeur['nom'] ?>
-                       </a>
-                       <?php else:
-                                echo $this->editeur['nom'] ;
-                             endif; ?></h2>
+                      <h2>
+                      <?php if('http://' != $this->editeur['url'] & '' != $this->editeur['url']) : ?>
+                        <a itemprop="publisher" target="_blank" href="<?php echo $this->editeur['url'] ?>"><?php echo $this->editeur['nom'] ?></a>
+                      <?php else : ?>
+                        <span itemprop="publisher"><?php echo $this->editeur['nom']; ?></span>
+                      <?php endif; ?></h2>
                     </td>
                 </tr>
                 <?php if(!null == $this->collectionInfos): ?>
@@ -264,7 +252,7 @@
                                 $searchQuote = array('"', "'") ?>  
 
                         <h2><a href="<?php echo $this->customUrl(array('tag'=>$motscles->libelle), 'recherche') ?>"
-                           title="<?php echo str_replace( $searchQuote , '' , strip_tags($motscles->definition)) ?>">
+                           title="<?php echo str_replace( $searchQuote , '' , strip_tags($motscles->definition)) ?>" itemprop="genre">
                            <?php echo $motscles->libelle ?></a><?php echo $sep ?></h2>
                         <?php endforeach ?>
                     </td>
@@ -273,7 +261,7 @@
                 <?php if(!null == $this->albumInfos->getDatecreation() ): ?>
                 <tr>
                     <td class="label">Sortie&nbsp;:</td>
-                    <td class="info">
+                    <td class="info" itemprop="datePublished" content="<?php echo $this->albumInfos->getDatecreation(); ?>">
                         <?php  echo $this->dateFormat($this->albumInfos->getDatecreation() , 'month_year' ) ?>
                     </td>
                 </tr>
@@ -283,7 +271,7 @@
                         if($isbnAlbum[0] != '_'): ?>
                         <tr>
                             <td class="label">ISBN&nbsp;:</td>
-                            <td class="info"><?php echo $this->albumInfos->getIsbn() ?></td>
+                            <td class="info" itemprop="isbn"><?php echo $this->albumInfos->getIsbn() ?></td>
                         </tr>
                 <?php endif;
                 endif; ?>
@@ -326,49 +314,44 @@
                 </ul>
 
                 <section class="summary">
-                    <?php 
-                    if(isset($this->resume[0]->histoire) && $this->resume[0]->histoire != ''):
-                        echo $this->textFormat($this->resume[0]->histoire, 'RESUME_TEXT') ?>	
-                        <p class="right">
-                            Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs"><?php echo $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>, 
-                            le <?php echo $this->dateFormat($this->resume[0]->dateHistoire, 'day_month_year_with_slash') ?>
-                        </p>			
-                    
-                    <?php
-                    endif;
-                    #echo '<pre>';
-                    #print_r($this->resume[0]);
-                    
-                    ?>
-                    <div class="separateur"></div>			
-                    <div class="separateur"></div>			
-                    <?php 
-                    if(isset($this->critique[0]->critique) && $this->critique[0]->critique != ''):
-                        echo $this->textFormat($this->critique[0]->critique, 'RESUME_TEXT') ?>
+                    <?php if(isset($this->resume[0]->histoire) && $this->resume[0]->histoire != '') : ?>
+                    <div itemprop="description"> <?php echo $this->textFormat($this->resume[0]->histoire, 'RESUME_TEXT') ?></div>
                     <p class="right">
-                        Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs"><?php echo $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>, 
-                        le <?php echo $this->dateFormat($this->critique[0]->datecreation, 'day_month_year_with_slash') ?>
+                        Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs"><?php echo $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                        le <?php echo $this->dateFormat($this->resume[0]->dateHistoire, 'day_month_year_with_slash') ?>
                     </p>
+                    <?php endif; ?>
+                    <div class="separateur"></div>
+                    <div class="separateur"></div>
+                    <?php if(isset($this->critique[0]->critique) && $this->critique[0]->critique != '') : ?>
+                      <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+                        <div itemprop="reviewBody"><?php echo $this->textFormat($this->critique[0]->critique, 'RESUME_TEXT') ?></div>
+                        <p class="right">
+                          Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                          le <span itemprop="datePublished" content="<?php echo $this->critique[0]->datecreation; ?>"><?php echo $this->dateFormat($this->critique[0]->datecreation, 'day_month_year_with_slash'); ?></span>
+                        </p>
+                      </div>
                     <?php endif; ?>
                 </section>
 
                 <?php if(count($this->critique) > 0): ?>
                 <section class="avis">
-                    <?php 
-                    $critiques = $this->critique ;
-                    array_shift($critiques);
-                    foreach($critiques as $key => $critique): ?>
-                        <p class="justify">
-                            <?php echo $this->textFormat($critique->critique, 'RESUME_TEXT')  ?>
+                    <?php $critiques = $this->critique; ?>
+                    <?php array_shift($critiques); ?>
+                    <?php foreach($critiques as $key => $critique): ?>
+                      <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+                        <p class="justify" itemprop="reviewBody">
+                          <?php echo $this->textFormat($critique->critique, 'RESUME_TEXT')  ?>
                         </p>
                         <p class="right">
-                            Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs"><?php echo $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>, 
-                            le <?php echo $this->dateFormat($critique->datecreation, 'day_month_year_with_slash') ?>
+                          Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                          le <span itemprop="datePublished" content="<?php echo $critique->datecreation; ?>"><?php echo $this->dateFormat($critique->datecreation, 'day_month_year_with_slash') ?></span>
                         </p>
                         <?php if($key >= 0 && $key < count($critiques)-1): ?>
-                        <div class="separateur"></div>			
+                        <div class="separateur"></div>
                         <div class="separateur"></div>
                         <?php endif;?>
+                      </div>
                     <?php endforeach;?>
 
                 </section>
@@ -480,3 +463,4 @@
 
 <!-- Reinitialisation des float -->
 <div class="clear"></div>    
+</div>
