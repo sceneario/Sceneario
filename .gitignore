@@ -29,6 +29,9 @@
 # google analytics
 /public/google*.html
 
+# robots.txt : pour ne pas indexer les environnements de dev
+/public/robots.txt
+
 ### Fichiers temporaires et fichiers système
 
 # cache zend

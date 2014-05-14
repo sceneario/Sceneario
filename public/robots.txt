@@ -1,10 +1,2 @@
 User-agent: *
-Disallow: /integration/
-Disallow: /css/
-Disallow: /chromeframe/
-Disallow: /doc/
-Disallow: /habillages/
-Disallow: /img/
-Disallow: /uploads/
-
-
+Disallow: /
