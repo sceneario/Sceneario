@@ -27,10 +27,12 @@ class Zend_View_Helper_BuyThisBookButtons
         $bdFugue         = 'http://www.bdfugue.com/a/?ean='.$isbn.'&ref=14' ;
         $fnac            = 'http://ad.zanox.com/ppc/?12175452C2022213026T&ULP=[['.urlencode('www3.fnac.com/search/quick.do?category=book&text='.$isbn).']]' ;
         $izneo           = self::getIzneoLink($isbn);
+        $cultura         = 'http://clk.tradedoubler.com/click?p=218642&a=2411443&g=21903292&url=http://www.cultura.com/catalog/product/search/ean/'.$isbn;
         
         $bookButtons = array( 'Priceminister' => $priceMinister,
                               'BdFugue'       => $bdFugue,
                               'FNAC'          => $fnac,
+                              'Cultura'          => $cultura,
                               ); // 'Amazon'        => $amazon,
         
         //amazon ready
