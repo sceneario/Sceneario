@@ -20,18 +20,23 @@
                           . ' au ' .  $this->dateFormat($this->concoursEnCours->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
             <h3><?php echo strip_tags($this->concoursEnCours->getEntete()) ?></h3>
 	</hgroup>
-        <?php echo $this->linkAlbum ?>
+	<?php if (!empty($this->album_related)) : ?>
+        <a href="<?php echo $this->customUrl(array('titleSerie' => $this->album_related->getCollection().($this->album_related->getTome() != '' ? ' ' . $this->album_related->getTome() : ''),
+                    'titleAlbum' => $this->album_related->getTitre(),
+                    'idAlbum' => $this->album_related->getIdAlbum()),
+                    'album' ); ?>" class="fiche_album">Voir la fiche BD ></a>
+    <?php endif; ?>
 	
 	<!-- Reinitialisation des float -->
 	<div class="clear"></div>
 	
 	<div class="separateur"></div>
 	
-        <form>
-            <p>
-                <?php echo $this->concoursEnCours->getReglement() ?>
-            </p>
-	</form>	
+    <div class="reglement-concours">
+	    <p>
+	        <?php echo $this->concoursEnCours->getReglement() ?>
+	    </p>
+	</div>
 	
 	
 	

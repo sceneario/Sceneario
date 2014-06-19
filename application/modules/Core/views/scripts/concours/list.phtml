@@ -17,6 +17,15 @@ endforeach;
         foreach( $concoursPrecedents as $k => $concPrec ):
         #print_r($concPrec->getDateFin());
     ?>
+    <?php if ($key == 2 && $k == 1) : ?>
+        <div class="pub">
+            <div id="div-gpt-ad-1350912979829-0"  style="width:300px; height:250px;">
+                <script type="text/javascript">
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912979829-0'); });
+                </script>
+            </div>
+        </div>
+    <?php endif; ?>
     <a href="<?php echo $this->customUrl( array( 
                                                  'nomConcours' => $concPrec->getLibelleConcours() , 
                                                  'idConcours'  => $concPrec->getNomConcours()) , 'concoursstep1') ?>">

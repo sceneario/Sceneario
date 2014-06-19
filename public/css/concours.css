@@ -129,7 +129,7 @@ div.whiteblock940 .big_button img {
 	top:15px;
 }
 
-div.whiteblock300 figure {
+div.whiteblock300 figure, div.pinkblock300 figure {
 	-webkit-border-top-left-radius: 5px;
 	-webkit-border-top-right-radius: 5px;
 	-moz-border-radius-topleft: 5px;
@@ -137,9 +137,11 @@ div.whiteblock300 figure {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	display:block;
-	
+	width:300px;
+	height:150px;
 	behavior:url(compat/PIE-1/PIE.htc);
 }
+
 
 div.whiteblock300 h2 a {
 	color:#a12c6d;
@@ -181,10 +183,23 @@ div.whiteblock940 div.separateur {
 	margin-top:10px;
 }
 
-div.whiteblock940 form {
-	width:760px;
-	margin:auto;
+div.whiteblock940 .left-column {
+	float: left;
+	width: 560px;
+	margin-left: 20px;
 	margin-top:40px;
+}
+
+div.whiteblock940 .right-column {
+	float: right;
+	width: 300px;
+	margin-right: 20px;
+	margin-top:40px;
+}
+
+div.whiteblock940 form {
+	width: 100%;
+	margin:auto;
 }
 
 div.whiteblock940 form label {
@@ -194,7 +209,7 @@ div.whiteblock940 form label {
 }
 
 div.whiteblock940 form input {
-	width: 740px;
+	width: 100%;
 	height: 45px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -257,10 +272,6 @@ div.whiteblock940 form a.submit img {
 	margin-right:25px;
 }
 
-div.whiteblock940 p.reglement {
-	margin-left:20px;
-}
-
 div.whiteblock940 p.reglement a {
 	color: #999;
 	font-size: 12px;
@@ -280,7 +291,7 @@ div.whiteblock940 form p {
 }
 
 div.whiteblock940 form.coords input {
-	width:365px !important;
+	width:220px !important;
 }
 
 div.whiteblock940 form div.leftForm {
@@ -293,17 +304,17 @@ div.whiteblock940 form div.rightForm {
 }
 
 div.whiteblock940 form div.rightForm div.cp {
-	width:150px !important;
+	width:100px !important;
 	float:left;
 	margin-right:15px;
 }
 
 div.whiteblock940 form div.rightForm div.cp label {
-	width:150px !important;
+	width:100px !important;
 }
 
 div.whiteblock940 form div.rightForm div.cp input {
-	width:150px !important;
+	width:100px !important;
 }
 
 div.whiteblock940 form div.rightForm div.ville {
@@ -324,4 +335,17 @@ div.whiteblock940 p.confirm {
 	font-size: 16px;
 	text-align:center;
 	margin:30px 0 30px 0;
+}
+
+div.whiteblock940 form p.no-questions {
+	color: #a12c6d;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+div.reglement-concours {
+	width: 760px;
+	margin: auto;
+	margin-top: 40px;
+	font-size: 13px;
 }
