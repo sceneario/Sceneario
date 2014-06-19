@@ -102,7 +102,7 @@
                     'album' ); ?>">
             <h2>
                 <?php echo $this->album_related->getCollection(); ?><br />
-                <?php echo ($this->album_related->getTome() != '' ? 'Tome ' . $this->album_related->getTome() : '').' - '.$this->album_related->getTitre(); ?>
+                <?php echo ($this->album_related->getTome() != '' ? 'Tome ' . $this->album_related->getTome().' - ' : '').$this->album_related->getTitre(); ?>
             </h2>
         </a>
         <a href="<?php echo $this->customUrl(array('titleSerie' => $this->album_related->getCollection().($this->album_related->getTome() != '' ? ' ' . $this->album_related->getTome() : ''),
