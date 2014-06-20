@@ -162,7 +162,7 @@
           <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
             <h1>
               <span itemprop="name"><?php echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?></span>
-              <a href="<?php echo $this->customUrl(array('tag'=> $this->serieInfos->getNomSerie()), 'recherche') ?>">voir la série ></a>
+              <a href="<?php echo $this->url(array('slug' => $this->serieInfos->getNomSerie(), 'id' => $this->serieInfos->getIdSerie()), 'serie') ?>">voir la série ></a>
             </h1>
           <?php endif ?>
           <h1 class="album-title" itemprop="<?php echo (isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) ? 'alternateName' : 'name'; ?>"><?php echo $this->albumInfos->getTitre() ?></h1>

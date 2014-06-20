@@ -190,7 +190,12 @@ div.rightSide section.albums-auteur li {
 	min-height:250px;
 	position: relative;
 }
-
+div.rightSide section.albums-auteur li:nth-child(4n+1) {
+	clear: left;
+}
+div.rightSide section.albums-auteur li:nth-child(4n+4) {
+	margin-right: 0;
+}
 div.rightSide section.albums-auteur li img {
 	max-width: 120px;
 

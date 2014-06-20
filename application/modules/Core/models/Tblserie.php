@@ -57,6 +57,19 @@ class Core_Model_Tblserie
 	 */ 
 	private $_idUnivers ; 
 
+	public $albums;
+	public $coloristes;
+	public $scenaristes;
+	public $dessinateurs;
+
+	public function __get($name) {
+		return $this->$name;
+	}
+
+	public function __set($name, $value) {
+		$this->$name = $value;
+		return $this;
+	}
 
 	/* 
 	 * @desc SETTER AND GETTER FOR $_idSerie

@@ -12,7 +12,7 @@
  * @version 1.0
  */
 
-class Core_Model_Mapper_Tblserie
+class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
 {
     protected $_dbTable;
 
@@ -77,6 +77,13 @@ class Core_Model_Mapper_Tblserie
 	$tbl_Serie->setCommentaire(self::unescape($row->commentaire));
 	$tbl_Serie->setInformations(self::unescape($row->informations));
 	$tbl_Serie->setIdUnivers(self::unescape($row->idUnivers));
+    $tbl_Serie->albums = $this->getAlbums($row->idSerie);
+    $tbl_Serie->coloristes = $this->getColoristes($row->idSerie);
+    $tbl_Serie->scenaristes = $this->getScenaristes($row->idSerie);
+    $tbl_Serie->dessinateurs = $this->getDessinateurs($row->idSerie);
+    $tbl_Serie->editeurs = $this->getEditeurs($row->idSerie);
+    $tbl_Serie->collections = $this->getCollections($row->idSerie);
+    $tbl_Serie->motcles = $this->getMotcles($row->idSerie);
 	return $tbl_Serie;
     }
 
@@ -113,5 +120,91 @@ class Core_Model_Mapper_Tblserie
         $dbTable = $this->getDbTable();
         $where   = $dbTable->getAdapter()->quoteInto("idSerie = ?", $id);
         return $dbTable->delete($where);
+    }
+
+    public function getAlbums($id) {
+        $sql = 'SELECT idAlbum FROM tbl_Album WHERE idSerie = ? ORDER BY dateCreation ASC';
+        $results = $this->getSqlResults($sql, array($id));
+
+        $albums = array();
+        foreach ($results as $result) {
+            if (!empty($result->idAlbum)) {
+                $mpAlb = new Core_Model_Mapper_Tblalbum();
+                $album = $mpAlb->find($result->idAlbum, new Core_Model_Tblalbum);
+                if ($album != null) {
+                    $albums[] = $album;
+                }
+            }
+        }
+        return $albums;
+    }
+
+    protected function _getAuteurs($idSerie, $role) {
+        $sql = 'SELECT a.idAuteur, a.nomAuteur, a.prenomAuteur
+            FROM tbl_Auteurs a
+            LEFT JOIN tbl_Auteurs_Albums aa ON a.idAuteur = aa.idAuteur
+            WHERE aa.idAlbum IN (SELECT idAlbum FROM tbl_Album WHERE idSerie = ?) AND aa.cdRole = ?
+            GROUP BY a.idAuteur
+            ORDER BY a.nomAuteur ASC';
+
+        $results = $this->getSqlResults($sql, array($idSerie, $role));
+        return $results;
+    }
+
+    public function getColoristes($idSerie) {
+        return $this->_getAuteurs($idSerie, 'C');
+    }
+
+    public function getScenaristes($idSerie) {
+        return $this->_getAuteurs($idSerie, 'S');
+    }
+
+    public function getDessinateurs($idSerie) {
+        return $this->_getAuteurs($idSerie, 'D');
+    }
+
+    public function getEditeurs($idSerie) {
+        $sql = 'SELECT DISTINCT FKidEditeur FROM tbl_Album a WHERE a.idAlbum IN (SELECT idAlbum FROM tbl_Album WHERE idSerie = ?)';
+        $results = $this->getSqlResults($sql, array($idSerie));
+
+        $eds = array();
+        $editeurMapper = new Core_Model_Mapper_Tblediteur();
+        foreach ($results as $result) {
+            if (!empty($result->FKidEditeur)) {
+                $eds[] = $editeurMapper->find($result->FKidEditeur, new Core_Model_Tblediteur);
+            }
+        }
+        return $eds;
+    }
+
+    public function getCollections($idSerie) {
+        $sql = 'SELECT DISTINCT idCollection FROM tbl_Album a WHERE a.idAlbum IN (SELECT idAlbum FROM tbl_Album WHERE idSerie = ?)';
+        $results = $this->getSqlResults($sql, array($idSerie));
+
+        $eds = array();
+        $collectionMapper = new Core_Model_Mapper_Tblcollections();
+        foreach ($results as $result) {
+            if (!empty($result->idCollection)) {
+                $eds[] = $collectionMapper->find($result->idCollection, new Core_Model_Tblcollections);
+            }
+        }
+        return $eds;
+    }
+
+    public function getMotcles($idSerie) {
+        $sql = 'SELECT DISTINCT g.idGenre FROM tbl_Genres g
+            LEFT JOIN tbl_Genres_Albums ga ON g.idGenre = ga.idGenre
+            WHERE ga.idAlbum IN (SELECT idAlbum FROM tbl_Album WHERE idSerie = ?)
+            ORDER BY g.libelle';
+        $results = $this->getSqlResults($sql, array($idSerie));
+
+        $eds = array();
+        $genreMapper = new Core_Model_Mapper_Tblgenres();
+        foreach ($results as $result) {
+            if (!empty($result->idGenre)) {
+                $eds[] = $genreMapper->find($result->idGenre, new Core_Model_Tblgenres);
+            }
+        }
+        return $eds;
     }
 }
