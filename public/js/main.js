@@ -80,8 +80,40 @@ jQuery(function($)
             }
             //console.log( emptyFields.length == 0 );
         });
-        
-        
+
+        $('.contact').on('submit', '.form-contact', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            var $form   = $(e.currentTarget),
+                url    = $form.attr('action'),
+                status = 'data-is-loading';
+
+            if($form.attr(status)) return;
+            $form.attr(status, true);
+
+            $.ajax({
+                type: 'POST',
+                url : url,
+                data: $form.serialize(),
+                dataType: 'json'
+            }).done(function(response) {
+                isLoading = false;
+                if (response != null && response != '') {
+                    if(response.status){
+                        if(response.msg){
+                            $form.empty().append('<p class="success">' + response.msg + '</p>');
+                        }
+                    } else {
+                        $form.replaceWith(response.form);
+                    }
+                }
+            }).complete(function() {
+                    $form.removeAttr(status);
+            });
+
+        });
+
         function checkUserRecipient(recipient)
         {
             var reg = new RegExp('^[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*[\.]{1}[a-z]{2,6}$', 'i');
