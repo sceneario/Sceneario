@@ -123,7 +123,7 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
     }
 
     public function getAlbums($id) {
-        $sql = 'SELECT idAlbum FROM tbl_Album WHERE idSerie = ? ORDER BY dateCreation ASC';
+        $sql = 'SELECT idAlbum FROM tbl_Album WHERE idSerie = ? ORDER BY CAST(tome as UNSIGNED INTEGER), tome ASC';
         $results = $this->getSqlResults($sql, array($id));
 
         $albums = array();

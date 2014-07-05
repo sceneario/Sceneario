@@ -156,8 +156,7 @@ class AlbumController extends GlobalController
         
         if(is_object($albumInfos)){
             $serieMapper = new Core_Model_Mapper_Tblserie;
-            $serieInfos  = $serieMapper->find($albumInfos->getIdSerie(), 
-                                              new Core_Model_Tblserie) ;
+            $this->view->serie = $serieMapper->find($albumInfos->getIdSerie(), new Core_Model_Tblserie);
         }
         
         if($albumInfos->getFKidEditeur() != ''){
@@ -302,14 +301,7 @@ class AlbumController extends GlobalController
         $this -> view -> critique       = $albumCritic ;
         $this -> view -> interview      = $albumInterviews ;
         $this -> view -> albumsconnexes = $albumConnexes;
-             
-        
-       if('' != $albumInfos->getIdSerie()){ 
-           $this -> view -> serieInfos = $serieInfos;
-           $albumFullSerie = $mpAlb->getAlbumFullSerie($albumInfos->getIdSerie());  
-           $this -> view -> albumFullSerie = $albumFullSerie ;     
-       }
-       
+
        if('' != $albumInfos->getIdCollection()){ 
            $collectionMapper = new Core_Model_Mapper_Tblcollections;
            $collectionInfos  = $collectionMapper->find($albumInfos->getIdCollection(), 

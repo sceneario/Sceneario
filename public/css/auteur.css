@@ -162,6 +162,13 @@ div.rightSide section.biographie div.bioWrapper p {
 div.rightSide section.albums-auteur {
 	width:100%;
 }
+div.rightSide section.albums-auteur.also-like {
+	margin-bottom: 0;
+}
+div.rightSide section.albums-auteur.also-like a {
+	font-size: 12px;
+	color: #7a7a7a;
+}
 div.rightSide section.albums-auteur h2 {
 	margin: 0;
 	font-weight: normal;
@@ -173,6 +180,7 @@ div.rightSide section.albums-auteur h3 {
 	font-size: 17px;
 	text-shadow: 0 1px 0 #fff;
 	margin-bottom:20px;
+	display: inline-block;
 }
 
 div.rightSide section.albums-auteur ul {
@@ -182,13 +190,14 @@ div.rightSide section.albums-auteur ul {
 	width:100%;
 	margin-left:5px;
 }
-div.rightSide section.albums-auteur li {
+div.rightSide section.albums-auteur ul li {
 	width:120px;
 	float:left;
 	margin-right:30px;
 	margin-bottom: 10px;
 	min-height:250px;
 	position: relative;
+	text-align: left;
 }
 div.rightSide section.albums-auteur li:nth-child(4n+1) {
 	clear: left;
@@ -196,6 +205,19 @@ div.rightSide section.albums-auteur li:nth-child(4n+1) {
 div.rightSide section.albums-auteur li:nth-child(4n+4) {
 	margin-right: 0;
 }
+div.rightSide section.albums-auteur.serie li:nth-child(3n+1) {
+	clear: left;
+}
+div.rightSide section.albums-auteur.serie li:nth-child(3n+3) {
+	margin-right: 0;
+}
+div.rightSide section.albums-auteur.serie li:nth-child(4n+1) {
+	clear: none;
+}
+div.rightSide section.albums-auteur.serie li:nth-child(4n+4) {
+	margin-right: 30px;
+}
+
 div.rightSide section.albums-auteur li img {
 	max-width: 120px;
 
@@ -207,12 +229,15 @@ div.rightSide section.albums-auteur li img {
 	behavior:url(compat/PIE-1/PIE.htc);
 }
 
-div.rightSide section.albums-auteur li a {
+div.rightSide section.albums-auteur li a,
+div.rightSide section.albums-auteur.also-like li a {
 	color: #00b3bd;
 	font-size: 15px;
 }
 
-div.rightSide section.albums-auteur li span {
+div.rightSide section.albums-auteur li span,
+div.rightSide section.albums-auteur li span a,
+div.rightSide section.albums-auteur.also-like li span a {
 	font-size:11px;
 	color:#646464;
 	display:block;

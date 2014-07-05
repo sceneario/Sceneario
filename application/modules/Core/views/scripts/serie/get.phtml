@@ -180,8 +180,8 @@
             <div class="clear"></div>
             <div class="separateur"></div>
 
-            <section class="albums-auteur">
-                <h3>Les albums de la série <?php echo $this->serie->getNomSerie(); ?></h3>
+            <section class="albums-auteur also-like">
+                <h3>Tous les albums de la série <?php echo $this->serie->getNomSerie(); ?></h3>
                 <ul>
                     <?php foreach($this->serie->albums as $album) : ?>
                         <li>
@@ -191,9 +191,11 @@
                             <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
                                 <h2><?php echo $album->getTitre(); ?></h2>
                             </a>
+                            <?php if ($album->getTome()) : ?>
                             <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
                                 <span>Tome # <?php echo $album->getTome(); ?></span>
                             </a>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>

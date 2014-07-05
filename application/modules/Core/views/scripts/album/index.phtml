@@ -162,7 +162,7 @@
           <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
             <h1>
               <span itemprop="name"><?php echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?></span>
-              <a href="<?php echo $this->url(array('slug' => $this->serieInfos->getNomSerie(), 'id' => $this->serieInfos->getIdSerie()), 'serie') ?>">voir la série ></a>
+              <a href="<?php echo $this->url(array('slug' => $this->serie->getNomSerie(), 'id' => $this->serie->getIdSerie()), 'serie') ?>">voir la série ></a>
             </h1>
           <?php endif ?>
           <h1 class="album-title" itemprop="<?php echo (isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) ? 'alternateName' : 'name'; ?>"><?php echo $this->albumInfos->getTitre() ?></h1>
@@ -357,14 +357,18 @@
                 </section>
                 <?php endif; ?>
                 <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
-                <section class="serie">
-                    <p class="justify">La série :</p>
+                <section class="serie albums-auteur clearfix">
                     <ul>
-                        <?php
-                        foreach($this->albumFullSerie as $serie): ?>
-                            <li><a href="<?php echo $this->customUrl(array('idAlbum'    => $serie->idAlbum,
-                                                                           'titleAlbum' => $serie->titre, ),
-                                                                           'album') ?>"><?php echo $serie->titre , ' #', $serie->tome ?></a></li>
+                        <?php foreach($this->serie->albums as $album) : ?>
+                            <li>
+                                <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
+                                    <?php echo $this->displayImage($this->customUrl(array('isbn'=> $album->getIsbn(), 'format'=> 'alsolike'), 'couverture'), 'couverture bande-dessinée '.$this->serie->getNomSerie().' '.$album->getTitre()); ?>
+                                </a>
+                                <h2><a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>"><?php echo $album->getTitre(); ?></a></h2>
+                                <?php if ($album->getTome()) : ?>
+                                <span><a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">Tome # <?php echo $album->getTome(); ?></a></span>
+                                <?php endif; ?>
+                            </li>
                         <?php endforeach; ?>
                     </ul>
                 </section>
@@ -434,7 +438,29 @@
             endforeach;
         endif; ?>
         <div class="separateur"></div>
-
+          <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
+            <section class="albums-auteur also-like clearfix">
+                <h3>Dans la même série</h3>
+                <a style="float:right;margin:22px 0;" href="<?php echo $this->url(array('slug' => $this->serie->getNomSerie(), 'id' => $this->serie->getIdSerie()), 'serie') ?>">voir la série <?php echo $this->serie->getNomSerie(); ?> au complet ></a>
+                <ul>
+                    <?php $keys = array_keys($this->serie->albums); ?>
+                    <?php $keys = count($this->serie->albums) > 4 ? array_rand($this->serie->albums, 4) : $keys; ?>
+                    <?php $keys = count($this->serie->albums) > 8 ? array_rand($this->serie->albums, 8) : $keys; ?>
+                    <?php foreach($keys as $key) : $album = $this->serie->albums[$key]; ?>
+                        <li>
+                            <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
+                                <?php echo $this->displayImage($this->customUrl(array('isbn'=> $album->getIsbn(), 'format'=> 'alsolike'), 'couverture'), 'couverture bande-dessinée '.$this->serie->getNomSerie().' '.$album->getTitre()); ?>
+                            </a>
+                            <h2><a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>"><?php echo $album->getTitre(); ?></a></h2>
+                            <?php if ($album->getTome()) : ?>
+                            <span><a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">Tome # <?php echo $album->getTome(); ?></a></span>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </section>
+          <?php endif; ?>
+        <div class="separateur"></div>
         <?php if ($this->albumsconnexes !== null): ?>
         <!-- Vous aimerez également -->
         <section class="also-like">
