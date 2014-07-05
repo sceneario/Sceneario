@@ -134,7 +134,7 @@
                             <?php if (!empty($this->serie->editeurs)) : ?>
                                 <?php foreach ($this->serie->editeurs as $editeur) : ?>
                                     <h2>
-                                    <?php if (!empty($editeur->getAdrWebEditeur())) : ?>
+                                    <?php $addrWebEditeur = $editeur->getAdrWebEditeur(); if (!empty($editeur->getAdrWebEditeur())) : ?>
                                         <a itemprop="publisher" target="_blank" href="<?php echo (strpos($editeur->getAdrWebEditeur(), 'http://') ? '' : 'http://').$editeur->getAdrWebEditeur(); ?>">
                                             <?php echo trim($editeur->getPrenomEditeur().' '.$editeur->getNomEditeur()); ?>
                                         </a>
