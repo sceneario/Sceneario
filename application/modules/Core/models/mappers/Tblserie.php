@@ -111,7 +111,14 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
         }
         return $entries;
     }
-    
+
+    public function getAllSeriesForIndex()
+    {
+        $sql = 'SELECT idSerie, nomSerie FROM tbl_Serie;';
+        $results = $this->getSqlResults($sql);
+        return $results;
+    }
+
     private static function unescape ($str){
     	return stripslashes($str);
     }

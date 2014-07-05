@@ -35,6 +35,14 @@ class SitemapController extends GlobalController
                 'priority' => '0.9'
             ),
             array(
+                'mapper' => 'Core_Model_Mapper_Tblserie',
+                'fetch' => 'getAllSeriesForIndex',
+                'link' => 'getSerieUrlFromId',
+                'params' => array('idSerie', 'nomSerie'),
+                'freq' => 'monthly',
+                'priority' => '0.7'
+            ),
+            array(
                 'link' => $url.'/interview',
                 'freq' => 'weekly',
                 'priority' => '0.8'

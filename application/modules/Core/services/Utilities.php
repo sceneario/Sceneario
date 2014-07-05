@@ -200,19 +200,20 @@ class Core_Service_Utilities
     }
     
 
-    public function getSerieUrlFromId($id)
+    public function getSerieUrlFromId($id, $nom = '')
     {
-        $serieMapper = new Core_Model_Mapper_Tblserie();
-        $serieInfos  = $serieMapper->find($id, new Core_Model_Tblserie()) ;
-        
-        if(!null == $serieInfos){
-            $titre = $serieInfos->getNomSerie();
-            $view  = $this->_getView();
+        $view  = $this->_getView();
 
-            return '/recherche/'.$titre;
-        }else{
+        if (empty($nom)) {
+            $serieMapper = new Core_Model_Mapper_Tblserie();
+            $serieInfos  = $serieMapper->find($id, new Core_Model_Tblserie());
+
+            if (!null == $serieInfos) {
+                return $view->customUrl(array('slug' => $serieInfos->getNomSerie(), 'id' => $serieInfos->getIdSerie()), 'serie');
+            }
             return '/';
         }
+        return $view->customUrl(array('slug' => $nom, 'id' => $id), 'serie');
     }
       
      /*
