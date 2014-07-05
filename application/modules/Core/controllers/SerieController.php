@@ -29,5 +29,11 @@ class SerieController extends GlobalController {
 
     public function getAction() {
         $this->view->serie = $this->_get();
+
+        $this->view->headTitle($this->view->serie->getNomSerie() . ' - ', 'PREPEND');
+        $this->view->headMeta()->setName('description', 'Liste des albums de ' . $this->view->serie->getNomSerie());
+        $this->view->headMeta()->setName(
+            'keywords', 'albums bd, série bd, ' . $this->view->serie->getNomSerie() .
+            ', albums ' . $this->view->serie->getNomSerie() . ', série '. $this->view->serie->getNomSerie());
     }
 }
