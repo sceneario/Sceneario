@@ -42,7 +42,7 @@ class ConcoursController extends GlobalController
         /*
          * Concours précédents
          */
-         $concoursPrecedents = $this->_concoursMapper->fetchAll(12, 
+         $concoursPrecedents = $this->_concoursMapper->fetchAll(11,
                                                                 array( 'clause' => 'enligne = ? AND dateFin < CURDATE()',
                                                                        'params' => IS_PUBLISHED),
                                                                'dateFin DESC') ;
@@ -98,14 +98,10 @@ class ConcoursController extends GlobalController
             $this->view->concoursTermine = true;
         }
         
-        $utils = new Core_Service_Utilities;
-        if( $concoursEnCours->getIdAlbum() != 0 ) {
-            $this->view->linkAlbum = 
-                    '<a href="' 
-                    . $utils->getAlbumUrlFromId($concoursEnCours->getIdAlbum()) 
-                    . '" class="fiche_album">Voir la fiche album ></a>' ;
-        }
-      
+
+        $albumMapper = new Core_Model_Mapper_Tblalbum();
+        $this->view->album_related = $albumMapper->find($this->view->concoursEnCours->getIdAlbum(), new Core_Model_Tblalbum()) ;
+
         $this->view->concoursQuestion = $concoursQuestion ;
 
         $imageFacebook = '/images/concours/' . $concoursEnCours->getNomConcours() . '.jpg' ;
@@ -136,6 +132,9 @@ class ConcoursController extends GlobalController
             
             $this->view->concoursToken        = $tokenFromStep1;
             $this->view->postConcoursReponses = serialize($postConcoursReponses);
+
+            $albumMapper = new Core_Model_Mapper_Tblalbum();
+            $this->view->album_related = $albumMapper->find($this->view->concoursEnCours->getIdAlbum(), new Core_Model_Tblalbum()) ;
         }
         else{
             $this->_redirect($this->view->customUrl(array(), 'concours'));
@@ -158,7 +157,10 @@ class ConcoursController extends GlobalController
 				
                 $postConcoursReponses = unserialize($reponsesDateString);
                 $idConcours           = $this->getRequest()->getParam('idConcours');
- 
+
+                $albumMapper = new Core_Model_Mapper_Tblalbum();
+                $this->view->album_related = $albumMapper->find($this->view->concoursEnCours->getIdAlbum(), new Core_Model_Tblalbum()) ;
+
                 $concoursReponsesMapper = new Core_Model_Mapper_Tblconcoursreponses;
                 $concoursReponsesModel  = new Core_Model_Tblconcoursreponses;
                 
@@ -224,7 +226,10 @@ class ConcoursController extends GlobalController
      */
     public function concoursreglementAction()
     {
-        $this->getConcours();  
+        $this->getConcours();
+
+        $albumMapper = new Core_Model_Mapper_Tblalbum();
+        $this->view->album_related = $albumMapper->find($this->view->concoursEnCours->getIdAlbum(), new Core_Model_Tblalbum()) ;
     }
     
     /*

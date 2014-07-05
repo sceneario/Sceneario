@@ -49,6 +49,7 @@
 
         <link rel="stylesheet" href="<?php echo BASE_URL ?>css/normalize.css">
         <link rel="stylesheet" href="<?php echo BASE_URL ?>css/main.css">
+        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/form.css">
         <link rel="stylesheet" href="<?php echo BASE_URL ?>css/infobar.css"> <!-- Barre Chromeframe si IE<9-->
         <link rel="stylesheet" href="<?php echo BASE_URL ?>css/sceneario.css"> <!-- Accueil/Styles de base-->
         <link rel="stylesheet" href="<?php echo BASE_URL ?>css/album-serie.css"> <!-- Pages album et série -->
@@ -316,10 +317,10 @@
         <div class="social_links">
             <div class="social_links-title"><img src="<?php echo BASE_URL ?>img/slinks_green_titre.png" alt="Suivez-nous !"></div>
                         <ul>
-                                <li><a target="_blank" href="http://www.facebook.com/Sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_fb.png" alt="bande-dessinée, facebook"></a></li>
-                                <li><a target="_blank" href="https://twitter.com/sceneario"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_twitter.png" alt="bande-dessinée, twitter"></a></li>
-                                <li><a target="_blank" href="http://www.sceneario.com/blog/feed/rss"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_rss.png" alt="bande-dessinée, rss"></a></li>
-                                <li><a target="_blank" href="mailto:webmaster@sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_email.png" alt="bande-dessinée, email"></a></li>
+                                <li><a target="_blank" href="http://www.facebook.com/Sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_fb.png" alt="Facebook Sceneario.com"></a></li>
+                                <li><a target="_blank" href="https://twitter.com/sceneario"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_twitter.png" alt="Twitter Sceneario.com"></a></li>
+                                <li><a target="_blank" href="http://www.sceneario.com/blog/feed/rss"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_rss.png" alt="RSS Sceneario.com"></a></li>
+                                <li><a href="<?php echo $this->url(array(), 'contact', true); ?>"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_email.png" alt="Contact Sceneario.com"></a></li>
                         </ul>
             <div class="clear"></div>
         </div><!-- social_links -->
@@ -349,7 +350,7 @@
                 <li><a target="_blank" href="http://www.facebook.com/Sceneario.com">Facebook</a></li>
                 <li><a target="_blank" href="https://twitter.com/sceneario">Twitter</a></li>
                 <li><a target="_blank" href="/blog/feed/rss">RSS</a></li>
-                <li><a target="_blank" href="mailto:webmaster@sceneario.com">Contact</a></li>
+                <li><a href="<?php echo $this->url(array(), 'contact', true); ?>">Contact</a></li>
             </ul>
           </li>
           <li><h4><a href="/blog">Actualités</a></h4>
