@@ -4,8 +4,8 @@
     <div id="slides-wrapper">
     	<?php foreach($this->events as $evt): ?>
             <?php if($evt->getLienEvt() !== '') : ?><a href="<?php echo $evt->getLienEvt() ?>"><?php endif; ?>
-                <article style="background:url(http://admin.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>) no-repeat center center;">
-                    <img src="http://admin.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>" alt="bande-dessinée, <?php echo $evt->getTitreEvt() ?>" class="visuallyhidden" />
+                <article style="background:url(http://images.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>) no-repeat center center;">
+                    <img src="http://images.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>" alt="bande-dessinée, <?php echo $evt->getTitreEvt() ?>" class="visuallyhidden" />
                 	<h1><?php echo $evt->getTitreEvt() ?></h1>
                 	<img class="h1queue" src="img/slider_h1_queue.png" alt="<?php echo $evt->getTitreEvt() ?>" />
                     <?php if($evt->getLienEvt() !== ''): ?>
