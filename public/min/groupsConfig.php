@@ -32,6 +32,11 @@ return array(
 		  '//css/main.css',
 		  '//css/normalize.css',
 		  '//css/form.css'),
+    'js-vendor' => array(
+		  '//js/vendor/jquery-1.8.0.min.js',
+		  '//js/vendor/jquery-ui-1.8.23.min.js',
+		  '//js/vendor/jquery-rotate.js',
+		  '//js/vendor/modernizr-2.6.1.min.js'),
     'js' => array(
 		  '//js/plugins.js',
 		  '//js/jquery.lazyload.min.js',
@@ -40,8 +45,4 @@ return array(
 		  '//js/lightbox.js',
 		  '//js/bgpos.js',
 		  '//js/googledbc.js'),
-    'js-vendor' => array(
-		  '//js/vendor/jquery-ui-1.8.23.min.js',
-		  '//js/vendor/jquery-rotate.js',
-		  '//js/vendor/modernizr-2.6.1.min.js'),
 );
