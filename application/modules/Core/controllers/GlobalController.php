@@ -1,4 +1,5 @@
 <?php
+require_once APPLICATION_PATH . '/modules/Core/views/helpers/CustomUrl.php';
 
 class GlobalController extends Zend_Controller_Action
 {
