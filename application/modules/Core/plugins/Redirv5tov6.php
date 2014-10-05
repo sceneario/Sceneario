@@ -29,7 +29,18 @@ class Core_Plugin_Redirv5tov6 extends Zend_Controller_Plugin_Abstract {
     public function routeStartup(Zend_Controller_Request_Abstract $request)
     {
         $utils = new Core_Service_Utilities;
-        
+
+        if ($this->_requestUri == '/accueil.html') {
+            $this->redirect301('/');
+        }
+
+        if (strstr($this->_requestUri, 'index.php/')) {
+            $this->redirect301(str_replace('index.php/', '', $this->_requestUri));
+        }
+        else if ($this->_requestUri == '/index.php') {
+            $this->redirect301('/');
+        }
+
         //BD REDIR 301
         if($this->_requestUri !== false){
             if(strpos( $this->_requestUri , 'bd_') !== false || strpos( $this->_requestUri , 'album_') !== false) {
