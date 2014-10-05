@@ -177,8 +177,9 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
         $eds = array();
         $editeurMapper = new Core_Model_Mapper_Tblediteur();
         foreach ($results as $result) {
-            if (!empty($result->FKidEditeur)) {
-                $eds[] = $editeurMapper->find($result->FKidEditeur, new Core_Model_Tblediteur);
+            if (!empty($result->FKidEditeur) &&
+                !empty($e = $editeurMapper->find($result->FKidEditeur, new Core_Model_Tblediteur))) {
+                $eds[] = $e;
             }
         }
         return $eds;
@@ -191,8 +192,9 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
         $eds = array();
         $collectionMapper = new Core_Model_Mapper_Tblcollections();
         foreach ($results as $result) {
-            if (!empty($result->idCollection)) {
-                $eds[] = $collectionMapper->find($result->idCollection, new Core_Model_Tblcollections);
+            if (!empty($result->idCollection) &&
+                !empty($c = $collectionMapper->find($result->idCollection, new Core_Model_Tblcollections))) {
+                $eds = $c;
             }
         }
         return $eds;
@@ -208,8 +210,9 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
         $eds = array();
         $genreMapper = new Core_Model_Mapper_Tblgenres();
         foreach ($results as $result) {
-            if (!empty($result->idGenre)) {
-                $eds[] = $genreMapper->find($result->idGenre, new Core_Model_Tblgenres);
+            if (!empty($result->idGenre) &&
+                !empty($g = $genreMapper->find($result->idGenre, new Core_Model_Tblgenres))) {
+                $eds[] = $g;
             }
         }
         return $eds;
