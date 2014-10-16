@@ -205,7 +205,14 @@ class Core_Model_Tblalbum
 	}
 	public function getTitre()
 	{
-		return $this->_titre ;
+		$words = explode(' ', $this->_titre);
+		$last = array_pop($words);
+		if ($last[0] == '(' && $last[strlen($last) - 1] == ')') {
+			array_unshift($words, substr($last, 1, strlen($word) - 1));
+		} else {
+			array_push($words, $last);
+		}
+		return implode(' ', $words);
 	}
 
 	/* 
@@ -220,7 +227,14 @@ class Core_Model_Tblalbum
 	}
 	public function getCollection()
 	{
-		return $this->_collection ;
+		$words = explode(' ', $this->_collection);
+		$last = array_pop($words);
+		if ($last[0] == '(' && $last[strlen($last) - 1] == ')') {
+			array_unshift($words, substr($last, 1, strlen($word) - 1));
+		} else {
+			array_push($words, $last);
+		}
+		return implode(' ', $words);
 	}
 
 	/* 

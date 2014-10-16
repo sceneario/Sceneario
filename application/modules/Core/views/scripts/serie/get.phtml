@@ -77,10 +77,11 @@
     <div class="rightSide">
         <div class="rightContent">
 
-            <hgroup>
-                <h1 class="album-title"><span itemprop="name"><?php echo $this->serie->getNomSerie(); ?></span></h1>
-            </hgroup>
-
+            <div class="clearfix">
+                <div class="album-title">
+                    <h1 class="album-title_name"><span itemprop="name"><?php echo $this->serie->getNomSerie(); ?></span></h1>
+                </div>
+            </div>
             <div class="separateur"></div>
             <div class="social-links">
                 <div class="fb-like" data-href="<?php echo $this->currentUrl() ?>" data-send="true" data-layout="button_count" data-width="100" data-show-faces="true" data-font="arial"></div>

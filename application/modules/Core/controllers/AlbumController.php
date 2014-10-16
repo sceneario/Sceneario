@@ -16,7 +16,6 @@ class AlbumController extends GlobalController
     {
         parent::init();
         $this->_mapperAlbum = new Core_Model_Mapper_Tblalbum();
-        $this->view->headTitle('Avis BD - ', 'PREPEND');
     }
     
     /*
@@ -321,39 +320,9 @@ class AlbumController extends GlobalController
            $this->view->applyFilter = $utils->applyAdultFilter($albumKeywords) == 1 ? true : false ;
            $this->view->referer     = $utils->getReferer();
        }
-       
-       /*
-        <meta property="og:tag name" content="tag value"/> 
-If you use Open Graph tags, the following six are required:
 
-og:title - The title of the entity.
-og:type - The type of entity. You must select a type from the list of Open Graph types.
-og:image - The URL to an image that represents the entity. Images must be at least 50 pixels by 50 pixels (though minimum 200px by 200px is preferred). Square images work best, but you are allowed to use images up to three times as wide as they are tall.
-og:url - The canonical, permanent URL of the page representing the entity. When you use Open Graph tags, the Like button posts a link to the og:url instead of the URL in the Like button code.
-og:site_name - A human-readable name for your site, e.g., "IMDb".
-fb:admins or fb:app_id - A comma-separated list of either the Facebook IDs of page administrators or a Facebook Platform application ID. At a minimum, include only your own Facebook ID.
-        */
-        /**
-         * deprecated
-         * 
-         * $facebookOg = array();
-         * $tome = $albumInfos->getTome() != '' ? ' #'. $albumInfos->getTome() : '';
-         * $facebookOg['og:title'] = $this->view->albumTitle =   $albumInfos->getCollection() . $tome . ' - ' . $albumInfos->getTitre()  ;
-         * $facebookOg['og:type']  = 'book' ;
-         * $facebookOg['og:image'] = 'http://' . $_SERVER['HTTP_HOST'] . $this->view->customUrl( array('isbn'   => $albumInfos->getIsbn(),
-                                                            'format' => 'small') , 
-                                                      'couverture' ) ;  
-         * $facebookOg['og:url']         = $this->view->currentUrl();
-         * $facebookOg['og:site_name']   = 'Sceneario.com - Toute la bande dessinée sur Sceneario.com';
-         * $facebookOg['og:description'] = $this->view->albumDescription = substr(strip_tags($albumExcerpt[0]->histoire), 0 , 250) . '...';
-         * #$facebookOg['fb:app_id'] = '274580549328716';
-         * $this->view->facebookOg = $facebookOg ;
-         * 
-         */  
         $this->view->albumDescription = substr(strip_tags($albumExcerpt[0]->histoire), 0 , 250) . '...';
-        $tome = $albumInfos->getTome() != '' ? ' #'. $albumInfos->getTome() : '';
-        $this->view->albumTitle =   $albumInfos->getCollection() . $tome . ' - ' . $albumInfos->getTitre();
-        
+
        $albumKeywordsRef = array();
        foreach($albumDessinateurs as $d){
            $dessinateur = $d->nomAuteur . ' ' . $d->prenomAuteur ;
@@ -389,10 +358,22 @@ fb:admins or fb:app_id - A comma-separated list of either the Facebook IDs of pa
        $this->view->albumKeywordsRef = implode( ' , ', $albumKeywordsRef);
 
         $this->view->headOpenTag = '<head prefix="og: http://ogp.me/ns# book: http://ogp.me/ns/book#">';
-        $this->view->headTitle($this->view->albumTitle.' - ', 'PREPEND');
+
+		$title = ucfirst(strtolower($albumInfos->getCollection()));
+        if (strlen($title.' #'.$albumInfos->getTome()) < 70) {
+        	$title .= $albumInfos->getTome() != '' ? ' #'. $albumInfos->getTome() : '';
+       	}
+        if (strlen($title.$albumInfos->getTitre()) < 70) {
+        	$title .= ' '.ucfirst(strtolower($albumInfos->getTitre()));
+       	}
+       	if (strlen($title.' - Sceneario.com') < 70) {
+        	$this->view->headTitle($title.' - ', 'PREPEND');
+        } else {
+        	$this->view->headTitle($title, 'SET');
+        }
         $this->view->headMeta()->setName('description', $this->view->albumDescription);
         $this->view->headMeta()->setName('keywords', $this->view->albumKeywordsRef);
-        $this->view->headMeta()->setProperty('og:title', $this->view->albumTitle);
+        $this->view->headMeta()->setProperty('og:title', $title);
         $this->view->headMeta()->setProperty('og:type', 'book');
         $this->view->headMeta()->setProperty('book:isbn', $albumInfos->getIsbn());
         foreach ($albumKeywordsRef as $kw) {

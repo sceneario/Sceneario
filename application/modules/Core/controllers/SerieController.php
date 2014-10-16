@@ -24,13 +24,17 @@ class SerieController extends GlobalController {
 
     public function init() {
         parent::init();
-        $this->view->headTitle('Série BD - ', 'PREPEND');
     }
 
     public function getAction() {
         $this->view->serie = $this->_get();
 
-        $this->view->headTitle($this->view->serie->getNomSerie() . ' - ', 'PREPEND');
+        $title = ucfirst(strtolower($this->view->serie->getNomSerie()));
+        if (strlen($title.'tous les albums de la série bd - Sceneario.com') < 70) {
+            $this->view->headTitle($title.', tous les albums de la série bd - ', 'PREPEND');
+        } else {
+            $this->view->headTitle($title.', tous les albums de la série bd', 'SET');
+        }
         $this->view->headMeta()->setName('description', 'Liste des albums de ' . $this->view->serie->getNomSerie());
         $this->view->headMeta()->setName(
             'keywords', 'albums bd, série bd, ' . $this->view->serie->getNomSerie() .

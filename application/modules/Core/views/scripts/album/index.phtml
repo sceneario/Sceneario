@@ -139,7 +139,7 @@
 
 <div class="rightSide">
     <div class="rightContent">
-
+      <div class="clearfix">
         <div class="icons">
                <?php 
                $facebookConnect = Core_Service_FacebookConnect::getInstance();
@@ -158,17 +158,19 @@
                     class="like <?php echo $this->currentUserLike == 1 ? 'likeon' : 'likeoff'; ?>">J'aime</a>
         </div>
 
-        <hgroup>
+        <div class="album-title">
+          <h1>
+            <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
+              <span class="album-title_name" itemprop="name"><?php echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?></span>
+            <?php endif; ?>
+            <span class="album-title_subname" itemprop="<?php echo (isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) ? 'alternateName' : 'name'; ?>"><?php echo $this->albumInfos->getTitre() ?></span>
+          </h1>
           <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
-            <h1>
-              <span itemprop="name"><?php echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?></span>
-              <a href="<?php echo $this->customUrl(array('slug' => $this->serie->getNomSerie(), 'id' => $this->serie->getIdSerie()), 'serie') ?>">voir la série ></a>
-            </h1>
+            <a class="view-more" href="<?php echo $this->customUrl(array('slug' => $this->serie->getNomSerie(), 'id' => $this->serie->getIdSerie()), 'serie') ?>">voir la série <?php echo $this->serie->getNomSerie(); ?></a>
           <?php endif ?>
-          <h1 class="album-title" itemprop="<?php echo (isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) ? 'alternateName' : 'name'; ?>"><?php echo $this->albumInfos->getTitre() ?></h1>
-        </hgroup>
-
-        <div class="separateur"></div>
+        </div>
+      </div>
+      <div class="separateur"></div>
 
         <!-- Informations générales -->
         <section class="album-infos">
@@ -315,6 +317,7 @@
 
                 <section class="summary">
                     <?php if(isset($this->resume[0]->histoire) && $this->resume[0]->histoire != '') : ?>
+                    <h2>Résumé de l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
                     <div itemprop="description"> <?php echo $this->textFormat($this->resume[0]->histoire, 'RESUME_TEXT') ?></div>
                     <p class="right">
                         Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs"><?php echo $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
@@ -324,6 +327,7 @@
                     <div class="separateur"></div>
                     <div class="separateur"></div>
                     <?php if(isset($this->critique[0]->critique) && $this->critique[0]->critique != '') : ?>
+                      <h2>Notre avis sur l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
                       <div itemprop="review" itemscope itemtype="http://schema.org/Review">
                         <div itemprop="reviewBody"><?php echo $this->textFormat($this->critique[0]->critique, 'RESUME_TEXT') ?></div>
                         <p class="right">
@@ -358,6 +362,7 @@
                 <?php endif; ?>
                 <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
                 <section class="serie albums-auteur clearfix">
+                    <h2>Les albums de la série <i><?php echo $this->serie->getNomSerie(); ?></i></h2>
                     <ul>
                         <?php foreach($this->serie->albums as $album) : ?>
                             <li>
@@ -441,8 +446,10 @@
           <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
             <section class="albums-auteur also-like clearfix">
                 <h3>Dans la même série</h3>
-                <a style="float:right;margin:22px 0;" href="<?php echo $this->customUrl(array('slug' => $this->serie->getNomSerie(), 'id' => $this->serie->getIdSerie()), 'serie') ?>">voir la série <?php echo $this->serie->getNomSerie(); ?> au complet ></a>
-                <ul>
+                <div>
+                <a href="<?php echo $this->customUrl(array('slug' => $this->serie->getNomSerie(), 'id' => $this->serie->getIdSerie()), 'serie') ?>">Les albums de la série <?php echo $this->serie->getNomSerie(); ?></a>
+                </div>
+                <ul class="clearfix">
                     <?php $keys = array_keys($this->serie->albums); ?>
                     <?php $keys = count($this->serie->albums) > 4 ? array_rand($this->serie->albums, 4) : $keys; ?>
                     <?php $keys = count($this->serie->albums) > 8 ? array_rand($this->serie->albums, 8) : $keys; ?>
@@ -465,7 +472,7 @@
         <!-- Vous aimerez également -->
         <section class="also-like">
             <h3>Vous aimerez également</h3>
-            <ul>
+            <ul class="clearfix">
                 <?php foreach($this->albumsconnexes as $albumConnexes): ?>
                 <li><a href="<?php echo $this->customUrl(array('titleSerie' => $albumConnexes->collection . ' ' . $albumConnexes->tome,
                                                                'titleAlbum' => $albumConnexes->titre, 

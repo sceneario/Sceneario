@@ -116,7 +116,6 @@ div.rightSide div.icons {
 	height:28px;
 	float:right;
 	margin-right: -20px;
-	margin-top: -20px;
 }
 
 div.rightSide div.icons.two {
@@ -156,18 +155,21 @@ div.rightSide div.icons a.likeon {
 	background-position:-58px -58px;
 }
 
-div.rightSide hgroup {
-	margin-top:20px;
+div.rightSide .album-title {
 	margin-bottom:20px;
+	float: left;
+	width: 560px;
 }
 
-div.rightSide hgroup h1 {
-	color:#9f2b69;
+div.rightSide .album-title h1 {
+	margin: 0;
 	font-size:20px;
+}
+div.rightSide .album-title .album-title_name {
+	color:#9f2b69;
+	display: block;
 	text-transform:uppercase;
 	font-weight:normal;
-	margin:0;
-	
 	text-shadow: 0px 1px 0px #fff;
 	-webkit-text-shadow: 0px 1px 0px #fff;
 	-moz-text-shadow: 0px 1px 0px #fff;
@@ -175,7 +177,7 @@ div.rightSide hgroup h1 {
 	-o-text-shadow: 0px 1px 0px #fff;
 }
 
-div.rightSide hgroup h1 a {
+div.rightSide .album-title a {
 	color:#7a7a7a;
 	font-size:12px;
 	text-transform:none;
@@ -189,9 +191,10 @@ div.rightSide hgroup h1 a {
 	-o-text-shadow: 0px 0px 0px #fff;
 }
 
-div.rightSide hgroup h1.album-title {
+div.rightSide .album-title .album-title_subname {
 	color:#00b3be;
 	font-size:26px;
+	display: block;
 	margin:-3px 0 0 0;
 	text-transform:none;
 	font-weight: bold;
@@ -436,6 +439,11 @@ div.rightSide section.album-details section.summary {
 	display:block;
 }
 
+div.rightSide section.album-details section.summary h2,
+div.rightSide section.albums-auteur h2 {
+	font-size: 14px;
+}
+
 div.rightSide article hgroup {
 	margin-bottom:0;
 }
@@ -550,7 +558,6 @@ div.rightSide article .more {
 }
 
 div.rightSide section.also-like {
-	margin-bottom:100px;
 	margin-top:20px;
 }
 
@@ -558,12 +565,13 @@ div.rightSide section.also-like h3 {
 	color:#9f2b69;
 	font-size:17px;
 	font-weight:normal;
+	margin-bottom: 0;
 }
 
 div.rightSide section.also-like ul {
 	list-style:none;
-	height:123px;
 	padding:0;
+	margin-top: 20px;
 	margin-left:20px;
 }
 
