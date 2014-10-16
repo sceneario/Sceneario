@@ -4,6 +4,7 @@
             <?php foreach($this->serie->albums as $k => $album) : ?>
                 <?php if ($k < 2) : ?>
                     <?php $couvUrl = $this->customUrl(array('isbn' => $album->getIsbn(), 'format' => 'large'), 'couverture'); ?>
+                    <?php if ($k == 0) $couvUrlZoom = $couvUrl; ?>
                     <a rel="lightbox[album]" href="<?php echo $couvUrl ?>" class="zoom">
                         <?php echo $this->displayImage(
                             $this->customUrl(array('isbn'=> $album->getIsbn(), 'format'=> 'big') , 'couverture'),
@@ -14,9 +15,11 @@
             <?php endforeach; ?>
         </div>
 
+        <?php if (isset($couvUrlZoom)) : ?>
         <footer>
-            <a rel="lightbox[albumfooter]" href="<?php echo $urlCouvZoom ?>" class="zoom">voir en grand</a>
+            <a rel="lightbox[albumfooter]" href="<?php echo $couvUrlZoom ?>" class="zoom">voir en grand</a>
         </footer>
+        <?php endif; ?>
 
         <?php echo $this->userAccountWidget('user_dashboard'); ?>
 
