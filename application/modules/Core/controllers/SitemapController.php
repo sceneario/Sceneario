@@ -3,6 +3,7 @@
 require_once APPLICATION_PATH . '/modules/Core/controllers/GlobalController.php' ;
 
 set_time_limit(0);
+ini_set("memory_limit","512M");
 
 class SitemapController extends GlobalController
 {
@@ -17,14 +18,12 @@ class SitemapController extends GlobalController
         $url = 'http://www.sceneario.com';
         $csu = new Core_Service_Utilities();
 
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'."\n"; 
-
         $categories = array(
             array(
                 'link' => $url,
                 'freq' => 'daily',
-                'priority' => '1.0'
+                'priority' => '1.0',
+                'sitemap' => 'global'
             ),
             array(
                 'mapper' => 'Core_Model_Mapper_Tblalbum',
@@ -32,7 +31,8 @@ class SitemapController extends GlobalController
                 'link' => 'getAlbumUrlFromId',
                 'params' => array('idAlbum'),
                 'freq' => 'monthly',
-                'priority' => '0.9'
+                'priority' => '0.9',
+                'sitemap' => 'albums'
             ),
             array(
                 'mapper' => 'Core_Model_Mapper_Tblserie',
@@ -40,12 +40,14 @@ class SitemapController extends GlobalController
                 'link' => 'getSerieUrlFromId',
                 'params' => array('idSerie', 'nomSerie'),
                 'freq' => 'monthly',
-                'priority' => '0.7'
+                'priority' => '0.7',
+                'sitemap' => 'series'
             ),
             array(
                 'link' => $url.'/interview',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'interviews'
             ),
             array(
                 'mapper' => 'Core_Model_Mapper_Tblinterviews',
@@ -53,7 +55,8 @@ class SitemapController extends GlobalController
                 'link' => 'getInterviewUrlFromId',
                 'params' => array('idInterview'),
                 'freq' => 'monthly',
-                'priority' => '0.9'
+                'priority' => '0.9',
+                'sitemap' => 'interviews'
             ),
             array(
                 'mapper' => 'Core_Model_Mapper_Tblauteurs',
@@ -61,12 +64,14 @@ class SitemapController extends GlobalController
                 'link' => 'getAuteurUrlFromId',
                 'params' => array('idAuteur'),
                 'freq' => 'monthly',
-                'priority' => '0.6'
+                'priority' => '0.6',
+                'sitemap' => 'auteurs'
             ),
             array(
                 'link' => $url.'/expositions-salons',
                 'freq' => 'monthly',
-                'priority' => '0.7'
+                'priority' => '0.7',
+                'sitemap' => 'expositions'
             ),
             array(
                 'mapper' => 'Core_Model_Mapper_Tblexpos',
@@ -74,12 +79,14 @@ class SitemapController extends GlobalController
                 'link' => 'getExpoUrlFromId',
                 'params' => array('annee', 'idExpo'),
                 'freq' => 'monthly',
-                'priority' => '0.7'
+                'priority' => '0.7',
+                'sitemap' => 'expositions'
             ),
             array(
                 'link' => $url.'/galerie',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'expositions'
             ),
             array(
                 'mapper' => 'Core_Model_Mapper_Tbldossiers',
@@ -87,42 +94,50 @@ class SitemapController extends GlobalController
                 'link' => 'getDossierUrlFromId',
                 'params' => array('idDossier'),
                 'freq' => 'monthly',
-                'priority' => '0.7'
+                'priority' => '0.7',
+                'sitemap' => 'expositions'
             ),
             array(
                 'link' => $url.'/bande-dessinee.html',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'global'
             ),
             array(
                 'link' => $url.'/bande-dessinee/nouveautes.html',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'global'
             ),
             array(
                 'link' => $url.'/bande-dessinee/prochaines-parutions.html',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'global'
             ),
             array(
                 'link' => $url.'/bande-dessinee/coupsdecoeur.html',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'global'
             ),
             array(
                 'link' => $url.'/bande-dessinee/recommandes.html',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'global'
             ),
             array(
                 'link' => $url.'/preview',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'global'
             ),
             array(
                 'link' => $url.'/concours',
                 'freq' => 'weekly',
-                'priority' => '0.8'
+                'priority' => '0.8',
+                'sitemap' => 'concours'
             ),
             array(
                 'mapper' => 'Core_Model_Mapper_Tblconcoursent',
@@ -130,76 +145,109 @@ class SitemapController extends GlobalController
                 'link' => 'getConcoursUrlFromId',
                 'params' => array('nomConcours', 'libelleConcours'),
                 'freq' => 'monthly',
-                'priority' => '0.7'
+                'priority' => '0.7',
+                'sitemap' => 'concours'
             ),
             array(
                 'link' => $url.'/newsletter',
                 'freq' => 'yearly',
-                'priority' => '0.6'
+                'priority' => '0.6',
+                'sitemap' => 'global'
             ),
             array(
                 'link' => $url.'/mentions-legales',
                 'freq' => 'yearly',
-                'priority' => '0.4'
+                'priority' => '0.4',
+                'sitemap' => 'global'
             ),
             array(
                 'link' => $url.'/equipe',
                 'freq' => 'yearly',
-                'priority' => '0.4'
+                'priority' => '0.4',
+                'sitemap' => 'global'
             ),
         );
 
+        $sitemaps = array();
         foreach ($categories as $category) {
+            $item = '';
+            $sitemap = $category['sitemap'];
             if (!empty($category['mapper']) && !empty($category['fetch']) && !empty($category['params'])) {
                 $m = new $category['mapper']();
                 $rows = $m->$category['fetch']();
                 if (!empty($rows)) {
-                    foreach ($rows as $row) {
+                    foreach ($rows as $k => $row) {
+                        if ($k > 0 && $k % 7000 == 0) {
+                            $sitemaps[$sitemap][] = $item;
+                            $item = '';
+                            $sitemap = $category['sitemap'].'-'.floor($k / 7000);
+                        }
                         $params = array();
                         foreach ($category['params'] as $p) $params[] = $row->$p;
-                        $xml .= '  <url>'."\n";
-                        $xml .= '    <loc>'.$url.call_user_func_array(array($csu, $category['link']), $params).'</loc>'."\n";
+                        $item .= '  <url>'."\n";
+                        $item .= '    <loc>'.$url.call_user_func_array(array($csu, $category['link']), $params).'</loc>'."\n";
 
                         // special for albums to fetch cover and board pictures
                         if ($category['mapper'] == 'Core_Model_Mapper_Tblalbum') {
-                            $xml .= '    <image:image>'."\n";
-                            $xml .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'format'=> 'big'), 'couverture').'</image:loc>'."\n";
-                            $xml .= '      <image:title>Couverture - '.urlencode($row->titre).'</image:title>'."\n";
-                            $xml .= '      <image:caption>'.urlencode($row->collection.' - '.$row->titre).'</image:caption>'."\n";
-                            $xml .= '    </image:image>'."\n";
-                            $xml .= '    <image:image>'."\n";
-                            $xml .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'idAlbum' => $row->idAlbum, 'format'=> 'big'), 'planche').'</image:loc>'."\n";
-                            $xml .= '      <image:title>Planche - '.urlencode($row->titre).'</image:title>'."\n";
-                            $xml .= '      <image:caption>'.urlencode($row->collection.' - '.$row->titre).'</image:caption>'."\n";
-                            $xml .= '    </image:image>'."\n";
-                            $xml .= '    <image:image>'."\n";
-                            $xml .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'format'=> 'large'), 'couverture').'</image:loc>'."\n";
-                            $xml .= '      <image:title>Couverture - '.urlencode($row->titre).'</image:title>'."\n";
-                            $xml .= '      <image:caption>'.urlencode($row->collection.' - '.$row->titre).'</image:caption>'."\n";
-                            $xml .= '    </image:image>'."\n";
-                            $xml .= '    <image:image>'."\n";
-                            $xml .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'idAlbum' => $row->idAlbum, 'format'=> 'large'), 'planche').'</image:loc>'."\n";
-                            $xml .= '      <image:title>Planche - '.urlencode($row->titre).'</image:title>'."\n";
-                            $xml .= '      <image:caption>'.urlencode($row->collection.' - '.$row->titre).'</image:caption>'."\n";
-                            $xml .= '    </image:image>'."\n";
+                            $title = 'BD '.$row->collection.($row->titre != $row->collection ? ' - '.$row->titre : '');
+                            $item .= '    <image:image>'."\n";
+                            $item .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'format'=> 'big'), 'couverture').'</image:loc>'."\n";
+                            $item .= '      <image:title><![CDATA[Couverture '.$title.']]></image:title>'."\n";
+                            $item .= '    </image:image>'."\n";
+                            $item .= '    <image:image>'."\n";
+                            $item .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'idAlbum' => $row->idAlbum, 'format'=> 'big'), 'planche').'</image:loc>'."\n";
+                            $item .= '      <image:title><![CDATA[Extrait '.$title.']]></image:title>'."\n";
+                            $item .= '    </image:image>'."\n";
+                            $item .= '    <image:image>'."\n";
+                            $item .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'format'=> 'large'), 'couverture').'</image:loc>'."\n";
+                            $item .= '      <image:title><![CDATA[Couverture '.$title.']]></image:title>'."\n";
+                            $item .= '    </image:image>'."\n";
+                            $item .= '    <image:image>'."\n";
+                            $item .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'idAlbum' => $row->idAlbum, 'format'=> 'large'), 'planche').'</image:loc>'."\n";
+                            $item .= '      <image:title><![CDATA[Extrait '.$title.']]></image:title>'."\n";
+                            $item .= '    </image:image>'."\n";
                         }
 
-                        $xml .= '    <changefreq>'.$category['freq'].'</changefreq>'."\n";
-                        $xml .= '    <priority>'.$category['priority'].'</priority>'."\n";
-                        $xml .= '  </url>'."\n";
+                        $item .= '    <changefreq>'.$category['freq'].'</changefreq>'."\n";
+                        $item .= '    <priority>'.$category['priority'].'</priority>'."\n";
+                        $item .= '  </url>'."\n";
                     }
-                }            
+                }
             } else if (!empty($category['link'])) {
-                $xml .= '  <url>'."\n";
-                $xml .= '    <loc>'.$category['link'].'</loc>'."\n";
-                $xml .= '    <changefreq>'.$category['freq'].'</changefreq>'."\n";
-                $xml .= '    <priority>'.$category['priority'].'</priority>'."\n";
-                $xml .= '  </url>'."\n";
+                $item .= '  <url>'."\n";
+                $item .= '    <loc>'.$category['link'].'</loc>'."\n";
+                $item .= '    <changefreq>'.$category['freq'].'</changefreq>'."\n";
+                $item .= '    <priority>'.$category['priority'].'</priority>'."\n";
+                $item .= '  </url>'."\n";
             }
+
+            $sitemaps[$sitemap][] = $item;
         }
 
-        $xml .= '</urlset>'."\n";
-        
+
+
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'."\n";
+
+        $start_sitemap = $xml;
+        $end_sitemap   = '</urlset>'."\n";
+
+        foreach (array_keys($sitemaps) as $sitemap) {
+            $xml .= '  <sitemap>'."\n";
+            $xml .= '    <loc>'.$url.'/sitemap-'.$sitemap.'.xml</loc>'."\n";
+            $xml .= '    <lastmod>'.date('Y-m-d H:i:m:s').'</lastmod>'."\n";
+            $xml .= '  </sitemap>'."\n";
+
+            $s = $start_sitemap;
+            foreach ($sitemaps[$sitemap] as $item) {
+                $s .= $item;
+            }
+            $s .= $end_sitemap;
+            file_put_contents('sitemap-'.$sitemap.'.xml', $s);
+        }
+
+        $xml .= $end_sitemap;
+
         file_put_contents('sitemap.xml', $xml);
 
         die();
