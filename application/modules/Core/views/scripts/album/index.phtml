@@ -16,20 +16,13 @@
  
                 ?>
             
-                <a rel="lightbox[album]" href="<?php echo $urlCouvZoom ?>" class="zoom"><?php 
-                echo $this->displayImage($this->customUrl( array('isbn'=> $this->albumInfos->getIsbn(),
-                                                                 'format'=> 'big') , 'couverture' ) , 
-                                                                  'bande-dessinée, '.$this->albumInfos->getCollection().
-                                                                  ($this->albumInfos->getTome() ? ' #'.$this->albumInfos->getTome().', ' : '').', '.$this->albumInfos->getTitre(),
-                                                                 'front', 'itemprop="image"') ?></a>
+                <a rel="lightbox[album]" href="<?php echo $urlCouvZoom ?>" class="zoom">
+                  <?php echo $this->displayImage($this->customUrl(array('isbn'=> $this->albumInfos->getIsbn(), 'format'=> 'big'), 'couverture'), 'Couverture de l\'album '.$this->albumInfos->getCollection().($this->albumInfos->getTome() ? ' Tome #'.$this->albumInfos->getTome() : '').' '.$this->albumInfos->getTitre(), 'front', 'itemprop="image"'); ?>
+                </a>
                <!-- data-lightbox="lightbox" -->
                 <a rel="lightbox[album]" href="<?php echo $urlPlancheZoom?>" class="planche">
-                    <?php echo $this->displayImage($this->customUrl( array('isbn'=> $this->albumInfos->getIsbn(),
-                                                            'idAlbum' => $this->albumInfos->getIdAlbum(),
-                                                            'format'=> 'big') , 'planche' ), 
-                                                            'bande-dessinée, '.$this->albumInfos->getCollection().
-                                                                  ($this->albumInfos->getTome() ? ' #'.$this->albumInfos->getTome().', ' : '').', '.$this->albumInfos->getTitre(),
-                                                            'behind', 'itemprop="image"');?></a>
+                  <?php echo $this->displayImage($this->customUrl(array('isbn'=> $this->albumInfos->getIsbn(), 'idAlbum' => $this->albumInfos->getIdAlbum(), 'format'=> 'big'), 'planche'), 'Extrait de l\'album '.$this->albumInfos->getCollection().($this->albumInfos->getTome() ? ' Tome #'.$this->albumInfos->getTome() : '').' '.$this->albumInfos->getTitre(), 'behind', 'itemprop="image"');?>
+                </a>
                 <?php if($this->albumIsCoupDeCoeur): ?>
 		<img src="<?php echo BASE_URL ?>img/coup-de-coeur.png" alt="Bande-dessinée coup de coeur, meilleur bande-dessinée, <?php echo $this->albumInfos->getCollection(); ?>" class="bandeau_haut">
                 <?php endif; ?>

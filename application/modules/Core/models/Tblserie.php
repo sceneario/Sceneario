@@ -101,7 +101,7 @@ class Core_Model_Tblserie
 	{
 		$words = explode(' ', $this->_nomSerie);
 		$last = array_pop($words);
-		if ($last[0] == '(' && $last[strlen($last) - 1] == ')') {
+		if (isset($last[0]) && $last[0] == '(' && $last[strlen($last) - 1] == ')') {
 			array_unshift($words, substr($last, 1, strlen($last) - 2));
 		} else {
 			array_push($words, $last);

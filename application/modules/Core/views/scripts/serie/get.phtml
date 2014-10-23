@@ -8,7 +8,7 @@
                     <a rel="lightbox[album]" href="<?php echo $couvUrl ?>" class="zoom">
                         <?php echo $this->displayImage(
                             $this->customUrl(array('isbn'=> $album->getIsbn(), 'format'=> 'big') , 'couverture'),
-                            'bande-dessinée, '.$album->getCollection().($album->getTome() ? ' #'.$album->getTome().', ' : '').', '.$album->getTitre(),
+                            'Couverture BD '.$album->getCollection().' '.$album->getTitre(),
                             $k % 2 == 0 ? 'front' : 'behind', 'itemprop="image"'); ?>
                     </a>
                 <?php endif; ?>
@@ -190,7 +190,8 @@
                     <?php foreach($this->serie->albums as $album) : ?>
                         <li>
                             <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
-                                <?php echo $this->displayImage($this->customUrl(array('isbn'=> $album->getIsbn(), 'format'=> 'alsolike'), 'couverture'), 'couverture bande-dessinée '.$this->serie->getNomSerie().' '.$album->getTitre()); ?>
+                                <?php echo $this->displayImage($this->customUrl(array('isbn'=> $album->getIsbn(), 'format'=> 'alsolike'), 'couverture'), 'Couverture de l\'album '.$this->serie->getNomSerie().' '.
+                                    ($album->getTome() ? ' Tome #'.$album->getTome() : '').' '.$album->getTitre()); ?>
                             </a>
                             <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
                                 <h2><?php echo $album->getTitre(); ?></h2>

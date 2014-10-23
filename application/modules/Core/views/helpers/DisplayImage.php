@@ -12,7 +12,7 @@ class Zend_View_Helper_DisplayImage
         $imgUri                             = $this->checkImage($imgUri) ;
         #list($width, $height, $type, $attr)= getimagesize($imgUri);
 
-        $text = str_replace(array('"',"'","`"), '', str_replace(array('<br>', '<br/>'), ' ', $text));
+        $text = trim(str_replace(array('"', "`"), '', str_replace(array('<br>', '<br/>'), ' ', $text)));
         #var_dump(is_resource($imgUri));
         
         if( $imgUri != false ){
