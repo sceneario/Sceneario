@@ -208,7 +208,7 @@ class Core_Model_Tblalbum
 		$words = explode(' ', $this->_titre);
 		$last = array_pop($words);
 		if (isset($last[0]) && $last[0] == '(' && $last[strlen($last) - 1] == ')') {
-			array_unshift($words, substr($last, 1, strlen($word) - 1));
+			array_unshift($words, substr($last, 1, strlen($last) - 2));
 		} else {
 			array_push($words, $last);
 		}
@@ -230,7 +230,7 @@ class Core_Model_Tblalbum
 		$words = explode(' ', $this->_collection);
 		$last = array_pop($words);
 		if (isset($last[0]) && $last[0] == '(' && $last[strlen($last) - 1] == ')') {
-			array_unshift($words, substr($last, 1, strlen($word) - 1));
+			array_unshift($words, substr($last, 1, strlen($last) - 2));
 		} else {
 			array_push($words, $last);
 		}
