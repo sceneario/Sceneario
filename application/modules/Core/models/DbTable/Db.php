@@ -22,7 +22,7 @@ abstract class Core_Model_DbTable_Db extends Zend_Db_Table_Abstract
                                     ->getDb("dbcore");
     }
     
-    public static function getSqlResults($sql, $params)
+    public static function getSqlResults($sql, $params = array())
     {
          $db   = self::getDb();
          $stmt = $db->query($sql, $params);
