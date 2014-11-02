@@ -3,21 +3,22 @@
         <div class="cover">
             <?php foreach($this->serie->albums as $k => $album) : ?>
                 <?php if ($k < 2) : ?>
-                    <?php $couvUrl = $this->customUrl(array('isbn' => $album->getIsbn(), 'format' => 'large'), 'couverture'); ?>
-                    <?php if ($k == 0) $couvUrlZoom = $couvUrl; ?>
-                    <a rel="lightbox[album]" href="<?php echo $couvUrl ?>" class="zoom">
-                        <?php echo $this->displayImage(
-                            $this->customUrl(array('isbn'=> $album->getIsbn(), 'format'=> 'big') , 'couverture'),
-                            'Couverture BD '.$album->getCollection().' '.$album->getTitre(),
-                            $k % 2 == 0 ? 'front' : 'behind', 'itemprop="image"'); ?>
+                    <a rel="lightbox[album]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($album); ?>" class="zoom">
+                        <?php if ($k % 2 == 0) : ?>
+                            <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'big', 'front', '', 'itemprop="image"'); ?>
+                        <?php else : ?>
+                            <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'big', 'behind', '', 'itemprop="image"'); ?>
+                        <?php endif; ?>
                     </a>
                 <?php endif; ?>
             <?php endforeach; ?>
         </div>
 
-        <?php if (isset($couvUrlZoom)) : ?>
+        <?php if (isset($this->serie->albums[0])) : ?>
         <footer>
-            <a rel="lightbox[albumfooter]" href="<?php echo $couvUrlZoom ?>" class="zoom">voir en grand</a>
+            <a rel="lightbox[albumfooter]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($this->serie->albums[0]); ?>" class="zoom">
+                voir en grand
+            </a>
         </footer>
         <?php endif; ?>
 
@@ -189,15 +190,14 @@
                 <ul>
                     <?php foreach($this->serie->albums as $album) : ?>
                         <li>
-                            <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
-                                <?php echo $this->displayImage($this->customUrl(array('isbn'=> $album->getIsbn(), 'format'=> 'alsolike'), 'couverture'), 'Couverture de l\'album '.$this->serie->getNomSerie().' '.
-                                    ($album->getTome() ? ' Tome #'.$album->getTome() : '').' '.$album->getTitre()); ?>
+                            <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
+                                <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike'); ?>
                             </a>
-                            <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
+                            <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
                                 <h2><?php echo $album->getTitre(); ?></h2>
                             </a>
                             <?php if ($album->getTome()) : ?>
-                            <a href="<?php echo $this->customUrl(array('idAlbum' => $album->getIdAlbum(), 'titleAlbum' => $album->getTitre(), 'titleSerie' => $this->serie->getNomSerie()), 'album') ?>">
+                            <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
                                 <span>Tome # <?php echo $album->getTome(); ?></span>
                             </a>
                             <?php endif; ?>

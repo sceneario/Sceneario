@@ -191,19 +191,19 @@ class SitemapController extends GlobalController
                         if ($category['mapper'] == 'Core_Model_Mapper_Tblalbum') {
                             $title = 'BD '.$row->collection.($row->titre != $row->collection ? ' - '.$row->titre : '');
                             $item .= '    <image:image>'."\n";
-                            $item .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'format'=> 'big'), 'couverture').'</image:loc>'."\n";
+                            $item .= '      <image:loc>'.$url.$this->view->getHelper('customUrl')->getAlbumCoverUrl($row, 'big').'</image:loc>'."\n";
                             $item .= '      <image:title><![CDATA[Couverture '.$title.']]></image:title>'."\n";
                             $item .= '    </image:image>'."\n";
                             $item .= '    <image:image>'."\n";
-                            $item .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'idAlbum' => $row->idAlbum, 'format'=> 'big'), 'planche').'</image:loc>'."\n";
+                            $item .= '      <image:loc>'.$this->view->getHelper('customUrl')->getAlbumPageUrl($row, 'big').'</image:loc>'."\n";
                             $item .= '      <image:title><![CDATA[Extrait '.$title.']]></image:title>'."\n";
                             $item .= '    </image:image>'."\n";
                             $item .= '    <image:image>'."\n";
-                            $item .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'format'=> 'large'), 'couverture').'</image:loc>'."\n";
+                            $item .= '      <image:loc>'.$url.$this->view->getHelper('customUrl')->getAlbumCoverUrl($row).'</image:loc>'."\n";
                             $item .= '      <image:title><![CDATA[Couverture '.$title.']]></image:title>'."\n";
                             $item .= '    </image:image>'."\n";
                             $item .= '    <image:image>'."\n";
-                            $item .= '      <image:loc>'.$url.$this->view->customUrl(array('isbn'=> $row->isbn, 'idAlbum' => $row->idAlbum, 'format'=> 'large'), 'planche').'</image:loc>'."\n";
+                            $item .= '      <image:loc>'.$this->view->getHelper('customUrl')->getAlbumPageUrl($row).'</image:loc>'."\n";
                             $item .= '      <image:title><![CDATA[Extrait '.$title.']]></image:title>'."\n";
                             $item .= '    </image:image>'."\n";
                         }

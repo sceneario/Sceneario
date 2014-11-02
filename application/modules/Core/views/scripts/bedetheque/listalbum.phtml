@@ -53,56 +53,38 @@
             résultats par page</p>
        
 	</header>
-	<?php if (count($this->paginator)): ?>
-	
-        
-
-<?php foreach ($this->paginator as $key => $hit): ?>
-  <?php
-    $coverUri = $this->customUrl(array('isbn'   => $hit->isbn ,'format' => 'small'), 'couverture') ;
-            ?>
-           
+<?php if (count($this->paginator)): ?>
+    <?php foreach ($this->paginator as $key => $hit): ?>
         <div class="item clearfix" id="id-<?php echo $hit->idAlbum ?>">
-            
             <?php if(Zend_Registry::isRegistered('currentUserID') && $this->bedetheque && !isset($_GET['user'])): ?>
-            <div style="position:absolute;z-index:1000;right:10px;top:0px;"><a style="display:block;padding:10px;" href="javascript:void(0);" onclick="javascript:deleteAlbumFromBdtech(<?php echo $hit->idAlbum ?>);">×</a></div>
+                <div style="position:absolute;z-index:1000;right:10px;top:0px;"><a style="display:block;padding:10px;" href="javascript:void(0);" onclick="javascript:deleteAlbumFromBdtech(<?php echo $hit->idAlbum ?>);">×</a></div>
             <?php endif;?>
-            
             <?php if($hit->idAlbum != '_ALBUM_A_PARAITRE_'): ?>
-            <a href="<?php echo $this->customUrl( array('titleSerie' => $hit->titreSerie , 
-                                                        'titleAlbum' => $hit->titreAlbum, 
-                                                        'idAlbum'    => $hit->idAlbum ) , 
-                                                        'album'); ?>" class="item-link clearfix">
-	
-            <?php echo $this->displayImage($coverUri, 'bande-dessinée, '.$hit->titreAlbum .', '. $hit->titreSerie, 'cover'  ) ?>
+                <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($hit); ?>" class="item-link clearfix">
+                <?php echo $this->getHelper('displayImage')->displayAlbumCover($hit, 'small', 'cover'); ?>
             <?php endif ;?>
-             
-                <div class="search-content">
-                   
-                    <hgroup>
-                        <h2 class="titreSerie"><?php echo $hit->titreSerie ?></h2>
-                        <h2><?php echo $hit->titreAlbum ?></h2>
-                    </hgroup>
+            <div class="search-content">
+                <hgroup>
+                    <h2 class="titreSerie"><?php echo $hit->titreSerie ?></h2>
+                    <h2><?php echo $hit->titreAlbum ?></h2>
+                </hgroup>
 
-                    <p>
-                    <?php  echo $hit->auteurs ?>
+                <p>
+                <?php  echo $hit->auteurs ?>
 
-                    <?php if($hit->editeur != ''):?>
-                        <br />Editions <?php echo $hit->editeur  ?>
-                    <?php endif ?>
-                    </p>
-                    <?php 
-
-                    if($hit->genres != ''): ?>
-                        <p><?php echo $hit->genres ?></p>
-                    <?php endif; ?>
-                </div>
-            </a>
-	</div>
-        
-  
-<?php endforeach; ?>
-
+                <?php if($hit->editeur != ''):?>
+                    <br />Editions <?php echo $hit->editeur  ?>
+                <?php endif ?>
+                </p>
+                <?php if($hit->genres != ''): ?>
+                    <p><?php echo $hit->genres ?></p>
+                <?php endif; ?>
+            </div>
+            <?php if($hit->idAlbum != '_ALBUM_A_PARAITRE_'): ?>
+                </a>
+            <?php endif ;?>
+        </div>
+    <?php endforeach; ?>
 <?php endif; ?>
        
 <div class="separateur"></div>

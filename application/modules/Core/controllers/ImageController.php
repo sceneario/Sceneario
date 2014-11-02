@@ -283,6 +283,10 @@ class ImageController extends Zend_Controller_Action
         // Affichage
         ob_start();
         header('Content-Type: image/jpeg');
+        header("Expires: ".gmdate("D, d M Y H:i:s", time() + 3600*48)." GMT");
+        header("Cache-Control: max-age=".(3600*48).", proxy-revalidate");
+        header("Pragma: public");
+
         $thumb  = imagecreatetruecolor($newwidth, $newheight);
         $source = imagecreatefromjpeg($filename);
 

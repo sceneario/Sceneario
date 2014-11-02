@@ -480,7 +480,9 @@ class BedethequeController extends GlobalController
                 $result->isbn         = $hit->isbn;
                 $result->genres       = $hit->genres;
                 $result->titreSerie   = $hit->titreSerie;
+                $result->collection   = $hit->titreSerie;
                 $result->titreAlbum   = $hit->titreAlbum;
+                $result->titre        = $hit->titreAlbum;
                 $result->auteurs      = $this->formatAuteurs($hit, 3);
                 $result->editeur      = $hit->editeur;
                 if($typeRequested == 'moncompte'){
