@@ -137,13 +137,18 @@ jQuery(function($)
       
         function homeTabsOptions ( u, b )
         {
-            $('.albums-slider').load(u, function(){
-                 setScrollBar(1000);
-                 //alert('Load was performed.');
+            $('.albums-slider').load(u, function(data) {
+                var imgs      = $(data).find('img');
+                var imgLoaded = 0;
+                imgs.load(function() {
+                    imgLoaded++;
+                    if (imgLoaded >= imgs.length * (1 - 10 / 100)) {
+                        setScrollBar();
+                        $('.onglet-home-bd').removeClass('selected');
+                        $(b).addClass('selected');
+                    }
+                });
             });
-            $('.onglet-home-bd').removeClass('selected');
-            $(b).addClass('selected');
-           
         }
         
         
@@ -219,20 +224,20 @@ jQuery(function($)
 		}
 		return rv;
 	}
-        
-	setScrollBar(4000);
-        
-        function setScrollBar( delay ){
-            if (getInternetExplorerVersion() > 8.0 || getInternetExplorerVersion() == -1) {
-		var time = setTimeout(function() {
-		$('.albums-slider').mCustomScrollbar({
-			mouseWheel:false,
-			horizontalScroll:true,
-			set_width:940
-		});
-		}, delay );
-	}
+
+    $(window).load(function() {
+        setScrollBar();
+	});
+
+    function setScrollBar(){
+        if (getInternetExplorerVersion() > 8.0 || getInternetExplorerVersion() == -1) {
+            $('.albums-slider').mCustomScrollbar({
+                mouseWheel:false,
+                horizontalScroll:true,
+                set_width:940
+            });
         }
+    }
 	
 	
 	$("img.behind").rotate(-10);
