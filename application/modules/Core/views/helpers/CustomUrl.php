@@ -71,29 +71,33 @@ class Zend_View_Helper_CustomUrl extends Zend_View_Helper_Url
         $filterChain->addFilter(new Zend_Filter_StripTags()) //supprime les tags
                     ->addFilter(new Zend_Filter_StripNewlines()) //supprimer les caractere de retour a la ligne
                     ->addFilter(new Zend_Filter_AlnumWithSpaces(true))// supprime tout les caractères non-alphabetique et non-num
-                    ->addFilter(new Zend_Filter_StringTrim()) //supprime les espace au début et a la fin
-                    ;
+                    ->addFilter(new Zend_Filter_StringTrim()); //supprime les espace au début et a la fin
 
-        $search  = array(' - ');
-        $replace = array(' ');
+        foreach ($urlOptions as &$urlOption){
+            if (in_array($name, array('couverture', 'planche', 'album', 'serie'))) {
+                $accents = array('À','Á','Â','Ã','Ä','Å','Ç','È','É','Ê','Ë','Ì','Í','Î','Ï','Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü','Ý','à','á','â','ã','ä','å','ç','è','é','ê','ë','ì','í','î','ï','ð','ò','ó','ô','õ','ö','ù','ú','û','ü','ý','ÿ');
+                $sans = array('A','A','A','A','A','A','C','E','E','E','E','I','I','I','I','O','O','O','O','O', 'U','U','U','U','Y','a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','o','o','o','o','o','u','u','u','u','y','y');
+                $urlOption = str_replace($accents, $sans, $urlOption);
 
-        $options = array();
-        foreach ($urlOptions as $key => $urlOption){
-            #$option        = strtolower($urlOption);
-            $option        = str_replace( $search , $replace , $urlOption);
-            $options[$key] = preg_replace('!\s+!', ' ', $filterChain->filter($option));
-        }
-
-        if ($name == 'couverture' || $name == 'planche') {
-            if (!isset($options['seo'])) {
-                $options['s']   = '';
-                $options['seo'] = '';
+                $urlOption = strtolower($urlOption);
+                $urlOption = str_replace('/', ' ', $urlOption);
+                $urlOption = preg_replace('!\s+!', '-', $filterChain->filter($urlOption));
             } else {
-                $options['s']   = $options['seo'] ? '-' : '';
-                $options['seo'] = $options['seo'] ?: '';
+                $urlOption = str_replace(' - ', ' ', $urlOption);
+                $urlOption = preg_replace('!\s+!', ' ', $filterChain->filter($urlOption));
             }
         }
 
-        return $this->url($options, $name, $reset, $encode);
+        if ($name == 'couverture' || $name == 'planche') {
+            if (!isset($urlOptions['seo'])) {
+                $urlOptions['s']   = '';
+                $urlOptions['seo'] = '';
+            } else {
+                $urlOptions['s']   = $urlOptions['seo'] ? '-' : '';
+                $urlOptions['seo'] = $urlOptions['seo'] ?: '';
+            }
+        }
+
+        return $this->url($urlOptions, $name, $reset, $encode);
     }
 }

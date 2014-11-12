@@ -11,15 +11,19 @@ class SerieController extends GlobalController {
         $this->_slug  = $this->getParam('slug');
         $this->_id    = $this->getParam('id');
 
-        $serie = new Core_Model_Mapper_Tblserie;
-        $series = $serie->find($this->_id, new Core_Model_Tblserie);
+        if (!empty($this->_id)) {
+            $serie = new Core_Model_Mapper_Tblserie;
+            $series = $serie->find($this->_id, new Core_Model_Tblserie);
 
-        if ($series == null) {
-            $this->_redirect($this->view->url(array(),'bedetheque'));
-            exit('Redirection en cours');
+            if (!empty($series)) {
+                $good_url = $this->view->getHelper('customUrl')->getSerieUrl($series);
+                if ($this->getRequest()->getRequestUri() != $good_url) {
+                    $this->redirect301($good_url);
+                }
+                return $series;
+            }
         }
-
-        return $series;
+        throw new Zend_Controller_Action_Exception('Cette série n\'existe pas', 404);
     }
 
     public function init() {

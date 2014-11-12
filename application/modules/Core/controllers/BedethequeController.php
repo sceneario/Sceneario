@@ -159,7 +159,7 @@ class BedethequeController extends GlobalController
          *      AND t1.idAlbum = t3.idAlbum
          * ORDER BY t1.date desc
          */
-        return $this->_mapperAlbum->getNewAlbums(); 
+        return $this->_mapperAlbum->assoc($this->_mapperAlbum->getNewAlbums());
     }
     
     private function getCoupsdecoeurAlbums()
@@ -174,17 +174,17 @@ class BedethequeController extends GlobalController
          * WHERE t1.idAlbum = tbl_Coup_de_coeur.idAlbum AND tbl_Coup_de_coeur.idInternaute = t3.idInternaute 
          * ORDER BY t3.pseudo, collection, t1.tome";
          */
-        return $this->_mapperAlbum->getCoupsdecoeurAlbums(); 
+        return $this->_mapperAlbum->assoc($this->_mapperAlbum->getCoupsdecoeurAlbums());
     }
     
     private function getRecentAlbums()
     {
-        return $this->_mapperAlbum->getRecentAlbums(); 
+        return $this->_mapperAlbum->assoc($this->_mapperAlbum->getRecentAlbums());
     }
     
     private function getMostViewedAlbums()
     {
-        return $this->_mapperAlbum->getMostViewedAlbums(); 
+        return $this->_mapperAlbum->assoc($this->_mapperAlbum->getMostViewedAlbums());
     }  
     
     /*

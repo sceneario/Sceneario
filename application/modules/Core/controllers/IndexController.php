@@ -45,7 +45,7 @@ class IndexController extends GlobalController
         /*
          * Derniers albums
          */ 
-        $this->view->newAlbums = $this->_mapperAlbums->getNewAlbums();
+        $this->view->newAlbums = $this->_mapperAlbums->assoc($this->_mapperAlbums->getNewAlbums());
         
         //$currentUserSession = new Zend_Session_Namespace ('currentUserSession');
         
@@ -60,11 +60,12 @@ class IndexController extends GlobalController
         /*
          * Derniers albums
          */
-        
-        echo $this->view->partial('partials/listingAlbum.phtml',  
-                                   array('albums' => $this->_mapperAlbums->getNewAlbums() ) )  ;
+        echo $this->view->partial(
+            'partials/listingAlbum.phtml',
+            array('albums' => $this->_mapperAlbums->assoc($this->_mapperAlbums->getNewAlbums()))
+        );
     }
-    
+
     /*
      * 
      */
@@ -73,10 +74,12 @@ class IndexController extends GlobalController
         /*
          * Coup de coeur
          */
-        echo $this->view->partial('partials/listingAlbum.phtml',  
-                                  array('albums' => $this->_mapperAlbums->getCoupsdecoeurAlbums() ) )  ;
+        echo $this->view->partial(
+            'partials/listingAlbum.phtml',
+            array('albums' => $this->_mapperAlbums->assoc($this->_mapperAlbums->getCoupsdecoeurAlbums()))
+        );
     }
-    
+
     /*
      * 
      */
@@ -85,8 +88,10 @@ class IndexController extends GlobalController
         /*
          * Derniers ajouts
          */
-        echo $this->view->partial('partials/listingAlbum.phtml',  
-                                   array('albums' => $this->_mapperAlbums->getRecentAlbums() ) )  ;
+        echo $this->view->partial(
+            'partials/listingAlbum.phtml',
+            array('albums' => $this->_mapperAlbums->assoc($this->_mapperAlbums->getRecentAlbums()))
+        );
     }
     
     /*
@@ -97,8 +102,10 @@ class IndexController extends GlobalController
         /*
          * Les plus vus
          */
-        echo $this->view->partial('partials/listingAlbum.phtml',  
-                                   array('albums' => $this->_mapperAlbums->getMostViewedAlbums() ) )  ;
+        echo $this->view->partial(
+            'partials/listingAlbum.phtml',
+            array('albums' => $this->_mapperAlbums->assoc($this->_mapperAlbums->getMostViewedAlbums()))
+        );
     }
     
     /*

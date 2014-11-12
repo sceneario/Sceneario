@@ -15,10 +15,12 @@ class Core_Plugin_Stats extends Zend_Controller_Plugin_Abstract
         * UPDATE DU NOMBRE DE VISTES ET VISITES SEMAINE
         * DE L'ALBUM
         */
-       if($request->getControllerName() == 'album'){
-           $idAlbum = $request->getParam('idAlbum');
-           $albumMapper = new Core_Model_Mapper_Tblalbum ;
-           $albumMapper->updateVisitAlbum($idAlbum);
-       }
+        if($request->getControllerName() == 'album'){
+            $idAlbum = (int)$request->getParam('idAlbum');
+            if (!empty($idAlbum)) {
+                $albumMapper = new Core_Model_Mapper_Tblalbum ;
+                $albumMapper->updateVisitAlbum($idAlbum);
+            }
+        }
     }
 }

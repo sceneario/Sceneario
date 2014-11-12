@@ -6,9 +6,9 @@ class GlobalController extends Zend_Controller_Action
     public function init()
     {
         $this->view->headOpenTag = '<head>';
-        
+
         $this->view->headTitle('Sceneario.com', 'SET');
-        
+
         $description = 'Site consacr&eacute; &agrave; la BD : critiques, r&eacute;sum&eacute;s, nouveaut&eacute;s, interviews, concours...';
 
         $this->view->headMeta('width=device-width', 'viewport');
@@ -43,4 +43,9 @@ class GlobalController extends Zend_Controller_Action
 
     }
 
+    public function redirect301($url) {
+        $this->_redirector = $this->_helper->getHelper('Redirector');
+        $this->_redirector->setCode(301);
+        $this->_redirect($url);
+    }
 }

@@ -82,88 +82,70 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
         }
     } */
 
-    public function find($id, Core_Model_Tblalbum $tbl_Album)
-    {
+    public function find($id, Core_Model_Tblalbum $tbl_Album) {
         $result = $this->getDbTable()->find($id);
-       
+
         if (0 == count($result)) {
             return;
         }
-        $row = $result->current(); 
-	$tbl_Album->setIdAlbum(self::unescape($row->idAlbum));
-	$tbl_Album->setTitre(self::unescape($row->titre));
-	$tbl_Album->setCollection(self::unescape($row->collection));
-	$tbl_Album->setSousTitre(self::unescape($row->sousTitre));
-	$tbl_Album->setTome(self::unescape($row->tome));
-	$tbl_Album->setCouverture(self::unescape($row->couverture));
-	$tbl_Album->setDroits(self::unescape($row->droits));
-	$tbl_Album->setEnligne(self::unescape($row->enligne));
-	$tbl_Album->setNouveaute(self::unescape($row->nouveaute));
-	$tbl_Album->setFKidEditeur(self::unescape($row->FKidEditeur));
-	$tbl_Album->setDatecreation(self::unescape($row->datecreation));
-	$tbl_Album->setIdCollection(self::unescape($row->idCollection));
-	$tbl_Album->setLienBDNet(self::unescape($row->lienBDNet));
-	$tbl_Album->setLienAmazon(self::unescape($row->lienAmazon));
-	$tbl_Album->setIdCouv(self::unescape($row->idCouv));
-	$tbl_Album->setIsbn(self::unescape($row->isbn));
-	$tbl_Album->setExtrait(self::unescape($row->extrait));
-	$tbl_Album->setIdSerie(self::unescape($row->idSerie));
-	$tbl_Album->setDate(self::unescape($row->date));
-	$tbl_Album->setIdUnivers(self::unescape($row->idUnivers));
-	$tbl_Album->setPresse(self::unescape($row->presse));
-	$tbl_Album->setTopic_id(self::unescape($row->topic_id));
-	$tbl_Album->setNbpages(self::unescape($row->nbpages));
-	$tbl_Album->setVisites(self::unescape($row->visites));
-	$tbl_Album->setVisitesSemaine(self::unescape($row->visitesSemaine));
-	$tbl_Album->setRecommande(self::unescape($row->recommande));
-	$tbl_Album->setBandeAnnonce(self::unescape($row->bandeAnnonce));
-	return $tbl_Album;
+
+        $row  = $result->current();
+        $rows = $this->assoc($row);
+
+        return $rows[0];
     }
 
-    public function fetchAll($limit = null, $where = null, $order = null)
-    {	
-    
+    public function assoc($data) {
+        $items = array();
+        $rows  = !is_array($data) ? array($data) : $data;
+
+        foreach ($rows as $row) {
+            $tbl_Album = new Core_Model_Tblalbum();
+            $tbl_Album->setIdAlbum(self::unescape($row->idAlbum));
+            $tbl_Album->setTitre(self::unescape($row->titre));
+            $tbl_Album->setCollection(self::unescape($row->collection));
+            $tbl_Album->setSousTitre(self::unescape($row->sousTitre));
+            $tbl_Album->setTome(self::unescape($row->tome));
+            $tbl_Album->setCouverture(self::unescape($row->couverture));
+            $tbl_Album->setDroits(self::unescape($row->droits));
+            $tbl_Album->setEnligne(self::unescape($row->enligne));
+            $tbl_Album->setNouveaute(self::unescape($row->nouveaute));
+            $tbl_Album->setFKidEditeur(self::unescape($row->FKidEditeur));
+            $tbl_Album->setDatecreation(self::unescape($row->datecreation));
+            $tbl_Album->setIdCollection(self::unescape($row->idCollection));
+            $tbl_Album->setLienBDNet(self::unescape($row->lienBDNet));
+            $tbl_Album->setLienAmazon(self::unescape($row->lienAmazon));
+            $tbl_Album->setIdCouv(self::unescape($row->idCouv));
+            $tbl_Album->setIsbn(self::unescape($row->isbn));
+            $tbl_Album->setExtrait(self::unescape($row->extrait));
+            $tbl_Album->setIdSerie(self::unescape($row->idSerie));
+            $tbl_Album->setDate(self::unescape($row->date));
+            $tbl_Album->setIdUnivers(self::unescape($row->idUnivers));
+            $tbl_Album->setPresse(self::unescape($row->presse));
+            $tbl_Album->setTopic_id(self::unescape($row->topic_id));
+            $tbl_Album->setNbpages(self::unescape($row->nbpages));
+            $tbl_Album->setVisites(self::unescape($row->visites));
+            $tbl_Album->setVisitesSemaine(self::unescape($row->visitesSemaine));
+            $tbl_Album->setRecommande(self::unescape($row->recommande));
+            $tbl_Album->setBandeAnnonce(self::unescape($row->bandeAnnonce));
+            $items[] = $tbl_Album;
+        }
+        return $items;
+    }
+
+    public function fetchAll($limit = null, $where = null, $order = null) {
+
         $table     = $this->getDbTable();
-       
-        $resultSet = $table->fetchAll($table->select()
-           			            ->where($where["clause"], $where["params"])
-           				    ->order($order) //"idAlbum DESC"
-           				    ->limit($limit,0)
-                   		     );
-        
-        #exit;
-        
-        $entries   = array();
+        $resultSet = $table->fetchAll($table
+            ->select()
+            ->where($where["clause"], $where["params"])
+		    ->order($order)
+		    ->limit($limit,0)
+        );
+
+        $entries = array();
         foreach ($resultSet as $row) {
-            $entry = new Core_Model_Tblalbum(); 
-	    $entry->setIdAlbum(self::unescape($row->idAlbum));
-	    $entry->setTitre(self::unescape($row->titre));
-	    $entry->setCollection(self::unescape($row->collection));
-	    $entry->setSousTitre(self::unescape($row->sousTitre));
-	    $entry->setTome(self::unescape($row->tome));
-	    $entry->setCouverture(self::unescape($row->couverture));
-	    $entry->setDroits(self::unescape($row->droits));
-	    $entry->setEnligne(self::unescape($row->enligne));
-	    $entry->setNouveaute(self::unescape($row->nouveaute));
-	    $entry->setFKidEditeur(self::unescape($row->FKidEditeur));
-	    $entry->setDatecreation(self::unescape($row->datecreation));
-	    $entry->setIdCollection(self::unescape($row->idCollection));
-	    $entry->setLienBDNet(self::unescape($row->lienBDNet));
-	    $entry->setLienAmazon(self::unescape($row->lienAmazon));
-	    $entry->setIdCouv(self::unescape($row->idCouv));
-	    $entry->setIsbn(self::unescape($row->isbn));
-	    $entry->setExtrait(self::unescape($row->extrait));
-	    $entry->setIdSerie(self::unescape($row->idSerie));
-	    $entry->setDate(self::unescape($row->date));
-	    $entry->setIdUnivers(self::unescape($row->idUnivers));
-	    $entry->setPresse(self::unescape($row->presse));
-	    $entry->setTopic_id(self::unescape($row->topic_id));
-	    $entry->setNbpages(self::unescape($row->nbpages));
-	    $entry->setVisites(self::unescape($row->visites));
-	    $entry->setVisitesSemaine(self::unescape($row->visitesSemaine));
-	    $entry->setRecommande(self::unescape($row->recommande));
-	    $entry->setBandeAnnonce(self::unescape($row->bandeAnnonce));
-            $entries[] = $entry;
+            $entries[] = $this->assoc($row);
         }
         return $entries;
     }
@@ -338,8 +320,7 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
      */
     public function getCoupsdecoeurAlbums()
     {
-        $sql = "SELECT t3.pseudo, t1.idAlbum, t1.titre, t1.isbn, 
-                IF(nomSerie is null,t1.collection,nomSerie) as collection, t1.tome, t1.couverture, t1.datecreation 
+        $sql = "SELECT t3.pseudo, t1.*, IF(nomSerie is null,t1.collection,nomSerie) as collection
                 FROM (tbl_Album t1, tbl_Coup_de_coeur, tbl_Internaute t3) 
                 LEFT JOIN tbl_Serie t4 ON t1.idSerie = t4.idSerie 
                 WHERE t1.idAlbum = tbl_Coup_de_coeur.idAlbum AND tbl_Coup_de_coeur.idInternaute = t3.idInternaute 
