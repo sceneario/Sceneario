@@ -6,7 +6,7 @@
 /library/*
 
 # sitemap
-/public/sitemap.xml
+/public/sitemap*.xml
 
 # blog
 /public/blog/
