@@ -9,6 +9,7 @@ class AlbumController extends GlobalController
 {
     private $_mapperAlbum;
     private $_album;
+    private $_id;
 
     /*
      * Set le mapper une seule fois
@@ -22,7 +23,9 @@ class AlbumController extends GlobalController
      *
      */
     private function _get() {
-        if(!empty($this->getRequest()->getParam('idAlbum'))) {
+        $this->_id = $this->getRequest()->getParam('idAlbum');
+
+        if(!empty($this->_id)) {
             $this->_album = $this->_mapperAlbum->find((int)$this->getRequest()->getParam('idAlbum'), new Core_Model_Tblalbum);
 
             if (!empty($this->_album)) {
