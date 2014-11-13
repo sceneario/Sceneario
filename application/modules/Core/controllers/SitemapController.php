@@ -227,9 +227,10 @@ class SitemapController extends GlobalController
 
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-        $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'."\n";
+        $xml .= '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-        $start_sitemap = $xml;
+        $start_sitemap = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+        $start_sitemap .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'."\n";
         $end_sitemap   = '</urlset>'."\n";
 
         foreach (array_keys($sitemaps) as $sitemap) {
@@ -246,7 +247,7 @@ class SitemapController extends GlobalController
             file_put_contents('sitemap-'.$sitemap.'.xml', $s);
         }
 
-        $xml .= $end_sitemap;
+        $xml .= '</sitemapindex>';
 
         file_put_contents('sitemap.xml', $xml);
 
