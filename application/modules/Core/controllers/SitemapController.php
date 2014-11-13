@@ -236,7 +236,7 @@ class SitemapController extends GlobalController
         foreach (array_keys($sitemaps) as $sitemap) {
             $xml .= '  <sitemap>'."\n";
             $xml .= '    <loc>'.$url.'/sitemap-'.$sitemap.'.xml</loc>'."\n";
-            $xml .= '    <lastmod>'.date('Y-m-d H:i:m:s').'</lastmod>'."\n";
+            $xml .= '    <lastmod>'.date('Y-m-d').'</lastmod>'."\n";
             $xml .= '  </sitemap>'."\n";
 
             $s = $start_sitemap;
