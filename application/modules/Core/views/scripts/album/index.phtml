@@ -103,7 +103,7 @@
         <div class="album-title">
           <h1>
             <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
-              <span class="album-title_name" itemprop="name"><?php echo $this->albumInfos->getCollection() ?> #<?php echo $this->albumInfos->getTome() ?></span>
+              <span class="album-title_name" itemprop="name"><?php echo $this->albumInfos->getCollection() ?><?php echo $this->albumInfos->getTome() ? ' #'.$this->albumInfos->getTome() : ''; ?></span>
             <?php endif; ?>
             <span class="album-title_subname" itemprop="<?php echo (isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) ? 'alternateName' : 'name'; ?>"><?php echo $this->albumInfos->getTitre() ?></span>
           </h1>
