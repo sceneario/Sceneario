@@ -10,10 +10,10 @@ class Zend_View_Helper_DisplayImage extends Zend_View_Helper_CustomUrl
         $text = trim(str_replace(array('"', "`"), '', str_replace(array('<br>', '<br/>'), ' ', $text)));
         if ($ajax === true) {
             $loaderUri = BASE_URL.'img/loader.gif';
-            $picture = '<img class="lazy '.$class.'" src="'.$loaderUri.'" data-original="'.$imgUri.'" alt="'.$text.'" title="'.$text.' '.$attr.'" />';
+            $picture = '<img class="lazy '.$class.'" src="'.$loaderUri.'" data-original="'.$imgUri.'" alt="'.$text.'" title="'.$text.'" '.$attr.' />';
             $picture .= '<noscript><img src="'.$imgUri.'" alt="'.$text.'" title="'.$text.'" '.$attr.'></noscript>';
         } else {
-            $picture = '<img class="'.$class.'" src="'.$imgUri.'" alt="'.$text.'" title="'.$text.' '.$attr.'" />';
+            $picture = '<img class="'.$class.'" src="'.$imgUri.'" alt="'.$text.'" title="'.$text.'" '.$attr.' />';
         }
         return $picture;
     }
