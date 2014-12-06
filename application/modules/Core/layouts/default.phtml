@@ -4,18 +4,15 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <?php print isset($this->headOpenTag) && !empty($this->headOpenTag) ? $this->headOpenTag : '<head>'; ?>
-
         <meta charset="utf-8">
         <?php print ($this->headTitle() != '<title></title>') ? $this->headTitle() : '<title>Sceneario.com - Toute la bande dessinée sur Sceneario.com</title>'; ?>
-        
+
         <?php if ($this->headMeta() != '') : ?>
         <?php   print $this->headMeta(); ?>
         <?php else : ?>
         <?php   $description = "Site consacr&eacute; &agrave; la BD : critiques, r&eacute;sum&eacute;s, nouveaut&eacute;s, interviews, concours..."; ?>
         <?php   $keywords    = "BD, CRITIQUE, RESUME, INTERVIEW, NOUVEAUTE, SERIE, BDS, CRITIQUES, BANDES DESSINEES, BANDE DESSINEE, SERIES "; ?>
-
         <meta name="viewport" content="width=device-width">
-        <!-- V5 META -->
         <meta name="description" content="<?php echo isset($this->albumDescription) ? $this->albumDescription  :$description ?>">
         <meta name="keywords"  content="<?php echo isset($this->albumKeywordsRef) ? $this->albumKeywordsRef : $keywords ?>">
         <meta name="Copyright" content="Sceneario.com">
@@ -24,209 +21,93 @@
         <meta name="Revisit-after" content="7 days">
         <meta name="category" content="bandes dessinées">
         <meta name="robots" content="index, follow">
-        <!-- authentification google -->
         <meta name="verify-v1" content="N9yzsROn12aL6salWXxgqz9U9aeSzxhFu6F5tzj6CEs=" />
         <meta name="verify-v1" content="gaTlT4pYBU3oc5bHuB1iio1MQ0nKVDThl1XDZcaCbkI=" />
         <meta name="verify-v1" content="VF0vdLsuK++ubFin2MVOAykZjtpfZu3OmDF79DGWFHI=" />
         <meta name="google-site-verification" content="7M4o6nF28RlM0UiRZFplC7X0zWmr_rs_k3dLep5urGg" />
         <meta name="google-site-verification" content="hjRrgEsA5m2vA4R5ApfOTEB5UcejlbUAo56wumw7kNg" />
-        <!-- authentification yahoo! -->
         <meta name="y_key" content="cbf954200f12df6f" />
-        
-        <!-- FACEBOOK OPEN GRAPH -->   
-        <meta property="og:title" content="Sceneario.com"/> 
-        <meta property="og:type" content="website"/> 
-        <meta property="og:image" content="http://<?php echo $_SERVER['HTTP_HOST'] ?>/img/temp/v6-img6.jpg"/> 
-        <meta property="og:url" content="http://<?php echo $_SERVER['HTTP_HOST'] ?> "/> 
-        <meta property="og:site_name" content="Sceneario.com"/> 
+        <meta property="og:title" content="Sceneario.com"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:image" content="http://<?php echo $_SERVER['HTTP_HOST'] ?>/img/temp/v6-img6.jpg"/>
+        <meta property="og:url" content="http://<?php echo $_SERVER['HTTP_HOST'] ?>"/>
+        <meta property="og:site_name" content="Sceneario.com"/>
         <meta property="og:description" content="<?php echo $description ?>"/>
-        <!-- FACEBOOK OPEN GRAPH -->
-
         <?php endif; ?>
-        
         <link rel="canonical" href="<?php echo $this->currentUrl() ?>" />
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
-        <!-- utilisation minify
-             modifier le fichier public/min/groupsConfig.php pour ajouter/modifier un js
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/normalize.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/main.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/form.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/infobar.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/sceneario.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/album-serie.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/recherche.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/bedetheque.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/auteur.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/interview.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/blog.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/coupsdecoeur.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/concours.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/calendrier.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/galerie.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/scrollbar.css">
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>css/lightbox.css">
-         -->
         <link rel="stylesheet" href="<?php echo BASE_URL ?>min/?g=css">
         <!--[if lt IE 9]> <link rel="stylesheet" href="css/ie.css"> <![endif]-->
         <!--[if IE 7]> <link rel="stylesheet" href="css/ie7.css"> <![endif]-->
-    
-
-        <!-- utilisation minify
-             modifier le fichier public/min/groupsConfig.php pour ajouter/modifier un css
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="<?php echo BASE_URL ?>js/vendor/jquery-1.8.0.min.js"><\/script>')</script>
-        <script src="<?php echo BASE_URL ?>js/vendor/jquery-ui-1.8.23.min.js"></script>
-        <script src="<?php echo BASE_URL ?>js/vendor/jquery-rotate.js"></script>
-        <script src="<?php echo BASE_URL ?>js/vendor/modernizr-2.6.1.min.js"></script>
-        -->
-        <script src="<?php echo BASE_URL ?>min/?g=js-vendor"></script>
-
-        <!-- utilisation minify
-             modifier le fichier public/min/groupsConfig.php pour ajouter/modifier un css
-        <script src="<?php echo BASE_URL ?>js/jquery.lazyload.min.js"></script>
-        <script src="<?php echo BASE_URL ?>js/plugins.js"></script>
-        <script src="<?php echo BASE_URL ?>js/main.js"></script>
-        <script src="<?php echo BASE_URL ?>js/scrollbar.js"></script>
-        <script src="<?php echo BASE_URL ?>js/lightbox.js"></script>
-        <script src="<?php echo BASE_URL ?>js/bgpos.js"></script>
-        <script src="<?php echo BASE_URL ?>js/googledbc.js"></script>
-        -->
-        <script src="<?php echo BASE_URL ?>min/?g=js"></script>
-
+        <script src="http://<?php echo $_SERVER['HTTP_HOST'] ?>/js/googledbc.js"></script>
     </head>
     <body>
-    <?php 
-#   if ($this->isLtIE9()) {
-#       echo '<div id="infobar" class="infobar"><span class="info"></span>Sceneario vous propose de télécharger "Chrome Frame", afin d\'améliorer le rendu visuel de son site. (<a href="chromeframe/index.php">En savoir plus</a>)<a href="" title="Fermer" class="close">Fermer</a></div>';
-#   }
-    ?>
         <?php if($this->applyFilter == true):?>
-<style>
-    #adultFilter{
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background: #DDD;
-        z-index: 10000;
-        text-align: center;
-        vertical-align: vertical-align;
-        opacity:0.9;
-    }
-    #adultFilter div{
-        width:500px;
-        outline:0px solid red;
-        margin :  0 auto;
-        margin-top:180px;
-        background: #666;
-        padding: 20px;
-      
-        -moz-box-shadow: 0 0 5px #888;
-        -webkit-box-shadow: 0 0 5px#888;
-        box-shadow: 0 0 5px #888;
-      
-        color:white;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        border-radius: 10px;
-        border:2px solid white;
-    }
-    
-    #adultFilter div .heading-1{
-        line-height: 30px;
-        font-size: 25px;
-        font-weight: bold;
-        margin: 0.67em 0;
-    }
-    
-    #adultFilter div p.text {
-        width:300px;
-        margin :  0 auto;
-        text-align: justify;
-        padding-bottom: 20px;
-    }
-    .filterlink{
-        outline: 0px solid red;
-        float:left;
-        width: 50px;
-        font-weight: bolder;
-        font-size:20px;
-    }
-  
-    .filterlink:hover{
-        color:white;
-    }
-    .out{
-        float:right;
-    }
-</style>
-<div id="adultFilter">
-    <div>
-        <p class="heading-1">ATTENTION : CONTENU RESERVE <br />A UN PUBLIC AVERTI</p>
-        <p class="text">Les images et textes à caractère érotique, pornographique ou violent contenus dans cette page peuvent choquer certaines sensibilités. 
-        <br />En affichant cette page, vous déclarez prendre vos responsabilités vis-a-vis de ce contenu.</p>
-        <p class="text">
-           <a class="filterlink in" href="javascript:void(0);" onclick="document.getElementById('adultFilter').style.display = 'none'">Afficher</a>
-           <a class="filterlink out" href="<?php echo $this->referer ?>">Sortir</a>
-        </p>
-    </div>
-</div>
-<?php endif;?>
-        <!-- FACEBOOK SDK -->
+            <style>
+                #adultFilter { position: fixed; width: 100%; height: 100%; background: #DDD; z-index: 10000; text-align: center; vertical-align: vertical-align; opacity:0.9; }
+                #adultFilter div{ width:500px; outline:0px solid red; margin :  0 auto; margin-top:180px; background: #666; padding: 20px; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px#888; box-shadow: 0 0 5px #888; color:white; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border:2px solid white; }
+                #adultFilter div .heading-1{ line-height: 30px; font-size: 25px; font-weight: bold; margin: 0.67em 0; }
+                #adultFilter div p.text { width:300px; margin :  0 auto; text-align: justify; padding-bottom: 20px; }
+                .filterlink { outline: 0px solid red; float:left; width: 50px; font-weight: bolder; font-size:20px; }
+                .filterlink:hover { color:white; }
+                .out { float:right; }
+            </style>
+            <div id="adultFilter">
+                <div>
+                    <p class="heading-1">ATTENTION : CONTENU RESERVE <br />A UN PUBLIC AVERTI</p>
+                    <p class="text">Les images et textes à caractère érotique, pornographique ou violent contenus dans cette page peuvent choquer certaines sensibilités.
+                    <br />En affichant cette page, vous déclarez prendre vos responsabilités vis-a-vis de ce contenu.</p>
+                    <p class="text">
+                       <a class="filterlink in" href="javascript:void(0);" onclick="document.getElementById('adultFilter').style.display = 'none'">Afficher</a>
+                       <a class="filterlink out" href="<?php echo $this->referer ?>">Sortir</a>
+                    </p>
+                </div>
+            </div>
+        <?php endif;?>
         <div id="fb-root"></div>
-            <?php if(APPLICATION_ENV == 'testing' || APPLICATION_ENV == 'development'): ?>
+        <?php if(APPLICATION_ENV == 'testing' || APPLICATION_ENV == 'development'): ?>
             <script>
                 window.fbAsyncInit = function() {
                     FB.init({
-                      appId      : '277280558967434', // App ID
-                      channelUrl : '//dev.sceneario.com/tool/channel', // Channel File
-                      status     : true, // check login status
-                      cookie     : true, // enable cookies to allow the server to access the session
-                      oauth      : true, // enable OAuth 2.0
-                      xfbml      : true  // parse XFBML
+                      appId      : '277280558967434',
+                      channelUrl : '//dev.sceneario.com/tool/channel',
+                      status     : true,
+                      cookie     : true,
+                      oauth      : true,
+                      xfbml      : true
                     });
-
-                    // Additional initialization code here
-                  };
-                    
+                };
                 (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;js.async = true;
-          js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=277280558967434";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;js.async = true;
+                    js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=277280558967434";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
             </script>
-          <?php else: ?>
-     <script>
+        <?php else: ?>
+            <script>
                 window.fbAsyncInit = function() {
                     FB.init({
-                      appId      : '277280558967434', // App ID
-                      channelUrl : '//www.sceneario.com/tool/channel', // Channel File
-                      status     : true, // check login status
-                      cookie     : true, // enable cookies to allow the server to access the session
-                      oauth      : true, // enable OAuth 2.0
-                      xfbml      : true  // parse XFBML
+                      appId      : '277280558967434',
+                      channelUrl : '//www.sceneario.com/tool/channel',
+                      status     : true,
+                      cookie     : true,
+                      oauth      : true,
+                      xfbml      : true
                     });
-
-                    // Additional initialization code here
                   };
-                    
                 (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;js.async = true;
-          js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=277280558967434";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) return;
+                    js = d.createElement(s); js.id = id;js.async = true;
+                    js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=277280558967434";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
             </script>
-
-          
-          <?php endif; ?>
+        <?php endif; ?>
         <header>
-            <!-- Entete publicitaire -->
             <div id="pub">
-                    <div>
+                <div>
                     <?php $chartotrash = array('"','\'','(',')'); ?>
                     <?php if (count($this->motcles) > 0) : ?>
                     <?php   $pubgenre = array(); ?>
@@ -250,7 +131,6 @@
                     <?php     $pubauteurs[] = $coloriste->prenomAuteur.' '.$coloriste->nomAuteur; ?>
                     <?php   endforeach ?>
                     <?php endif; ?>
-                     <!-- BanniereHeader -->
                     <div id='div-gpt-ad-1390927229792-0'>
                     <script type='text/javascript'>
                     googletag.cmd.push(function() {
@@ -270,231 +150,133 @@
                     });
                     </script>
                     </div>
-                    </div>
-            </div><!-- pub -->
-            
+                </div>
+            </div>
             <div id="main-head">
-            
-                <!-- Entete logo -->
                 <div id="head-container">
                     <div id="head">
-                        <div id="logo"><a href="<?php echo BASE_URL ?>"><img src="<?php echo BASE_URL ?>img/logo_sceneario.png" 
-                                                                                             alt="Sceneario.com - Toute la BD sur internet"></a></div><!-- logo -->
+                        <div id="logo">
+                            <a href="<?php echo BASE_URL ?>">
+                                <img src="<?php echo BASE_URL ?>img/logo_sceneario.png" alt="Sceneario.com - Toute la BD sur internet">
+                            </a>
+                        </div>
                         <div class="search">
-                                        <form method='get' action="
-                                            <?php echo $this->customUrl( array() , 'recherche') ?>">
-                                            <input type="text" name="tag" value='<?php echo isset($this->requeteUser)?$this->requeteUser:'' ?>' placeholder="Rechercher">
-                                        </form>
-                                        </div><!-- search -->
-                    </div><!-- head -->
-                </div><!-- head-container -->
-                
-                <!-- Menu -->
+                            <form method='get' action="
+                                <?php echo $this->customUrl( array() , 'recherche') ?>">
+                                <input type="text" name="tag" value='<?php echo isset($this->requeteUser)?$this->requeteUser:'' ?>' placeholder="Rechercher">
+                            </form>
+                        </div>
+                    </div>
+                </div>
                 <div id="nav-container">
-                            <nav id="mainnav">
-                               <?php /*
-                                /* ABSENT DANS LA BETA*/  
-                              // if($_SERVER['REMOTE_ADDR'] == '88.177.236.205'){
-                                   echo $this->userAccountWidget('user_connect_shortcut') ;
-                            //  }
-                                
-                             
-                                ### MENU PRINCIPAL ###
-                                echo $this->navigation()->menu(Zend_Registry::get('Zend_Navigation'))->setUlClass('mainMenu');
-                                ### -------------- ###
-                                ?>
-                                <div class="clear"></div>
-                            </nav><!-- mainnav -->
-                </div><!-- nav-container -->
-            
-            </div><!-- main-head -->
-        
+                    <nav id="mainnav">
+                        <?php echo $this->userAccountWidget('user_connect_shortcut'); ?>
+                        <?php echo $this->navigation()->menu(Zend_Registry::get('Zend_Navigation'))->setUlClass('mainMenu'); ?>
+                        <div class="clear"></div>
+                    </nav>
+                </div>
+            </div>
         </header>
-        
         <div id="content-container">
-            
-            <?php 
- 
-            echo $this->partial('partials/habillagesPub.phtml', array('habillageHome' => $this->habillageHome) ) ?>
-            
+            <?php echo $this->partial('partials/habillagesPub.phtml', array('habillageHome' => $this->habillageHome) ) ?>
             <div id="content">
-                
-            
- <?php print $this->layout()->content ?>
- 
- 
-        <div class="clear"></div>
-    </div><!-- content -->
-</div><!-- content-container -->
-
-
-<footer id="mainfooter">
-    <div id="header">
-        <div class="social_links">
-            <div class="social_links-title"><img src="<?php echo BASE_URL ?>img/slinks_green_titre.png" alt="Suivez-nous !"></div>
+                <?php print $this->layout()->content ?>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <footer id="mainfooter">
+            <div id="header">
+                <div class="social_links">
+                    <div class="social_links-title"><img src="<?php echo BASE_URL ?>img/slinks_green_titre.png" alt="Suivez-nous !"></div>
                         <ul>
-                                <li><a target="_blank" href="http://www.facebook.com/Sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_fb.png" alt="Facebook Sceneario.com"></a></li>
-                                <li><a target="_blank" href="https://twitter.com/sceneario"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_twitter.png" alt="Twitter Sceneario.com"></a></li>
-                                <li><a target="_blank" href="http://www.sceneario.com/blog/feed/rss"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_rss.png" alt="RSS Sceneario.com"></a></li>
-                                <li><a href="<?php echo $this->url(array(), 'contact', true); ?>"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_email.png" alt="Contact Sceneario.com"></a></li>
+                            <li><a target="_blank" href="http://www.facebook.com/Sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_fb.png" alt="Facebook Sceneario.com"></a></li>
+                            <li><a target="_blank" href="https://twitter.com/sceneario"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_twitter.png" alt="Twitter Sceneario.com"></a></li>
+                            <li><a target="_blank" href="http://www.sceneario.com/blog/feed/rss"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_rss.png" alt="RSS Sceneario.com"></a></li>
+                            <li><a href="<?php echo $this->url(array(), 'contact', true); ?>"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_email.png" alt="Contact Sceneario.com"></a></li>
                         </ul>
-            <div class="clear"></div>
-        </div><!-- social_links -->
-        <div class="search">
-                    
-                    <form method='get' action="
-                                            <?php echo $this->customUrl( array() , 'recherche') ?>">
-                                            <input type="text" name="tag" value='<?php echo isset($this->requeteUser)?$this->requeteUser:'' ?>' placeholder="Rechercher">
-                                        </form>
-                    
-                </div><!-- search -->
-    </div>
-    
-    <div id="sitemap" class="clearfix">
-        <h3>Plan du site</h3>
-        <p>
-            <a href="http://www.sceneario.com">Sceneario.com</a> est un site généraliste traitant de Bande Dessinée, spécialisé dans la critique de BD, de Comics et de Mangas. Avec plus de 20 000 fiches BDs résumant et analysant les parutions internationales, 550 interviews, 450 préviews, 270 comptes rendus d’expositions / salons, 180 galeries de croquis, des concours, Sceneario.com est un site de référence et un incontournable du monde de la Bande Dessinée.
-        </p>
-
-        <ul class="mainMenu">
-          <li><h4><a href="/accueil.html">Sceneario</a></h4>
-            <ul>
-                <li><a href="/equipe">Équipe</a></li>
-                <li><a href="/newsletter">Newsletter</a></li>
-                <li><a href="/mentions-legales">Mentions légales</a></li>
-                <li><a href="http://regie.sceneario.com" target="_blank">Régie Pub</a></li>
-                <li><a target="_blank" href="http://www.facebook.com/Sceneario.com">Facebook</a></li>
-                <li><a target="_blank" href="https://twitter.com/sceneario">Twitter</a></li>
-                <li><a target="_blank" href="/blog/feed/rss">RSS</a></li>
-                <li><a href="<?php echo $this->url(array(), 'contact', true); ?>">Contact</a></li>
-            </ul>
-          </li>
-          <li><h4><a href="/blog">Actualités</a></h4>
-            <ul>
-              <li><a href="/blog">Blog</a></li>
-            </ul>
-          </li>
-          <li><h4><a href="/bande-dessinee.html">Bédéthèque</a></h4>
-            <ul>
-              <li><a href="/bande-dessinee/nouveautes.html">Nouveautés</a></li>
-              <li><a href="/bande-dessinee/prochaines-parutions.html">A paraitre</a></li>
-              <li><a href="/bande-dessinee/coupsdecoeur.html">Coup de coeur</a></li>
-              <li><a href="/bande-dessinee/recommandes.html">Recommandés</a></li>
-            </ul>
-          </li>
-          <li><h4><a href="/sceneario-passe-la-6eme.html">Toute la bd</a></h4>
-            <ul>
-              <li><a href="/interview">Interviews</a></li>
-              <li><a href="/expositions-salons">Expositions, salons</a></li>
-              <li><a href="/galerie">Galeries</a></li>
-              <li><a href="/preview">Previews</a></li>
-            </ul>
-          </li>
-          <li><h4><a href="/concours">Concours</a></h4>
-            <ul>
-              <li><a href="/concours">Tous les concours</a></li>
-              <?php $c = Core_Model_Mapper_Tblconcoursent::getCurrentConcours(); ?>
-              <?php if (!empty($c)) : ?>
-              <li><a href="<?php echo $this->customUrl( array( 'nomConcours' => $c[0]->getLibelleConcours(), 'idConcours'  => $c[0]->getNomConcours()) , 'concoursstep1'); ?>">À gagner en ce moment</a></li>
-              <?php endif; ?>
-            </ul>
-          </li>
-        </ul>
-        
-    </div><!-- sitemap -->
-    
-    <div id="footer">
-        <p><a href="http://www.sceneario.com">Sceneario.com</a> V6.0 © Association Sceneario.com loi 1901 - Tous droits réservés</p>
-        <a href="http://www.sceneario.com"><img src="/img/footer_logo.png" alt="critiques BD, comics, mangas"></a>
-    </div>
-</footer><!-- mainfooter -->
-        <?php
-        
-        if(isset($this->galerieSlideShow) && $this->galerieSlideShow): ?>
-         <script src="<?php echo BASE_URL ?>js/slideShow.js"></script>
-        <script type="text/javascript">
-            slider(980,500,".galerieWrapper .next",".galerieWrapper .prev",".sliderPagination a",".galerieSlider ul",null);
-        </script>
-            
-        <?php 
-        endif;
-        ?>
-        
-        <?php if(isset($this->indexSlideShow) && $this->indexSlideShow):  ?>
-        <!-- AJOUT MATHIEU 26/12 -->
-        <script src="<?php echo BASE_URL ?>js/slideShow.js"></script>
-        <script type="text/javascript">
-            slider(620,500,null,null,"#slider nav a","#slides-wrapper",4000);
-        </script>
+                    <div class="clear"></div>
+                </div>
+                <div class="search">
+                    <form method='get' action="<?php echo $this->customUrl( array() , 'recherche') ?>">
+                        <input type="text" name="tag" value='<?php echo isset($this->requeteUser)?$this->requeteUser:'' ?>' placeholder="Rechercher">
+                    </form>
+                </div>
+            </div>
+            <div id="sitemap" class="clearfix">
+                <h3>Plan du site</h3>
+                <p>
+                    <a href="http://www.sceneario.com">Sceneario.com</a> est un site généraliste traitant de Bande Dessinée, spécialisé dans la critique de BD, de Comics et de Mangas. Avec plus de 20 000 fiches BDs résumant et analysant les parutions internationales, 550 interviews, 450 préviews, 270 comptes rendus d’expositions / salons, 180 galeries de croquis, des concours, Sceneario.com est un site de référence et un incontournable du monde de la Bande Dessinée.
+                </p>
+                <ul class="mainMenu">
+                    <li><h4><a href="/accueil.html">Sceneario</a></h4>
+                        <ul>
+                            <li><a href="/equipe">Équipe</a></li>
+                            <li><a href="/newsletter">Newsletter</a></li>
+                            <li><a href="/mentions-legales">Mentions légales</a></li>
+                            <li><a href="http://regie.sceneario.com" target="_blank">Régie Pub</a></li>
+                            <li><a target="_blank" href="http://www.facebook.com/Sceneario.com">Facebook</a></li>
+                            <li><a target="_blank" href="https://twitter.com/sceneario">Twitter</a></li>
+                            <li><a target="_blank" href="/blog/feed/rss">RSS</a></li>
+                            <li><a href="<?php echo $this->url(array(), 'contact', true); ?>">Contact</a></li>
+                        </ul>
+                    </li>
+                    <li><h4><a href="/blog">Actualités</a></h4>
+                        <ul><li><a href="/blog">Blog</a></li></ul>
+                    </li>
+                    <li><h4><a href="/bande-dessinee.html">Bédéthèque</a></h4>
+                        <ul>
+                          <li><a href="/bande-dessinee/nouveautes.html">Nouveautés</a></li>
+                          <li><a href="/bande-dessinee/prochaines-parutions.html">A paraitre</a></li>
+                          <li><a href="/bande-dessinee/coupsdecoeur.html">Coup de coeur</a></li>
+                          <li><a href="/bande-dessinee/recommandes.html">Recommandés</a></li>
+                        </ul>
+                    </li>
+                    <li><h4><a href="/sceneario-passe-la-6eme.html">Toute la bd</a></h4>
+                        <ul>
+                          <li><a href="/interview">Interviews</a></li>
+                          <li><a href="/expositions-salons">Expositions, salons</a></li>
+                          <li><a href="/galerie">Galeries</a></li>
+                          <li><a href="/preview">Previews</a></li>
+                        </ul>
+                    </li>
+                    <li><h4><a href="/concours">Concours</a></h4>
+                        <ul>
+                            <li><a href="/concours">Tous les concours</a></li>
+                            <?php $c = Core_Model_Mapper_Tblconcoursent::getCurrentConcours(); ?>
+                            <?php if (!empty($c)) : ?>
+                            <li><a href="<?php echo $this->customUrl( array( 'nomConcours' => $c[0]->getLibelleConcours(), 'idConcours'  => $c[0]->getNomConcours()) , 'concoursstep1'); ?>">À gagner en ce moment</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="footer">
+                <p><a href="http://www.sceneario.com">Sceneario.com</a> V6.0 © Association Sceneario.com loi 1901 - Tous droits réservés</p>
+                <a href="http://www.sceneario.com"><img src="/img/footer_logo.png" alt="critiques BD, comics, mangas"></a>
+            </div>
+        </footer>
+        <script src="<?php echo BASE_URL ?>min/?g=js-vendor"></script>
+        <script src="<?php echo BASE_URL ?>min/?g=js"></script>
+        <?php if(isset($this->galerieSlideShow) && $this->galerieSlideShow): ?>
+            <script src="<?php echo BASE_URL ?>js/slideShow.js"></script>
+            <script type="text/javascript">
+                slider(980,500,".galerieWrapper .next",".galerieWrapper .prev",".sliderPagination a",".galerieSlider ul",null);
+            </script>
         <?php endif; ?>
-        
 
-<!--/* OpenX Interstitial or Floating DHTML Tag v2.8.11 */-->
- 
-<!--/*
-  * This tag has been generated for use on a non-SSL page. If this tag
-  * is to be placed on an SSL page, change the
-  *   'http://ads.culture-regie.com/www/delivery/...'
-  * to
-  *   'https://ads.culture-regie.com/www/delivery/...'
-  *
-  *------------------------------------------------------------*
-  * This interstitial invocation code requires the images from:
-  * /www/images/layerstyles/simple/...
-  * To be accessible via: http(s)://ads.culture-regie.com/www/images/layerstyles/simple/...
-  *------------------------------------------------------------*
-  */-->
- 
-
-<script type='text/javascript'><!--//<![CDATA[
-   var ox_u = 'http://ads.culture-regie.com/www/delivery/al.php?zoneid=136&layerstyle=simple&align=center&valign=middle&padding=2&closetime=7&padding=2&shifth=0&shiftv=50&closebutton=t&backcolor=ffffff&noborder=t';
-   if (document.context) ox_u += '&context=' + escape(document.context);
-   document.write("<scr"+"ipt type='text/javascript' src='" + ox_u + "'></scr"+"ipt>");
-//]]>--></script>
-
-        <?php   if(APPLICATION_ENV != 'development' || APPLICATION_ENV != 'testing'): ?>
-        
-        <script>
-            /*
-             * GOOGLE ANALYTICS
-             */
-            var _gaq=[['_setAccount','UA-964631-1'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-        
-        <script type="text/javascript">
-            /*
-             * USERVOICE
-             */
-            /*
-            var uvOptions = {};
-            (function() {
-              var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true;
-              uv.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'widget.uservoice.com/ecDPPSs1FQW4PD5IyI8k0Q.js';
-              var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s);
-            })();
-            */
-          </script>
-          <?php else:?>
-         
- <script>(function (d, s, id) { //document, script, amazing-jssdk
-    // recuperation de l'element <script> en position 0 
-    var js, fjs = d.getElementsByTagName(s)[0];
-    console.log(d.getElementsByTagName(s)[0]);
-    // si l'element <script> avec l'id "amazing-jssdk" existe, on stoppe l'execution du script'
-    if (d.getElementById(id)) return;
-    // sinon on créé l'element <script> avec l'id "amazing-jssdk"
-    js = d.createElement(s); js.id = id; js.async = true;
-    // on lui affecte la source
-    //js.src = "//madeforweb.dev/js/amazing/amazing.js#test=1&appId=_FAKE_277280558967434_FAKE_";
-    js.src = "//madeforweb.dev/js/amazing/facebookdeminifier.js#xfbml=1&appId=277280558967434"
-    //puis on replace le <script> dans le dom au dessus des autres
-    fjs.parentNode.insertBefore(js, fjs);
-    console.log(d.getElementsByTagName(s)[0]);
- }(document, 'script', 'amazing-jssdk'));
-</script>
-<?php endif; echo PHP_EOL ; ?>
+        <?php if(isset($this->indexSlideShow) && $this->indexSlideShow):  ?>
+            <script src="<?php echo BASE_URL ?>js/slideShow.js"></script>
+            <script type="text/javascript">
+                slider(620,500,null,null,"#slider nav a","#slides-wrapper",4000);
+            </script>
+        <?php endif; ?>
+        <?php if (APPLICATION_ENV != 'development' || APPLICATION_ENV != 'testing'): ?>
+            <script>
+                var _gaq=[['_setAccount','UA-964631-1'],['_trackPageview']];
+                (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+                g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+                s.parentNode.insertBefore(g,s)}(document,'script'));
+            </script>
+        <?php endif; echo PHP_EOL ; ?>
     </body>
 </html>

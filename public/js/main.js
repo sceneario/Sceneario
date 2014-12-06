@@ -399,6 +399,23 @@ jQuery(function($)
 	$("table ul li").mouseleave(function() {
 		$(this).find("span[class!=arrow]").hide();
 	});
+
+    $(document).ready(function() {
+        $('#bloc-newsletter form').submit(function(e) {
+            $('#bloc-newsletter .alert').hide();
+            $('#bloc-newsletter .alert').removeClass('success');
+            $('#bloc-newsletter .alert').removeClass('error');
+            $.post($(this).attr('action'), $(this).serialize(), function(ret) {
+                var data = jQuery.parseJSON(ret);
+                $('#bloc-newsletter .alert').addClass(data.status == true ? 'success' : 'error');
+                $('#bloc-newsletter .alert').html(data.message);
+                $('#bloc-newsletter .alert').show();
+            });
+            e.preventDefault();
+            return false;
+        });
+    });
+
 });
 
 // CENTRAGE DES VISUELS

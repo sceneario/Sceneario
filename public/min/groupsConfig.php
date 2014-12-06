@@ -44,5 +44,5 @@ return array(
 		  '//js/scrollbar.js',
 		  '//js/lightbox.js',
 		  '//js/bgpos.js',
-		  '//js/googledbc.js'),
+    ),
 );
