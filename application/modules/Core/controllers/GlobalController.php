@@ -41,11 +41,18 @@ class GlobalController extends Zend_Controller_Action
         $this->view->headMeta()->setProperty('og:site_name', 'Sceneario.com');
         $this->view->headMeta()->setProperty('og:description', $description);
 
+        $this->view->isMobile = $this->isMobile();
+
+        $this->view->block_js = array();
     }
 
     public function redirect301($url) {
         $this->_redirector = $this->_helper->getHelper('Redirector');
         $this->_redirector->setCode(301);
         $this->_redirect($url);
+    }
+
+    public function isMobile() {
+        return preg_match("/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i", $_SERVER["HTTP_USER_AGENT"]);
     }
 }

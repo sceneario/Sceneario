@@ -1,37 +1,27 @@
 <form action="<?php echo $this->form->getAction(); ?>" method="<?php echo $this->form->getMethod(); ?>" class="<?php echo $this->form->getAttrib('class'); ?>">
-    <div class="field-group">
-        <div class="form-item clearfix">
-            <div class="field-wrapper">
-                <?php echo $this->form->getElement('reason')->renderViewHelper(); ?>
-                <?php echo $this->form->getElement('reason')->renderErrors(); ?>
-            </div>
-        </div>
-        <div class="form-item clearfix">
-            <?php echo $this->form->getElement('name')->renderLabel(); ?>
-            <div class="field-wrapper">
-                <?php echo $this->form->getElement('name')->renderViewHelper(); ?>
-            <?php echo $this->form->getElement('name')->renderErrors(); ?>
-            </div>
-        </div>
-        <div class="form-item clearfix">
-            <?php echo $this->form->getElement('email')->renderLabel(); ?>
-            <div class="field-wrapper">
-                <?php echo $this->form->getElement('email')->renderViewHelper(); ?>
-               <?php echo $this->form->getElement('email')->renderErrors(); ?>
-            </div>
-        </div>
-        <div class="form-item clearfix">
-            <?php echo $this->form->getElement('message')->renderLabel(); ?>
-            <div class="field-wrapper">
-                <?php echo $this->form->getElement('message')->renderViewHelper(); ?>
-                <?php echo $this->form->getElement('message')->renderErrors(); ?>
-            </div>
-        </div>
-        <p class="right">* champs obligatoires</p>
-        <div class="form-item clearfix">
-            <div class="form-submit align-center">
-                <?php echo $this->form->getElement('submit')->renderViewHelper(); ?>
-            </div>
+    <div class="form-group">
+        <?php echo $this->form->getElement('reason')->renderViewHelper(); ?>
+        <?php echo $this->form->getElement('reason')->renderErrors(); ?>
+    </div>
+    <div class="form-group">
+        <?php echo $this->form->getElement('name')->renderLabel(); ?>
+        <?php echo $this->form->getElement('name')->renderViewHelper(); ?>
+        <?php echo $this->form->getElement('name')->renderErrors(); ?>
+    </div>
+    <div class="form-group">
+        <?php echo $this->form->getElement('email')->renderLabel(); ?>
+        <?php echo $this->form->getElement('email')->renderViewHelper(); ?>
+       <?php echo $this->form->getElement('email')->renderErrors(); ?>
+    </div>
+    <div class="form-group">
+        <?php echo $this->form->getElement('message')->renderLabel(); ?>
+        <?php echo $this->form->getElement('message')->renderViewHelper(); ?>
+        <?php echo $this->form->getElement('message')->renderErrors(); ?>
+    </div>
+    <p class="pull-right">* champs obligatoires</p>
+    <div class="form-group">
+        <div class="form-submit align-center">
+            <?php echo $this->form->getElement('submit')->renderViewHelper(); ?>
         </div>
     </div>
 </form>

@@ -1,49 +1,24 @@
-<!-- CONTENU -->
-<h1 class="concours">&Agrave; gagner en ce moment sur Sceneario !</h1>
-
-<div class="whiteblock940">
- 
-        <figure class="center">
-           <?php
-                $filename =  '/images/concours/' . $this->concoursEnCours->getNomConcours() . '.jpg' ;
-                if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
-                     $filename = "/img/temp/scev6-tempconcours.jpg";      
-                endif; ?>
-            <img src="<?php echo $filename ?>" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" class="illus">
-                ?>
-		<figcaption><h1><?php echo $this->concoursEnCours->getLibelleConcours() ?></h1></figcaption>
-	</figure> 
-     
-        
-	<hgroup>
-            <h2>Du <?php echo $this->dateFormat($this->concoursEnCours->getDateDebut() , 'day_month_year_with_slash') 
-                          . ' au ' .  $this->dateFormat($this->concoursEnCours->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
-            <h3><?php echo strip_tags($this->concoursEnCours->getEntete()) ?></h3>
-	</hgroup>
-	<?php if (!empty($this->album_related)) : ?>
-        <a href="<?php echo $this->customUrl(array('titleSerie' => $this->album_related->getCollection().($this->album_related->getTome() != '' ? ' ' . $this->album_related->getTome() : ''),
-                    'titleAlbum' => $this->album_related->getTitre(),
-                    'idAlbum' => $this->album_related->getIdAlbum()),
-                    'album' ); ?>" class="fiche_album">Voir la fiche BD ></a>
-    <?php endif; ?>
-	
-	<!-- Reinitialisation des float -->
-	<div class="clear"></div>
-	
-	<div class="separateur"></div>
-	
-    <div class="reglement-concours">
-	    <p>
-	        <?php echo $this->concoursEnCours->getReglement() ?>
-	    </p>
-	</div>
-	
-	
-	
-	<!-- Reinitialisation des float -->
-<div class="clear"></div>
-	
+<div class="concours col-xs-12">
+    <h3>&Agrave; gagner en ce moment sur Sceneario&nbsp;!</h3>
+    <div class="block white col-xs-12 rounded concours-current">
+        <figure class="row">
+            <?php $filename = file_exists(ROOT_PATH.PUBLIC_DIR.'/images/concours/'.$this->concoursEnCours->getNomConcours().'.jpg') ? '/images/concours/'.$this->concoursEnCours->getNomConcours().'.jpg' : '/img/temp/scev6-tempconcours.jpg'; ?>
+            <img src="<?php echo $filename ?>" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" class="illus" />
+        </figure>
+        <h1 class="hidden-xs"><?php echo $this->concoursEnCours->getLibelleConcours() ?></h1>
+        <div class="concours-description row">
+            <div class="col-xs-12 col-md-9">
+                <h2>Du <?php echo $this->dateFormat($this->concoursEnCours->getDateDebut(), 'day_month_year_with_slash').' au '.$this->dateFormat($this->concoursEnCours->getDateFin() , 'day_month_year_with_slash'); ?></h2>
+                <h3><?php echo strip_tags($this->concoursEnCours->getEntete()) ?></h3>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <a href="<?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours(), 'idConcours' => $this->concoursEnCours->getNomConcours()), 'concoursstep1') ?>" class="big_button">Participez</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="reglement-concours col-xs-12 col-md-8">
+        	    <p><?php echo $this->concoursEnCours->getReglement() ?></p>
+	       </div>
+        </div>
+    </div>
 </div>
-
-<!-- Reinitialisation des float -->
-<div class="clear"></div>

@@ -1,26 +1,20 @@
-<?php if(isset($this->data)): ?>
-
-<div class="whiteblock940">
-<a href="<?php echo $this->customUrl( array( 'nomConcours' => $this->data->getLibelleConcours() ,
-                                                 'idConcours'  => $this->data->getNomConcours()) , 'concoursstep1') ?>" class="clearfix">
-    <figure class="center">
-            
-            <?php 
-             
-            $filename =  '/images/concours/' . $this->data->getNomConcours() . '.jpg' ;
-            if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
-                 $filename = "/img/temp/scev6-tempconcours.jpg";      
-            endif; ?>
-            <img src="<?php echo $filename ?>" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('"',"'","`"), '', $this->data->getLibelleConcours()); ?>" class="illus">
-            <figcaption><h1><?php echo $this->data->getLibelleConcours() ?></h1></figcaption>
-    </figure>
- 
-    <hgroup>
-        <h2>Du <?php echo $this->dateFormat($this->data->getDateDebut() , 'day_month_year_with_slash') 
-                          . ' au ' .  $this->dateFormat($this->data->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
-        <h3><?php echo strip_tags($this->data->getEntete()) ?></h3>
-    </hgroup>
-    <span class="big_button">Participez <img src="/img/concours-fleche.png" alt="concours bande-dessinée, gagner bande-dessinée, Participez au concours Sceneario"></span>
-</a>
+<?php if (isset($this->data)) : ?>
+<div class="block white rounded col-xs-12 concours-current">
+    <a href="<?php echo $this->customUrl(array( 'nomConcours' => $this->data->getLibelleConcours(), 'idConcours' => $this->data->getNomConcours()), 'concoursstep1') ?>">
+        <figure class="row">
+            <?php $filename = file_exists(ROOT_PATH.PUBLIC_DIR.'/images/concours/'.$this->data->getNomConcours().'.jpg') ? '/images/concours/'.$this->data->getNomConcours().'.jpg' : '/img/temp/scev6-tempconcours.jpg'; ?>
+            <img src="<?php echo $filename ?>" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('"',"'","`"), '', $this->data->getLibelleConcours()); ?>" class="illus" />
+        </figure>
+        <h1 class="hidden-xs"><?php echo $this->data->getLibelleConcours() ?></h1>
+        <div class="concours-description row">
+            <div class="col-xs-12 col-md-9">
+                <h2>Du <?php echo $this->dateFormat($this->data->getDateDebut(), 'day_month_year_with_slash').' au '.$this->dateFormat($this->data->getDateFin(), 'day_month_year_with_slash' ) ?></h2>
+                <h3><?php echo strip_tags($this->data->getEntete()) ?></h3>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <span class="big_button">Participez</span>
+            </div>
+        </div>
+    </a>
 </div>
-<?php endif ; ?>
+<?php endif; ?>

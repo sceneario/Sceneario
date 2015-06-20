@@ -133,7 +133,7 @@ class AuteurController extends GlobalController
          #print_r($blocDatas);
     
         $this -> view -> blocDatas   = $blocDatas ;
-        $this -> view -> albumPrices = $albumPrices ;
+        $this -> view -> allAlbumPrice  = $albumPrices ;
         
        # echo '<pre>';
         

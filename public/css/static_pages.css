@@ -1,0 +1,127 @@
+.staticpage h1 { margin-top: 0; }
+
+/* Mentions Légales */
+.legalmentions p { text-align: justify; }
+.legalmentions li { text-align: justify; }
+
+/* Équipe */
+.equipe {
+    color: #616161;
+}
+.equipe .presentation {
+    margin-bottom: 60px;
+    font-size: 14px;
+    text-align: justify;
+}
+.equipe .presentation .pola {
+    padding: 5px;
+    background: #fff;
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -ms-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -o-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    border: 1px solid #efefef;
+    font-size: 13px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.equipe .presentation div img {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.equipe .redacteur {
+    background: #fff;
+    margin-bottom: 50px;
+    padding: 10px 15px 10px 15px;
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -ms-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -o-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    color: #616161;
+}
+
+.equipe .redacteur header {
+    margin: 0 0 35px 110px;
+}
+.equipe .redacteur header .picture {
+    margin-left: -126px;
+    margin-top: -57px;
+    float: left;
+    padding: 5px;
+    background: #fff;
+    border: 1px solid #efefef;
+    transform:rotate(4deg);
+    -ms-transform:rotate(4deg); /* IE 9 */
+    -webkit-transform:rotate(4deg); /* Safari and Chrome */
+    -webkit-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -ms-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    -o-box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.15);
+}
+.equipe .redacteur header .picture.revert {
+    transform:rotate(-4deg);
+    -ms-transform:rotate(-4deg); /* IE 9 */
+    -webkit-transform:rotate(-4deg); /* Safari and Chrome */
+}
+
+.equipe .redacteur header .picture img {
+    width: 100px;
+}
+
+.equipe .redacteur header span {
+    display: block;
+}
+.equipe .redacteur header h2 {
+    color: #a03374;
+    font-size: 19px;
+    line-height: 19px;
+    margin: 23px 0 4px 0;
+}
+.equipe .redacteur header .full-name {
+    font-size: 13px;
+    margin-bottom: 2px;
+    min-height: 18px;
+}
+.equipe .redacteur header .email {
+    min-height: 12px;
+    overflow: hidden;
+}
+.equipe .redacteur header .email, .equipe .redacteur header .email a {
+    font-size: 12px;
+    color: #a03374;
+}
+.equipe .redacteur .full-description {
+    font-size: 12px;
+    line-height: 15px;
+}
+.equipe .redacteur .full-description span {
+    font-weight: bold;
+}
+.equipe .redacteur .full-description p {
+    margin: 4px 0;
+}
+.equipe .redacteur .full-description p.avis {
+    background: url('/img/concours-title2.png') no-repeat top left;
+    float: right;
+    height: 37px;
+    padding: 10px 20px 0;
+    margin-top: 10px;
+    margin-right: -17px;
+}
+.equipe .redacteur .full-description p.avis a {
+    color: #fff;
+    font-size: 18px;
+}
+.equipe .redacteur .full-description p.avis a strong {
+    font-size: 24px;
+}

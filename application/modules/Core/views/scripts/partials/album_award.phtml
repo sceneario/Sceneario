@@ -1,0 +1,16 @@
+<?php if (count($this->allAlbumPrice) > 0) : ?>
+    <section class="prix_recompenses">
+        <header><h3>Prix & récompenses</h3></header>
+        <ul class="row">
+            <?php foreach ($this->allAlbumPrice as $albumPrice) : ?>
+            <li class="clearfix">
+                <a class="pull-right text-right col-xs-4" href="<?php echo $albumPrice->url ?>"><?php echo $albumPrice->serie ?></a>
+                <div class="col-xs-8">
+                    <span><?php echo $albumPrice->festival ?></span>
+                    <p itemprop="award"><?php echo $albumPrice->prix ?></p>
+                </div>
+            </li>
+            <?php endforeach ; ?>
+        </ul>
+    </section>
+<?php endif; ?>

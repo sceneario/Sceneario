@@ -1,30 +1,16 @@
-<div class="leftActu staticpages contact">
+<div class="staticpage contact col-xs-12 col-md-8">
     <h1><a href="<?php echo $this->url(); ?>">Contact</a></h1>
-
-    <section class="actu-wrapper clearfix">
-        <div class="actuContent">
-            <h2>Vous avez des questions, des remarques, des suggestions&nbsp;?</h2>
-            <p>N'hésitez pas à nous contacter&nbsp;!</p>
-            <p>Vous souhaitez annoncer sur Sceneario.com&nbsp;? Notre <a href="http://regie.sceneario.com" target="_blank">régie</a> répond à vos besoins.</p>
-
-            <?php echo $this->partial('_forms/contact.phtml', 'Core', array('form' => $this->form)); ?>
-
-        </div>
-    </section>
-</div>
-<div class="rightActu">
-    <?php echo $this->lastConcoursBloc($this); ?>
-    <div class="pub">
-        <?php echo $this->partial('partials/pubs300large.phtml'); ?>
-        <div id='div-gpt-ad-1350913318651-0'>
-            <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913318651-0'); });
-            </script>
-        </div>
-        <div id='div-gpt-ad-1350913404071-0'>
-            <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913404071-0'); });
-            </script>
+    <div class="block white col-xs-12">
+        <div class="row">
+            <div class="col-xs-12">
+                <h2>Vous avez des questions, des remarques, des suggestions&nbsp;?</h2>
+                <p>N'hésitez pas à nous contacter&nbsp;!</p>
+                <p>Vous souhaitez annoncer sur Sceneario.com&nbsp;? Notre <a href="http://regie.sceneario.com" target="_blank">régie</a> répond à vos besoins.</p>
+            </div>
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <?php echo $this->partial('_forms/contact.phtml', 'Core', array('form' => $this->form)); ?>
+            </div>
         </div>
     </div>
 </div>
+<?php echo $this->partial('partials/sidebar.phtml'); ?>

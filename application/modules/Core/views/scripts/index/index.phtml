@@ -1,113 +1,101 @@
-<!-- CONTENU -->
-<!-- Slider actu -->
-<div id="slider">
-    <div id="slides-wrapper">
-    	<?php foreach($this->events as $evt): ?>
-            <?php if($evt->getLienEvt() !== '') : ?><a href="<?php echo $evt->getLienEvt() ?>"><?php endif; ?>
-                <article style="background:url(http://images.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>) no-repeat center center;">
-                    <img src="http://images.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>" alt="bande-dessinée, <?php echo $evt->getTitreEvt() ?>" class="visuallyhidden" />
-                    <h2><?php echo $evt->getTitreEvt() ?></h2>
-                	<img class="h1queue" src="img/slider_h1_queue.png" alt="<?php echo $evt->getTitreEvt() ?>" />
-                    <?php if($evt->getLienEvt() !== ''): ?>
-                        <span class="more">en savoir plus &rsaquo;</span>
-                    <?php endif; ?>
-                </article>
-            <?php if($evt->getLienEvt() !== '') : ?></a><?php endif; ?>
-        <?php endforeach; ?>
-    </div><!-- slides-wrapper -->
-    <div id="bgblack"></div>
-    <nav>
-    	<?php foreach($this->events as $evt): ?>
-            <a href="#"></a>
-        <?php endforeach; ?>
-    </nav>
- 
-</div><!-- slider -->
-        
-<!-- Pub 300x250 -->
-<div class="pub">
-    <!-- Home300x250 -->
-    <!-- Home300x250 -->
-    <div id='div-gpt-ad-1350912979829-0' style='width:300px; height:250px;'>
-        <script type='text/javascript'>
-        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912979829-0'); });
-        </script>
+<div class="home">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-md-8">
+                <div id="slider">
+                    <div id="slides-wrapper">
+                        <?php foreach($this->events as $evt): ?>
+                            <?php if($evt->getLienEvt() !== '') : ?><a href="<?php echo $evt->getLienEvt() ?>"><?php endif; ?>
+                                <article class="slide">
+                                    <img class="illus" src="http://images.sceneario.com/evenements/<?php echo $evt->getImageEvt() ?>" alt="bande-dessinée, <?php echo $evt->getTitreEvt() ?>" />
+                                    <h2><?php echo $evt->getTitreEvt() ?></h2>
+                                    <img class="h1queue" src="img/slider_h1_queue.png" alt="<?php echo $evt->getTitreEvt() ?>" />
+                                    <?php if($evt->getLienEvt() !== ''): ?>
+                                        <span class="more">en savoir plus &rsaquo;</span>
+                                    <?php endif; ?>
+                                </article>
+                            <?php if($evt->getLienEvt() !== '') : ?></a><?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+                    <div id="bgblack"></div>
+                    <nav>
+                        <?php foreach($this->events as $evt): ?>
+                            <a href="#"></a>
+                        <?php endforeach; ?>
+                    </nav>
+                </div>
+            </div>
+            <?php if (!$this->isMobile) : ?>
+            <div class="pub col-md-4">
+                <div id='div-gpt-ad-1350912979829-0' style='width:300px; height:250px;'>
+                    <script type='text/javascript'>
+                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912979829-0'); });
+                    </script>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <?php echo $this->partial ('partials/socialContacts.phtml', array('color' => 'pink')); ?>
+            </div>
+            <?php endif; ?>
+        </div>
     </div>
-</div><!-- pub -->
-<?php
-echo $this->partial ('partials/socialContacts.phtml');
-?>
-
-<!-- Reinitialisation des float -->
-<div class="clear"></div>
-
-<!-- Module de BD -->
-<div id="bdalaune">
-    <header>
-        <a href="<?php echo $this->customUrl(array(), 'bedetheque'); ?>" class="more">Tout afficher &rsaquo;</a>
-        <ul>
-            <li><a href="javascript:void(0);" class="tab_1 onglet-home-bd selected">Nouveautés</a></li>
-            <li><a href="javascript:void(0);" class="tab_2 onglet-home-bd" >Derniers ajouts</a></li>
-            <li><a href="javascript:void(0);" class="tab_3 onglet-home-bd" >Les plus populaires</a></li>
-            <li><a href="javascript:void(0);" class="tab_4 onglet-home-bd" >Coups de coeur</a></li>
-        </ul>
-
-         <div class="clear"></div>
-    </header>
- 
-    <div class="albums-slider">
-        <?php echo $this->partial('partials/listingAlbum.phtml',  array('albums' => $this->newAlbums) ) ; ?>
-    </div><!-- albums-slider -->
- 
-</div><!-- bdalaune -->
-
-<!-- Blocs a la unes -->
-<div class="bloc2col">	
-    <?php echo $this->lastInterviewBloc($this) ; //$this == 'instance de Zend_View'  
-    
-  
-    //temporaire
-    // echo $this->randomInterviewBloc($this, 1) ; //$this == 'instance de Zend_View'  
-     echo $this->lastConcoursBloc($this) ; //$this == 'instance de Zend_View' ?>
-     <?php echo $this->registerNewsletter($this) ?>
-    
-</div><!-- bloc2col -->
-<div class="bloc2col">
-    <?php echo $this->lastGalleryBloc($this); ?>
-    <?php echo $this->lastExpoBloc($this); ?>
-    <?php echo $this->lastBlogPostBloc($this, 1); ?>
-    <?php 
-    //temporaire
-    //echo $this->randomInterviewBloc($this, 2) ; //$this == 'instance de Zend_View'
-    //echo $this->randomInterviewBloc($this, 3) ;?>
-    
-</div><!-- bloc2col -->
-
-<div class="sidebar">
-    <?php echo $this->lastGalleryBloc($this, 'preview'); ?>
-    <?php echo $this->lastBlogPostBloc($this); ?>
-    <!-- Facebook like box -->
-    <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div><!-- Facebook like box -->
-
-    <!-- Pub 300x250 -->
-    <div class="pub">
-        <!-- Home300 -->
-        <div id='div-gpt-ad-1350913034468-0'>
+    <div id="bdalaune" class="col-xs-12">
+        <header class="row">
+            <a href="<?php echo $this->customUrl(array(), 'bedetheque'); ?>" class="more pull-right">Tout afficher &rsaquo;</a>
+            <div class="col-xs-8 col-md-10">
+                <ul>
+                    <li><a href="javascript:void(0);" class="tab_1 onglet-home-bd selected">Nouveautés</a></li>
+                    <li><a href="javascript:void(0);" class="tab_2 onglet-home-bd" >Derniers ajouts</a></li>
+                    <li><a href="javascript:void(0);" class="tab_3 onglet-home-bd" >Les plus populaires</a></li>
+                    <li><a href="javascript:void(0);" class="tab_4 onglet-home-bd" >Coups de coeur</a></li>
+                </ul>
+            </div>
+        </header>
+        <div class="albums-slider"  data-mcs-theme="dark">
+            <?php echo $this->partial('partials/listingAlbum.phtml',  array('albums' => $this->newAlbums) ) ; ?>
+        </div>
+    </div>
+    <?php if ($this->isMobile) : ?>
+    <div class="pub col-xs-12">
+        <div id='div-gpt-ad-1350912979829-0' style='width:300px; height:250px;'>
             <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913034468-0'); });
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912979829-0'); });
             </script>
         </div>
-        
-        <!-- Home300interne -->
-        <div id='div-gpt-ad-1350913092690-0'>
-            <script type='text/javascript'>
-            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913092690-0'); });
-            </script>
+    </div>
+    <?php endif; ?>
+    <div class="col-xs-12 col-md-4">
+        <?php echo $this->lastInterviewBloc($this); ?>
+        <?php echo $this->lastConcoursBloc($this); ?>
+        <?php echo $this->registerNewsletter($this); ?>
+    </div>
+    <div class="col-xs-12 col-md-4">
+        <?php echo $this->lastGalleryBloc($this); ?>
+        <?php echo $this->lastExpoBloc($this); ?>
+        <?php echo $this->lastBlogPostBloc($this, 1); ?>
+    </div>
+    <div class="col-xs-12 col-md-4">
+        <?php echo $this->lastGalleryBloc($this, 'preview'); ?>
+        <?php echo $this->lastBlogPostBloc($this); ?>
+        <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="100%" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
+        <div class="pub">
+            <div id='div-gpt-ad-1350913034468-0'>
+                <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913034468-0'); });
+                </script>
+            </div>
+            <div id='div-gpt-ad-1350913092690-0'>
+                <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913092690-0'); });
+                </script>
+            </div>
         </div>
-
-    </div><!-- pub -->
-
-</div><!-- bloc2col -->
-
-<!-- Reinitialisation des float -->
-<div class="clear"></div>
+    </div>
+</div>
+<?php $this->block_js[] = '
+<script type="text/javascript">
+    $(window).load(function() {
+        slider(500,null,null,"#slider nav a","#slides-wrapper",4000, false);
+    });
+</script>
+'; ?>

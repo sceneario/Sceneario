@@ -1,10 +1,9 @@
 <?php if(!null == $this->data): ?>
 <a href="<?php echo $this->data['lien']['url'] ?>" class="clearfix">
-<div class="whiteblock300">
+<div class="block white col-xs-12 rounded">
     <?php if($this->data['image'] != '' ):?>
-		<figure class="center">
+		<figure class="row">
 			<img src="<?php echo $this->data['image']?>" alt="<?php echo str_replace(array('"',"'","`"), '', str_replace(array('<br />', '<br>'), ' ', $this->data['titre'])); ?>" class="illus"/>
-	        <img src="/img/block300_white_masque.png" alt="" class="masque">
 		</figure>
     <?php endif; ?>
     <h2><?php echo $this->data['titre'] ?></h2>

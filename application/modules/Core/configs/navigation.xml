@@ -16,7 +16,6 @@
                     <route>blog</route>
                     <visible>0</visible>
                 </blog>
-
                 <calendrier>
                     <label>Calendrier</label>
                     <route>calendrier</route>
@@ -26,7 +25,7 @@
         </actualites>
           <bedetheque>
             <label>Bédéthèque</label>
-            <route>bedetheque</route>
+            <uri>#</uri>
             <visible>1</visible>
             <pages>
                 <nouveaute>
@@ -61,12 +60,11 @@
                     <visible>1</visible>
                 </recommande>
             </pages>
-        </bedetheque> 
+        </bedetheque>
           <toutelabd>
             <label>Toute la bd</label>
-            <route>pagedelancement</route>
+            <uri>#</uri>
             <visible>1</visible>
-      
             <pages>
                 <interview>
                     <label>Interviews</label>
@@ -94,11 +92,11 @@
                     <visible>0</visible>
                 </bdcouverte>
             </pages>
-        </toutelabd> 
+        </toutelabd>
           <concours>
             <label>Concours</label>
             <route>concours</route>
             <visible>1</visible>
-        </concours>  
+        </concours>
     </production>
 </config>

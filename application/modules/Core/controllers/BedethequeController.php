@@ -196,14 +196,12 @@ class BedethequeController extends GlobalController
         $typeRequested = $this->getRequest()->getParam('tag');
         $_GET['cleanedTag'] =  $typeRequested;
         $utils = new Core_Service_Utilities();
-        
-        
+
         switch($typeRequested){
             case 'bedetheque': {
-                
                 $this->view->bedetheque = true;
                 //si l'utilisateur est connecté
-                if(Zend_Registry::isRegistered('currentUserID') || isset($_GET['user'])){
+                if (Zend_Registry::isRegistered('currentUserID') || isset($_GET['user'])) {
 
                     if(isset($_GET['user'])){
                         $currentUserId = (int)$_GET['user'] ;
@@ -214,16 +212,14 @@ class BedethequeController extends GlobalController
                             $this->_redirect($this->view->customUrl(array(), 'accueil'));
                             exit(0);
                         }
-                        $bdtekTile = 'Bédéthèque de ' . $userInfos->getUsername() ;
+                        $this->view->bdtekTile = 'Bédéthèque de ' . $userInfos->getUsername() ;
                     }
                     else{
                         $currentUserId = Zend_Registry::get('currentUserID');
                         $addUrl = '' ;
-                        $bdtekTile = 'Ma bédéthèque';
+                        $this->view->bdtekTile = 'Ma bédéthèque';
                     }
-                    
-                    $this->view->textHeader = '<form name="formFilter" id="formFilter" method="get" action=""><p><strong>'.$bdtekTile.'</strong> ';
-                    
+
                     $addRequest = '';
                     $listBy = 'all' ;
                     if(isset($_GET['listby']) ){
@@ -238,28 +234,12 @@ class BedethequeController extends GlobalController
                     }
 
                     $tblUserBdtekV6 = new Core_Model_Mapper_TblUserBdthequeV6();
-                    $userBedetheque = $tblUserBdtekV6->fetchAll(null,
+                    $this->view->userBedetheque = $tblUserBdtekV6->fetchAll(null,
                                                   array('clause'=> 'user_id = ? ' . $addRequest, 
                                                         'params' => $currentUserId), null);
-                    
-                    $this->view->textHeader .= '<span>' 
-                                               . $this->view->formatNumber(count($userBedetheque)) 
-                                               . "</span> albums ";
-                        
-                    $this->view->textHeader .=  '<select name="listType" onchange="document.location.href=\'?'.$addUrl.'listby=\'+this.value+\'\'" >';
-                            
-                     $this->view->textHeader .= '<optgroup label="Options d\'affichage">
-                            <option value="all" ' . (($listBy == 'all') ? 'SELECTED' : '' ). ' >Montrer la totalité</option>
-                            <option value="list_my_album" ' . (($listBy == 'list_my_album') ? 'SELECTED' : '') . '>dans ma bédéthèque</option>
-                            <option value="list_album_to_buy" ' . (($listBy == 'list_album_to_buy') ? 'SELECTED' : '') . '> à acheter</option>
-                            </optgroup>
-                        </select>
-                        </p>
-                        </form>' ;
-                    
                     #$albumsData = array();
                     $albums = array();
-                    foreach($userBedetheque as $bd){
+                    foreach($this->view->userBedetheque as $bd){
                         $albumsData = $this->_mapperAlbum->find($bd->getAlbumid(), new Core_Model_Tblalbum());
                         $album = new stdClass();
                         $album->idAlbum      = $albumsData->getIdAlbum();
@@ -289,32 +269,21 @@ class BedethequeController extends GlobalController
                      * SELECTEUR QUI NE BOUGE PAS
                      */
                     $datesAlbums = $this->_mapperAlbum->getDateFromAllAlbum();
-   
+
                     $formattedDates   = array();
                     $nowDate          = date('Y-m') ;
                     $nowDatePieces = explode(' ' , $this->view->dateFormat( $nowDate , 'month_year'));
                     $formattedDates[date('Y')][$nowDate] = $nowDatePieces[0];
-                  
+
                     foreach($datesAlbums as $date){
                         $datePieces = explode(' ', $this->view->dateFormat( $date->dateParution , 'month_year'));
                         $formattedDates[substr($date->dateParution,0,-3)][$date->dateParution] = $datePieces[0] ;
                     }
-                    # print_r($formattedDates);
-                    
-                    $dateSelecteur    = $utils->generateHtmlSelector('date', $formattedDates);
-  
+
+                    $this->view->dateSelecteur    = $utils->generateHtmlSelector('date', $formattedDates);
 
                     $albums = $this->_mapperAlbum->getNewAlbumsLight($dateREQUESTED, $clauseEditeur) ;
-                    
-                    
-                    
-                     /*
-                     * SELECTEUR DONT LE PEUPLEMENT EST DEPENDANT DE LA DATE
-                     */
-                    #$editeurMapper = new Core_Model_Mapper_Tblediteur();
-                    #$editeurModel  = $editeurMapper->fetchAll(null,array('clause'=>'idEditeur != 0','params'=>''), 'nomEditeur ASC') ;
-                  
-                    
+
                     $editeurSets = array();
                     foreach($albums as $album){
                         $editeurName       = $album->nomEditeur ;
@@ -325,21 +294,13 @@ class BedethequeController extends GlobalController
                     ksort($editeurSets, SORT_STRING);
                     #
                     $options = array('alleditor' => 'Tous les &eacute;diteurs');
-                    $editeurSelecteur = $utils->generateHtmlSelector('editeur', $editeurSets, $options);
-
-                    //injection du form dans la vue
-                    $this->view->textHeader = '<form name="formFilter" id="formFilter" method="get" action=""><h1>Nouveautés</h1><p><span>'
-                            .$this->view->formatNumber(count($albums))
-                            .'</span> nouveautés en '.$dateSelecteur.'chez '.$editeurSelecteur
-                            .'<input id="formFilterBt" type="submit" value="ok"/></p>
-                        </form>' ;
+                    $this->view->editeurSelecteur = $utils->generateHtmlSelector('editeur', $editeurSets, $options);
                 }
                 break;
             case 'recommandes':
                 $albums = $this->_mapperAlbum->getAllRecommandeAlbums() ;
-                $this->view->textHeader = '<h1>Recommandés</h1><p>par Sceneario.com</p>';
                 break;
-            case $queryAlbumAparaitre :{    
+            case $queryAlbumAparaitre :{
                     $mapperTblServicePress = new Core_Model_Mapper_Tblservicespress;
                     //retourne la plus lointaine date
                     //pour calculer l'interval entre maintenant et les prochaines parutions
@@ -373,8 +334,7 @@ class BedethequeController extends GlobalController
                         $formattedDates[substr($date,0,4)][substr($date,0,-3)] = $datePieces[0] ;
                     }
 
-                    $dateSelector = $utils->generateHtmlSelector('date' , $formattedDates) ;
-                    #print $dateSelector ;
+                    $this->view->dateSelecteur = $utils->generateHtmlSelector('date' , $formattedDates) ;
 
                     //creation du selecteur d'éditeur
 
@@ -395,52 +355,30 @@ class BedethequeController extends GlobalController
                        $fistChar          = $editeurName[0] ;
                        $editeurSets[$fistChar][$id] = $editeurInfos->getNomEditeur() ;
                     }
-                    
+
                     /*
                      * fetch album du moi a paraitre
                      */
                     $dateREQUESTED = isset($_GET['date']) ? strip_tags( $_GET['date'] ) : date('Y-m');
-                    
+
                     #echo $dateREQUESTED;
                     $clauseEditeur = isset($_GET['editeur']) && $_GET['editeur']!='alleditor'  
                                      ? 'AND idEditeur = "' . (int)$_GET['editeur'] . '"' 
                                      : null;
-    
-                    $albumDuMoisAP = $mapperTblServicePress->fetchAll(NULL, 
+
+                    $this->view->albumDuMoisAP = $mapperTblServicePress->fetchAll(NULL, 
                                                                       array('clause'=>'dateParution REGEXP ? ' . $clauseEditeur, 
                                                                             'params'=>$dateREQUESTED), 
                                                                       'dateParution DESC') ;
-                    
-                    #print_r($albumDuMoisAP);
                     $albums = array();
 
                     ksort($editeurSets);
-                    
+
                     $options = array('alleditor' => 'Tous les &eacute;diteurs') ;
-                    $editeurSelecteur = $utils->generateHtmlSelector('editeur' , $editeurSets , $options);
+                    $this->view->editeurSelecteur = $utils->generateHtmlSelector('editeur' , $editeurSets , $options);
 
-                    #print_r($formattedDates);
-                    #print $editeurSelecteur ;
-                    $this->view->textHeader = '<form id="formFilter" method="get" action=""><h1>À paraître</h1><p>'
-                        .'<span>'. $this->view->formatNumber(count($albumDuMoisAP)) .'</span> albums à paraître en '.$dateSelector
-                        .' chez '.$editeurSelecteur
-                        .'<input id="formFilterBt" type="submit" value="ok"/></p></form>' ;
-                   # exit;
-
-                    #$albums = $albumDuMoisAP ;
-                    /*
-                        [_idService:Core_Model_Tblservicespress:private] => 11573
-                        [_idEditeur:Core_Model_Tblservicespress:private] => 6
-                        [_dateParution:Core_Model_Tblservicespress:private] => 2013-01-01
-                        [_nomService:Core_Model_Tblservicespress:private] => Skip Beat TOME 25
-                        [_bloque:Core_Model_Tblservicespress:private] => N
-                        [_T_Recu:Core_Model_Tblservicespress:private] => N
-                        [_ListeAuteurs:Core_Model_Tblservicespress:private] => YOSHIKKI NAKAMURA
-                        [_datecreation:Core_Model_Tblservicespress:private] => 2012-10-03 16:08:42
-                     */
-                    
                     $resultSet = array();
-                    foreach($albumDuMoisAP as $hit){
+                    foreach($this->view->albumDuMoisAP as $hit){
                         $hit = (object) $hit ;
                         $result = new stdClass();
                         $result->idAlbum      = '_ALBUM_A_PARAITRE_';
@@ -452,26 +390,22 @@ class BedethequeController extends GlobalController
                         $result->editeur      = $mapperEditeur->find($hit->getIdEditeur(), new Core_Model_Tblediteur)->getNomEditeur() ;//$hit->getIdEditeur();
                         $resultSet[] = $result ;
                     }
-                    
                 }
                 break;
             default:
                 $albums = null;
                 break;
         }
-     
- 
-  
+
         $this->view->countOfAlbums = count($albums);
 
         $albumsData = array();
-        
+
         if($typeRequested != $queryAlbumAparaitre){
             foreach($albums as $album){
                 $albumsData[] =  $utils->getDataForAlbumWhoFails($album->idAlbum);
-                 
             }
-            #Zend_Debug::dump($albums);
+
             $resultSet = array();
             foreach($albumsData as $hit){
                 $hit = (object) $hit ;
@@ -491,22 +425,18 @@ class BedethequeController extends GlobalController
                 $resultSet[] = $result ;
             }
         }
-       
- 
-     
-        
-      
+
         /*
          * Nombre de resultat
          */
         $this -> view -> countResults  = count($resultSet);
-        
+
         /*
          * Resultat par page
          */
         $resulsPerPage = isset($_GET['results'])? $_GET['results'] : $_GET['results'] = 20 ;
         $this -> view -> resultsPerPage = $resulsPerPage ;
-        
+
         /*
          * Page requetée
          */
@@ -517,15 +447,13 @@ class BedethequeController extends GlobalController
          */
         $paginator     = Zend_Paginator::factory($resultSet);
         $pageRequested = $paginator->setCurrentPageNumber($pageRequested);
-        
+
         $paginator->setItemCountPerPage($resulsPerPage);
-   
+
         $this->view->paginator   = $paginator;
-        
-        
-       
+        $this->view->type = $typeRequested;
     }
-    
+
     public function getMonthFr()
     {
         

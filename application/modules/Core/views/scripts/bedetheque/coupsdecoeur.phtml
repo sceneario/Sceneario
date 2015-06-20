@@ -1,118 +1,102 @@
-<div class="leftCDC">
+<div class="coupsdecoeur col-xs-12 col-md-8">
     <h1>Coups de coeur</h1>
-    <section class="classement hebdomadaire">
-        <h1>Le classement hebdomadaire</h1>
-        <ul>
-          <?php foreach($this->albumWinnerSemaine as $key => $albumSemaine): ?>
-            <?php $albumUrl = $this->customUrl(array(
-                        'titleSerie' => $albumSemaine['titreSerie'],
-                        'titleAlbum' => $albumSemaine['titreAlbum'],
-                        'idAlbum'    => $albumSemaine['idAlbum']
-                    ),
-                    'album'
-                );
-                $coverUri = $this->customUrl(array(
-                        'isbn'   => $albumSemaine['isbn'],
-                        'format' => 'medium',
-                        'seo'    => $albumSemaine['titreSerie'].'-'.$albumSemaine['titreAlbum']
-                    ),
-                    'couverture'
-                );
-            ?>
-            <li>
-              <a href="<?php echo $albumUrl ?>">
-                <?php echo $this->displayImage($coverUri, 'bande-dessinée, '. $albumSemaine['titreSerie'] . ', ' . $albumSemaine['titreAlbum'], 'cover'  ) ?>
-                <img src="/img/ruban<?php echo $key+1 ?>.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $albumSemaine['titreSerie']; ?>" class="ruban">
-              </a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-        <?php  echo $this -> socialButtons($this->currentUrl()); ?>
-    </section>
-    <section class="classement an2012">
-        <h1>Le classement <?php echo date('Y'); ?></h1>
-        <ul>
-
-          <?php foreach($this->albumWinnerAnnee as $key => $albumAnnee): ?>
-            <?php $albumUrl = $this->customUrl(array(
-                        'titleSerie' => $albumAnnee['titreSerie'],
-                        'titleAlbum' => $albumAnnee['titreAlbum'],
-                        'idAlbum'    => $albumAnnee['idAlbum'],
-                    ),
-                    'album'
-                );
-                $coverUri = $this->customUrl(array(
-                        'isbn'   => $albumAnnee['isbn'],
-                        'format' => 'medium',
-                        'seo'    => $albumAnnee['titreSerie'].'-'.$albumAnnee['titreAlbum']
-                    ),
-                    'couverture'
-                );
-            ?>
-            <li>
-              <a href="<?php echo $albumUrl ?>">
-                <?php echo $this->displayImage($coverUri, 'bande-dessinée, '. $albumAnnee['titreSerie'] . ', ' . $albumAnnee['titreAlbum'], 'cover'  ) ?>
-                <img src="/img/ruban<?php echo $key+1 ?>.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $albumAnnee['titreSerie']; ?>" class="ruban">
-              </a>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-        <?php  echo $this -> socialButtons($this->currentUrl()); ?>
-    </section>
-    <section class="classement equipe">
-        <h1>Les coups de coeur de l'équipe</h1>
-          <?php foreach($this->albumStaff as  $k => $albumsPerMember): ?>
+    <section class="classement hebdomadaire row">
+        <div class="col-xs-12"><h1>Le classement hebdomadaire</h1></div>
+        <div class="col-xs-12">
             <div class="cdc_wrapper">
-              <ul>
-                <?php foreach($albumsPerMember as $key => $a) : ?>
-                  <?php if($key < 2) : ?>
-                    <li>
-                      <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($a); ?>">
-                        <?php echo $this->getHelper('displayImage')->displayAlbumCover($a, 'coupdecoeurequipe', 'cover'); ?>
-                        <img src="/img/coeur-coin.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $a->collection; ?>" class="coeur">
+                <ul class="row">
+                  <?php foreach($this->albumWinnerSemaine as $key => $albumSemaine): ?>
+                    <?php $albumUrl = $this->customUrl(array(
+                                'titleSerie' => $albumSemaine['titreSerie'],
+                                'titleAlbum' => $albumSemaine['titreAlbum'],
+                                'idAlbum'    => $albumSemaine['idAlbum']
+                            ),
+                            'album'
+                        );
+                        $coverUri = $this->customUrl(array(
+                                'isbn'   => $albumSemaine['isbn'],
+                                'format' => 'medium',
+                                'seo'    => $albumSemaine['titreSerie'].'-'.$albumSemaine['titreAlbum']
+                            ),
+                            'couverture'
+                        );
+                    ?>
+                    <li class="col-xs-4">
+                      <a href="<?php echo $albumUrl ?>">
+                        <?php echo $this->displayImage($coverUri, 'bande-dessinée, '. $albumSemaine['titreSerie'] . ', ' . $albumSemaine['titreAlbum'], 'cover'  ) ?>
+                        <img src="/img/ruban<?php echo $key+1 ?>.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $albumSemaine['titreSerie']; ?>" class="ruban">
                       </a>
                     </li>
-                  <?php endif; ?>
-                <?php endforeach ?>
-              </ul>
-              <div class="clear"></div>
-              <h2>Les coups de coeur
-                <?php $voyelles = array('a', 'o', 'i', 'u', 'e', 'y' ); $de = 'de '; ?>
-                <?php if (in_array(strtolower($k[0]),$voyelles)) $de = 'd\''; ?>
-                <?php echo $de . $k ?>
-              </h2>
+                  <?php endforeach; ?>
+                </ul>
             </div>
-          <?php endforeach; ?>
-        <div class="clear"></div>
+        </div>
+        <?php  echo $this -> socialButtons($this->currentUrl()); ?>
+    </section>
+    <section class="classement an2012 row">
+        <div class="col-xs-12"><h1>Le classement <?php echo date('Y'); ?></h1></div>
+        <div class="col-xs-12">
+            <div class="cdc_wrapper">
+                <ul class="row">
+                  <?php foreach($this->albumWinnerAnnee as $key => $albumAnnee): ?>
+                    <?php $albumUrl = $this->customUrl(array(
+                                'titleSerie' => $albumAnnee['titreSerie'],
+                                'titleAlbum' => $albumAnnee['titreAlbum'],
+                                'idAlbum'    => $albumAnnee['idAlbum'],
+                            ),
+                            'album'
+                        );
+                        $coverUri = $this->customUrl(array(
+                                'isbn'   => $albumAnnee['isbn'],
+                                'format' => 'medium',
+                                'seo'    => $albumAnnee['titreSerie'].'-'.$albumAnnee['titreAlbum']
+                            ),
+                            'couverture'
+                        );
+                    ?>
+
+                    <li class="col-xs-4">
+                      <a href="<?php echo $albumUrl ?>">
+                        <?php echo $this->displayImage($coverUri, 'bande-dessinée, '. $albumAnnee['titreSerie'] . ', ' . $albumAnnee['titreAlbum'], 'cover'  ) ?>
+                        <img src="/img/ruban<?php echo $key+1 ?>.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $albumAnnee['titreSerie']; ?>" class="ruban">
+                      </a>
+                    </li>
+                  <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+        <?php  echo $this -> socialButtons($this->currentUrl()); ?>
+    </section>
+    <section class="classement equipe row">
+        <div class="col-xs-12"><h1>Les coups de coeur de l'équipe</h1></div>
+        <div class="col-xs-12">
+            <div class="cdc_wrapper">
+                <div class="row">
+                    <?php foreach($this->albumStaff as  $k => $albumsPerMember): ?>
+                    <div class="col-xs-12 col-md-6">
+                      <ul class="row">
+                        <?php foreach($albumsPerMember as $key => $a) : ?>
+                          <?php if($key < 2) : ?>
+                            <li class="col-xs-6">
+                              <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($a); ?>">
+                                <?php echo $this->getHelper('displayImage')->displayAlbumCover($a, 'coupdecoeurequipe', 'cover'); ?>
+                                <img src="/img/coeur-coin.png" alt="avis bande-dessinée, meilleur bande-dessinée, <?php echo $a->collection; ?>" class="coeur">
+                              </a>
+                            </li>
+                          <?php endif; ?>
+                        <?php endforeach ?>
+                      </ul>
+                      <h2>Les coups de coeur
+                        <?php $voyelles = array('a', 'o', 'i', 'u', 'e', 'y' ); $de = 'de '; ?>
+                        <?php if (in_array(strtolower($k[0]),$voyelles)) $de = 'd\''; ?>
+                        <?php echo $de . $k ?>
+                      </h2>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
 
-<div class="rightCDC">
-    <?php echo $this->userAccountWidget('user_dashboard'); ?>
-    <?php echo $this->lastConcoursBloc($this); ?>
-
-    <!-- Pub 300x250 -->
-    <div class="pub">
-            <?php echo $this->partial('partials/pubs300large.phtml'); ?>
-            <!-- Recherche300pub -->
-            <div id='div-gpt-ad-1350913318651-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913318651-0'); });
-                </script>
-            </div>
-            <!-- Recherche300interne -->
-            <div id='div-gpt-ad-1350913404071-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913404071-0'); });
-                </script>
-            </div>
-    </div>
-    <?php echo $this->lastInterviewBloc($this); ?>
-    <?php echo $this->lastGalleryBloc($this); ?>
-    <?php echo $this->lastExpoBloc($this); ?>
-    <?php echo $this->lastGalleryBloc($this, 'preview'); ?>
-    <?php echo $this->registerNewsletter($this); ?>
-    <div class="clear"></div>
-    <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
-</div>
-<div class="clear"></div>
+<?php echo $this->partial('partials/sidebar.phtml'); ?>

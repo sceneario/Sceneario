@@ -3,7 +3,7 @@
  * Retourne une liste formatée contenant les albums demandés
  */
 if(!null == $this->albums): ?>
-    <ul class="albums-wrapper">
+    <ul class="albums-wrapper" data-mcs-theme="dark">
         <?php foreach($this->albums as $key => $album ):?>
             <li><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
                <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'bedetheque', '', '', '', false); ?>

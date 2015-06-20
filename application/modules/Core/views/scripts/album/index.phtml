@@ -1,438 +1,397 @@
-<div itemscope itemtype="http://schema.org/Book">
-<div class="leftSide">
-    <div class="cover">
-        <a rel="lightbox[album]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($this->albumInfos); ?>" class="zoom">
-          <?php echo $this->getHelper('displayImage')->displayAlbumCover($this->albumInfos, 'big', 'front', '', 'itemprop="image"'); ?>
-        </a>
-        <a rel="lightbox[album]" href="<?php echo $this->getHelper('customUrl')->getAlbumPageUrl($this->albumInfos); ?>" class="planche">
-          <?php echo $this->getHelper('displayImage')->displayAlbumPage($this->albumInfos, 'big', 'behind', '', 'itemprop="image"'); ?>
-        </a>
-        <?php if($this->albumIsCoupDeCoeur): ?>
-        <img src="<?php echo BASE_URL ?>img/coup-de-coeur.png" alt="Bande-dessinée coup de coeur, meilleur bande-dessinée, <?php echo $this->albumInfos->getCollection(); ?>" class="bandeau_haut">
-        <?php endif; ?>
-        <?php if($this->albumInfos->recommande == 1): ?>
-            <img src="<?php echo BASE_URL ?>img/recommande.png" alt="Bande-dessinée recommandé, Conseil bande-dessinée, <?php echo $this->albumInfos->getCollection(); ?>" class="bandeau_bas">
-        <?php endif; ?>
-    </div>
-    <footer>
-        <a rel="lightbox[albumfooter]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($this->albumInfos); ?>" class="zoom">voir en grand</a>
-        <a rel="lightbox[albumFooter]" href="<?php echo $this->getHelper('customUrl')->getAlbumPageUrl($this->albumInfos); ?>" class="planche">voir une planche</a>
-    </footer>
-    <?php if(count($this->allAlbumPrice) > 0): ?>
-        <section class="prix_recompenses">
-            <header><h3>Prix & récompenses</h3></header>
-            <ul>
-                <?php foreach($this->allAlbumPrice as $albumPrice): ?>
-                <li>
-                    <a href="<?php echo $albumPrice->url ?>"><?php echo $albumPrice->serie ?></a>
-                    <span><?php echo $albumPrice->festival ?></span>
-                    <p itemprop="award"><?php echo $albumPrice->prix ?></p>
-                    <div class ="clear"></div>
-                </li>
-                <?php endforeach ; ?>
-            </ul>
-        </section>
-    <?php endif; ?>
-
-    <?php
-        if(isset($this->concours) && count($this->concours) > 0) {
-            foreach($this->concours as $concours) {
-                echo  $this->partial('partials/block300.phtml', array('data' => $concours));
-            }
-        }
-
-        if(isset($this->previews) && count($this->previews) > 0){
-            foreach($this->previews as $preview){
-                echo  $this->partial('partials/block300.phtml', array('data' => $preview));
-            }
-        }
-        echo $this->userAccountWidget('user_dashboard');
-        echo $this->writerDashBoardWidget($this->albumInfos->getIdAlbum(), $this->albumInfos->getIdSerie());
-    ?>
-    <!-- Pub 300x250 -->
-    <div class="pub">
-        <?php echo $this->partial('partials/pubs300large.phtml'); ?>
-            <!-- Album300 -->
-            <div id='div-gpt-ad-1350911838645-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350911838645-0'); });
-                </script>
+<div class="albums" itemscope itemtype="http://schema.org/Book">
+    <?php if (!$this->isMobile) : ?>
+        <div class="sidebar col-md-4">
+            <div class="album-cover-wrapper">
+                <div class="album-cover">
+                    <a rel="lightbox[album]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($this->albumInfos); ?>" class="zoom">
+                      <?php echo $this->getHelper('displayImage')->displayAlbumCover($this->albumInfos, 'big', 'front', '', 'itemprop="image"'); ?>
+                    </a>
+                    <a rel="lightbox[album]" href="<?php echo $this->getHelper('customUrl')->getAlbumPageUrl($this->albumInfos); ?>" class="planche">
+                      <?php echo $this->getHelper('displayImage')->displayAlbumPage($this->albumInfos, 'big', 'behind', '', 'itemprop="image"'); ?>
+                    </a>
+                    <?php if($this->albumIsCoupDeCoeur): ?>
+                    <img src="<?php echo BASE_URL ?>img/coup-de-coeur.png" alt="Bande-dessinée coup de coeur, meilleur bande-dessinée, <?php echo $this->albumInfos->getCollection(); ?>" class="bandeau_haut">
+                    <?php endif; ?>
+                    <?php if($this->albumInfos->recommande == 1): ?>
+                        <img src="<?php echo BASE_URL ?>img/recommande.png" alt="Bande-dessinée recommandé, Conseil bande-dessinée, <?php echo $this->albumInfos->getCollection(); ?>" class="bandeau_bas">
+                    <?php endif; ?>
+                </div>
+                <footer>
+                    <a rel="lightbox[albumfooter]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($this->albumInfos); ?>" class="zoom">voir en grand</a>
+                    <a rel="lightbox[albumFooter]" href="<?php echo $this->getHelper('customUrl')->getAlbumPageUrl($this->albumInfos); ?>" class="planche">voir une planche</a>
+                </footer>
             </div>
-            <!-- Album300interne -->
-            <div id='div-gpt-ad-1350912177560-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912177560-0'); });
-                </script>
-            </div>
-    </div>
-
-    <?php
-        if(isset($this->galleries) && count($this->galleries) > 0) {
-            foreach($this->galleries as $gallery) {
-                echo  $this->partial('partials/block300.phtml', array('data' => $gallery));
-            }
-        }
-        echo $this->partial('partials/socialContacts.phtml');
-    ?>
-    <div class="clear"></div>
-    <!-- Facebook like box -->
-    <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
-</div>
-
-<div class="rightSide">
-    <div class="rightContent">
-      <div class="clearfix">
-        <div class="icons">
-            <?php
-               $facebookConnect = Core_Service_FacebookConnect::getInstance();
-               $googleConnect   = Core_Service_GoogleConnect::getInstance();
-               if($facebookConnect->isConnected() || $googleConnect->isConnected()): ?>
-                <a onclick="javascript:addalbum(this, '<?php echo $this->albumInfos->getIdAlbum() ?>' , 'achat');" 
-                   href="javascript:void(0);" title=""
-                   class="prix <?php echo $this->inUserBdtechAchat == 1 ? 'prixon' : 'prixoff'; ?>">Ajout liste d'achat</a>
-
-                <a onclick="javascript:addalbum(this, '<?php echo $this->albumInfos->getIdAlbum() ?>' , 'fav');" 
-                   href="javascript:void(0);" title="" 
-                   class="acheter <?php echo $this->inUserBdtechFav == 1 ? 'acheteron' : 'acheteroff'; ?>">Ajout bdtheque</a>
-               <?php endif;  ?>
-                <a  href="javascript:void(0);" onclick="javascript:addCdc(this, '<?php echo $this->albumInfos->getIdAlbum() ?>');" 
-                    title="Coup de coeur" 
-                    class="like <?php echo $this->currentUserLike == 1 ? 'likeon' : 'likeoff'; ?>">J'aime</a>
-        </div>
-
-        <div class="album-title">
-          <h1>
-            <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
-              <span class="album-title_name" itemprop="name"><?php echo $this->albumInfos->getCollection() ?><?php echo $this->albumInfos->getTome() ? ' #'.$this->albumInfos->getTome() : ''; ?></span>
+            <?php echo $this->partial('partials/album_award.phtml', $this); ?>
+            <?php if (isset($this->concours) && count($this->concours) > 0) : ?>
+                <?php foreach ($this->concours as $concours) : ?>
+                    <?php echo $this->partial('partials/block300.phtml', array('data' => $concours)); ?>
+                <?php endforeach; ?>
             <?php endif; ?>
-            <span class="album-title_subname" itemprop="<?php echo (isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) ? 'alternateName' : 'name'; ?>"><?php echo $this->albumInfos->getTitre() ?></span>
-          </h1>
-          <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
-            <a class="view-more" href="<?php echo $this->getHelper('customUrl')->getSerieUrl($this->serie); ?>">
-                voir la série <?php echo $this->serie->getNomSerie(); ?>
-            </a>
-          <?php endif ?>
+                <?php  if (isset($this->previews) && count($this->previews) > 0) : ?>
+                    <?php foreach($this->previews as $preview) : ?>
+                        <?php echo $this->partial('partials/block300.phtml', array('data' => $preview)); ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php echo $this->userAccountWidget('user_dashboard'); ?>
+            <?php echo $this->writerDashBoardWidget($this->albumInfos->getIdAlbum(), $this->albumInfos->getIdSerie()); ?>
+            <div class="pub">
+                <?php echo $this->partial('partials/pubs300large.phtml'); ?>
+                <div id='div-gpt-ad-1350911838645-0'>
+                    <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350911838645-0'); });</script>
+                </div>
+                <div id='div-gpt-ad-1350912177560-0'>
+                    <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912177560-0'); });</script>
+                </div>
+            </div>
+            <?php if (isset($this->galleries) && count($this->galleries) > 0) : ?>
+                <?php foreach($this->galleries as $gallery) : ?>
+                    <?php echo $this->partial('partials/block300.phtml', array('data' => $gallery)); ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php echo $this->partial('partials/socialContacts.phtml', array('color' => 'pink')); ?>
+            <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
         </div>
-      </div>
-      <div class="separateur"></div>
-
-        <!-- Informations générales -->
-        <section class="album-infos">
-            <table>
-                 <?php if(count($this->dessinateurs)>0): ?>
-                <tr>
-                    <td class="label">Dessinateur<?php if(count($this->dessinateurs)>1){ ?>s<?php } ?>&nbsp;:</td>
-                    <td class="info">
-                         <?php
-                         if(isset($this->dessinateurs)):
-                            foreach ($this->dessinateurs as $dessinateurs): ?>  
-                                <h2><a href="<?php echo $this->customUrl(   array('nomAuteur'=> $dessinateurs->prenomAuteur
-                                           . ' ' . $dessinateurs->nomAuteur, 'idAuteur' => $dessinateurs->idAuteur ),'auteur') ?>" itemprop="author">
-                                   <?php echo $dessinateurs->prenomAuteur.' '.$dessinateurs->nomAuteur?></a></h2><br />
-                           <?php endforeach ;
-                         endif;?>
-                    </td>
-                </tr>
+    <?php endif; ?>
+    <div class="col-xs-12 col-md-8">
+        <div class="row separateur">
+            <div class="col-xs-10 album-title">
+                <h1>
+                    <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
+                        <span class="album-title_name" itemprop="name">
+                            <?php echo $this->albumInfos->getCollection() ?><?php echo $this->albumInfos->getTome() ? ' #'.$this->albumInfos->getTome() : ''; ?>
+                        </span>
+                    <?php endif; ?>
+                    <span class="album-title_subname" itemprop="<?php echo (isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) ? 'alternateName' : 'name'; ?>"><?php echo $this->albumInfos->getTitre() ?></span>
+                </h1>
+                <?php if(isset($this->albumInfos) && '' != $this->albumInfos->getIdSerie()) : ?>
+                    <a class="view-more" href="<?php echo $this->getHelper('customUrl')->getSerieUrl($this->serie); ?>">
+                        voir la série <?php echo $this->serie->getNomSerie(); ?>
+                    </a>
                 <?php endif ?>
-                <?php if(count($this->scenaristes)>0): ?>
-                <tr>
-                    <td class="label">Scénariste<?php if(count($this->scenaristes)>1){ ?>s<?php } ?>&nbsp;:</td>
-                    <td class="info">
-                        <?php 
-                        if(isset($this->scenaristes)):
-                            foreach ($this->scenaristes as $scenariste): ?>  
-                            <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur
-                                                                     , 'idAuteur' => $scenariste->idAuteur),'auteur') ?>" itemprop="author">
-                                <?php echo $scenariste->prenomAuteur.' '.$scenariste->nomAuteur ?></a></h2><br />
-                        <?php endforeach ;
-                        endif;?>
+            </div>
+            <div class="col-xs-2 icons">
+                <?php $facebookConnect = Core_Service_FacebookConnect::getInstance(); ?>
+                <?php $googleConnect   = Core_Service_GoogleConnect::getInstance(); ?>
+                <?php if ($facebookConnect->isConnected() || $googleConnect->isConnected()) : ?>
+                    <a onclick="javascript:addalbum(this, '<?php echo $this->albumInfos->getIdAlbum() ?>' , 'achat');" href="javascript:void(0);" title="" class="prix <?php echo $this->inUserBdtechAchat == 1 ? 'prixon' : 'prixoff'; ?>">Ajout liste d'achat</a>
+                    <a onclick="javascript:addalbum(this, '<?php echo $this->albumInfos->getIdAlbum() ?>' , 'fav');" href="javascript:void(0);" title="" class="acheter <?php echo $this->inUserBdtechFav == 1 ? 'acheteron' : 'acheteroff'; ?>">Ajout bdtheque</a>
+                <?php endif;  ?>
+                <a  href="javascript:void(0);" onclick="javascript:addCdc(this, '<?php echo $this->albumInfos->getIdAlbum() ?>');" title="Coup de coeur" class="pull-right like <?php echo $this->currentUserLike == 1 ? 'likeon' : 'likeoff'; ?>">J'aime</a>
+            </div>
+        </div>
+        <div class="row separateur">
+            <section class="col-xs-12 album-infos">
+                <table class="col-xs-6">
+                    <?php if(count($this->dessinateurs)>0): ?>
+                    <tr>
+                        <td class="label">Dessinateur<?php if(count($this->dessinateurs)>1){ ?>s<?php } ?>&nbsp;:</td>
+                        <td class="info">
+                             <?php
+                             if(isset($this->dessinateurs)):
+                                foreach ($this->dessinateurs as $dessinateurs): ?>  
+                                    <h2><a href="<?php echo $this->customUrl(   array('nomAuteur'=> $dessinateurs->prenomAuteur
+                                               . ' ' . $dessinateurs->nomAuteur, 'idAuteur' => $dessinateurs->idAuteur ),'auteur') ?>" itemprop="author">
+                                       <?php echo $dessinateurs->prenomAuteur.' '.$dessinateurs->nomAuteur?></a></h2><br />
+                               <?php endforeach ;
+                             endif;?>
+                        </td>
+                    </tr>
+                    <?php endif ?>
+                    <?php if(count($this->scenaristes)>0): ?>
+                    <tr>
+                        <td class="label">Scénariste<?php if(count($this->scenaristes)>1){ ?>s<?php } ?>&nbsp;:</td>
+                        <td class="info">
+                            <?php 
+                            if(isset($this->scenaristes)):
+                                foreach ($this->scenaristes as $scenariste): ?>  
+                                <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur
+                                                                         , 'idAuteur' => $scenariste->idAuteur),'auteur') ?>" itemprop="author">
+                                    <?php echo $scenariste->prenomAuteur.' '.$scenariste->nomAuteur ?></a></h2><br />
+                            <?php endforeach ;
+                            endif;?>
 
-                    </td>
-                </tr>
-                <?php endif; ?>
-                <?php if(count($this->coloristes)>0): ?>
-                <tr>
-                    <td class="label">Coloriste<?php if(count($this->coloristes)>1){ ?>s<?php } ?>&nbsp;:</td>
-                    <td class="info">
-                        <?php foreach ($this->coloristes as $coloriste): ?>  
-                            <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur
-                                                                     , 'idAuteur' => $coloriste->idAuteur), 'auteur') ?>" itemprop="author">
-                                <?php echo $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur ?></a></h2><br />
-                        <?php endforeach ?>
-                    </td>
-                </tr>
-                <?php endif; ?>
-                <tr>
-                    <td class="label">Éditions&nbsp;:</td>
-                    <td class="info">
-                      <h2>
-                      <?php if('http://' != $this->editeur['url'] & '' != $this->editeur['url']) : ?>
-                        <a itemprop="publisher" target="_blank" href="<?php echo $this->editeur['url'] ?>"><?php echo $this->editeur['nom'] ?></a>
-                      <?php else : ?>
-                        <span itemprop="publisher"><?php echo $this->editeur['nom']; ?></span>
-                      <?php endif; ?></h2>
-                    </td>
-                </tr>
-                <?php if(!null == $this->collectionInfos): ?>
-                <tr>
-                    <td class="label">Collection&nbsp;:</td>
-                    <td class="info">
-                        <?php /*<a href="<?php echo $this->customUrl(array('tag' => $this->collectionInfos->getNomCollection()), 'recherche') ?>">*/ ?>
-                        <h2><?php echo $this->collectionInfos->getNomCollection() ?><?php /*</a>*/?></h2>
-                    </td>
-                </tr>
-                <?php endif ;  ?>
-            </table>
-
-            <table>
-                <?php if(!null == $this->motcles): ?>
-                <tr>
-                    <td class="label">Genre&nbsp;:</td>
-                    <td class="info">
-                        <?php foreach ($this->motcles as $key => $motscles):
-                                $sep = '';
-
-                                if($key >= 0 && $key < count($this->motcles)-1 ) {
-                                    $sep = ',&nbsp;' ;
-                                }
-                                $searchQuote = array('"', "'") ?>  
-
-                        <h2><a href="<?php echo $this->customUrl(array('tag'=>$motscles->libelle), 'recherche') ?>"
-                           title="<?php echo str_replace( $searchQuote , '' , strip_tags($motscles->definition)) ?>" itemprop="genre">
-                           <?php echo $motscles->libelle ?></a><?php echo $sep ?></h2>
-                        <?php endforeach ?>
-                    </td>
-                </tr>
-                <?php endif; ?>
-                <?php if(!null == $this->albumInfos->getDatecreation() ): ?>
-                <tr>
-                    <td class="label">Sortie&nbsp;:</td>
-                    <td class="info" itemprop="datePublished" content="<?php echo $this->albumInfos->getDatecreation(); ?>">
-                        <?php  echo $this->dateFormat($this->albumInfos->getDatecreation() , 'month_year' ) ?>
-                    </td>
-                </tr>
-                <?php endif; ?>
-                <?php if(!null == $this->albumInfos->getIsbn()): 
-                        $isbnAlbum = $this->albumInfos->getIsbn() ;
-                        if($isbnAlbum[0] != '_'): ?>
-                        <tr>
-                            <td class="label">ISBN&nbsp;:</td>
-                            <td class="info" itemprop="isbn"><?php echo $this->albumInfos->getIsbn() ?></td>
-                        </tr>
-                <?php endif;
-                endif; ?>
-            </table>
-        </section>
-
-        <div class="clear"></div>
-
-        <div class="separateur"></div>
-
-        <?php
-            if(!null == $this->albumInfos->getIsbn()){
-                echo $this -> buyThisBookButtons( $this->albumInfos->getIsbn(), $this->albumInfos->getLienAmazon() ); 
-            }
-
-
-            echo $this -> socialButtons($this->currentUrl());
-        ?>
-  
-        <div class="clear"></div>
-
-        <!-- Bloc Résumé, Avis ... -->
-        <section class="album-details">
-                <div class="masque"></div>
-
-                <!-- L'idenfiant du lien doit correspondre à la classe du bloc concerné -->
-                <!-- L'appel se fait en JS à l'aide de ces noms -->
-                <ul class="call-sections">
-                    <li id="summary" class="active">Résumé & Chronique</li>
-                     <?php if(count($this->critique) > 1): ?>
-                    <li id="avis">Avis des internautes</li>
-                    <?php endif;?>
-                    <?php if('' != $this->albumInfos->getIdSerie()): ?>
-                    <li id="serie">La série</li>
+                        </td>
+                    </tr>
                     <?php endif; ?>
-                    <?php if( $this->albumInfos->getBandeAnnonce() != "" ): ?>
-                    <li id="bande-annonce">Bande-annonce : <?php $this->albumInfos->getBandeAnnonce() ?></li>
+                    <?php if(count($this->coloristes)>0): ?>
+                    <tr>
+                        <td class="label">Coloriste<?php if(count($this->coloristes)>1){ ?>s<?php } ?>&nbsp;:</td>
+                        <td class="info">
+                            <?php foreach ($this->coloristes as $coloriste): ?>  
+                                <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur
+                                                                         , 'idAuteur' => $coloriste->idAuteur), 'auteur') ?>" itemprop="author">
+                                    <?php echo $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur ?></a></h2><br />
+                            <?php endforeach ?>
+                        </td>
+                    </tr>
                     <?php endif; ?>
-                    <li id="form-review-internaute" >Donner votre avis</li>
-                </ul>
+                    <tr>
+                        <td class="label">Éditions&nbsp;:</td>
+                        <td class="info">
+                          <h2>
+                          <?php if('http://' != $this->editeur['url'] & '' != $this->editeur['url']) : ?>
+                            <a itemprop="publisher" target="_blank" href="<?php echo $this->editeur['url'] ?>"><?php echo $this->editeur['nom'] ?></a>
+                          <?php else : ?>
+                            <span itemprop="publisher"><?php echo $this->editeur['nom']; ?></span>
+                          <?php endif; ?></h2>
+                        </td>
+                    </tr>
+                    <?php if(!null == $this->collectionInfos): ?>
+                    <tr>
+                        <td class="label">Collection&nbsp;:</td>
+                        <td class="info">
+                            <?php /*<a href="<?php echo $this->customUrl(array('tag' => $this->collectionInfos->getNomCollection()), 'recherche') ?>">*/ ?>
+                            <h2><?php echo $this->collectionInfos->getNomCollection() ?><?php /*</a>*/?></h2>
+                        </td>
+                    </tr>
+                    <?php endif ;  ?>
+                </table>
+                <table class="col-xs-6">
+                    <?php if(!null == $this->motcles): ?>
+                    <tr>
+                        <td class="label">Genre&nbsp;:</td>
+                        <td class="info">
+                            <?php foreach ($this->motcles as $key => $motscles):
+                                    $sep = '';
 
-                <section class="summary">
-                    <?php if(isset($this->resume[0]->histoire) && $this->resume[0]->histoire != '') : ?>
-                    <h2>Résumé de l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
-                    <div itemprop="description"> <?php echo $this->textFormat($this->resume[0]->histoire, 'RESUME_TEXT') ?></div>
-                    <p class="right">
-                        Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs"><?php echo $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
-                        le <?php echo $this->dateFormat($this->resume[0]->dateHistoire, 'day_month_year_with_slash') ?>
-                    </p>
-                    <?php endif; ?>
-                    <div class="separateur"></div>
-                    <div class="separateur"></div>
-                    <?php if(isset($this->critique[0]->critique) && $this->critique[0]->critique != '') : ?>
-                      <h2>Notre avis sur l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
-                      <div itemprop="review" itemscope itemtype="http://schema.org/Review">
-                        <div itemprop="reviewBody"><?php echo $this->textFormat($this->critique[0]->critique, 'RESUME_TEXT') ?></div>
-                        <p class="right">
-                          Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
-                          le <span itemprop="datePublished" content="<?php echo $this->critique[0]->datecreation; ?>"><?php echo $this->dateFormat($this->critique[0]->datecreation, 'day_month_year_with_slash'); ?></span>
-                        </p>
-                      </div>
-                    <?php endif; ?>
-                </section>
+                                    if($key >= 0 && $key < count($this->motcles)-1 ) {
+                                        $sep = ',&nbsp;' ;
+                                    }
+                                    $searchQuote = array('"', "'") ?>  
 
-                <?php if(count($this->critique) > 0): ?>
-                <section class="avis">
-                    <?php $critiques = $this->critique; ?>
-                    <?php array_shift($critiques); ?>
-                    <?php foreach($critiques as $key => $critique): ?>
-                      <div itemprop="review" itemscope itemtype="http://schema.org/Review">
-                        <p class="justify" itemprop="reviewBody">
-                          <?php echo $this->textFormat($critique->critique, 'RESUME_TEXT')  ?>
-                        </p>
-                        <p class="right">
-                          Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
-                          le <span itemprop="datePublished" content="<?php echo $critique->datecreation; ?>"><?php echo $this->dateFormat($critique->datecreation, 'day_month_year_with_slash') ?></span>
-                        </p>
-                        <?php if($key >= 0 && $key < count($critiques)-1): ?>
-                        <div class="separateur"></div>
-                        <div class="separateur"></div>
+                            <h2><a href="<?php echo $this->customUrl(array('tag'=>$motscles->libelle), 'recherche') ?>"
+                               title="<?php echo str_replace( $searchQuote , '' , strip_tags($motscles->definition)) ?>" itemprop="genre">
+                               <?php echo $motscles->libelle ?></a><?php echo $sep ?></h2>
+                            <?php endforeach ?>
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                    <?php if(!null == $this->albumInfos->getDatecreation() ): ?>
+                    <tr>
+                        <td class="label">Sortie&nbsp;:</td>
+                        <td class="info" itemprop="datePublished" content="<?php echo $this->albumInfos->getDatecreation(); ?>">
+                            <?php  echo $this->dateFormat($this->albumInfos->getDatecreation() , 'month_year' ) ?>
+                        </td>
+                    </tr>
+                    <?php endif; ?>
+                    <?php if(!null == $this->albumInfos->getIsbn()): 
+                            $isbnAlbum = $this->albumInfos->getIsbn() ;
+                            if($isbnAlbum[0] != '_'): ?>
+                            <tr>
+                                <td class="label">ISBN&nbsp;:</td>
+                                <td class="info" itemprop="isbn"><?php echo $this->albumInfos->getIsbn() ?></td>
+                            </tr>
+                    <?php endif;
+                    endif; ?>
+                </table>
+            </section>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <?php echo $this->socialButtons($this->currentUrl()); ?>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <?php if (!null == $this->albumInfos->getIsbn()) : ?>
+                    <?php echo $this->buyThisBookButtons($this, $this->albumInfos->getIsbn(), $this->albumInfos->getLienAmazon()); ?>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="row separateur">
+            <div class="col-xs-12">
+                <div class="album-details-wrapper">
+                    <ul class="nav nav-tabs call-sections" role="tablist">
+                        <li><a href="#summary" class="active">Résumé & Chronique</a></li>
+                        <?php if (count($this->critique) > 1) : ?>
+                            <li><a href="#avis">Avis des internautes</a></li>
                         <?php endif;?>
-                      </div>
-                    <?php endforeach;?>
+                        <?php if ('' != $this->albumInfos->getIdSerie()) : ?>
+                            <li><a href="#serie">La série</a></li>
+                        <?php endif; ?>
+                        <?php if ($this->albumInfos->getBandeAnnonce() != "") : ?>
+                            <li><a href="#bande-annonce">Bande-annonce</a></li>
+                        <?php endif; ?>
+                        <li><a href="#form-review-internaute">Donnez votre avis</a></li>
+                    </ul>
+                    <div class="album-details block white">
+                        <section id="summary" class="summary">
+                            <?php if(isset($this->resume[0]->histoire) && $this->resume[0]->histoire != '') : ?>
+                            <div class="separateur">
+                                <h2>Résumé de l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
+                                <div itemprop="description"> <?php echo $this->textFormat($this->resume[0]->histoire, 'RESUME_TEXT') ?></div>
+                                <p class="right">
+                                    Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs"><?php echo $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                                    le <?php echo $this->dateFormat($this->resume[0]->dateHistoire, 'day_month_year_with_slash') ?>
+                                </p>
+                            </div>
+                            <?php endif; ?>
+                            <?php if(isset($this->critique[0]->critique) && $this->critique[0]->critique != '') : ?>
+                              <h2>Notre avis sur l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
+                              <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+                                <div itemprop="reviewBody"><?php echo $this->textFormat($this->critique[0]->critique, 'RESUME_TEXT') ?></div>
+                                <p class="right">
+                                  Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                                  le <span itemprop="datePublished" content="<?php echo $this->critique[0]->datecreation; ?>"><?php echo $this->dateFormat($this->critique[0]->datecreation, 'day_month_year_with_slash'); ?></span>
+                                </p>
+                              </div>
+                            <?php endif; ?>
+                        </section>
+                        <?php if(count($this->critique) > 0): ?>
+                            <section id="avis" class="avis">
+                                <?php $critiques = $this->critique; ?>
+                                <?php array_shift($critiques); ?>
+                                <?php foreach($critiques as $key => $critique): ?>
+                                    <div itemprop="review" itemscope itemtype="http://schema.org/Review">
+                                        <p class="justify" itemprop="reviewBody">
+                                            <?php echo $this->textFormat($critique->critique, 'RESUME_TEXT')  ?>
+                                        </p>
+                                        <p class="right <?php if ($key >= 0 && $key < count($critiques)-1) : ?>separateur<?php endif; ?>">
+                                            Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                                            le <span itemprop="datePublished" content="<?php echo $critique->datecreation; ?>"><?php echo $this->dateFormat($critique->datecreation, 'day_month_year_with_slash') ?></span>
+                                        </p>
+                                    </div>
+                                <?php endforeach;?>
+                            </section>
+                        <?php endif; ?>
+                        <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
+                            <section id="serie" class="serie also-like clearfix">
+                                <h2>Les albums de la série <i><?php echo $this->serie->getNomSerie(); ?></i></h2>
+                                <ul class="row">
+                                    <?php foreach($this->serie->albums as $album) : ?>
+                                        <li class="col-xs-6 col-md-3">
+                                            <div class="album-wrapper">
+                                                <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                                    <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike'); ?>
+                                                </a>
+                                                <div class="title-wrapper">
+                                                    <h2><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                                        <?php echo $album->getTitre(); ?>
+                                                    </a></h2>
+                                                    <?php if ($album->getTome()) : ?>
+                                                        <span><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                                            Tome # <?php echo $album->getTome(); ?>
+                                                        </a></span>
+                                                    <?php endif; ?>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </section>
+                        <?php endif; ?>
+                        <?php if( $this->albumInfos->getBandeAnnonce() != "" ): ?>
+                            <section id="bande-annonce" class="bande-annonce">
+                                <p><?php echo $this->playVid($this->albumInfos->getBandeAnnonce()); ?></p>
+                            </section>
+                        <?php endif ; ?>
+                        <section id="form-review-internaute" class="form-review-internaute row">
+                            <?php
+                            $fieldDecorator = array(
+                                'ViewHelper',
+                                'Description',
+                                array('errors', array('class' => 'errors')),
+                                array('Label' , array('style' => 'display:block')),
+                                array('row'=> 'HtmlTag', array('tag' => 'p'))
+                            );
 
-                </section>
+                            $buttonDecorator = array(
+                               'ViewHelper',
+                                array('row'=> 'HtmlTag', array('tag' => 'p' ))
+                            );
+
+                            $this->reviewForm->review_pseudo->clearDecorators();
+                            $this->reviewForm->review_mail->clearDecorators();
+                            $this->reviewForm->review_text->clearDecorators();
+                            $this->reviewForm->review_submit->clearDecorators();
+
+                            $this->reviewForm->setAttrib('class', 'form col-xs-12 col-md-10 col-md-offset-1');
+                            $this->reviewForm->review_pseudo->setDecorators($fieldDecorator)->setAttrib('class', 'field-text') ;
+                            $this->reviewForm->review_mail->setDecorators($fieldDecorator)->setAttrib('class', 'field-text');
+                            $this->reviewForm->review_text->setDecorators($fieldDecorator)->setAttrib('class', 'field-textarea');
+                            $this->reviewForm->review_dont_like_bot->setDecorators($fieldDecorator)->setAttrib('style', 'display:none;');
+                            $this->reviewForm->review_submit->setDecorators($buttonDecorator)->setAttrib('class','btn field-submit') ;
+
+                            echo $this->reviewForm ?>
+                        </section>
+                    </div>
+                </div>
+                <?php if (!empty($this->interview)) : ?>
+                    <div class="interview">
+                        <h3>Nos interviews liées</h3>
+                        <?php foreach ($this->interview as $interview) : ?>
+                            <article>
+                                <h2><?php echo $interview->titreInterview ?></h2>
+                                <div class="interview-wrapper">
+                                    <?php echo $this->textFormat($interview->textInterview, 'RESUME_INTERVIEW'); ?>
+                                    <a href="<?php echo $this->customUrl(array('id'=> $interview->idInterview, 'nom'=>$interview->titreInterview), 'interview') ?>" class="btn pull-right">Lire la suite &rsaquo;</a>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
                 <?php endif; ?>
-                <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
-                <section class="serie albums-auteur clearfix">
-                    <h2>Les albums de la série <i><?php echo $this->serie->getNomSerie(); ?></i></h2>
-                    <ul>
-                        <?php foreach($this->serie->albums as $album) : ?>
-                            <li>
-                                <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
-                                    <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike'); ?>
-                                </a>
-                                <h2><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
-                                    <?php echo $album->getTitre(); ?>
-                                </a></h2>
-                                <?php if ($album->getTome()) : ?>
-                                <span><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
-                                    Tome # <?php echo $album->getTome(); ?>
-                                </a></span>
-                                <?php endif; ?>
+            </div>
+        </div>
+        <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
+            <div class="row separateur">
+                <section class="albums-auteur also-like col-xs-12">
+                    <h3>Dans la même série</h3>
+                    <ul class="row">
+                        <?php $keys = array_keys($this->serie->albums); ?>
+                        <?php $keys = count($this->serie->albums) > 4 ? array_rand($this->serie->albums, 4) : $keys; ?>
+                        <?php $keys = count($this->serie->albums) > 8 ? array_rand($this->serie->albums, 8) : $keys; ?>
+                        <?php foreach($keys as $key) : $album = $this->serie->albums[$key]; ?>
+                            <li class="col-xs-6 col-md-3">
+                                <div class="album-wrapper">
+                                    <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                        <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike'); ?>
+                                    </a>
+                                    <div class="title-wrapper">
+                                        <h2><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                            <?php echo $album->getTitre(); ?>
+                                        </a></h2>
+                                        <?php if ($album->getTome()) : ?>
+                                            <span><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                                Tome # <?php echo $album->getTome(); ?>
+                                            </a></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <a href="<?php echo $this->getHelper('customUrl')->getSerieUrl($this->serie); ?>" class="btn pull-right">
+                        Les albums de la série <?php echo $this->serie->getNomSerie(); ?>
+                    </a>
+                </section>
+            </div>
+        <?php endif; ?>
+        <?php if ($this->albumsconnexes !== null): ?>
+            <div class="row">
+                <section class="also-like col-xs-12">
+                    <h3>Vous aimerez également</h3>
+                    <ul class="row">
+                        <?php foreach($this->albumsconnexes as $albumConnexes): ?>
+                            <li class="col-xs-6 col-md-3">
+                                <div class="album-wrapper">
+                                    <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($albumConnexes); ?>">
+                                        <?php echo $this->getHelper('displayImage')->displayAlbumCover($albumConnexes, 'alsolike'); ?>
+                                    </a>
+                                    <div class="title-wrapper">
+                                        <h2><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($albumConnexes); ?>">
+                                            <?php echo $albumConnexes->titre; ?>
+                                        </a></h2>
+                                        <?php if ($albumConnexes->tome) : ?>
+                                            <span><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($albumConnexes); ?>">
+                                                Tome # <?php echo $albumConnexes->tome; ?>
+                                            </a></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </li>
                         <?php endforeach; ?>
                     </ul>
                 </section>
-                <?php endif; ?>
-                <?php if( $this->albumInfos->getBandeAnnonce() != "" ): ?>
-                <section class="bande-annonce">
-                    <p>
-                     <?php echo $this->playVid($this->albumInfos->getBandeAnnonce()); ?>
-                    </p>
-                </section>
-                <?php endif ; ?>
-                <section class="form-review-internaute">
-                    <?php
-                    $fieldDecorator = array(
-                        'ViewHelper',
-                        'Description',
-                        array('errors', array('class' => 'errors')),
-                        array('Label' , array('style' => 'display:block')),
-                        array('row'=> 'HtmlTag', array('tag' => 'p'))
-                    );
-
-                    $buttonDecorator = array(
-                       'ViewHelper',
-                        array('row'=> 'HtmlTag', array('tag' => 'p' ))
-                    );
-
-                    $this->reviewForm->review_pseudo->clearDecorators();
-                    $this->reviewForm->review_mail->clearDecorators();
-                    $this->reviewForm->review_text->clearDecorators();
-                    $this->reviewForm->review_submit->clearDecorators();
-
-                    $this->reviewForm->review_pseudo->setDecorators($fieldDecorator)->setAttrib('style', 'width:300px;') ;
-                    $this->reviewForm->review_mail->setDecorators($fieldDecorator)->setAttrib('style', 'width:300px;');
-                    $this->reviewForm->review_text->setDecorators($fieldDecorator)->setAttrib('style', 'width:535px;');
-                    $this->reviewForm->review_dont_like_bot->setDecorators($fieldDecorator)->setAttrib('style', 'display:none;');
-                    $this->reviewForm->review_submit->setDecorators($buttonDecorator) ;
-
-                    echo $this->reviewForm ?>
-                </section>
-        </section>
-
-        <!-- Interview/Article -->
-        <?php 
-            #var_dump($this->interview);
-        if( null !== $this->interview ): 
-            ?>
-
-            <?php
-            foreach( $this->interview as $interview ): ?>
-            <article>
-                    <hgroup>
-                        <h3>A voir aussi...</h3>
-                        <h2><?php echo $interview->titreInterview ?></h2>
-                    </hgroup>
-                    <div class="articleWrapper">
-                        <?php echo  $this->textFormat($interview->textInterview, 
-                                                      'RESUME_INTERVIEW')//$this->cleanOutput() ?>
-
-                    </div>
-                    <a href="<?php echo $this->customUrl(array('id'=> $interview->idInterview, 'nom'=>$interview->titreInterview), 'interview') ?>" class="more">Lire la suite &rsaquo;</a>
-                    <div class="clear"></div>
-            </article>
-        <?php 
-            endforeach;
-        endif; ?>
-        <div class="separateur"></div>
-          <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
-            <section class="albums-auteur also-like clearfix">
-                <h3>Dans la même série</h3>
-                <div>
-                    <a href="<?php echo $this->getHelper('customUrl')->getSerieUrl($this->serie); ?>">
-                        Les albums de la série <?php echo $this->serie->getNomSerie(); ?>
-                    </a>
-                </div>
-                <ul class="clearfix">
-                    <?php $keys = array_keys($this->serie->albums); ?>
-                    <?php $keys = count($this->serie->albums) > 4 ? array_rand($this->serie->albums, 4) : $keys; ?>
-                    <?php $keys = count($this->serie->albums) > 8 ? array_rand($this->serie->albums, 8) : $keys; ?>
-                    <?php foreach($keys as $key) : $album = $this->serie->albums[$key]; ?>
-                        <li>
-                            <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
-                                <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike'); ?>
-                            </a>
-                            <h2><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
-                                <?php echo $album->getTitre(); ?>
-                            </a></h2>
-                            <?php if ($album->getTome()) : ?>
-                                <span><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
-                                    Tome # <?php echo $album->getTome(); ?>
-                                </a></span>
-                            <?php endif; ?>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
-            </section>
-          <?php endif; ?>
-        <div class="separateur"></div>
-        <?php if ($this->albumsconnexes !== null): ?>
-        <!-- Vous aimerez également -->
-        <section class="also-like">
-            <h3>Vous aimerez également</h3>
-            <ul class="clearfix">
-                <?php foreach($this->albumsconnexes as $albumConnexes): ?>
-                    <li><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($albumConnexes); ?>">
-                        <?php echo $this->getHelper('displayImage')->displayAlbumCover($albumConnexes, 'alsolike'); ?>
-                    </a></li>
-                <?php endforeach; ?>
-            </ul>
-        </section>
+            </div>
         <?php endif; ?>
     </div>
-</div>
-<div class="clear"></div>
 </div>

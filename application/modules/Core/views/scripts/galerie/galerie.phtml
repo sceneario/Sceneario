@@ -1,42 +1,36 @@
-	                
-<!-- CONTENU -->
-
-<div class="galerieWrapper">
-	<div class="galerie-title">
-		<h2><a href="<?php echo $this->url(array(), !empty($this->isPreview) ? 'listpreview' : 'listgalerie'); ?>"><?php echo !empty($this->isPreview) ? 'Preview' : 'Galerie' ; ?></a></h2> -
-		<h1><a href="<?php echo $this->currentUrl(); ?>"><?php echo $this->titre ?></a></h1>
-	</div>
-	<div class="galerieSlider <?php echo !empty($this->isPreview) ? 'preview' : ''; ?>">
-		
-		<ul>
-                    <?php
-                    foreach($this->images as $image):
-                    ?>    
-                       <li><a href="<?php echo $image['big'] ?>" rel="lightbox[gal]" title=""><img src="<?php  echo $image['med'] ?>" class="<?php echo !empty($this->isPreview) ? 'norotate' : ''; ?>" alt="<?php echo (!empty($this->isPreview) ? 'preview bande-dessinée' : 'galerie bande-dessinée').', '.$this->titre ?>" /></a></li>
-                    <?php    
-                    endforeach;
-                    ?>
-		</ul>
-		
-	</div>
-	
-	<a href="javascript:void(0);" class="prev"></a>
-	<a href="javascript:void(0);" class="next"></a>
-	
-	<div class="sliderPagination">
+<div class="col-xs-12">
+    <div class="galerie-title">
+        <h2>
+            <a href="<?php echo $this->url(array(), !empty($this->isPreview) ? 'listpreview' : 'listgalerie'); ?>">
+                <?php echo !empty($this->isPreview) ? 'Preview' : 'Galerie' ; ?>
+            </a>
+        </h2> -
+        <h1><a href="<?php echo $this->currentUrl(); ?>"><?php echo $this->titre ?></a></h1>
+    </div>
+    <div id="slider">
+        <div id="slides-wrapper">
+            <?php foreach ($this->images as $image) : ?>
+                <div class="slide">
+                    <a href="<?php echo $image['big'] ?>" rel="lightbox[gal]" title="">
+                        <img src="<?php  echo $image['med'] ?>" class="img-responsive <?php echo !empty($this->isPreview) ? 'norotate' : ''; ?>" alt="<?php echo (!empty($this->isPreview) ? 'preview bande-dessinée' : 'galerie bande-dessinée').', '.$this->titre ?>" />
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <a href="javascript:void(0);" class="prev"></a>
+        <a href="javascript:void(0);" class="next"></a>
+    </div>
+    <div class="sliderPagination">
             <?php foreach($this->images as $image): ?>
                 <a href="#">&nbsp;</a>
             <?php endforeach; ?>
-	</div>
-	
-	<?php
-             echo $this -> socialButtons($this->currentUrl());
-        ?>
-	
+    </div>
+    <?php echo $this -> socialButtons($this->currentUrl()); ?>
 </div>
-
-
-<!-- Reinitialisation des float -->
-<div class="clear"></div>
-
-     
+<?php $this->block_js[] = '
+<script type="text/javascript">
+    $(window).load(function() {
+        slider(500,"#slider .next","#slider .prev",".sliderPagination a","#slides-wrapper",null, true);
+    });
+</script>
+'; ?>

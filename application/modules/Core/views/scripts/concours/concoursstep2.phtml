@@ -1,129 +1,92 @@
-<!-- CONTENU -->
-<h1 class="concours">&Agrave; gagner en ce moment sur Sceneario !</h1>
-
-<div class="whiteblock940">
-	 
-        <figure class="center">
-		<?php
-                $filename =  '/images/concours/' . $this->concoursEnCours->getNomConcours() . '.jpg' ;
-                if(!file_exists(ROOT_PATH . PUBLIC_DIR .  $filename)): 
-                     $filename = "/img/temp/scev6-tempconcours.jpg";      
-                endif; ?>
-            <img src="<?php echo $filename ?>" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" class="illus">
-                ?>
-		<figcaption><h1><?php echo $this->concoursEnCours->getLibelleConcours() ?></h1></figcaption>
-	</figure>
-         
-     
-        
-	<hgroup>
-            <h2>Du <?php echo $this->dateFormat($this->concoursEnCours->getDateDebut() , 'day_month_year_with_slash') 
-                          . ' au ' .  $this->dateFormat($this->concoursEnCours->getDateFin() , 'day_month_year_with_slash' ) ?></h2>
-            <h3><?php echo strip_tags($this->concoursEnCours->getEntete()) ?></h3>
-	</hgroup>
-    <?php if (!empty($this->album_related)) : ?>
-        <a href="<?php echo $this->customUrl(array('titleSerie' => $this->album_related->getCollection().($this->album_related->getTome() != '' ? ' ' . $this->album_related->getTome() : ''),
-                    'titleAlbum' => $this->album_related->getTitre(),
-                    'idAlbum' => $this->album_related->getIdAlbum()),
-                    'album' ); ?>" class="fiche_album">Voir la fiche BD ></a>
-    <?php endif; ?>
-	<!-- Reinitialisation des float -->
-	<div class="clear"></div>
-	
-	<div class="separateur"></div>
-<div class="left-column">
-	<form id="form_coord" action="<?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours() , 
-                                                         'idConcours'  => $this->concoursEnCours->getNomConcours()),   'concoursstep3') ?>" method="post" class="coords">
-		<h2>Vos coordonnées</h2>
-		<p>Pour valider votre participation, veuillez remplir les champs ci-dessous. Tous les champs sont obligatoires. Une seule participation par personne sera prise en compte par jour. Attention votre email doit être valide, nous l'utiliserons pour vous contacter si vous remportez le concours.</p>
-		
-		<div class="leftForm">
-			<label for="nom">Nom</label>
-			<input type="text" class="participant_details" name="participant_details[nom]" id="nom" value="" required="required">
-			
-			<label for="email">Adresse email</label>
-			<input type="text" class="participant_details" name="participant_details[email]" id="email" value="" required="required" pattern="[a-zA-Z0-9.-_]+@[a-z]+.[a-z]{2,4}">
-			
-			<label for="adresse">Adresse postale</label>
-			<input type="text" class="participant_details" name="participant_details[adresse]" id="adresse" value="" required="required">
-		</div>
-		
-		<div class="rightForm">
-			<label for="prenom">Prénom</label>
-			<input type="text" class="participant_details" name="participant_details[prenom]" id="prenom" value="" required="required">
-			
-			<label for="email2">Entrez à nouveau votre adresse email</label>
-			<input type="text" class="participant_details" name="participant_details[email2]" id="email2" value="" required="required" pattern="[a-zA-Z0-9.-_]+@[a-z]+.[a-z]{2,4}">
-			
-			<div class="cp">
-				<label for="cp">Code Postal</label>
-				<input type="text" class="participant_details" name="participant_details[cp]" id="cp" value="" required="required" pattern="[0-9]{5}">
-			</div>
-			
-			<div class="ville">
-				<label for="ville">Ville</label>
-				<input type="text" class="participant_details" name="participant_details[ville]" id="ville" value="" required="required">
-			</div>
-		</div>
-		<input type="hidden" name="concours_process[step2]" value="1">
-                <input type="hidden" name="concours_process[token]" value="<?php echo $this->concoursToken ?>">
-                <input type="hidden" name="participant_serialized_reponses" value='<?php echo $this->postConcoursReponses ?>'>
-		<a href="javascript:void(0);"   id="submitconcourstep2" class="submit">Valider mes réponses <img src="/img/concours-fleche.png" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" /></a>
-                <div id="messageValidation"></div>
-        </form>
-
-<div class="clear"></div>
-	
-	<p class="reglement"><a target="_blank" href="<?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours() , 
-                                                         'idConcours'  => $this->concoursEnCours->getNomConcours()), 'concoursreglement') ?>">Voir le réglement du concours</a></p>
-</div>
-<div class="right-column">
-    <?php if (!empty($this->album_related)) : ?>
-    <div class="pinkblock300">
-        <header>
-            <a href="<?php echo $this->customUrl(array('titleSerie' => $this->album_related->getCollection().($this->album_related->getTome() != '' ? ' ' . $this->album_related->getTome() : ''),
-                    'titleAlbum' => $this->album_related->getTitre(),
-                    'idAlbum' => $this->album_related->getIdAlbum()),
-                    'album' ); ?>" class="more">Voir la fiche BD ></a>
-
-            <a href="/galerie"><h3>Fiche BD</h3></a>
-        </header>
-        <figure class="center">
-            <a href="<?php echo $this->customUrl(array('titleSerie' => $this->album_related->getCollection().($this->album_related->getTome() != '' ? ' ' . $this->album_related->getTome() : ''),
-                    'titleAlbum' => $this->album_related->getTitre(),
-                    'idAlbum' => $this->album_related->getIdAlbum()),
-                    'album' ); ?>">
-                <img src="<?php echo $this->customUrl( array('isbn'=> $this->album_related->getIsbn(), 'format'=> 'big') , 'couverture' ) ?>" alt="<?php echo str_replace(array('"',"'","`"), '', $this->album_related->getCollection().' '.($this->album_related->getTome() != '' ? 'Tome ' . $this->album_related->getTome() : '').' - '.$this->album_related->getTitre()); ?>">
-            </a>
+<div class="concours col-xs-12">
+    <h3>&Agrave; gagner en ce moment sur Sceneario&nbsp;!</h3>
+    <div class="block white col-xs-12 rounded concours-current">
+        <figure class="row">
+            <?php $filename = file_exists(ROOT_PATH.PUBLIC_DIR.'/images/concours/'.$this->concoursEnCours->getNomConcours().'.jpg') ? '/images/concours/'.$this->concoursEnCours->getNomConcours().'.jpg' : '/img/temp/scev6-tempconcours.jpg'; ?>
+            <img src="<?php echo $filename ?>" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>" class="illus" />
         </figure>
-        <a href="<?php echo $this->customUrl(array('titleSerie' => $this->album_related->getCollection().($this->album_related->getTome() != '' ? ' ' . $this->album_related->getTome() : ''),
-                    'titleAlbum' => $this->album_related->getTitre(),
-                    'idAlbum' => $this->album_related->getIdAlbum()),
-                    'album' ); ?>">
-            <h2>
-                <?php echo $this->album_related->getCollection(); ?><br />
-                <?php echo ($this->album_related->getTome() != '' ? 'Tome ' . $this->album_related->getTome().' - ' : '').$this->album_related->getTitre(); ?>
-            </h2>
-        </a>
-        <a href="<?php echo $this->customUrl(array('titleSerie' => $this->album_related->getCollection().($this->album_related->getTome() != '' ? ' ' . $this->album_related->getTome() : ''),
-                    'titleAlbum' => $this->album_related->getTitre(),
-                    'idAlbum' => $this->album_related->getIdAlbum()),
-                    'album' ); ?>" class="more">Voir la fiche BD ›</a>
-    </div>
-    <?php endif; ?>
-
-    <div class="pub">
-        <div id="div-gpt-ad-1350912979829-0"  style="width:300px; height:250px;">
-            <script type="text/javascript">
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912979829-0'); });
-            </script>
+        <h1 class="hidden-xs"><?php echo $this->concoursEnCours->getLibelleConcours() ?></h1>
+        <div class="concours-description row">
+            <div class="col-xs-12 col-md-9">
+                <h2>Du <?php echo $this->dateFormat($this->concoursEnCours->getDateDebut(), 'day_month_year_with_slash').' au '.$this->dateFormat($this->concoursEnCours->getDateFin() , 'day_month_year_with_slash'); ?></h2>
+                <h3><?php echo strip_tags($this->concoursEnCours->getEntete()) ?></h3>
+            </div>
+            <?php if (!empty($this->album_related)) : ?>
+                <div class="col-xs-12 col-md-3">
+                    <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($this->album_related); ?>" class="big_button">Voir la fiche BD</a>
+                </div>
+            <?php endif; ?>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <form class="row coords" id="form_coord" action="<?php echo $this->customUrl(array('nomConcours' => $this->concoursEnCours->getLibelleConcours(), 'idConcours' => $this->concoursEnCours->getNomConcours()), 'concoursstep3') ?>" method="post">
+                    <h2 class="col-xs-12">Vos coordonnées</h2>
+                    <p class="col-xs-12">Pour valider votre participation, veuillez remplir les champs ci-dessous. Tous les champs sont obligatoires. Une seule participation par personne sera prise en compte par jour. Attention votre email doit être valide, nous l'utiliserons pour vous contacter si vous remportez le concours.</p>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control participant_details" name="participant_details[nom]" id="nom" value="" required="required">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" class="form-control participant_details" name="participant_details[prenom]" id="prenom" value="" required="required">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="email">Adresse email</label>
+                        <input type="text" class="form-control participant_details" name="participant_details[email]" id="email" value="" required="required" pattern="[a-zA-Z0-9.-_]+@[a-z]+.[a-z]{2,4}">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="email2">Entrez à nouveau votre adresse email</label>
+                        <input type="text" class="form-control participant_details" name="participant_details[email2]" id="email2" value="" required="required" pattern="[a-zA-Z0-9.-_]+@[a-z]+.[a-z]{2,4}">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <label for="adresse">Adresse postale</label>
+                        <input type="text" class="form-control participant_details" name="participant_details[adresse]" id="adresse" value="" required="required">
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <label for="cp">Code Postal</label>
+                                <input type="number" class="form-control participant_details" name="participant_details[cp]" id="cp" value="" required="required" pattern="[0-9]{5}">
+                            </div>
+                            <div class="col-xs-7">
+                                <label for="ville">Ville</label>
+                                <input type="text" class="form-control participant_details" name="participant_details[ville]" id="ville" value="" required="required">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="concours_process[step2]" value="1">
+                    <input type="hidden" name="concours_process[token]" value="<?php echo $this->concoursToken ?>">
+                    <input type="hidden" name="participant_serialized_reponses" value='<?php echo $this->postConcoursReponses ?>'>
+                    <div class="col-xs-12"><div class="alert error"></div></div>
+                    <div class="col-xs-12 col-md-6 col-md-offset-3"><input type="submit" class="big_button" value="Valider mes réponses" /></div>
+                </form>
+                <p class="reglement"><a target="_blank" href="<?php echo $this->customUrl(array( 'nomConcours' => $this->concoursEnCours->getLibelleConcours(), 'idConcours' => $this->concoursEnCours->getNomConcours()), 'concoursreglement') ?>">Voir le réglement du concours</a></p>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <?php if (!empty($this->album_related)) : ?>
+                <div class="block pink col-xs-12">
+                    <header>
+                        <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($this->album_related); ?>" class="more pull-right">Voir la fiche BD &rsaquo;</a>
+                        <a href="/galerie"><h3>Fiche BD</h3></a>
+                    </header>
+                    <figure class="row">
+                        <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($this->album_related); ?>">
+                            <img class="illus" src="<?php echo $filename ?>" alt="concours bande-dessinée, gagner bande-dessinée, <?php echo str_replace(array('\'', '"', '`'), '', $this->concoursEnCours->getLibelleConcours()) ?>">
+                        </a>
+                    </figure>
+                    <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($this->album_related); ?>">
+                        <h2><?php echo $this->album_related->getCollection(); ?></h2>
+                        <p><?php echo ($this->album_related->getTome() != '' ? 'Tome ' . $this->album_related->getTome().' - ' : '').$this->album_related->getTitre(); ?></p>
+                    </a>
+                    <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($this->album_related); ?>" class="btn pull-right">Voir la fiche BD &rsaquo;</a>
+                </div>
+                <?php endif; ?>
+                <div class="pub">
+                    <div id="div-gpt-ad-1350912979829-0"  style="width:300px; height:250px;">
+                        <script type="text/javascript">googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912979829-0'); });</script>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-	<!-- Reinitialisation des float -->
-<div class="clear"></div>
-
-</div>
-
-<!-- Reinitialisation des float -->
-<div class="clear"></div>

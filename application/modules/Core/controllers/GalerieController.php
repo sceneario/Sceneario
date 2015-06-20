@@ -124,7 +124,6 @@ class GalerieController extends GlobalController
     public function galerieAction()
     {
         //
-        $this->view->galerieSlideShow = true ;
         $idGalerie         = $this->getRequest()->getParam('id');
         $mapperTblDossiers = new Core_Model_Mapper_Tbldossiers();
         $galerieInfos      = $mapperTblDossiers->find($idGalerie, new Core_Model_Tbldossiers) ;

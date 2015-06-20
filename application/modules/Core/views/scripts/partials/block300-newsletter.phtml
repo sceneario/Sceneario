@@ -1,9 +1,11 @@
 <?php if (!null == $this->data) : ?>
-<div id="bloc-newsletter" class="bloc-newsletter whiteblock300">
-  <header>
-    <h3>Inscription à la newsletter Sceneario</h3>
-  </header>
-  <div class="alert"></div>
-  <?php print $this->data; ?>
+<div id="bloc-newsletter" class="bloc-newsletter block white">
+    <header>
+        <h3>Inscription à la newsletter Sceneario</h3>
+    </header>
+    <div class="alert"></div>
+    <div class="row">
+        <?php print $this->data; ?>
+    </div>
 </div>
 <?php endif; ?>

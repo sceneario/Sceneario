@@ -32,7 +32,6 @@ class IndexController extends GlobalController
         /*
          * Gestion du script JS
          */
-        $this->view->indexSlideShow = true ;
         $this->view->habillageHome  = true ;
         
         /*

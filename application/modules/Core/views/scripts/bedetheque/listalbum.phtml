@@ -1,144 +1,55 @@
-
-        
-<!-- CONTENU -->
-
-<header class="header-mauve"  id="bedetheque">
- 
-         	<?php echo $this->textHeader ?>
-
-</header>
-
-<div class="leftRecherche">
-	<header >
-           
-            <p class="left">
-            Résultats <?php echo $this -> pageRequested > 1 
-                                 ? $this->resultsPerPage * ($this -> pageRequested-1) 
-                                 : 1 ?> 
-                à <?php echo ($this->countResults < $this->resultsPerPage) 
-                             ?  $this->countResults 
-                             :  ((($this->resultsPerPage * $this -> pageRequested) < $this->countResults) 
-                                                                                   ? $this->resultsPerPage * $this -> pageRequested
-                                                                                   : $this->countResults ) ;
-
-                ?> sur <?php echo $this->countResults ?></p>
-             
-            <p class="right">Afficher 
-                <script>
-                function createUrl(count){
-                    var currentUrl = window.location.href;
-                    var url ;
-                    var resultPerPage = 'results='+count;
-
-                    if(currentUrl.indexOf('results=') != -1){
-                        var nb = currentUrl.indexOf('results=') ;
-                        currentUrl = currentUrl.substring(0, nb-1);
-                    }
-                    
-                    if(currentUrl.indexOf('?') == -1){
-                        url = currentUrl + '?' + resultPerPage ;
-                    }else{
-                        url = currentUrl + '&' + resultPerPage ;
-                    }
-                    
-                    self.location.href = url ;
-                }
-                </script>
-                    <select name="" onchange=" createUrl(this.value) " >
-                        <option <?php if(isset($_GET['results']) && $_GET['results'] == 10 )echo "SELECTED" ?> value="10">10</option>
-                        <option <?php if(isset($_GET['results']) && $_GET['results'] == 20 )echo "SELECTED" ?> value="20">20</option>
-                        <option <?php if(isset($_GET['results']) && $_GET['results'] == 30 )echo "SELECTED" ?> value="30">30</option>
-                        <option <?php if(isset($_GET['results']) && $_GET['results'] == 50 )echo "SELECTED" ?> value="50">50</option>
-                    </select> 
-            résultats par page</p>
-       
-	</header>
-<?php if (count($this->paginator)): ?>
-    <?php foreach ($this->paginator as $key => $hit): ?>
-        <div class="item clearfix" id="id-<?php echo $hit->idAlbum ?>">
-            <?php if(Zend_Registry::isRegistered('currentUserID') && $this->bedetheque && !isset($_GET['user'])): ?>
-                <div style="position:absolute;z-index:1000;right:10px;top:0px;"><a style="display:block;padding:10px;" href="javascript:void(0);" onclick="javascript:deleteAlbumFromBdtech(<?php echo $hit->idAlbum ?>);">×</a></div>
-            <?php endif;?>
-            <?php if($hit->idAlbum != '_ALBUM_A_PARAITRE_'): ?>
-                <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($hit); ?>" class="item-link clearfix">
-                <?php echo $this->getHelper('displayImage')->displayAlbumCover($hit, 'small', 'cover'); ?>
-            <?php endif ;?>
-            <div class="search-content">
-                <hgroup>
-                    <h2 class="titreSerie"><?php echo $hit->titreSerie ?></h2>
-                    <h2><?php echo $hit->titreAlbum ?></h2>
-                </hgroup>
-
-                <p>
-                <?php  echo $hit->auteurs ?>
-
-                <?php if($hit->editeur != ''):?>
-                    <br />Editions <?php echo $hit->editeur  ?>
-                <?php endif ?>
+<div class="header-mauve col-xs-12" id="bedetheque">
+    <?php if ($this->type == 'bedetheque') : ?>
+        <form name="formFilter" id="formFilter" method="get" action="">
+            <p>
+                <strong><?php echo $this->bdtekTile; ?></strong>
+                <span><?php echo $this->formatNumber(count($this->userBedetheque)); ?></span> albums
+                <select name="listType" onchange="document.location.href='?'.$addUrl.'listby=\'+this.value+\'\'" >
+                    <optgroup label="Options d'affichage">
+                        <option value="all" ' . (($listBy == 'all') ? 'SELECTED' : '' ). ' >Montrer la totalité</option>
+                        <option value="list_my_album" ' . (($listBy == 'list_my_album') ? 'SELECTED' : '') . '>dans ma bédéthèque</option>
+                        <option value="list_album_to_buy" ' . (($listBy == 'list_album_to_buy') ? 'SELECTED' : '') . '> à acheter</option>
+                    </optgroup>
+                </select>
+            </p>
+        </form>
+    <?php elseif ($this->type == 'nouveautes') : ?>
+        <form name="formFilter" id="formFilter" method="get" action="" class="row">
+        <?php if ($this->isMobile) : ?>
+            <div class="col-xs-6 text-left"><h1>Nouveautés</h1></div>
+            <div class="col-xs-6 text-right"><p><span><?php echo $this->formatNumber($this->countOfAlbums); ?></span></p></div>
+            <div class="col-xs-4"><p><?php echo $this->dateSelecteur; ?></p></div>
+            <div class="col-xs-8"><p><?php echo $this->editeurSelecteur; ?></p><input id="formFilterBt" type="submit" value="ok" /></div>
+        <?php else : ?>
+            <div class="col-xs-12">
+                <h1>Nouveautés</h1>
+                <p><span><?php echo $this->formatNumber($this->countOfAlbums); ?></span> nouveautés</p>
+                <p>en <?php echo $this->dateSelecteur; ?></p><p>chez <?php echo $this->editeurSelecteur; ?></p>
+                <input id="formFilterBt" type="submit" value="ok" />
+            </div>
+        <?php endif; ?>
+        </form>
+    <?php elseif ($this->type == 'recommandes') : ?>
+        <h1>Recommandés</h1> <p>par Sceneario.com</p>
+    <?php else : ?>
+        <form id="formFilter" method="get" action="" class="row">
+        <?php if ($this->isMobile) : ?>
+            <div class="col-xs-6 text-left"><h1>À paraître</h1></div>
+            <div class="col-xs-6 text-right"><p><span><?php echo $this->formatNumber(count($this->albumDuMoisAP)); ?></span></p></div>
+            <div class="col-xs-4"><p><?php echo $this->dateSelecteur; ?></p></div>
+            <div class="col-xs-8"><p><?php echo $this->editeurSelecteur; ?></p><input id="formFilterBt" type="submit" value="ok" /></div>
+        <?php else : ?>
+            <div class="col-xs-12">
+                <h1>À paraître</h1>
+                <p><span><?php echo $this->formatNumber(count($this->albumDuMoisAP)); ?></span> albums à paraître</p>
+                <p>en <?php echo $this->dateSelecteur; ?><p><p>chez <?php echo $this->editeurSelecteur; ?></p>
+                <input id="formFilterBt" type="submit" value="ok" />
                 </p>
-                <?php if($hit->genres != ''): ?>
-                    <p><?php echo $hit->genres ?></p>
-                <?php endif; ?>
             </div>
-            <?php if($hit->idAlbum != '_ALBUM_A_PARAITRE_'): ?>
-                </a>
-            <?php endif ;?>
-        </div>
-    <?php endforeach; ?>
-<?php endif; ?>
-       
-<div class="separateur"></div>
- 
-<?php
-
-
-echo $this->paginationControl( $this->paginator,
-                               'Sliding',
-                               'paginationControl-interview-type.phtml' ); ?>
-	
+        <?php endif; ?>
+        </form>
+    <?php endif; ?>
 </div>
+<?php echo $this->partial('partials/album_list.phtml', $this); ?>
 
-<div class="rightRecherche">
-        <!-- user widget -->
-        <?php  
-           echo $this->userAccountWidget('user_dashboard');
-           echo $this->lastConcoursBloc($this);
-        ?>
-
-	<!-- Pub 300x250 -->
-	<div class="pub">
-            <?php echo $this->partial('partials/pubs300large.phtml'); ?>
-            <!-- Recherche300pub -->
-            <div id='div-gpt-ad-1350913318651-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913318651-0'); });
-                </script>
-            </div>
-            <!-- Recherche300interne -->
-            <div id='div-gpt-ad-1350913404071-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913404071-0'); });
-                </script>
-            </div>
-	</div><!-- pub -->
-	
-	<?php
-        echo $this->lastInterviewBloc($this);
-	echo $this->lastGalleryBloc($this);
-	echo $this->lastExpoBloc($this);
-	echo $this->lastGalleryBloc($this, 'preview');
-	echo $this->registerNewsletter($this);
-        ?>
-	
-         
-	<div class="clear"></div>
-	
-	<!-- Facebook like box -->
-	<div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" 
-             data-border-color="#fff" data-stream="false" data-header="false"></div><!-- Facebook like box --> 
-</div>
-
-<!-- Reinitialisation des float -->
-<div class="clear"></div>
-
-    
+<?php echo $this->partial('partials/sidebar.phtml'); ?>

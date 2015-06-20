@@ -1,105 +1,69 @@
-<div itemscope itemtype="http://schema.org/Book">
-    <div class="leftSide">
-        <div class="cover">
-            <?php foreach($this->serie->albums as $k => $album) : ?>
-                <?php if ($k < 2) : ?>
-                    <a rel="lightbox[album]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($album); ?>" class="zoom">
-                        <?php if ($k % 2 == 0) : ?>
-                            <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'big', 'front', '', 'itemprop="image"'); ?>
-                        <?php else : ?>
-                            <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'big', 'behind', '', 'itemprop="image"'); ?>
+<div class="serie albums" itemscope itemtype="http://schema.org/Book">
+    <?php if (!$this->isMobile) : ?>
+        <div class="sidebar col-md-4">
+            <div class="album-cover-wrapper">
+                <div class="album-cover">
+                    <?php foreach($this->serie->albums as $k => $album) : ?>
+                        <?php if ($k < 2) : ?>
+                            <a rel="lightbox[album]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($album); ?>" class="zoom">
+                                <?php if ($k % 2 == 0) : ?>
+                                    <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'big', 'front', '', 'itemprop="image"'); ?>
+                                <?php else : ?>
+                                    <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'big', 'behind', '', 'itemprop="image"'); ?>
+                                <?php endif; ?>
+                            </a>
                         <?php endif; ?>
-                    </a>
+                    <?php endforeach; ?>
+                </div>
+                <?php if (isset($this->serie->albums[0])) : ?>
+                    <footer>
+                        <a rel="lightbox[albumfooter]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($this->serie->albums[0]); ?>" class="zoom">
+                            voir en grand
+                        </a>
+                    </footer>
                 <?php endif; ?>
-            <?php endforeach; ?>
-        </div>
-
-        <?php if (isset($this->serie->albums[0])) : ?>
-        <footer>
-            <a rel="lightbox[albumfooter]" href="<?php echo $this->getHelper('customUrl')->getAlbumCoverUrl($this->serie->albums[0]); ?>" class="zoom">
-                voir en grand
-            </a>
-        </footer>
-        <?php endif; ?>
-
-        <?php echo $this->userAccountWidget('user_dashboard'); ?>
-
-        <div class="pub">
-            <?php echo $this->partial('partials/pubs300large.phtml'); ?>
-            <div id='div-gpt-ad-1350911838645-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350911838645-0'); });
-                </script>
             </div>
-            <div id='div-gpt-ad-1350912177560-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912177560-0'); });
-                </script>
-            </div>
-        </div>
-        <?php echo $this->partial('partials/socialContacts.phtml'); ?>
-
-
-        <?php if(count($this->allAlbumPrice) > 0): ?>
-        <section class="prix_recompenses">
-            <header><h3>Prix & récompenses</h3></header>
-            <ul>
-                <?php foreach($this->allAlbumPrice as $albumPrice): ?>
-                    <li>
-                        <a href="<?php echo $albumPrice->url ?>"><?php echo $albumPrice->serie ?></a>
-                        <span><?php echo $albumPrice->festival ?></span>
-                        <p itemprop="award"><?php echo $albumPrice->prix ?></p>
-                        <div class ="clear"></div>
-                    </li>
-                <?php endforeach ; ?>
-            </ul>
-        </section>
-        <?php endif; ?>
-        <?php if(isset($this->concours) && count($this->concours) > 0) : ?>
-            <?php foreach($this->concours as $concours) : ?>
-                <?php echo  $this->partial('partials/block300.phtml', array('data' => $concours)); ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
-        <?php if(isset($this->previews) && count($this->previews) > 0) : ?>
-            <?php foreach($this->previews as $preview) : ?>
-                <?php echo  $this->partial('partials/block300.phtml', array('data' => $preview)); ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
-
-        <?php echo $this->lastConcoursBloc($this); ?>
-        <?php echo $this->lastGalleryBloc($this); ?>
-        <?php echo $this->lastExpoBloc($this); ?>
-
-        <div class="clear"></div>
-
-        <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
-    </div>
-
-    <div class="rightSide">
-        <div class="rightContent">
-
-            <div class="clearfix">
-                <div class="album-title">
-                    <h1 class="album-title_name"><span itemprop="name"><?php echo $this->serie->getNomSerie(); ?></span></h1>
+            <?php echo $this->userAccountWidget('user_dashboard'); ?>
+            <div class="pub">
+                <?php echo $this->partial('partials/pubs300large.phtml'); ?>
+                <div id='div-gpt-ad-1350911838645-0'>
+                    <script type='text/javascript'>
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350911838645-0'); });
+                    </script>
+                </div>
+                <div id='div-gpt-ad-1350912177560-0'>
+                    <script type='text/javascript'>
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912177560-0'); });
+                    </script>
                 </div>
             </div>
-            <div class="separateur"></div>
-            <div class="social-links">
-                <div class="fb-like" data-href="<?php echo $this->currentUrl() ?>" data-send="true" data-layout="button_count" data-width="100" data-show-faces="true" data-font="arial"></div>
-                <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
-                <script type="text/javascript">
-                  window.___gcfg = {lang: 'fr'};
-                  (function() {
-                    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-                    po.src = 'https://apis.google.com/js/plusone.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-                  })();
-                </script>
+            <?php echo $this->partial('partials/socialContacts.phtml', array('color' => 'pink')); ?>
+            <?php echo $this->partial('partials/album_award.phtml', $this); ?>
+            <?php if(isset($this->concours) && count($this->concours) > 0) : ?>
+                <?php foreach($this->concours as $concours) : ?>
+                    <?php echo  $this->partial('partials/block300.phtml', array('data' => $concours)); ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if(isset($this->previews) && count($this->previews) > 0) : ?>
+                <?php foreach($this->previews as $preview) : ?>
+                    <?php echo  $this->partial('partials/block300.phtml', array('data' => $preview)); ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php echo $this->lastConcoursBloc($this); ?>
+            <?php echo $this->lastGalleryBloc($this); ?>
+            <?php echo $this->lastExpoBloc($this); ?>
+            <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
+        </div>
+    <?php endif; ?>
+    <div class="col-md-8">
+        <div class="row separateur">
+            <div class="col-xs-12 album-title">
+                <h1 class="album-title_name"><span itemprop="name"><?php echo $this->serie->getNomSerie(); ?></span></h1>
             </div>
-            <section class="album-infos">
-                <table>
+        </div>
+        <div class="row separateur">
+            <section class="col-xs-12 album-infos">
+                <table class="col-xs-6">
                     <?php if (!empty($this->serie->dessinateurs)) : ?>
                     <tr>
                         <td class="label"><?php echo count($this->serie->dessinateurs) > 1 ? 'Dessinateurs' : 'Dessinateur'; ?>&nbsp;:</td>
@@ -139,14 +103,12 @@
                             <?php if (!empty($this->serie->editeurs)) : ?>
                                 <?php foreach ($this->serie->editeurs as $editeur) : ?>
                                     <h2>
-                                    <?php $addrWebEditeur = $editeur->getAdrWebEditeur(); if (!empty($addrWebEditeur)) : ?>
+                                        <?php $addrWebEditeur = $editeur->getAdrWebEditeur(); if (!empty($addrWebEditeur)) : ?>
                                         <a itemprop="publisher" target="_blank" href="<?php echo (strpos($editeur->getAdrWebEditeur(), 'http://') ? '' : 'http://').$editeur->getAdrWebEditeur(); ?>">
                                             <?php echo trim($editeur->getPrenomEditeur().' '.$editeur->getNomEditeur()); ?>
                                         </a>
                                     <?php else : ?>
-                                        <span itemprop="publisher">
-                                            <?php echo trim($editeur->getPrenomEditeur().' '.$editeur->getNomEditeur()); ?>
-                                        </span>
+                                        <span itemprop="publisher"><?php echo trim($editeur->getPrenomEditeur().' '.$editeur->getNomEditeur()); ?></span>
                                     <?php endif; ?>
                                     </h2><br />
                                 <?php endforeach; ?>
@@ -158,16 +120,11 @@
                     <?php if (!empty($this->serie->collections)) : ?>
                     <tr>
                         <td class="label">Collection&nbsp;:</td>
-                        <td class="info">
-                            <?php foreach ($this->serie->collections as $collection) : ?>
-                                <h2><?php echo $collection->getNomCollection(); ?></h2><br />
-                            <?php endforeach; ?>
-                        </td>
+                        <td class="info"><h2><?php echo $this->serie->collections->getNomCollection(); ?></h2><br /></td>
                     </tr>
                     <?php endif; ?>
                 </table>
-
-                <table>
+                <table class="col-xs-6">
                     <?php if (!empty($this->serie->motcles)) : ?>
                     <tr>
                         <td class="label">Genre&nbsp;:</td>
@@ -182,30 +139,33 @@
                     <?php endif; ?>
                 </table>
             </section>
-            <div class="clear"></div>
-            <div class="separateur"></div>
-
-            <section class="albums-auteur also-like">
+        </div>
+        <?php echo $this->partial('partials/social_links.phtml', $this); ?>
+        <div class="row">
+            <section class="also-like col-xs-12">
                 <h3>Tous les albums de la série <?php echo $this->serie->getNomSerie(); ?></h3>
-                <ul>
+                <ul class="row">
                     <?php foreach($this->serie->albums as $album) : ?>
-                        <li>
-                            <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
-                                <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike'); ?>
-                            </a>
-                            <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
-                                <h2><?php echo $album->getTitre(); ?></h2>
-                            </a>
-                            <?php if ($album->getTome()) : ?>
-                            <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
-                                <span>Tome # <?php echo $album->getTome(); ?></span>
-                            </a>
-                            <?php endif; ?>
+                        <li class="col-xs-6 col-md-3">
+                            <div class="album-wrapper">
+                                <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
+                                    <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike'); ?>
+                                </a>
+                                <div class="title-wrapper">
+                                    <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
+                                        <h2><?php echo $album->getTitre(); ?></h2>
+                                    </a>
+                                    <?php if ($album->getTome()) : ?>
+                                    <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album, 'album'); ?>">
+                                        <span>Tome # <?php echo $album->getTome(); ?></span>
+                                    </a>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             </section>
         </div>
     </div>
-    <div class="clear"></div>
 </div>

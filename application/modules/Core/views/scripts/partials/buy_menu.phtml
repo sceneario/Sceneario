@@ -1,0 +1,8 @@
+<div class="acheter dropdown clearfix">
+    <button data-toggle="dropdown" href="#" class="btn col-xs-12" data-toggle="dropdown" aria-expanded="false">Acheter cet album</button>
+    <ul class="dropdown-menu dropdown-menu-right col-xs-12" role="menu">
+        <?php foreach($this->links as $item => $link) : ?>
+            <li><a href="<?php echo $link; ?>" target="_blank"><?php echo $item; ?></a></li>
+        <?php endforeach; ?>
+    </ul>
+</div>

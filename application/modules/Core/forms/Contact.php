@@ -78,7 +78,7 @@ class Core_Form_Contact extends Zend_Form
                 'ignore' => true,
                 'label' => 'Envoyer',
                 'attribs' => array(
-                    'class' => 'btn-action'
+                    'class' => 'btn field-submit'
                 )
             )
         );

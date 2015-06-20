@@ -1,106 +1,72 @@
+<?php
 
-<!--
-<div class="pagination">
-        <a href="" class="prev">Page précédente</a>
-        <a href="" class="page">3</a>
-        <a href="" class="page active">4</a>
-        <a href="" class="page">5</a>
-        <a href="" class="page">6</a>
-        <a href="" class="next">Page suivante</a>
-</div>
--->
-
-<!--
-Voir http://developer.yahoo.com/ypatterns/pattern.php?pattern=searchpagination
--->
- 
-<?php 
-
-if ($this->pageCount): 
-    #$operator = '?';
-
-    if(isset($_SERVER['REQUEST_URI'])){
+if ($this->pageCount):
+    if (isset($_SERVER['REQUEST_URI'])) {
         // si ? est présent
-        if( strpos($_SERVER['REQUEST_URI'], '?') !== false ){
-            
+        if (strpos($_SERVER['REQUEST_URI'], '?') !== false) {
             $requestUri = strstr($_SERVER['REQUEST_URI'], '?', true);
-            
-            if(isset($_GET['date'])){
+
+            if (isset($_GET['date'])) {
                 $requestUri .= '?date=' . $_GET['date'] ;
             }
-            
-            if(isset($_GET['editeur'])){
-                if(strpos( $requestUri , '?' ) != false){
+
+            if (isset($_GET['editeur'])) {
+                if (strpos( $requestUri , '?' ) != false) {
                     $requestUri .= '&editeur=' . $_GET['editeur'] ;
-                }else{
+                } else {
                     $requestUri .= '?editeur=' . $_GET['editeur'] ;
                 }
             }
-            
-            if(isset($_GET['results']) ){
-                if(strpos( $requestUri , '?' ) != false){
+
+            if (isset($_GET['results']) ) {
+                if (strpos( $requestUri , '?' ) != false) {
                     $requestUri .= '&results=' . $_GET['results'] ;
-                }else{
+                } else {
                     $requestUri .= '?results=' . $_GET['results'] ;
                 }
             }
-            
+
             $operator =  $requestUri  . '&';
-        }else{
+        } else {
             $operator = '?';
         }
-        if( strpos($_SERVER['REQUEST_URI'], 'interview') !== false ){
+        if (strpos($_SERVER['REQUEST_URI'], 'interview') !== false) {
             $operator = '?';
         }
-        
-        if( strpos($_SERVER['REQUEST_URI'], 'expositions-salons') !== false ){
+
+        if (strpos($_SERVER['REQUEST_URI'], 'expositions-salons') !== false) {
             $operator = '?';
         }
-        
-        if( strpos($_SERVER['REQUEST_URI'], 'preview') !== false ){
+
+        if (strpos($_SERVER['REQUEST_URI'], 'preview') !== false) {
             $operator = '?';
         }
-        
-        if( strpos($_SERVER['REQUEST_URI'], 'galerie') !== false ){
+
+        if (strpos($_SERVER['REQUEST_URI'], 'galerie') !== false) {
             $operator = '?';
         }
-    
-    }else{
+
+    } else {
          $operator = '?';
     }
-    ?>
+?>
 <div class="pagination" style="width:100%;">
-<!-- Previous page link -->
-<?php if (isset($this->previous)): 
-        $previous = $operator . 'page='. $this->previous ;
-   ?>
-  <a class="prev" href="<?php echo $previous ; ?>">
-    Page précédente
-  </a> 
-<?php endif; ?>
- 
-<!-- Numbered page links -->
-<?php foreach ($this->pagesInRange as $page): ?>
-  <?php if ($page != $this->current): 
-      $current  = $operator . 'page=' . $page ;
-?>
-    <a class="page" href="<?php echo $current  ?>">
-        <?php echo $page; ?>
-    </a> 
-  <?php else: 
-      $current  = $operator . 'page='. $page ;
-?>
-    <a href="<?php echo $current ?>" class="page active"><?php echo $page; ?></a>
-  <?php endif; ?>
-<?php endforeach; ?>
- 
-<!-- Next page link -->
-<?php if (isset($this->next)): 
-           $next     = $operator . 'page='. $this->next ;
-    ?>
-  <a class="next" href="<?php echo $next ;?>">
-    Page suivante
-  </a>
-<?php endif; ?>
+    <?php if (isset($this->previous)): ?>
+        <?php $previous = $operator . 'page='. $this->previous; ?>
+        <a class="prev" href="<?php echo $previous ; ?>">Page précédente</a>
+    <?php endif; ?>
+    <?php foreach ($this->pagesInRange as $page): ?>
+        <?php if ($page != $this->current): ?>
+            <?php $current  = $operator . 'page=' . $page; ?>
+            <a class="page" href="<?php echo $current  ?>"><?php echo $page; ?></a>
+        <?php else: ?>
+            <?php $current  = $operator . 'page='. $page; ?>
+            <a href="<?php echo $current ?>" class="page active"><?php echo $page; ?></a>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    <?php if (isset($this->next)): ?>
+        <?php $next = $operator . 'page='. $this->next; ?>
+        <a class="next" href="<?php echo $next ;?>">Page suivante</a>
+    <?php endif; ?>
 </div>
 <?php endif; ?>

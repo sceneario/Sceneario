@@ -1,162 +1,69 @@
-<?php
-/*
- * View : AuteurController - indexAction
- */
-  ?>      
-<!-- CONTENU -->
-
-<div class="leftSide">
-        <?php /* //ABSENT DANS LA BETA
-	<figure>
-		<img src="/img/temp/morvan.jpg" alt="Jean David Morvan">
-	</figure>
-   
-         */ ?>
-	<?php if(count($this->albumPrices) > 0): ?>
-	<section class="prix_recompenses">
-		<header>
-                    <h3>Prix & récompenses</h3>
-		</header>
-		<ul>
-                    <?php foreach($this->albumPrices as $albumPrice): ?>
-                       
-                            <li>
-                                 <a href="<?php echo $albumPrice->url ?>"><?php echo $albumPrice->serie ?></a>
-                                 <span><?php echo $albumPrice->festival ?></span>
-                                 <p><?php echo $albumPrice->prix ?></p>
-                                 <div class ="clear"></div>
-                            </li>
-                        
-                    <?php endforeach; ?>
-		
-		</ul>
-	</section>
-	<?php endif; ?>
-        <?php
-        //ABSENT DE LA BETA
-        /*
-	<!-- Mon compte -->
-	<section class="mon-compte">
-            <h1><img src="/img/user.png" alt="">Mon compte</h1>
-            <ul>
-                    <li>Albums dans ma bédéthèque <span>0407</span></li>
-                    <li>Albums à acheter <span>0036</span></li>
-                    <li>Albums manquants à mes séries <span>0559</span></li>
-            </ul>
-            <a href="">Accéder à ma bédéthèque</a>
-	</section>
-	*/ ?>
-	<!-- Pub 300x250 -->
-	<div class="pub">
-            <?php echo $this->partial('partials/pubs300large.phtml'); ?>
-            <!-- Auteur300 -->
-            <div id='div-gpt-ad-1350912243655-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912243655-0'); });
-                </script>
+<div class="auteur">
+    <?php if (!$this->isMobile) : ?>
+        <div class="sidebar col-md-4">
+            <?php echo $this->partial('partials/album_award.phtml', $this); ?>
+            <div class="pub">
+                <?php echo $this->partial('partials/pubs300large.phtml'); ?>
+                <div id='div-gpt-ad-1350912243655-0'>
+                    <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912243655-0'); });</script>
+                </div>
+                <div id='div-gpt-ad-1350912679192-0'>
+                    <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912679192-0'); });</script>
+                </div>
             </div>
-            <!-- Auteur300interne -->
-            <div id='div-gpt-ad-1350912679192-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350912679192-0'); });
-                </script>
+            <?php echo $this->partial ('partials/socialContacts.phtml', array('color' => 'pink')); ?>
+            <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
+        </div>
+    <?php endif; ?>
+    <div class="col-xd-12 col-md-8">
+        <div class="row separateur">
+            <div class="col-xs-12 presentation">
+                <h1><?php echo $this->nomAuteur ?></h1>
+                <h2><?php echo $this->jobsAuteur ?></h2>
             </div>
-	</div><!-- pub -->
-	
-	<!-- Bloc de liens réseaux sociaux -->
-	<div class="social_links">
-            <div class="social_links-title"><img src="/img/slinks_titre.png" alt="Suivez-nous !"></div>
-            <ul>
-                <li><a href="#"><img src="/img/slinks_icon_fb.png" alt="bande-dessinée, facebook"></a></li>
-                <li><a href="#"><img src="/img/slinks_icon_twitter.png" alt="bande-dessinée, twitter"></a></li>
-                <li><a href="#"><img src="/img/slinks_icon_rss.png" alt="bande-dessinée, rss"></a></li>
-                <li><a href="#"><img src="/img/slinks_icon_email.png" alt="bande-dessinée, email"></a></li>
-            </ul>
-            <div class="clear"></div>
-	</div><!-- social_links -->
-	<div class="clear"></div>
-	
-	<!-- Facebook like box -->
-	<div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div><!-- Facebook like box --> 
-</div>
-
-<div class="rightSide">
-    <div class="rightContent">
-	<hgroup class="auteur">
-		<h1><?php echo $this->nomAuteur ?></h1>
-		<h2><?php echo $this->jobsAuteur ?></h2>
-	</hgroup>
-	
-	<div class="separateur"></div>
-	
-	<!-- Bloc de liens réseaux sociaux -->
-	<div class="social-links">
-		<div class="fb-like" data-href="<?php echo $this->currentUrl() ?>" data-send="true" data-layout="button_count" data-width="100" data-show-faces="true" data-font="arial"></div>
-		
-		<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-		
-		<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
-
-		<script type="text/javascript">
-		  window.___gcfg = {lang: 'fr'};
-
-		  (function() {
-			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-			po.src = 'https://apis.google.com/js/plusone.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		  })();
-		</script>
-	</div>
-	<?php if(isset($this->bio) && $this->bio != ''): ?>
-	<section class="biographie">
-		<h3>Biographie</h3>
-		<div class="bioWrapper">
-                        <p><?php echo $this->bio ?></p>
-			<?php /*<p>C'est à BDBulle, la librairie de la femme de Sokal que Jean David Morvan découvre toute la BD dite adulte en cherchant la suite de Métro Cassiopée direction Châtelet dans la série Valérian. Il a 11 ans et repart avec La terre de la bombe, L'Indien Français, Les Innommables, Bastos et Zakousky, Comanche, L'Incal, Thorgal et surtout le magazine Gomme. Il redouble sa quatrième, il rencontre alors Christian Lerolle, un des deux Color Twins, et lors de sa seconde terminale Frank Guréghian, l'autre moitié du duo. Il commence à collaborer à un fanzine, Hors Gabarit, avec un copain croisé en classe de seconde, Sylvain Savoia. En 1989, Jean David Morvan intègre l'école Saint-Luc de Bruxelles pour apprendre le métier de dessinateur. Dès lors, il arrête de dessiner, et fréquente la librairie Forbidden Zone où il croise de nombreux professionnels de la BD et découvre comics et mangas. Au festival de Villeneuve d'Asc, il s'improvise scénariste pour ses copains, et, à sa grande surprise Reflets Perdus présenté avec Savoia est accepté par les éditions Zenda. L'année suivante, il passe le concours des Beaux-Arts d'où il est "viré pour non-assistance aux cours". Premier album et service militaire en poche, le chemin reste semé d'embûches... Alors que Zenda est racheté par Glénat, Akira arrive en France avec fracas et succès. Morvan propose alors Nomad avec Savoia. Le dessinateur lui présente Buchet qui s'attèle au design. Dans la foulée, son éditeur lui présente Trantkat et HK voit le jour. Pendant un an, la farandole des projets refusés continue jusqu'au jour où Guy Delcourt accepte Sillage. Les anciens projets reprennent vie : 7 secondes avec Parel, Zorn et Dirna en compagnie de Bessadi et Trannoy (Soleil)… Dans le même temps, il réalise avec Munuera des histoires courtes du très hautain Sir Pyle. Suivent des projets plus récents, tels que Le cycle de Tschaï avec Li-An, adaptation d'une série de romans de Jack Vance, La Mandiguerre avec Tamiazzo, Continuum avec Ponce, ou encore Jolin la teigne en compagnie de Ruben. Scénariste boulimique, Morvan n'arrête pas d'imaginer… À venir : Le Bonheur avec Lejeune ou Trois, et l'ange sous le dessin de Colombo, sans oublier un péplum grec mis en scène par Munuera. Viennent de sortir le sixième tome de Sillage, série où chaque album narre une histoire autonome; le cinquième tome du Cycle de Tschaï, ainsi que Lord Clancharlie ( en collaboration avec Delestret), adaptation personelle du roman de Victor Hugo, L'Homme qui Rit. </p>
-			<p class="right">Sources &copy; Delcourt 2004</p> */ ?>
-		</div>
-	</section>
-	<?php endif ?>
-	<section class="albums-auteur">
-		<h3>Les albums de <?php echo $this->nomAuteur ?> chroniqués par Sceneario.com :</h3>
-		<ul>
-			<?php foreach($this->albumsAuteur as $keyAlbum => $album): ?>
-        <?php $styleClear  = ($keyAlbum == 0 OR  $keyAlbum == 4) ? 'style="clear:both"' : '' ; ?>
-        <?php $styleMargin = ($keyAlbum == 3 OR  $keyAlbum == 7) ? 'style="margin-right:0px"' : ''; ?>
-        <li <?php echo $styleMargin, $styleClear ; ?>>
-          <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
-            <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike') ; ?>
-          </a>
-          <?php $limitTitle = 20; ?>
-  				<h2><a href="<?php echo $url ?>">
-            <?php echo substr($album->collection,0, $limitTitle); ?>
-            <?php echo strlen($album->collection) > $limitTitle ? '...' : ''; ?>
-          </a></h2>
-          <?php if( $album->tomes >  0 ): ?>
-				    <span>(<?php echo $album->tomes ?> tome<?php echo $album->tomes >  1 ? 's' : ''  ?>)</span>
-          <?php endif;?>
-        </li>
-        <?php if($keyAlbum == 3): ?>
-          <div class="clear"></div>
-        <?php endif;?>
-      <?php endforeach;?>
-  		<div class="clear"></div>
-		</ul>
-		<div class="clear"></div>
-		<a href="<?php echo $this->customUrl(array('tag'=> $this->nomAuteur), 'recherche') ?>" class="button_large">Voir plus de série de <?php echo $this->nomAuteur ?></a>
-	</section>
-</div>
-	<section class="blocs">
-    <div class="bloc2col">
-      <?php foreach($this->blocDatas as $key => $bloc): ?>
-        <?php if( $key == round(count($this->blocDatas)/2)): ?>
+        </div>
+        <?php if(isset($this->bio) && $this->bio != ''): ?>
+            <section class="biographie row">
+                <div class="col-xs-12">
+                    <h3>Biographie</h3>
+                    <div class="bioWrapper"><p><?php echo $this->bio ?></p></div>
+                </div>
+            </section>
+        <?php endif ?>
+        <?php echo $this->partial('partials/social_links.phtml', $this); ?>
+        <section class="also-like row">
+            <div class="col-xs-12">
+                <h3>Les séries de <?php echo $this->nomAuteur ?> chroniqués par Sceneario.com&nbsp;:</h3>
+                <ul class="row">
+                    <?php foreach ($this->albumsAuteur as $keyAlbum => $album) : ?>
+                        <li class="col-xs-6 col-md-3">
+                            <div class="album-wrapper">
+                                <a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                    <?php echo $this->getHelper('displayImage')->displayAlbumCover($album, 'alsolike') ; ?>
+                                </a>
+                                <div class="title-wrapper">
+                                    <h2><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                        <?php echo $album->collection; ?>
+                                    </a></h2>
+                                    <?php if( $album->tomes >  0 ): ?>
+                                        <span><a href="<?php echo $this->getHelper('customUrl')->getAlbumUrl($album); ?>">
+                                            (<?php echo $album->tomes ?> tome<?php echo $album->tomes >  1 ? 's' : '';  ?>)
+                                        </a></span>
+                                    <?php endif;?>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach;?>
+                </ul>
+                <a href="<?php echo $this->customUrl(array('tag'=> $this->nomAuteur), 'recherche') ?>" class="button_large">Voir plus de série de <?php echo $this->nomAuteur ?></a>
+            </div>
+        </section>
+        <?php foreach (array_chunk($this->blocDatas, 2) as $row) : ?>
+            <div class="row">
+                <?php foreach ($row as $bloc) : ?>
+                    <div class="col-xs-12 col-md-6"><?php echo $bloc; ?></div>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
     </div>
-    <div class="bloc2col">
-      <?php endif; ?>
-      <?php echo $bloc; ?>
-      <?php endforeach; ?>
-   </div>
-  </section>
 </div>
-<div class="clear"></div>

@@ -1,81 +1,18 @@
-   
-<!-- CONTENU -->
-
-<div class="leftActu">
-	<div class="interview-title">
-		<h2><a href="<?php echo $this->customUrl(array(),'listexpo') ?>">Expositions, salons</a></h2> -
-		<h1><a href="<?php echo $this->currentUrl(); ?>"><?php echo $this->titre; ?></a></h1>
-	</div>
-	<section class="interview-wrapper">
-		<figure  style="background-image:url('<?php echo $this -> imageUri ?>');background-repeat:no-repeat;">
-			<img class="visuallyhidden" src="<?php echo $this->imageUri; ?>" alt="exposition bande-dessinée, <?php echo $this->titre; ?>" />
-			<img src="/img/block620_white_masque.png" alt="exposition bande-dessinée, <?php echo $this->titre; ?>" class="masque">
-		</figure>
-		
-		<hgroup>
-			<h1><?php echo $this -> titre ; ?></h1>
-			<span><?php echo $this -> expo ->getDate() ; ?></span>
-		</hgroup>
-		   
-		<div id="texte"><?php echo $this -> expoHtml ; ?></div>
-                
-		<!-- Bloc de liens réseaux sociaux -->
-		<div class="social-links">
-                <div class="fb-like" data-href="<?php echo $this->currentUrl() ?>" data-send="true" data-layout="button_count" data-width="100" data-show-faces="false" data-action="recommend" data-font="arial"></div>
-			
-			<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-			
-			<div class="g-plusone" data-size="medium" data-annotation="inline" data-width="120"></div>
-
-			<script type="text/javascript">
-			  window.___gcfg = {lang: 'fr'};
-
-			  (function() {
-				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-				po.src = 'https://apis.google.com/js/plusone.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-			  })();
-			</script>
-		</div>
-	</section>
+<div class="interview col-xs-12 col-md-8">
+    <div class="interview-title">
+        <h2><a href="<?php echo $this->customUrl(array(),'listexpo') ?>">Expositions, salons</a></h2> -
+        <h1><a href="<?php echo $this->currentUrl(); ?>"><?php echo $this->titre; ?></a></h1>
+    </div>
+    <section class="block white col-xs-12 rounded">
+        <figure class="row">
+            <img class="illus" src="<?php echo $this->imageUri; ?>" alt="exposition bande-dessinée, <?php echo $this->titre; ?>" />
+        </figure>
+        <hgroup>
+            <h1><?php echo $this->titre ; ?></h1>
+            <span><?php echo $this->expo->getDate() ; ?></span>
+        </hgroup>
+        <div id="texte" class="table-container table-responsive"><?php echo $this->expoHtml; ?></div>
+        <?php echo $this->partial('partials/social_links.phtml', $this); ?>
+    </section>
 </div>
-
-<div class="rightActu">
-        <?php
-           echo $this->userAccountWidget('user_dashboard');
-	   echo $this->lastConcoursBloc($this);
-	?>
-	
-	<!-- Pub 300x250 -->
-	<div class="pub">
-            <?php echo $this->partial('partials/pubs300large.phtml'); ?>
-            <!-- Interview300 -->
-            <div id='div-gpt-ad-1350913175803-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913175803-0'); });
-                </script>
-            </div>
-            <!-- Interview300interne -->
-            <div id='div-gpt-ad-1350913216188-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913216188-0'); });
-                </script>
-            </div>
-	</div><!-- pub -->
-	
-	 	<?php
-		echo $this->lastInterviewBloc($this);  
-		echo $this->lastGalleryBloc($this);
-		echo $this->lastExpoBloc($this);
-		echo $this->lastGalleryBloc($this, 'preview');
-		echo $this->registerNewsletter($this);
-		?>
-	<div class="clear"></div>
-	
-	<!-- Facebook like box -->
-	<div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div><!-- Facebook like box --> 
-</div>
-
-<!-- Reinitialisation des float -->
-<div class="clear"></div>
+<?php echo $this->partial('partials/sidebar.phtml'); ?>

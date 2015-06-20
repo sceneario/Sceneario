@@ -2,34 +2,28 @@
 /*
  * Bloc blanc de 300px de large
  *
- * Les données sont issues d'un array entré en argument 
+ * Les données sont issues d'un array entré en argument
  * de la méthode $this->partial('lien/vers/le/script/html', array de data)
- * 
+ *
  * Gère les deux blocs de couleurs blanc et rose.
  */
 
-$blockColor = strtolower($this->data['couleur']) ;
-
-if(!null == $this->data):
-?>
-<div class="<?php echo $blockColor ?>block300">
-	<header>
-		<a href="<?php echo $this->data['lien']['tout_afficher']; ?>" class="more">Tout afficher &rsaquo;</a>
-		<a href="<?php echo $this->data['lien']['tout_afficher']; ?>"><h3><?php echo $this->data['rubrique'] ?></h3></a>
-	</header>
-	<figure class="center">
-		<a href="<?php echo $this->data['lien']['url'] ?>">
-			<img src="<?php echo $this->data['image']?>" alt="<?php echo str_replace(array('"',"'","`"), '', str_replace(array('<br>', '<br/>'), ' ', $this->data['rubrique'].' bande-dessinée, '.$this->data['titre'])) ?>" class="illus"/>
-			<img src="/img/block300_<?php echo $blockColor ?>_masque.png" alt="<?php echo str_replace(array('"',"'","`"), '', str_replace(array('<br>', '<br/>'), ' ', $this->data['rubrique'].' bande-dessinée, '.$this->data['titre'])) ?>" class="masque"/>
-		</a>
-	</figure>
-	<a href="<?php echo $this->data['lien']['url'] ?>">
-	<h2><?php echo $this->data['titre'] ?></h2>
-	<?php if($blockColor !== 'pink'):  ?><p><?php echo $this->data['sous_titre'] ?></p><?php endif; ?>
-	</a>
-	<a href="<?php echo $this->data['lien']['url'] ?>" class="more"><?php echo $this->data['lien']['type'] ?> &rsaquo;</a>
+$blockColor = strtolower($this->data['couleur']); ?>
+<?php if (!null == $this->data) : ?>
+<div class="block <?php echo $blockColor ?> col-xs-12">
+    <header>
+        <a href="<?php echo $this->data['lien']['tout_afficher']; ?>" class="more pull-right">Tout afficher &rsaquo;</a>
+        <a href="<?php echo $this->data['lien']['tout_afficher']; ?>"><h3><?php echo $this->data['rubrique'] ?></h3></a>
+    </header>
+    <figure class="row">
+        <a href="<?php echo $this->data['lien']['url'] ?>">
+            <img class="illus" src="<?php echo $this->data['image']?>" alt="<?php echo str_replace(array('"',"'","`"), '', str_replace(array('<br>', '<br/>'), ' ', $this->data['rubrique'].' bande-dessinée, '.$this->data['titre'])) ?>" />
+        </a>
+    </figure>
+    <a href="<?php echo $this->data['lien']['url'] ?>">
+        <h2><?php echo $this->data['titre'] ?></h2>
+        <?php if($blockColor !== 'pink'):  ?><p><?php echo $this->data['sous_titre'] ?></p><?php endif; ?>
+    </a>
+    <a href="<?php echo $this->data['lien']['url'] ?>" class="btn pull-right"><?php echo $this->data['lien']['type'] ?> &rsaquo;</a>
 </div>
-<!-- *block300 -->
-<?php
-endif;
-?>
+<?php endif; ?>

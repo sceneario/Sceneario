@@ -1,0 +1,57 @@
+<div class="recherche col-xs-12 col-md-8">
+    <div class="row recherche-header">
+        <?php if ($this->countResults > 0) : ?>
+        <p class="col-xs-5">
+            Résultats <?php echo $this->pageRequested > 1 ? $this->resultsPerPage * ($this->pageRequested - 1) : 1 ?>
+            à <?php echo ($this->countResults < $this->resultsPerPage) ?  $this->countResults : ((($this->resultsPerPage * $this->pageRequested) < $this->countResults) ? $this->resultsPerPage * $this->pageRequested: $this->countResults); ?>
+            sur <?php echo $this->countResults ?>
+        </p>
+        <p class="col-xs-7 text-right">Afficher
+            <select name="" onchange="createUrl(this.value)">
+                <option <?php if(isset($_GET['results']) && $_GET['results'] == 10 )echo "SELECTED" ?> value="10">10</option>
+                <option <?php if(isset($_GET['results']) && $_GET['results'] == 20 )echo "SELECTED" ?> value="20">20</option>
+                <option <?php if(isset($_GET['results']) && $_GET['results'] == 30 )echo "SELECTED" ?> value="30">30</option>
+                <option <?php if(isset($_GET['results']) && $_GET['results'] == 50 )echo "SELECTED" ?> value="50">50</option>
+            </select>
+            résultats par page
+        </p>
+        <?php else : ?>
+            <p class="no-result">Votre recherche n'a retournée aucun résultat.</p>
+        <?php endif; ?>
+    </div>
+    <?php if (count($this->paginator)) : ?>
+        <ul class="item-list">
+            <?php foreach ($this->paginator as $key => $hit): ?>
+            <?php $coverUri = $this->customUrl(array('isbn'   => $hit->isbn ,'format' => 'small'), 'couverture'); ?>
+            <li class="item">
+                <?php if(Zend_Registry::isRegistered('currentUserID') && $this->bedetheque && !isset($_GET['user'])): ?>
+                    <div style="position:absolute;z-index:1000;right:10px;top:0px;"><a style="display:block;padding:10px;" href="javascript:void(0);" onclick="javascript:deleteAlbumFromBdtech(<?php echo $hit->idAlbum ?>);">×</a></div>
+                <?php endif;?>
+                <?php if($hit->idAlbum != '_ALBUM_A_PARAITRE_'): ?>
+                <a href="<?php echo $this->customUrl( array('titleSerie' => $hit->titreSerie, 'titleAlbum' => $hit->titreAlbum, 'idAlbum' => $hit->idAlbum ), 'album'); ?>" class="item-link clearfix">
+                    <?php echo $this->displayImage($coverUri, 'bande-dessinée, '.$hit->titreSerie .', '.$hit->titreAlbum, 'cover'); ?>
+                <?php endif ;?>
+                    <div class="search-content">
+                        <hgroup>
+                            <h1 class="titreSerie"><?php echo $hit->titreSerie ?></h1>
+                            <h2><?php echo $hit->titreAlbum ?></h2>
+                        </hgroup>
+                        <p>
+                            <?php echo $hit->auteurs; ?>
+                            <?php if ($hit->editeur != '') : ?>
+                                <br />Editions <?php echo $hit->editeur  ?>
+                            <?php endif; ?>
+                        </p>
+                        <?php if($hit->genres != ''): ?>
+                            <p><?php echo $hit->genres ?></p>
+                        <?php endif; ?>
+                    </div>
+                <?php if($hit->idAlbum != '_ALBUM_A_PARAITRE_'): ?>
+                    </a>
+                <?php endif ;?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'paginationControl.phtml' ); ?>
+</div>

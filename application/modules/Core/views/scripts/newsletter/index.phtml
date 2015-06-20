@@ -1,34 +1,45 @@
-   
-<!-- CONTENU -->
-
-<div class="leftActu staticpages newsletter">
-  <h1><a href="<?php echo $this -> customUrl(array(),'nl') ?>">Newsletter</a></h1>
-  <section class="actu-wrapper">
-    <div class="actuContent">
-
-      <h2>Inscription</h2>
-      <p>Sceneario est un site très vivant. Avec plus de 200 nouvelles fiches BDs par mois, des interviews, des préviews, des galeries de croquis, des comptes rendus d'expos / festival, des news et des concours, il est important que nous puissions vous prévenir de nos mises en lignes. Pour celà nous vous invitons à vous inscrire à notre newsletter pour ne rien manquer de l'actualité du monde de la Bande Dessinée sur Sceneario.com, c'est ICI :</p>
-      <div class="bloc-newsletter whiteblock300">
-	<form enctype="application/x-www-form-urlencoded" action="/newsletter/subscribe" method="post">
-	  <div class="alert"></div>
-	  <p>
-	    <input type="checkbox" name="sceneario_optin" id="sceneario_optin" value="1">
-	    <label for="sceneario_optin">J'accepte que vous me fassiez parvenir des emails de vos partenaires</label>
-	  </p>
-	  <input type="text" name="sceneario_text" id="sceneario_text" value="">
-	  <input type="submit" name="sceneario_submit" id="sceneario_submit" value="M'inscrire à la newsletter" class="more">
-	</form>
-      </div>
- 
-      <h2>Désinscription</h2>
-      <p>Vous avez changé d'email, vous ne lisez plus de BDs, vous venez sur Sceneario tout seul tous les jours... ou vous ne nous aimez plus... pas de soucis, pour vous désinscrire c'est ICI :</p>
-      <div class="bloc-newsletter whiteblock300">
-	<form enctype="application/x-www-form-urlencoded" action="/newsletter/unsubscribe" method="post">
-	  <div class="alert"></div>
-	  <input type="text" name="sceneario_text" id="sceneario_text" value="">
-	  <input type="submit" name="sceneario_submit" id="sceneario_submit" value="Me désinscrire de la newsletter" class="more">
-	</form>
-      </div>
+<div class="staticpage newsletter col-xs-12 col-md-8">
+    <h1><a href="<?php echo $this -> customUrl(array(),'nl') ?>">Newsletter</a></h1>
+    <div class="clearfix">
+        <div class="col-xs-12 block white bloc-newsletter">
+            <div class="row">
+                <h2 class="col-xs-12">Inscription</h2>
+                <p class="col-xs-12">Sceneario est un site très vivant. Avec plus de 200 nouvelles fiches BDs par mois, des interviews, des préviews, des galeries de croquis, des comptes rendus d'expos / festival, des news et des concours, il est important que nous puissions vous prévenir de nos mises en lignes. Pour celà nous vous invitons à vous inscrire à notre newsletter pour ne rien manquer de l'actualité du monde de la Bande Dessinée sur Sceneario.com, c'est ICI :</p>
+                <form class="col-xs-12 form" enctype="application/x-www-form-urlencoded" action="/newsletter/subscribe" method="post">
+                    <div class="alert"></div>
+                    <div class="checkbox col-xs-12">
+                        <label for="sceneario_optin">
+                            <input type="checkbox" name="sceneario_optin" id="sceneario_optin" value="1" />
+                            J'accepte que vous me fassiez parvenir des emails de vos partenaires
+                        </label>
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <input class="field-text" type="text" name="sceneario_text" id="sceneario_text" value="" />
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <input type="submit" name="sceneario_submit" id="sceneario_submit" value="M'inscrire à la newsletter" class="btn field-submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-xs-12 block white bloc-newsletter">
+            <div class="row">
+                <h2 class="col-xs-12">Désinscription</h2>
+                <p class="col-xs-12">Vous avez changé d'email, vous ne lisez plus de BDs, vous venez sur Sceneario tout seul tous les jours... ou vous ne nous aimez plus... pas de soucis, pour vous désinscrire c'est ICI :</p>
+                <form class="col-xs-12 form" enctype="application/x-www-form-urlencoded" action="/newsletter/unsubscribe" method="post">
+                    <div class="alert"></div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <input class="field-text" type="text" name="sceneario_text" id="sceneario_text" value="" />
+                    </div>
+                    <div class="form-group col-xs-12 col-md-6">
+                        <input type="submit" name="sceneario_submit" id="sceneario_submit" value="Me désinscrire de la newsletter" class="btn field-submit" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<?php echo $this->partial('partials/sidebar.phtml'); ?>
 
 <script type="text/javascript">
   $(document).ready(function() {
@@ -48,44 +59,3 @@
     });
   });
 </script>
-
-    </div>
-  </section>
-</div>
-
-<div class="rightActu">
-  <?php 
-     echo $this->userAccountWidget('user_dashboard');
-     echo $this->lastConcoursBloc($this);
-  ?>
-	<!-- Pub 300x250 -->
-	<div class="pub">
-            <?php echo $this->partial('partials/pubs300large.phtml'); ?>
-            <!-- Interview300 -->
-            <div id='div-gpt-ad-1350913175803-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913175803-0'); });
-                </script>
-            </div>
-            <!-- Interview300interne -->
-            <div id='div-gpt-ad-1350913216188-0'>
-                <script type='text/javascript'>
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913216188-0'); });
-                </script>
-            </div>
-	</div><!-- pub -->
-	
-	<?php 
-	   echo $this->lastInterviewBloc($this);
-	   echo $this->lastGalleryBloc($this);
-	   echo $this->lastExpoBloc($this);
-	   echo $this->lastGalleryBloc($this, 'preview');
-	?>
-	<div class="clear"></div>
-	
-	<!-- Facebook like box -->
-	<div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div><!-- Facebook like box --> 
-</div>
-
-<!-- Reinitialisation des float -->
-<div class="clear"></div>

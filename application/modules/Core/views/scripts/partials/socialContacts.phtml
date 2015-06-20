@@ -8,14 +8,12 @@ mail     : webmaster@sceneario.com
 */
 
 ?>
-<!-- Bloc de liens réseaux sociaux -->
-<div class="social_links">
-        <div class="social_links-title"><img src="<?php echo BASE_URL ?>img/slinks_titre.png" alt="Suivez-nous !"></div>
-        <ul>
-                <li><a target="_blank" href="http://www.facebook.com/Sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks_icon_fb.png" alt="Facebook Sceneario.com"></a></li>
-                <li><a target="_blank" href="https://twitter.com/sceneario"><img src="<?php echo BASE_URL ?>img/slinks_icon_twitter.png" alt="Twitter Sceneario.com"></a></li>
-                <li><a target="_blank" href="http://www.sceneario.com/blog/feed/rss"><img src="<?php echo BASE_URL ?>img/slinks_icon_rss.png" alt="RSS Sceneario.com"></a></li>
-                <li><a href="<?php echo $this->url(array(), 'contact', true); ?>"><img src="<?php echo BASE_URL ?>img/slinks_icon_email.png" alt="Contact Sceneario.com"></a></li>
-        </ul>
-        <div class="clear"></div>
-</div><!-- social_links -->
+<div class="social_links block col-xs-12 <?php echo isset($this->class) ? $this->class : ''; ?><?php echo isset($this->color) ? ' '.$this->color : ''; ?>">
+    <div class="social_links-title col-xs-5"><img src="<?php echo BASE_URL ?>img/slinks<?php echo isset($this->color) ? '_'.$this->color : ''; ?>_titre.png" alt="Suivez-nous !"></div>
+    <ul class="col-xs-7">
+        <li><a target="_blank" href="http://www.facebook.com/Sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks<?php echo isset($this->color) ? '_'.$this->color : ''; ?>_icon_fb.png" alt="Facebook Sceneario.com"></a></li>
+        <li><a target="_blank" href="https://twitter.com/sceneario"><img src="<?php echo BASE_URL ?>img/slinks<?php echo isset($this->color) ? '_'.$this->color : ''; ?>_icon_twitter.png" alt="Twitter Sceneario.com"></a></li>
+        <li><a target="_blank" href="http://www.sceneario.com/blog/feed/rss"><img src="<?php echo BASE_URL ?>img/slinks<?php echo isset($this->color) ? '_'.$this->color : ''; ?>_icon_rss.png" alt="RSS Sceneario.com"></a></li>
+        <li><a href="<?php echo $this->url(array(), 'contact', true); ?>"><img src="<?php echo BASE_URL ?>img/slinks<?php echo isset($this->color) ? '_'.$this->color : ''; ?>_icon_email.png" alt="Contact Sceneario.com"></a></li>
+    </ul>
+</div>

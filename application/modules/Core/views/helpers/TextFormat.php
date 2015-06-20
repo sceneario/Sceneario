@@ -56,25 +56,21 @@ class Zend_View_Helper_TextFormat{
         #$string = str_replace($searchTags, '<p class="justify">',$text);
         #$string = strip_tags($string, '<p><a><br>');
         //$text        = nl2br($text);
-        $text        = strip_tags($text, '<br>'); /*<strong>*/
+        $text        = trim(strip_tags($text, '<br><strong>')); /*<strong>*/
         $searchPonct = array(' ?', ' !', '<br>');
         $replacPonct = array( '&nbsp;?', '&nbsp;!', '<br />');
-        $text        = str_replace($searchPonct,$replacPonct, $text);
-        
+        $text        = str_replace($searchPonct, $replacPonct, $text);
+
         $limit = 1030 ;
         if(strlen($text) > $limit){
             while( $text[$limit] !== '.') {
                 $limit++;
                 continue;
             }
-       
+
             $text = substr($text, 0 , $limit) ;
-         }
-         
-        return '<p class="justify">' 
-             . ltrim( $text, '<br />' )
-             . ' [...]</p>'; 
+        }
+
+        return '<p class="justify">' . preg_replace('/^(?:<br\s*\/?>\s*)+/', '', $text). ' [...]</p>';
     }
-    
-     
 }

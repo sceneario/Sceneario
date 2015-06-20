@@ -1,0 +1,63 @@
+.pagination {
+    clear: both;
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.pagination a {
+    background:url(../img/sprite-pagination.png) no-repeat;
+    width:28px;
+    height:28px;
+    display:inline-block;
+    margin-right:5px;
+    text-decoration:none;
+    color:#a0a0a0;
+    font-size:16px;
+    line-height:28px;
+    text-align:center;
+    font-weight:bold;
+    text-shadow: 0px 1px 0px #fff;
+    -webkit-text-shadow: 0px 1px 0px #fff;
+    -moz-text-shadow: 0px 1px 0px #fff;
+    -ms-text-shadow: 0px 1px 0px #fff;
+    -o-text-shadow: 0px 1px 0px #fff;
+}
+
+.pagination a.prev, .pagination a.next {
+    text-indent:-8000px;
+}
+
+.pagination a.prev {
+    background-position:0 0;
+}
+
+.pagination a.prev:hover {
+    background-position:0 -28px;
+}
+
+
+.pagination a.next {
+    background-position:-87px 0;
+}
+
+.pagination a.next:hover {
+    background-position:-58px -28px;
+}
+
+.pagination a.page {
+    background-position:-29px 0;
+}
+
+.pagination a.page:hover {
+    background-position:-29px -28px;
+}
+
+.pagination a.page.active {
+    background-position:-58px 0;
+    color:white;
+    text-shadow: 0px 1px 0px #383838;
+    -webkit-text-shadow: 0px 1px 0px #383838;
+    -moz-text-shadow: 0px 1px 0px #383838;
+    -ms-text-shadow: 0px 1px 0px #383838;
+    -o-text-shadow: 0px 1px 0px #383838;
+}

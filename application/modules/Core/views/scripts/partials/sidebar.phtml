@@ -1,0 +1,19 @@
+<div class="sidebar col-xs-12 col-md-4">
+    <?php echo $this->userAccountWidget('user_dashboard'); ?>
+    <?php echo $this->lastConcoursBloc($this); ?>
+    <div class="pub">
+        <?php echo $this->partial('partials/pubs300large.phtml'); ?>
+        <div id='div-gpt-ad-1350913318651-0'>
+            <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913318651-0'); });</script>
+        </div>
+        <div id='div-gpt-ad-1350913404071-0'>
+            <script type='text/javascript'>googletag.cmd.push(function() { googletag.display('div-gpt-ad-1350913404071-0'); });</script>
+        </div>
+    </div>
+    <?php echo $this->lastInterviewBloc($this); ?>
+    <?php echo $this->lastGalleryBloc($this); ?>
+    <?php echo $this->lastExpoBloc($this); ?>
+    <?php echo $this->lastGalleryBloc($this, 'preview'); ?>
+    <?php echo $this->registerNewsletter($this); ?>
+    <div class="fb-like-box" data-href="http://www.facebook.com/Sceneario.com" data-width="300" data-show-faces="true" data-border-color="#fff" data-stream="false" data-header="false"></div>
+</div>

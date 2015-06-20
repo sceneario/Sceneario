@@ -1,0 +1,31 @@
+<div class="header-mauve col-xs-12">
+    <div class="search row">
+        <form class="col-xs-12 col-md-6" action="<?php echo $this->customUrl( array('tag' => '') , 'recherche') ?>" method="get">
+            <input type="text" name="tag" value='<?php echo isset($this->requeteUser)? $this->requeteUser : '' ?>' placeholder="Rechercher" />
+            <div class="menu">
+                <a href="javascript:void(0);">Tout le site</a>
+                <ul>
+                    <li>Titre ou série</li>
+                    <li>Les auteurs</li>
+                    <li>Les éditeurs</li>
+                    <li>ISBN</li>
+                    <li>Les rédacteurs</li>
+                </ul>
+            </div>
+            <input type="hidden" name="filter" value="" />
+            <input type="submit" value="<?php echo $this->isMobile ? 'OK' : 'Rechercher' ; ?>" />
+        </form>
+        <form class="col-xs-12 col-md-6" action="<?php echo $this->customUrl( array('tag' => '') , 'recherche') ?>" method="get">
+            <div class="menu">
+                <a href="javascript:void(0);">Rechercher par thème</a>
+                <ul>
+                    <?php foreach ($this->genres as $genre) : ?>
+                        <li><?php echo $genre; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <input type="hidden" name="tag" value="" />
+            <input type="submit" value="<?php echo $this->isMobile ? 'OK' : 'Rechercher' ; ?>" />
+        </form>
+    </div>
+</div>

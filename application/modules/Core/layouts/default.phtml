@@ -6,13 +6,13 @@
     <?php print isset($this->headOpenTag) && !empty($this->headOpenTag) ? $this->headOpenTag : '<head>'; ?>
         <meta charset="utf-8">
         <?php print ($this->headTitle() != '<title></title>') ? $this->headTitle() : '<title>Sceneario.com - Toute la bande dessinée sur Sceneario.com</title>'; ?>
-
+        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
         <?php if ($this->headMeta() != '') : ?>
         <?php   print $this->headMeta(); ?>
         <?php else : ?>
         <?php   $description = "Site consacr&eacute; &agrave; la BD : critiques, r&eacute;sum&eacute;s, nouveaut&eacute;s, interviews, concours..."; ?>
         <?php   $keywords    = "BD, CRITIQUE, RESUME, INTERVIEW, NOUVEAUTE, SERIE, BDS, CRITIQUES, BANDES DESSINEES, BANDE DESSINEE, SERIES "; ?>
-        <meta name="viewport" content="width=device-width">
         <meta name="description" content="<?php echo isset($this->albumDescription) ? $this->albumDescription  :$description ?>">
         <meta name="keywords"  content="<?php echo isset($this->albumKeywordsRef) ? $this->albumKeywordsRef : $keywords ?>">
         <meta name="Copyright" content="Sceneario.com">
@@ -35,16 +35,15 @@
         <meta property="og:description" content="<?php echo $description ?>"/>
         <?php endif; ?>
         <link rel="canonical" href="<?php echo $this->currentUrl() ?>" />
-        <link rel="stylesheet" href="<?php echo BASE_URL ?>min/?g=css">
         <!--[if lt IE 9]> <link rel="stylesheet" href="css/ie.css"> <![endif]-->
         <!--[if IE 7]> <link rel="stylesheet" href="css/ie7.css"> <![endif]-->
         <script src="http://<?php echo $_SERVER['HTTP_HOST'] ?>/js/googledbc.js"></script>
     </head>
     <body>
-        <?php if($this->applyFilter == true):?>
+        <?php if ($this->applyFilter == true) : ?>
             <style>
                 #adultFilter { position: fixed; width: 100%; height: 100%; background: #DDD; z-index: 10000; text-align: center; vertical-align: vertical-align; opacity:0.9; }
-                #adultFilter div{ width:500px; outline:0px solid red; margin :  0 auto; margin-top:180px; background: #666; padding: 20px; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px#888; box-shadow: 0 0 5px #888; color:white; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border:2px solid white; }
+                #adultFilter div{ float: none; outline:0px solid red; margin :  0 auto; margin-top:180px; background: #666; padding: 20px; -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px#888; box-shadow: 0 0 5px #888; color:white; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; border:2px solid white; }
                 #adultFilter div .heading-1{ line-height: 30px; font-size: 25px; font-weight: bold; margin: 0.67em 0; }
                 #adultFilter div p.text { width:300px; margin :  0 auto; text-align: justify; padding-bottom: 20px; }
                 .filterlink { outline: 0px solid red; float:left; width: 50px; font-weight: bolder; font-size:20px; }
@@ -52,7 +51,7 @@
                 .out { float:right; }
             </style>
             <div id="adultFilter">
-                <div>
+                <div class="col-xs-12 col-md-3">
                     <p class="heading-1">ATTENTION : CONTENU RESERVE <br />A UN PUBLIC AVERTI</p>
                     <p class="text">Les images et textes à caractère érotique, pornographique ou violent contenus dans cette page peuvent choquer certaines sensibilités.
                     <br />En affichant cette page, vous déclarez prendre vos responsabilités vis-a-vis de ce contenu.</p>
@@ -63,8 +62,10 @@
                 </div>
             </div>
         <?php endif;?>
+        <?php if (!$this->isMobile) : ?>
         <div id="fb-root"></div>
         <?php if(APPLICATION_ENV == 'testing' || APPLICATION_ENV == 'development'): ?>
+            <!--
             <script>
                 window.fbAsyncInit = function() {
                     FB.init({
@@ -84,6 +85,7 @@
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
             </script>
+            -->
         <?php else: ?>
             <script>
                 window.fbAsyncInit = function() {
@@ -105,9 +107,11 @@
                 }(document, 'script', 'facebook-jssdk'));
             </script>
         <?php endif; ?>
+        <?php endif; ?>
         <header>
+            <?php if (!$this->isMobile) : ?>
             <div id="pub">
-                <div>
+                <div class="container">
                     <?php $chartotrash = array('"','\'','(',')'); ?>
                     <?php if (count($this->motcles) > 0) : ?>
                     <?php   $pubgenre = array(); ?>
@@ -152,124 +156,164 @@
                     </div>
                 </div>
             </div>
-            <div id="main-head">
+            <?php endif; ?>
+            <div id="main-head" class="navbar navbar-default">
                 <div id="head-container">
-                    <div id="head">
-                        <div id="logo">
-                            <a href="<?php echo BASE_URL ?>">
-                                <img src="<?php echo BASE_URL ?>img/logo_sceneario.png" alt="Sceneario.com - Toute la BD sur internet">
-                            </a>
+                    <div id="head" class="container">
+                        <div class="row">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainMenu">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a id="logo" class="navbar-brand col-xs-9 col-md-12" href="<?php echo BASE_URL ?>">
+                                    <img class="img-responsive" src="<?php echo BASE_URL ?>img/logo_sceneario.png" alt="Sceneario.com - Toute la BD sur internet" />
+                                </a>
+                            </div>
+                            <?php if (!$this->isMobile) : ?>
+                            <div class="search pull-right">
+                                <form method='get' action="<?php echo $this->customUrl( array() , 'recherche') ?>">
+                                    <input type="text" name="tag" value='<?php echo isset($this->requeteUser)?$this->requeteUser:'' ?>' placeholder="Rechercher">
+                                </form>
+                            </div>
+                            <?php endif; ?>
                         </div>
+                    </div>
+                </div>
+                <div id="nav-container">
+                    <nav id="mainnav" class="navbar navbar-default">
+                        <div class="container">
+                            <?php if (!$this->isMobile) : ?>
+                                <?php echo $this->userAccountWidget('user_connect_shortcut'); ?>
+                            <?php endif; ?>
+                            <div id="mainMenu" class="row collapse navbar-collapse">
+                                <ul class="mainMenu">
+                                    <li><a href="/">Accueil</a></li>
+                                    <li><a href="/blog">Actualités</a></li>
+                                    <li><a href="#">Bédéthèque</a><ul>
+                                        <li><a href="/bande-dessinee/nouveautes.html">Nouveautés</a></li>
+                                        <li><a href="/bande-dessinee/prochaines-parutions.html">A paraitre</a></li>
+                                        <li><a href="/bande-dessinee/coupsdecoeur.html">Coup de coeur</a></li>
+                                        <li><a href="/bande-dessinee/recommandes.html">Recommandés</a></li>
+                                    </ul></li>
+                                    <li><a href="#">Toute la bd</a><ul>
+                                        <li><a href="/interview">Interviews</a></li>
+                                        <li><a href="/expositions-salons">Expositions, salons</a></li>
+                                        <li><a href="/galerie">Galeries</a></li>
+                                        <li><a href="/preview">Previews</a></li>
+                                    </ul></li>
+                                    <li><a href="/concours">Concours</a></li>
+                                    <?php if ($this->isMobile) : ?>
+                                    <li class="visible-xs">
+                                        <form action="<?php echo $this->customUrl( array('tag' => '') , 'recherche') ?>" class="navbar-form navbar-left" role="search">
+                                            <div class="form-group col-xs-8">
+                                                <input type="text" class="form-control" placeholder="un album, une série, ..." name="tag" value="<?php echo isset($this->requeteUser)? $this->requeteUser : '' ?>" />
+                                            </div>
+                                            <button type="submit" class="btn btn-default">Rechercher</button>
+                                        </form>
+                                    </li>
+                                    <?php endif; ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="content-container" class="container">
+            <?php if (!$this->isMobile) : ?>
+                <?php echo $this->partial('partials/habillagesPub.phtml', array('habillageHome' => $this->habillageHome)); ?>
+            <?php endif; ?>
+            <div id="content" class="row">
+                <?php print $this->layout()->content ?>
+            </div>
+        </div>
+        <footer id="mainfooter">
+            <?php if (!$this->isMobile) : ?>
+            <div id="header">
+                <div class="container">
+                    <div class="row">
+                        <?php echo $this->partial('partials/socialContacts.phtml', array('class' => 'col-md-4 pull-right', 'color' => 'green')); ?>
                         <div class="search">
-                            <form method='get' action="
-                                <?php echo $this->customUrl( array() , 'recherche') ?>">
+                            <form method='get' action="<?php echo $this->customUrl( array() , 'recherche') ?>">
                                 <input type="text" name="tag" value='<?php echo isset($this->requeteUser)?$this->requeteUser:'' ?>' placeholder="Rechercher">
                             </form>
                         </div>
                     </div>
                 </div>
-                <div id="nav-container">
-                    <nav id="mainnav">
-                        <?php echo $this->userAccountWidget('user_connect_shortcut'); ?>
-                        <?php echo $this->navigation()->menu(Zend_Registry::get('Zend_Navigation'))->setUlClass('mainMenu'); ?>
-                        <div class="clear"></div>
-                    </nav>
-                </div>
             </div>
-        </header>
-        <div id="content-container">
-            <?php echo $this->partial('partials/habillagesPub.phtml', array('habillageHome' => $this->habillageHome) ) ?>
-            <div id="content">
-                <?php print $this->layout()->content ?>
-                <div class="clear"></div>
-            </div>
-        </div>
-        <footer id="mainfooter">
-            <div id="header">
-                <div class="social_links">
-                    <div class="social_links-title"><img src="<?php echo BASE_URL ?>img/slinks_green_titre.png" alt="Suivez-nous !"></div>
-                        <ul>
-                            <li><a target="_blank" href="http://www.facebook.com/Sceneario.com"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_fb.png" alt="Facebook Sceneario.com"></a></li>
-                            <li><a target="_blank" href="https://twitter.com/sceneario"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_twitter.png" alt="Twitter Sceneario.com"></a></li>
-                            <li><a target="_blank" href="http://www.sceneario.com/blog/feed/rss"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_rss.png" alt="RSS Sceneario.com"></a></li>
-                            <li><a href="<?php echo $this->url(array(), 'contact', true); ?>"><img src="<?php echo BASE_URL ?>img/slinks_green_icon_email.png" alt="Contact Sceneario.com"></a></li>
+            <?php else : ?>
+                <div class="container"><div class="row"><?php echo $this->partial('partials/socialContacts.phtml', array('color' => 'pink')); ?></div></div>
+            <?php endif; ?>
+            <div id="sitemap">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <h3>Plan du site</h3>
+                            <p class="text-justify">
+                                <a href="http://www.sceneario.com">Sceneario.com</a> est un site généraliste traitant de Bande Dessinée, spécialisé dans la critique de BD, de Comics et de Mangas. Avec plus de 20 000 fiches BDs résumant et analysant les parutions internationales, 550 interviews, 450 préviews, 270 comptes rendus d’expositions&nbsp;/&nbsp;salons, 180 galeries de croquis, des concours, Sceneario.com est un site de référence et un incontournable du monde de la Bande Dessinée.
+                            </p>
+                        </div>
+                        <ul class="mainMenu col-md-7 col-md-offset-1">
+                            <li class="col-md-2 col-md-offset-2 col-xs-4"><h4><a href="/accueil.html">Sceneario</a></h4>
+                                <ul>
+                                    <li><a href="/equipe">Équipe</a></li>
+                                    <li><a href="/newsletter">Newsletter</a></li>
+                                    <li><a href="/mentions-legales">Mentions légales</a></li>
+                                    <li><a href="http://regie.sceneario.com" target="_blank">Régie Pub</a></li>
+                                    <li><a target="_blank" href="http://www.facebook.com/Sceneario.com">Facebook</a></li>
+                                    <li><a target="_blank" href="https://twitter.com/sceneario">Twitter</a></li>
+                                    <li><a target="_blank" href="/blog/feed/rss">RSS</a></li>
+                                    <li><a href="<?php echo $this->url(array(), 'contact', true); ?>">Contact</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-md-2 col-xs-4"><h4><a href="/bande-dessinee.html">Bédéthèque</a></h4>
+                                <ul>
+                                  <li><a href="/bande-dessinee/nouveautes.html">Nouveautés</a></li>
+                                  <li><a href="/bande-dessinee/prochaines-parutions.html">A paraitre</a></li>
+                                  <li><a href="/bande-dessinee/coupsdecoeur.html">Coup de coeur</a></li>
+                                  <li><a href="/bande-dessinee/recommandes.html">Recommandés</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-md-2 col-xs-4"><h4><a href="/sceneario-passe-la-6eme.html">Toute la bd</a></h4>
+                                <ul>
+                                  <li><a href="/interview">Interviews</a></li>
+                                  <li><a href="/expositions-salons">Expositions, salons</a></li>
+                                  <li><a href="/galerie">Galeries</a></li>
+                                  <li><a href="/preview">Previews</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-md-2 col-xs-4"><h4><a href="/blog">Actualités</a></h4>
+                                <ul><li><a href="/blog">Blog</a></li></ul>
+                            </li>
+                            <li class="col-md-2 col-xs-4"><h4><a href="/concours">Concours</a></h4>
+                                <ul>
+                                    <li><a href="/concours">Tous les concours</a></li>
+                                    <?php $c = Core_Model_Mapper_Tblconcoursent::getCurrentConcours(); ?>
+                                    <?php if (!empty($c)) : ?>
+                                    <li><a href="<?php echo $this->customUrl( array( 'nomConcours' => $c[0]->getLibelleConcours(), 'idConcours'  => $c[0]->getNomConcours()) , 'concoursstep1'); ?>">À gagner en ce moment</a></li>
+                                    <?php endif; ?>
+                                </ul>
+                            </li>
                         </ul>
-                    <div class="clear"></div>
+                    </div>
                 </div>
-                <div class="search">
-                    <form method='get' action="<?php echo $this->customUrl( array() , 'recherche') ?>">
-                        <input type="text" name="tag" value='<?php echo isset($this->requeteUser)?$this->requeteUser:'' ?>' placeholder="Rechercher">
-                    </form>
-                </div>
-            </div>
-            <div id="sitemap" class="clearfix">
-                <h3>Plan du site</h3>
-                <p>
-                    <a href="http://www.sceneario.com">Sceneario.com</a> est un site généraliste traitant de Bande Dessinée, spécialisé dans la critique de BD, de Comics et de Mangas. Avec plus de 20 000 fiches BDs résumant et analysant les parutions internationales, 550 interviews, 450 préviews, 270 comptes rendus d’expositions / salons, 180 galeries de croquis, des concours, Sceneario.com est un site de référence et un incontournable du monde de la Bande Dessinée.
-                </p>
-                <ul class="mainMenu">
-                    <li><h4><a href="/accueil.html">Sceneario</a></h4>
-                        <ul>
-                            <li><a href="/equipe">Équipe</a></li>
-                            <li><a href="/newsletter">Newsletter</a></li>
-                            <li><a href="/mentions-legales">Mentions légales</a></li>
-                            <li><a href="http://regie.sceneario.com" target="_blank">Régie Pub</a></li>
-                            <li><a target="_blank" href="http://www.facebook.com/Sceneario.com">Facebook</a></li>
-                            <li><a target="_blank" href="https://twitter.com/sceneario">Twitter</a></li>
-                            <li><a target="_blank" href="/blog/feed/rss">RSS</a></li>
-                            <li><a href="<?php echo $this->url(array(), 'contact', true); ?>">Contact</a></li>
-                        </ul>
-                    </li>
-                    <li><h4><a href="/blog">Actualités</a></h4>
-                        <ul><li><a href="/blog">Blog</a></li></ul>
-                    </li>
-                    <li><h4><a href="/bande-dessinee.html">Bédéthèque</a></h4>
-                        <ul>
-                          <li><a href="/bande-dessinee/nouveautes.html">Nouveautés</a></li>
-                          <li><a href="/bande-dessinee/prochaines-parutions.html">A paraitre</a></li>
-                          <li><a href="/bande-dessinee/coupsdecoeur.html">Coup de coeur</a></li>
-                          <li><a href="/bande-dessinee/recommandes.html">Recommandés</a></li>
-                        </ul>
-                    </li>
-                    <li><h4><a href="/sceneario-passe-la-6eme.html">Toute la bd</a></h4>
-                        <ul>
-                          <li><a href="/interview">Interviews</a></li>
-                          <li><a href="/expositions-salons">Expositions, salons</a></li>
-                          <li><a href="/galerie">Galeries</a></li>
-                          <li><a href="/preview">Previews</a></li>
-                        </ul>
-                    </li>
-                    <li><h4><a href="/concours">Concours</a></h4>
-                        <ul>
-                            <li><a href="/concours">Tous les concours</a></li>
-                            <?php $c = Core_Model_Mapper_Tblconcoursent::getCurrentConcours(); ?>
-                            <?php if (!empty($c)) : ?>
-                            <li><a href="<?php echo $this->customUrl( array( 'nomConcours' => $c[0]->getLibelleConcours(), 'idConcours'  => $c[0]->getNomConcours()) , 'concoursstep1'); ?>">À gagner en ce moment</a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </li>
-                </ul>
             </div>
             <div id="footer">
-                <p><a href="http://www.sceneario.com">Sceneario.com</a> V6.0 © Association Sceneario.com loi 1901 - Tous droits réservés</p>
-                <a href="http://www.sceneario.com"><img src="/img/footer_logo.png" alt="critiques BD, comics, mangas"></a>
+                <div class="container">
+                    <div class="row">
+                        <p><a href="http://www.sceneario.com">Sceneario.com</a> V6.0 © Association Sceneario.com loi 1901 - Tous droits réservés</p>
+                        <a href="http://www.sceneario.com"><img src="/img/footer_logo.png" alt="critiques BD, comics, mangas"></a>
+                    </div>
+                </div>
             </div>
         </footer>
+        <link rel="stylesheet" href="<?php echo BASE_URL ?>min/?g=css">
         <script src="<?php echo BASE_URL ?>min/?g=js-vendor"></script>
         <script src="<?php echo BASE_URL ?>min/?g=js"></script>
-        <?php if(isset($this->galerieSlideShow) && $this->galerieSlideShow): ?>
-            <script src="<?php echo BASE_URL ?>js/slideShow.js"></script>
-            <script type="text/javascript">
-                slider(980,500,".galerieWrapper .next",".galerieWrapper .prev",".sliderPagination a",".galerieSlider ul",null);
-            </script>
-        <?php endif; ?>
-
-        <?php if(isset($this->indexSlideShow) && $this->indexSlideShow):  ?>
-            <script src="<?php echo BASE_URL ?>js/slideShow.js"></script>
-            <script type="text/javascript">
-                slider(620,500,null,null,"#slider nav a","#slides-wrapper",4000);
-            </script>
-        <?php endif; ?>
+        <?php echo implode('', $this->block_js); ?>
         <?php if (APPLICATION_ENV != 'development' || APPLICATION_ENV != 'testing'): ?>
             <script>
                 var _gaq=[['_setAccount','UA-964631-1'],['_trackPageview']];
