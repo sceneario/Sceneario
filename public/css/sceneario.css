@@ -24,6 +24,7 @@ a:hover { color:#414141; text-decoration: none; }
 
 .btn, .btn:focus, .btn:hover {
     display: inline-block;
+    text-align: center;
     border: 0;
     padding: 0px 10px;
     background: #0097a0;

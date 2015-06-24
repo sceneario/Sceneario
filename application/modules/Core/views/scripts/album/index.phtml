@@ -70,7 +70,7 @@
                     </a>
                 <?php endif ?>
             </div>
-            <div class="col-xs-2 icons">
+            <div class="col-xs-2 album-icons">
                 <?php $facebookConnect = Core_Service_FacebookConnect::getInstance(); ?>
                 <?php $googleConnect   = Core_Service_GoogleConnect::getInstance(); ?>
                 <?php if ($facebookConnect->isConnected() || $googleConnect->isConnected()) : ?>
@@ -359,7 +359,7 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
-                    <a href="<?php echo $this->getHelper('customUrl')->getSerieUrl($this->serie); ?>" class="btn pull-right">
+                    <a href="<?php echo $this->getHelper('customUrl')->getSerieUrl($this->serie); ?>" class="btn col-xs-12 col-md-4 col-md-offset-4">
                         Les albums de la série <?php echo $this->serie->getNomSerie(); ?>
                     </a>
                 </section>
