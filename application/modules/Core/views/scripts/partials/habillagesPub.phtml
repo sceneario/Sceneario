@@ -1,65 +1,61 @@
-<?php 
+<?php
 
-/* 
+/*
  * HABILLAGE PUBLICITAIRE
  * PORTEE :
  * 2 tout le site sans la home
  * 1 tout le site
  * 0 que la home
  */
- 
 
 define('HABILLAGE_URL', 'http://images.sceneario.com/pubs/habillages/');
 
 $habillageMapper = new Core_Model_Mapper_Tblhabillage();
 $clause          = APPLICATION_ENV == 'testing' ?  'actifDev = ?' :  'actif = ?' ;
 $habillageModels = $habillageMapper->fetchAll(2, array('clause' =>   $clause  , 'params' => IS_PUBLISHED), null);
- 
-if(!null == $habillageModels){
-
-foreach($habillageModels as $habillageObj){
-	
+?>
+<?php if (!null == $habillageModels) : ?>
+<?php foreach ($habillageModels as $habillageObj) : ?>
+<?php
 	// si la portée est 1, on n'execute pas
-	if($habillageObj->getPortee() !== 1){
-		if( isset($this->habillageHome) ){
+	if ($habillageObj->getPortee() !== 1) {
+		if (isset($this->habillageHome)) {
 			// si on est sur la home et que la portée est 2,
-			// on n'execute pas la suite du script 
+			// on n'execute pas la suite du script
 			// et on ré-itère
-			if( $this->habillageHome == true){
-				if($habillageObj->getPortee() == 2){
+			if ( $this->habillageHome == true) {
+				if ($habillageObj->getPortee() == 2) {
 					continue ;
 				}
 			}
-		}else{
+		} else {
 			// idem si on pas sur la home et que la portée est 0
-			if($habillageObj->getPortee() == 0){
+			if ($habillageObj->getPortee() == 0) {
 				continue ;
 			}
 		}
 	}
+?>
 
-	?>
-	
 	<div id="habillage-container">
 		<div id="habillage">
-			<?php if( $habillageObj->getCss() !== '' ): ?>
-	    			<link rel="stylesheet" href="<?php echo HABILLAGE_URL . $habillageObj->getCss() ?>">
-	    	<?php endif; 	    	
-	    	      if(  $habillageObj->getCouleur() !== ''): 
-		    		$couleur = $habillageObj->getCouleur() ;?>
-		    		
+			<?php if ($habillageObj->getCss() !== '' ) : ?>
+                <?php $this->block_css[] = '<link rel="stylesheet" href="'. HABILLAGE_URL . $habillageObj->getCss() .'">'; ?>
+	    	<?php endif; ?>
+	    	<?php if ($habillageObj->getCouleur() !== '') : ?>
+		    	<?php $couleur = $habillageObj->getCouleur(); ?>
+                <?php $this->block_css[] = '
 	    			<style>
 	    				body {
-		    				background: <?php echo $couleur[0] == '#' ? $couleur : '#'.$couleur ; ?>
+		    				background: '.($couleur[0] == '#' ? $couleur : '#'.$couleur).'
 	    				}
 	    			</style>
-	    			
-	    	<?php endif; 
-	              if( $habillageObj->getBanniere() ) : 
-	        		echo $habillageObj->getBanniere() ;
-	        	  endif; ?>
+                '; ?>
+	    	<?php endif; ?>
+	        <?php if( $habillageObj->getBanniere()) : ?>
+	        	<?php echo $habillageObj->getBanniere(); ?>
+	        <?php endif; ?>
 		</div>
-	</div> 
-<?php  } 
-}
-?>
+	</div>
+<?php endforeach; ?>
+<?php endif; ?>
