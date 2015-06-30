@@ -43,7 +43,8 @@ class GlobalController extends Zend_Controller_Action
 
         $this->view->isMobile = $this->isMobile();
 
-        $this->view->block_js = array();
+        $this->view->block_css = array();
+        $this->view->block_js  = array();
     }
 
     public function redirect301($url) {
