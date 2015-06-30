@@ -36,21 +36,14 @@ $habillageModels = $habillageMapper->fetchAll(2, array('clause' =>   $clause  , 
 		}
 	}
 ?>
-
 	<div id="habillage-container">
 		<div id="habillage">
 			<?php if ($habillageObj->getCss() !== '' ) : ?>
-                <?php $this->block_css[] = '<link rel="stylesheet" href="'. HABILLAGE_URL . $habillageObj->getCss() .'">'; ?>
+                <?php echo '<link rel="stylesheet" href="'. HABILLAGE_URL . $habillageObj->getCss() .'">'; ?>
 	    	<?php endif; ?>
 	    	<?php if ($habillageObj->getCouleur() !== '') : ?>
 		    	<?php $couleur = $habillageObj->getCouleur(); ?>
-                <?php $this->block_css[] = '
-	    			<style>
-	    				body {
-		    				background: '.($couleur[0] == '#' ? $couleur : '#'.$couleur).'
-	    				}
-	    			</style>
-                '; ?>
+                <?php echo '<style> body { background: '.($couleur[0] == '#' ? $couleur : '#'.$couleur).' !important; } </style>'; ?>
 	    	<?php endif; ?>
 	        <?php if( $habillageObj->getBanniere()) : ?>
 	        	<?php echo $habillageObj->getBanniere(); ?>
