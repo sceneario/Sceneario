@@ -43,6 +43,7 @@
     top:-3px;
     right:-3px;
     z-index:20;
+    width: auto;
 }
 .album-cover-wrapper img.bandeau_bas {
     position:absolute;
