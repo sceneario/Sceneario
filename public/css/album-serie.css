@@ -50,6 +50,7 @@
     bottom:40px;
     right:-6px;
     z-index:20;
+    width: auto;
 }
 .album-cover-wrapper footer {
     height: 30px;
