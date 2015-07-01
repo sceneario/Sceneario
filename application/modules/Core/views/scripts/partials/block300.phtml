@@ -10,7 +10,7 @@
 
 $blockColor = strtolower($this->data['couleur']); ?>
 <?php if (!null == $this->data) : ?>
-<div class="block <?php echo $blockColor ?> col-xs-12">
+<div class="block <?php echo $blockColor ?> clearfix">
     <header>
         <a href="<?php echo $this->data['lien']['tout_afficher']; ?>" class="more pull-right">Tout afficher &rsaquo;</a>
         <a href="<?php echo $this->data['lien']['tout_afficher']; ?>"><h3><?php echo $this->data['rubrique'] ?></h3></a>
