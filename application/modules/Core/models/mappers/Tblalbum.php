@@ -133,14 +133,14 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
         return $items;
     }
 
-    public function fetchAll($limit = null, $where = null, $order = null) {
+    public function fetchAll($limit = null, $where = null, $order = null, $offset = 0) {
 
         $table     = $this->getDbTable();
         $resultSet = $table->fetchAll($table
             ->select()
             ->where($where["clause"], $where["params"])
 		    ->order($order)
-		    ->limit($limit,0)
+		    ->limit($limit, $offset)
         );
 
         $entries = array();
