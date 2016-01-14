@@ -109,7 +109,7 @@ class ImageController extends Zend_Controller_Action
     public function coupdecoeurequipeFormat()
     {
         //121x167
-        $img = $this->resize( $this->_fileName, 121, null ); // L  x  H
+        $img = $this->resize( $this->_fileName, null, 230 ); // L  x  H
 
     }
     
@@ -118,7 +118,7 @@ class ImageController extends Zend_Controller_Action
      */
     public function alsolikeFormat() //width:123px; //height:171px;
     {
-        $img = $this->resize( $this->_fileName, null, 171 ); // L  x  H
+        $img = $this->resize( $this->_fileName, null, 230 ); // L  x  H
     }
     
     /*
@@ -128,7 +128,7 @@ class ImageController extends Zend_Controller_Action
     {    
         //125x166
         //137x103
-        $img = $this->resize( $this->_fileName, 103, null );//137 // L  x  H
+        $img = $this->resize( $this->_fileName, 100, null );//137 // L  x  H
     }
 
 	/*
@@ -156,7 +156,7 @@ class ImageController extends Zend_Controller_Action
      */
     public function bigFormat()
     {
-        $img = $this->resize( $this->_fileName, 300, null ); //width:340px; // height:413px;     
+        $img = $this->resize( $this->_fileName, 360, null ); //width:340px; // height:413px;
     }
     
     public function resize($filename, $newwidth, $newheight)

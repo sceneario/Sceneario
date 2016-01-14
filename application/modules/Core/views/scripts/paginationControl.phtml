@@ -1,35 +1,51 @@
 <?php
-    $requeteUser = urlencode($_GET['cleanedTag']);
+    $uri_parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+    $base_url  = '//'.$_SERVER['HTTP_HOST'].$uri_parts[0];
+    $params    = array();
 
-    $resultsPerPage = "";
     if (isset($_GET['results'])) {
-        $resultsPerPage = '&results=' . urlencode($_GET['results']);
+        $params['results'] = urlencode($_GET['results']);
     }
 
     if (isset($_GET['filter'])) {
-        $resultsPerPage = '&filter=' . urlencode($_GET['filter']);
+        $params['filter'] = urlencode($_GET['filter']);
     }
+
+    if (strstr('recherche', $uri_parts[0])) {
+        $params['tag'] = urlencode($_GET['cleanedTag']);
+    }
+
+    if (isset($this->previous)) {
+        $params['page'] = $this->previous;
+    } else if ($this->next) {
+        $params['page'] = $this->next;
+    }
+
+    parse_str($_SERVER['QUERY_STRING'], $get_array);
+
+    $url = $base_url.'?'.http_build_query(array_merge($get_array, $params));
+
+
+    $url_list = array();
+    foreach ($this->pagesInRange as $page) {
+        $params['page'] = $page;
+        $url_list[$page] = $base_url.'?'.http_build_query(array_merge($get_array, $params));
+    }
+
+
 ?>
 <?php if ($this->pageCount) : ?>
 <div class="pagination" style="width:100%;">
-    <?php if (isset($this->previous)): ?>
-        <?php $previous = '/recherche?tag='.$requeteUser.'&page='. $this->previous . $resultsPerPage; ?>
-        <a class="prev" href="<?php echo $previous ; ?>">Page précédente</a>
+    <?php if (isset($this->previous)) : ?>
+        <a class="prev" href="<?php echo $url; ?>">Page précédente</a>
     <?php endif; ?>
 
-    <?php foreach ($this->pagesInRange as $page): ?>
-        <?php if ($page != $this->current): ?>
-            <?php $current  = '/recherche?tag='.$requeteUser.'&page='. $page . $resultsPerPage; ?>
-            <a class="page" href="<?php echo $current  ?>"><?php echo $page; ?></a>
-        <?php else: ?>
-            <?php $current  = '/recherche?tag='.$requeteUser.'&page='. $page . $resultsPerPage; ?>
-            <a href="<?php echo $current ?>" class="page active"><?php echo $page; ?></a>
-        <?php endif; ?>
+    <?php foreach ($this->pagesInRange as $page) : ?>
+        <a class="page<?php echo $page != $this->current ? '' : ' active'; ?>" href="<?php echo $url_list[$page]; ?>"><?php echo $page; ?></a>
     <?php endforeach; ?>
 
-    <?php if (isset($this->next)): ?>
-        <?php $next = '/recherche?tag='.$requeteUser.'&page='. $this->next . $resultsPerPage; ?>
-        <a class="next" href="<?php echo $next ;?>">Page suivante</a>
+    <?php if (isset($this->next)) : ?>
+        <a class="next" href="<?php echo $url; ?>">Page suivante</a>
     <?php endif; ?>
 </div>
 <?php endif; ?>
