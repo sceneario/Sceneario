@@ -4,12 +4,28 @@ require_once APPLICATION_PATH . '/modules/Core/controllers/GlobalController.php'
 
 class AuteurController extends GlobalController
 {
+    const ITEM_PER_PAGE = 20;
+
     public function init()
     {
         parent::init();
         $this->view->headTitle('Auteurs BD - ', 'PREPEND');
     }
-    
+
+    public function listAction()
+    {
+        $this->view->letter  = $this->getParam('letter', null);
+        $this->view->page    = $this->getParam('page', 1);
+
+        $auteur              = new Core_Model_Mapper_Tblauteurs();
+        $a                   = $auteur->fetchAll(null, 0, 'nomAuteur LIKE \''. $this->view->letter.'%\'', 'nomAuteur ASC', false, true);
+        $this->view->auteurs = $auteur->fetchAll(self::ITEM_PER_PAGE, self::ITEM_PER_PAGE * ($this->view->page - 1), 'nomAuteur LIKE \''. $this->view->letter.'%\'', 'nomAuteur ASC', true);
+
+        $this->view->paginator = Zend_Paginator::factory($a);
+        $this->view->paginator->setCurrentPageNumber($this->view->page);
+        $this->view->paginator->setItemCountPerPage(self::ITEM_PER_PAGE);
+    }
+
     public function indexAction()
     {
         $idAuteur = $this->getRequest()->getParam('idAuteur');

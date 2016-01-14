@@ -1,0 +1,27 @@
+<div class="header-mauve col-xs-12">
+    <h1>Bédéthèque - Auteurs</h1>
+</div>
+<div class="recherche col-xs-12 col-md-8">
+    <div class="pagination pagination-top">
+        <?php foreach (range('A', 'Z') as $l) : ?>
+            <a class="page<?php echo !is_null($this->letter) && $l == $this->letter ? ' active' : ''?>" href="<?php echo $this->url(array('letter' => $l, 'page' => 1), 'listauteur_letter'); ?>"><?php echo $l; ?></a>
+        <?php endforeach; ?>
+    </div>
+    <?php if (!empty($this->auteurs)) : ?>
+        <ul class="item-list">
+            <?php foreach ($this->auteurs as $auteur) : ?>
+                <li class="item">
+                    <a href="<?php echo $this->customUrl(array('nomAuteur'=> $auteur->getPrenomAuteur(). ' ' . $auteur->getNomAuteur(), 'idAuteur' => $auteur->getIdAuteur() ),'auteur') ?>" class="item-link clearfix">
+                        <div class="search-content">
+                            <hgroup>
+                                <h2 class="titreSerie"><?php echo $auteur->getNomAuteur() . ' ' . $auteur->getPrenomAuteur(); ?></h2>
+                            </hgroup>
+                        </div>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+    <?php echo $this->paginationControl($this->paginator, 'Elastic', 'pagination.phtml' ); ?>
+</div>
+<?php echo $this->partial('partials/sidebar.phtml'); ?>
