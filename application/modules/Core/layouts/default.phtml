@@ -224,13 +224,15 @@
                 </div>
             </div>
         </header>
-        <div id="content-container" class="container">
+        <div id="content-container">
             <?php if (!$this->isMobile) : ?>
                 <?php echo $this->partial('partials/habillagesPub.phtml', array('habillageHome' => $this->habillageHome)); ?>
             <?php endif; ?>
+	    <div class="container">
             <div id="content" class="row">
                 <?php print $this->layout()->content ?>
             </div>
+	    </div>
         </div>
         <footer id="mainfooter">
             <?php if (!$this->isMobile) : ?>
