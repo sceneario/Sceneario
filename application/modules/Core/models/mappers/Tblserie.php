@@ -43,25 +43,42 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
         if (0 == count($result)) {
             return;
         }
-        $row = $result->current();
-        $tbl_Serie->setIdSerie(self::unescape($row->idSerie));
-        $tbl_Serie->setNomSerie(self::unescape($row->nomSerie));
-        $tbl_Serie->setComplete(self::unescape($row->complete));
-        $tbl_Serie->setNbtomes(self::unescape($row->nbtomes));
-        $tbl_Serie->setCommentaire(self::unescape($row->commentaire));
-        $tbl_Serie->setInformations(self::unescape($row->informations));
-        $tbl_Serie->setIdUnivers(self::unescape($row->idUnivers));
-        $tbl_Serie->albums = $this->getAlbums($row->idSerie);
-        $tbl_Serie->coloristes = $this->getColoristes($row->idSerie);
-        $tbl_Serie->scenaristes = $this->getScenaristes($row->idSerie);
-        $tbl_Serie->dessinateurs = $this->getDessinateurs($row->idSerie);
-        $tbl_Serie->editeurs = $this->getEditeurs($row->idSerie);
-        $tbl_Serie->collections = $this->getCollections($row->idSerie);
-        $tbl_Serie->motcles = $this->getMotcles($row->idSerie);
-        return $tbl_Serie;
+
+        return $this->assoc($result->current());
     }
 
-    public function fetchAll($limit = null, $offset = 0, $where = null, $order = null, $full = false)
+
+    public function assoc($data) {
+        $items = array();
+        $rows  = !is_array($data) ? array($data) : $data;
+
+        foreach ($rows as $row) {
+            $tbl_Serie = new Core_Model_Tblserie();
+            $tbl_Serie->setIdSerie(self::unescape($row->idSerie));
+            $tbl_Serie->setNomSerie(self::unescape($row->nomSerie));
+            $tbl_Serie->setComplete(self::unescape($row->complete));
+            $tbl_Serie->setNbtomes(self::unescape($row->nbtomes));
+            $tbl_Serie->setCommentaire(self::unescape($row->commentaire));
+            $tbl_Serie->setInformations(self::unescape($row->informations));
+            $tbl_Serie->setIdUnivers(self::unescape($row->idUnivers));
+            $tbl_Serie->albums = $this->getAlbums($row->idSerie);
+            $tbl_Serie->coloristes = $this->getColoristes($row->idSerie);
+            $tbl_Serie->scenaristes = $this->getScenaristes($row->idSerie);
+            $tbl_Serie->dessinateurs = $this->getDessinateurs($row->idSerie);
+            $tbl_Serie->editeurs = $this->getEditeurs($row->idSerie);
+            $tbl_Serie->collections = $this->getCollections($row->idSerie);
+            $tbl_Serie->motcles = $this->getMotcles($row->idSerie);
+
+            if (!is_array($data)) {
+                return $tbl_Serie;
+            } else {
+                $items[] = $tbl_Serie;
+            }
+        }
+        return $items;
+    }
+
+    public function fetchAll($limit = null, $offset = 0, $where = null, $order = null, $full = false, $count_only = false)
     {
         $table     = $this->getDbTable();
         $resultSet = $table->fetchAll(
@@ -71,26 +88,24 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
                 ->limit($limit, $offset)
         );
 
+        if ($count_only === true) {
+            return count($resultSet);
+        }
+
         $entries   = array();
         foreach ($resultSet as $row) {
-            $entry = new Core_Model_Tblserie();
-            $entry->setIdSerie(self::unescape($row->idSerie));
-            $entry->setNomSerie(self::unescape($row->nomSerie));
-            $entry->setComplete(self::unescape($row->complete));
-            $entry->setNbtomes(self::unescape($row->nbtomes));
-            $entry->setCommentaire(self::unescape($row->commentaire));
-            $entry->setInformations(self::unescape($row->informations));
-            $entry->setIdUnivers(self::unescape($row->idUnivers));
+            $tbl_Serie = $this->assoc($row);
+
             if ($full === true) {
-                $entry->albums = $this->getAlbums($row->idSerie);
-                $entry->coloristes = $this->getColoristes($row->idSerie);
-                $entry->scenaristes = $this->getScenaristes($row->idSerie);
-                $entry->dessinateurs = $this->getDessinateurs($row->idSerie);
-                $entry->editeurs = $this->getEditeurs($row->idSerie);
-                $entry->collections = $this->getCollections($row->idSerie);
-                $entry->motcles = $this->getMotcles($row->idSerie);
+                $tbl_Serie->albums = $this->getAlbums($row->idSerie);
+                $tbl_Serie->coloristes = $this->getColoristes($row->idSerie);
+                $tbl_Serie->scenaristes = $this->getScenaristes($row->idSerie);
+                $tbl_Serie->dessinateurs = $this->getDessinateurs($row->idSerie);
+                $tbl_Serie->editeurs = $this->getEditeurs($row->idSerie);
+                $tbl_Serie->collections = $this->getCollections($row->idSerie);
+                $tbl_Serie->motcles = $this->getMotcles($row->idSerie);
             }
-            $entries[] = $entry;
+            $entries[] = $tbl_Serie;
         }
         return $entries;
     }

@@ -48,10 +48,11 @@ class SerieController extends GlobalController {
     }
 
     public function listAction() {
-        $serie              = new Core_Model_Mapper_Tblserie;
         $this->view->letter = $this->getParam('letter');
         $this->view->page   = $this->getParam('page', 1);
-        $s = $serie->fetchAll(null, 0, 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC');
+
+        $serie              = new Core_Model_Mapper_Tblserie;
+        $s                  = $serie->fetchAll(null, 0, 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC', false, true);
         $this->view->series = $serie->fetchAll(self::ITEM_PER_PAGE, self::ITEM_PER_PAGE * ($this->view->page - 1), 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC', true);
 
         $this->view->paginator = Zend_Paginator::factory($s);
