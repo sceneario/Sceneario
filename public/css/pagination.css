@@ -4,6 +4,14 @@
     padding: 20px 0px;
 }
 
+.pagination-top {
+    padding-top: 0;
+}
+
+.pagination-top a {
+    margin-bottom: 5px;
+}
+
 .pagination a {
     background:url(../img/sprite-pagination.png) no-repeat;
     width:28px;
