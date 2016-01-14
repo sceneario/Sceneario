@@ -2,6 +2,8 @@
 
 require_once APPLICATION_PATH . '/modules/Core/controllers/ApiController.php';
 
+use Hashids\Hashids;
+
 /**
  * Api Album controller
  */
@@ -87,19 +89,28 @@ class ApiAlbumController extends ApiController
             }
         }
 
-        $authors           = array('cartoonist', 'colorist', 'scriptwriter');
+        $authors           = array('cartoonist' => array(), 'colorist' => array(), 'scriptwriter' => array());
         $albumDessinateurs = $this->_mapperAlbum->getAlbumDessinateurs($album->getIdAlbum());
         $albumColoristes   = $this->_mapperAlbum->getAlbumColoristes($album->getIdAlbum());
         $albumScenaristes  = $this->_mapperAlbum->getAlbumScenaristes($album->getIdAlbum());
 
         foreach ($albumDessinateurs as $dessinateur) {
-            $authors['cartoonist'][] = (!empty($dessinateur->prenomAuteur) ? $dessinateur->prenomAuteur . ' ' : '') . $dessinateur->nomAuteur;
+            $authors['cartoonist'][] = array(
+                'id'   => $dessinateur->idAuteur,
+                'name' => (!empty($dessinateur->prenomAuteur) ? $dessinateur->prenomAuteur . ' ' : '') . $dessinateur->nomAuteur,
+           );
         }
         foreach ($albumColoristes as $coloriste) {
-            $authors['colorist'][] = (!empty($coloriste->prenomAuteur) ? $coloriste->prenomAuteur . ' ' : '') . $coloriste->nomAuteur;
+            $authors['colorist'][] = array(
+                'id'   => $coloriste->idAuteur,
+                'name' => (!empty($coloriste->prenomAuteur) ? $coloriste->prenomAuteur . ' ' : '') . $coloriste->nomAuteur,
+            );
         }
         foreach ($albumScenaristes as $sceneariste) {
-            $authors['scriptwriter'][] = (!empty($sceneariste->prenomAuteur) ? $sceneariste->prenomAuteur . ' ' : '') . $sceneariste->nomAuteur;
+            $authors['scriptwriter'][] = array(
+                'id'   => $sceneariste->idAuteur,
+                'name' => (!empty($sceneariste->prenomAuteur) ? $sceneariste->prenomAuteur . ' ' : '') . $sceneariste->nomAuteur,
+            );
         }
 
         $keywords      = array();
@@ -108,12 +119,16 @@ class ApiAlbumController extends ApiController
             $keywords[] = $kw->libelle;
         }
 
+        $collection = $album->getCollection();
+        $sousTitre = $album->getSousTitre();
+        $tome = $album->getTome();
+
         return array(
             'id'         => $encodedId,
             'title'      => $album->getTitre(),
-            'collection' => !empty($album->getCollection()) ? $album->getCollection() : null,
-            'subtitle'   => !empty($album->getSousTitre()) ? $album->getSousTitre() : null,
-            'volume'     => !empty($album->getTome()) ? $album->getTome() : null,
+            'collection' => !empty($collection) ? $collection : null,
+            'subtitle'   => !empty($sousTitre) ? $sousTitre : null,
+            'volume'     => !empty($tome) ? $tome : null,
             'authors'    => $authors,
             'editor'     => $editor,
             'isbn'       => $album->getIsbn(),
