@@ -43,7 +43,14 @@ class AlbumController extends GlobalController
 
     public function listAction() {
         $this->view->letter = $this->getParam('letter', null);
-        $this->view->page   = $this->getParam('page', 1);
+        $this->view->page   = (int)$this->getParam('page', 1);
+
+        if ($this->view->page < 1) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => 1), 'listalbum_letter'));
+        }
+        if ((string)$this->view->page != $this->getParam('page', 1)) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => $this->view->page), 'listalbum_letter'));
+        }
 
         $album              = new Core_Model_Mapper_Tblalbum();
         $a                  = $album->fetchAll(null, 0, 'titre LIKE \''. $this->view->letter.'%\'', 'titre ASC', false, true);
@@ -52,6 +59,12 @@ class AlbumController extends GlobalController
         $this->view->paginator = Zend_Paginator::factory($a);
         $this->view->paginator->setCurrentPageNumber($this->view->page);
         $this->view->paginator->setItemCountPerPage(self::ITEM_PER_PAGE);
+
+        $this->view->headTitle('Liste des albums BD ' . (!empty($this->view->letter) ? ' commençant par '.$this->view->letter : '') . ' - ', 'PREPEND');
+
+        if ($this->view->page > $this->view->paginator->getPages()->pageCount) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => $this->view->paginator->getPages()->pageCount), 'listalbum_letter'));
+        }
     }
 
     /*

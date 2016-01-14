@@ -15,7 +15,14 @@ class AuteurController extends GlobalController
     public function listAction()
     {
         $this->view->letter  = $this->getParam('letter', null);
-        $this->view->page    = $this->getParam('page', 1);
+        $this->view->page    = (int)$this->getParam('page', 1);
+
+        if ($this->view->page < 1) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => 1), 'listauteur_letter'));
+        }
+        if ((string)$this->view->page != $this->getParam('page', 1)) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => $this->view->page), 'listauteur_letter'));
+        }
 
         $auteur              = new Core_Model_Mapper_Tblauteurs();
         $a                   = $auteur->fetchAll(null, 0, 'nomAuteur LIKE \''. $this->view->letter.'%\'', 'nomAuteur ASC', false, true);
@@ -24,6 +31,12 @@ class AuteurController extends GlobalController
         $this->view->paginator = Zend_Paginator::factory($a);
         $this->view->paginator->setCurrentPageNumber($this->view->page);
         $this->view->paginator->setItemCountPerPage(self::ITEM_PER_PAGE);
+
+        $this->view->headTitle('Liste des auteurs BD ' . (!empty($this->view->letter) ? ' commençant par '.$this->view->letter : '') . ' - ', 'PREPEND');
+
+        if ($this->view->page > $this->view->paginator->getPages()->pageCount) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => $this->view->paginator->getPages()->pageCount), 'listauteur_letter'));
+        }
     }
 
     public function indexAction()

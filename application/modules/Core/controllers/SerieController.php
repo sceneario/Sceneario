@@ -49,7 +49,14 @@ class SerieController extends GlobalController {
 
     public function listAction() {
         $this->view->letter = $this->getParam('letter');
-        $this->view->page   = $this->getParam('page', 1);
+        $this->view->page   = (int)$this->getParam('page', 1);
+
+        if ($this->view->page < 1) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => 1), 'listserie_letter'));
+        }
+        if ((string)$this->view->page != $this->getParam('page', 1)) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => $this->view->page), 'listserie_letter'));
+        }
 
         $serie              = new Core_Model_Mapper_Tblserie;
         $s                  = $serie->fetchAll(null, 0, 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC', false, true);
@@ -58,5 +65,11 @@ class SerieController extends GlobalController {
         $this->view->paginator = Zend_Paginator::factory($s);
         $this->view->paginator->setCurrentPageNumber($this->view->page);
         $this->view->paginator->setItemCountPerPage(self::ITEM_PER_PAGE);
+
+        $this->view->headTitle('Liste des séries BD ' . (!empty($this->view->letter) ? ' commençant par '.$this->view->letter : '') . ' - ', 'PREPEND');
+
+        if ($this->view->page > $this->view->paginator->getPages()->pageCount) {
+            $this->redirect301($this->view->url(array('letter' => $this->view->letter, 'page' => $this->view->paginator->getPages()->pageCount), 'listserie_letter'));
+        }
     }
 }
