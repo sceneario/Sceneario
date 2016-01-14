@@ -129,14 +129,14 @@ $(document).ready(function() {
             // on passe l'element en position fixed avec la marge en top
             if(scrollVar >= debut) {
                 $("#main-head").css({position:"fixed",top:0,zIndex:5000});
-                $("#head").css({paddingTop:"5px",paddingBottom:"5px"});
+                //$("#head").css({paddingTop:"5px",paddingBottom:"5px"});
             }
             // Si on est avant le début du stick, par exemple si on remonte la page,
             // on remet la position a fixes et la marge en top.
             // On remet aussi en right:0 puisqu'on est revenu en absolute
             if(scrollVar < debut) {
                 $("#main-head").css({position:"absolute",top:"auto",zIndex:5000});
-                $("#head").css({paddingTop:"15px",paddingBottom:"15px"});
+                //$("#head").css({paddingTop:"15px",paddingBottom:"15px"});
             }
         });
     }
