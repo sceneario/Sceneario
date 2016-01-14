@@ -35,64 +35,16 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
         }
         return $this->_dbTable;
     }
-    /*
-    public function save(Core_Model_Tblalbum $tbl_Album)
+
+    public function find($id, Core_Model_Tblalbum $tbl_Album)
     {
-	    
-        $data = array(
-		"idAlbum"	=> $tbl_Album->getIdAlbum() ,
-		"titre"	=> $tbl_Album->getTitre() ,
-		"collection"	=> $tbl_Album->getCollection() ,
-		"sousTitre"	=> $tbl_Album->getSousTitre() ,
-		"tome"	=> $tbl_Album->getTome() ,
-		"couverture"	=> $tbl_Album->getCouverture() ,
-		"droits"	=> $tbl_Album->getDroits() ,
-		"enligne"	=> $tbl_Album->getEnligne() ,
-		"nouveaute"	=> $tbl_Album->getNouveaute() ,
-		"FKidEditeur"	=> $tbl_Album->getFKidEditeur() ,
-		"datecreation"	=> $tbl_Album->getDatecreation() ,
-		"idCollection"	=> $tbl_Album->getIdCollection() ,
-		"lienBDNet"	=> $tbl_Album->getLienBDNet() ,
-		"lienAmazon"	=> $tbl_Album->getLienAmazon() ,
-		"idCouv"	=> $tbl_Album->getIdCouv() ,
-		"isbn"	=> $tbl_Album->getIsbn() ,
-		"extrait"	=> $tbl_Album->getExtrait() ,
-		"idSerie"	=> $tbl_Album->getIdSerie() ,
-		"date"	=> $tbl_Album->getDate() ,
-		"idUnivers"	=> $tbl_Album->getIdUnivers() ,
-		"presse"	=> $tbl_Album->getPresse() ,
-		"topic_id"	=> $tbl_Album->getTopic_id() ,
-		"nbpages"	=> $tbl_Album->getNbpages() ,
-		"visites"	=> $tbl_Album->getVisites() ,
-		"visitesSemaine"	=> $tbl_Album->getVisitesSemaine() ,
-		"recommande"	=> $tbl_Album->getRecommande() ,
-		"bandeAnnonce"	=> $tbl_Album->getBandeAnnonce() ,
-        );
-        $id = (int)$data["idAlbum"];
-
-        //if (null === ($id = $tbl_Album->getIdAlbum()  )) {
-        if($id === 0){
-            unset($data["idAlbum"]);
-           
-            //$data = $data + array("news_creation_date" => date("Y-m-d H:i:s"));
-            return $this->getDbTable()->insert($data);
-        } else {
-            //$data = $data + array("news_modification_date" => date("Y-m-d H:i:s"));
-            return $this->getDbTable()->update($data, array("idAlbum = ?" => $id));
-        }
-    } */
-
-    public function find($id, Core_Model_Tblalbum $tbl_Album) {
         $result = $this->getDbTable()->find($id);
 
         if (0 == count($result)) {
             return;
         }
 
-        $row  = $result->current();
-        $rows = $this->assoc($row);
-
-        return $rows[0];
+        return $this->assoc($result->current());
     }
 
     public function assoc($data) {
@@ -128,25 +80,45 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
             $tbl_Album->setVisitesSemaine(self::unescape($row->visitesSemaine));
             $tbl_Album->setRecommande(self::unescape($row->recommande));
             $tbl_Album->setBandeAnnonce(self::unescape($row->bandeAnnonce));
-            $items[] = $tbl_Album;
+            
+            if (!is_array($data)) {
+                return $tbl_Album;
+            } else {
+                $items[] = $tbl_Album;
+            }
         }
         return $items;
     }
 
-    public function fetchAll($limit = null, $where = null, $order = null) {
-
+    public function fetchAll($limit = null, $offset = 0, $where = null, $order = null, $full = false, $count_only = false)
+    {
         $table     = $this->getDbTable();
         $resultSet = $table->fetchAll($table
             ->select()
-            ->where($where["clause"], $where["params"])
+            ->where($where)
 		    ->order($order)
-		    ->limit($limit,0)
+		    ->limit($limit, $offset)
         );
+
+        if ($count_only === true) {
+            return count($resultSet);
+        }
 
         $entries = array();
         foreach ($resultSet as $row) {
-            $entries[] = $this->assoc($row);
+            $tbl_Album = $this->assoc($row);
+
+            if ($full === true) {
+                $tbl_Album->coloristes   = $this->getAlbumColoristes($row->idAlbum);
+                $tbl_Album->scenaristes  = $this->getAlbumScenaristes($row->idAlbum);
+                $tbl_Album->dessinateurs = $this->getAlbumDessinateurs($row->idAlbum);
+                $tbl_Album->editeurs     = $this->getAlbumEditeur($row->FKidEditeur);
+                $tbl_Album->motcles      = $this->getAlbumKeywords($row->idAlbum);
+            }
+
+            $entries[] = $tbl_Album;
         }
+
         return $entries;
     }
     
@@ -560,7 +532,22 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
         $results = $this->getSqlResults($sql, array($idAlbum));
         return $results;
     }
-    
+
+    /*
+     * Retourne l'editeur de l'album
+     */
+     public function getAlbumEditeur($idEditeur)
+    {
+         $sql = "
+            SELECT *
+            FROM tbl_Editeur
+            WHERE idEditeur = ?
+        ";
+
+        $results = $this->getSqlResults($sql, array($idEditeur));
+        return $results;
+    }
+
     /*
      * Retourne les mots clés
      */

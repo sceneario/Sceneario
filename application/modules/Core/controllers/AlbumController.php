@@ -7,6 +7,8 @@ require_once APPLICATION_PATH . '/modules/Core/controllers/GlobalController.php'
  */
 class AlbumController extends GlobalController
 {
+    const ITEM_PER_PAGE = 20;
+
     private $_mapperAlbum;
     private $_album;
     private $_id;
@@ -37,6 +39,19 @@ class AlbumController extends GlobalController
             }
         }
         throw new Zend_Controller_Action_Exception('Cet album n\'existe pas', 404);
+    }
+
+    public function listAction() {
+        $this->view->letter = $this->getParam('letter', null);
+        $this->view->page   = $this->getParam('page', 1);
+
+        $album              = new Core_Model_Mapper_Tblalbum();
+        $a                  = $album->fetchAll(null, 0, 'titre LIKE \''. $this->view->letter.'%\'', 'titre ASC', false, true);
+        $this->view->albums = $album->fetchAll(self::ITEM_PER_PAGE, self::ITEM_PER_PAGE * ($this->view->page - 1), 'titre LIKE \''. $this->view->letter.'%\'', 'titre ASC', true);
+
+        $this->view->paginator = Zend_Paginator::factory($a);
+        $this->view->paginator->setCurrentPageNumber($this->view->page);
+        $this->view->paginator->setItemCountPerPage(self::ITEM_PER_PAGE);
     }
 
     /*
