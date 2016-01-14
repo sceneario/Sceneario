@@ -1,0 +1,39 @@
+<div class="recherche col-xs-12 col-md-8">
+    <h2>Liste des Bande-Dessinées</h2>
+    <?php if (!empty($this->series)) : ?>
+        <div class="pagination">
+            <?php for ($i = 0; $i < 10; $i++) : ?>
+                <a class="page" href="<?php echo $this->url(array('letter' => $i, 'page' => 1), 'listserie_letter'); ?>"><?php echo $i; ?></a>
+            <?php endfor; ?>
+        </div>
+        <div class="pagination">
+            <?php foreach (range('A', 'Z') as $l) : ?>
+                <a class="page" href="<?php echo $this->url(array('letter' => $l, 'page' => 1), 'listserie_letter'); ?>"><?php echo $l; ?></a>
+            <?php endforeach; ?>
+        </div>
+        <ul class="item-list">
+            <?php foreach ($this->series as $serie) : ?>
+                <li class="item">
+                    <a href="<?php echo $this->getHelper('customUrl')->getSerieUrl($serie); ?>" class="item-link clearfix">
+                        <?php echo $this->getHelper('displayImage')->displayAlbumCover($serie->albums[0], 'small'); ?>
+                        <div class="search-content">
+                            <hgroup>
+                                <h1 class="titreSerie"><?php echo $serie->getNomSerie() ?></h1>
+                            </hgroup>
+                            <p>
+                                <?php foreach($this->serie->dessinateurs as $dessinateur) : ?>
+                                    <?php echo $dessinateur->prenomAuteur. ' ' . $dessinateur->nomAuteur; ?>
+                                <?php endforeach; ?>
+                                <?php if (!empty($serie->editeur)) : ?>
+                                    <br />Editions <?php echo $serie->editeur  ?>
+                                <?php endif; ?>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+    <?php echo $this->paginationControl($this->paginator, 'Elastic', 'pagination.phtml' ); ?>
+</div>
+<?php echo $this->partial('partials/sidebar.phtml'); ?>

@@ -1,0 +1,16 @@
+<?php if ($this->pageCount) : ?>
+<div class="pagination">
+    <?php if (isset($this->previous)): ?>
+        <?php $previous = $this->url(array('page' => $this->previous, Zend_Controller_Front::getInstance()->getRouter()->getCurrentRoute())); ?>
+        <a class="prev" href="<?php echo $previous ; ?>">Page précédente</a>
+    <?php endif; ?>
+    <?php foreach ($this->pagesInRange as $page) : ?>
+        <?php $current = $this->url(array('page' => $page, Zend_Controller_Front::getInstance()->getRouter()->getCurrentRoute())); ?>
+        <a class="page<?php echo $page == $this->current ? ' active' : ''; ?>" href="<?php echo $current  ?>"><?php echo $page; ?></a>
+    <?php endforeach; ?>
+    <?php if (isset($this->next)): ?>
+        <?php $next = $this->url(array('page' => $this->next, Zend_Controller_Front::getInstance()->getRouter()->getCurrentRoute())) ?>
+        <a class="next" href="<?php echo $next ;?>">Page suivante</a>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

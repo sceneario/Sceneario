@@ -44,4 +44,15 @@ class SerieController extends GlobalController {
             'keywords', 'albums bd, série bd, ' . $this->view->serie->getNomSerie() .
             ', albums ' . $this->view->serie->getNomSerie() . ', série '. $this->view->serie->getNomSerie());
     }
+
+    public function listAction() {
+        $serie              = new Core_Model_Mapper_Tblserie;
+        $this->view->letter = $this->getParam('letter');
+        $s = $serie->fetchAll(null, 0, 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC');
+        $this->view->series = $serie->fetchAll(20, 0, 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC', true);
+
+        $this->view->paginator = Zend_Paginator::factory($s);
+        $this->view->paginator->setCurrentPageNumber($this->getParam('page'));
+        $this->view->paginator->setItemCountPerPage(20);
+    }
 }
