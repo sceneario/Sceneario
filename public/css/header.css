@@ -5,7 +5,7 @@ header #pub {
     z-index: 6;
 }
 
-header #pub div {
+header #pub .container > div {
     width: 940px;
     margin: 0 auto;
     padding: 5px 0px;
@@ -28,7 +28,7 @@ header #head-container {
 header #head-container #head {
     position: relative;
     margin: 0 auto;
-    padding: 15px 20px;
+    padding: 5px 20px;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;

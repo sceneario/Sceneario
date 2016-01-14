@@ -21,7 +21,7 @@ class Zend_View_Helper_BuyThisBookButtons
 
         $priceMinister = 'http://track.effiliation.com/servlet/effi.redir?id_compteur=12078843&url=http://www.priceminister.com/s/'.$isbn.'';
         $bdFugue       = 'http://www.bdfugue.com/a/?ean='.$isbn.'&ref=14';
-        $fnac          = 'http://ad.zanox.com/ppc/?12175452C2022213026T&ULP=[['.urlencode('www3.fnac.com/search/quick.do?category=book&text='.$isbn).']]';
+        $fnac          = 'http://clic.reussissonsensemble.fr/click.asp?ref=745647&site=14485&type=text&tnb=3&diurl=http%3A%2F%2Feultech.fnac.com%2Fdynclick%2Ffnac%2F%3Feseg-name%3DaffilieID%26eseg-item%3D%24ref%24%26eaf-publisher%3DAFFILINET%26eaf-name%3Dg%3Fn%3Frique%26eaf-creative%3D%24affmt%24%26eaf-creativetype%3D%24affmn%24%26eurl%3Dhttp%253A%252F%252Frecherche.fnac.com%252Fr%252F'.$isbn.'%253FOrigin%253Daffilinet%2524ref%2524';
         $izneo         = self::getIzneoLink($isbn);
         $cultura       = 'http://clk.tradedoubler.com/click?p=218642&a=2411443&g=21903292&url=http://www.cultura.com/catalog/product/search/ean/'.$isbn;
 
@@ -59,10 +59,18 @@ class Zend_View_Helper_BuyThisBookButtons
 	        return false;
         }
 
-        $xml = new SimpleXMLElement($xmlStr);
-        $res = $xml->xpath('album/ean[.=\''.$isbn.'\']/parent::*');
-        if (isset($res[0]) && $res[0]->id) {
-            return 'http://www.izneo.com/read-'.$isbn.'-'.$res[0]->id.'-'.self::IZNEO_ID;
+        try {
+            libxml_use_internal_errors(true);  // erreurs xml non converties en warning php
+            $xml = new SimpleXMLElement($xmlStr);
+            libxml_clear_errors();  // purge des erreurs xml parce qu'on s'en occupe pas
+            libxml_use_internal_errors(false);
+
+            $res = $xml->xpath('album/ean[.=\''.$isbn.'\']/parent::*');
+            if (isset($res[0]) && $res[0]->id) {
+                return 'http://www.izneo.com/read-'.$isbn.'-'.$res[0]->id.'-'.self::IZNEO_ID;
+            }
+        } catch (Exception $e) {
+
         }
         return false;
     }
