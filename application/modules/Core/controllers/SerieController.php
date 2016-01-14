@@ -4,6 +4,8 @@ require_once APPLICATION_PATH . '/modules/Core/controllers/GlobalController.php'
 
 class SerieController extends GlobalController {
 
+    const ITEM_PER_PAGE = 20;
+
     protected $_slug;
     protected $_id;
 
@@ -48,11 +50,12 @@ class SerieController extends GlobalController {
     public function listAction() {
         $serie              = new Core_Model_Mapper_Tblserie;
         $this->view->letter = $this->getParam('letter');
+        $this->view->page   = $this->getParam('page', 1);
         $s = $serie->fetchAll(null, 0, 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC');
-        $this->view->series = $serie->fetchAll(20, 0, 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC', true);
+        $this->view->series = $serie->fetchAll(self::ITEM_PER_PAGE, self::ITEM_PER_PAGE * ($this->view->page - 1), 'nomSerie LIKE \''. $this->view->letter.'%\'', 'nomSerie ASC', true);
 
         $this->view->paginator = Zend_Paginator::factory($s);
-        $this->view->paginator->setCurrentPageNumber($this->getParam('page'));
-        $this->view->paginator->setItemCountPerPage(20);
+        $this->view->paginator->setCurrentPageNumber($this->view->page);
+        $this->view->paginator->setItemCountPerPage(self::ITEM_PER_PAGE);
     }
 }

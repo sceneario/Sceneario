@@ -1,32 +1,48 @@
 <div class="recherche col-xs-12 col-md-8">
-    <h2>Liste des Bande-Dessinées</h2>
+    <h2>Liste des Séries</h2>
     <?php if (!empty($this->series)) : ?>
         <div class="pagination">
             <?php for ($i = 0; $i < 10; $i++) : ?>
-                <a class="page" href="<?php echo $this->url(array('letter' => $i, 'page' => 1), 'listserie_letter'); ?>"><?php echo $i; ?></a>
+                <a class="page<?php echo !is_null($this->letter) && (string)$i == $this->letter ? ' active' : ''?>" href="<?php echo $this->url(array('letter' => $i, 'page' => 1), 'listserie_letter'); ?>"><?php echo $i; ?></a>
             <?php endfor; ?>
-        </div>
-        <div class="pagination">
             <?php foreach (range('A', 'Z') as $l) : ?>
-                <a class="page" href="<?php echo $this->url(array('letter' => $l, 'page' => 1), 'listserie_letter'); ?>"><?php echo $l; ?></a>
+                <a class="page<?php echo !is_null($this->letter) && $l == $this->letter ? ' active' : ''?>" href="<?php echo $this->url(array('letter' => $l, 'page' => 1), 'listserie_letter'); ?>"><?php echo $l; ?></a>
             <?php endforeach; ?>
         </div>
         <ul class="item-list">
             <?php foreach ($this->series as $serie) : ?>
                 <li class="item">
                     <a href="<?php echo $this->getHelper('customUrl')->getSerieUrl($serie); ?>" class="item-link clearfix">
-                        <?php echo $this->getHelper('displayImage')->displayAlbumCover($serie->albums[0], 'small'); ?>
+                        <?php echo $this->getHelper('displayImage')->displayAlbumCover($serie->albums[0], 'small', 'cover'); ?>
                         <div class="search-content">
                             <hgroup>
                                 <h1 class="titreSerie"><?php echo $serie->getNomSerie() ?></h1>
                             </hgroup>
                             <p>
-                                <?php foreach($this->serie->dessinateurs as $dessinateur) : ?>
-                                    <?php echo $dessinateur->prenomAuteur. ' ' . $dessinateur->nomAuteur; ?>
+                                <?php $auteurs = array(); ?>
+                                <?php foreach($serie->dessinateurs as $dessinateur) : ?>
+                                    <?php $auteurs[] = trim($dessinateur->prenomAuteur. ' ' . $dessinateur->nomAuteur); ?>
                                 <?php endforeach; ?>
-                                <?php if (!empty($serie->editeur)) : ?>
-                                    <br />Editions <?php echo $serie->editeur  ?>
-                                <?php endif; ?>
+                                <?php foreach($serie->coloristes as $coloriste) : ?>
+                                    <?php $auteurs[] = trim($coloriste->prenomAuteur. ' ' . $coloriste->nomAuteur); ?>
+                                <?php endforeach; ?>
+                                <?php foreach($serie->scenaristes as $scenariste) : ?>
+                                    <?php $auteurs[] = trim($scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur); ?>
+                                <?php endforeach; ?>
+                                <?php echo implode(' / ', $auteurs); ?>
+                                <br />Editions
+                                <?php $editeurs = array(); ?>
+                                <?php foreach ($serie->editeurs as $editeur) : ?>
+                                    <?php $editeurs[] = trim($editeur->getPrenomEditeur() . ' ' . $editeur->getNomEditeur()); ?>
+                                <?php endforeach; ?>
+                                <?php echo implode(' / ', $editeurs); ?>
+                            </p>
+                            <p>
+                                <?php $motcles = array(); ?>
+                                <?php foreach ($serie->motcles as $motcle) : ?>
+                                    <?php $motcles[] = $motcle->getLibelle(); ?>
+                                <?php endforeach; ?>
+                                <?php echo implode(' / ', $motcles); ?>
                             </p>
                         </div>
                     </a>
