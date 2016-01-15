@@ -1,41 +1,43 @@
-<header class="header-mauve" id="bedetheque">
-    <p>Aujourd'hui, la bédéthèque de Sceneario c'est : <span><?php echo $this->nbCritiques ?></span> chroniques sur <span><?php echo $this->nbAlbums ?></span> albums par <span><?php echo $this->nbAuteurs ?></span> auteurs</p>
-</header>
+<div id="bedetheque">
+    <header class="header-mauve col-xs-12">
+        <p>Aujourd'hui, la bédéthèque de Sceneario c'est : <span><?php echo $this->nbCritiques ?></span> chroniques sur <span><?php echo $this->nbAlbums ?></span> albums par <span><?php echo $this->nbAuteurs ?></span> auteurs</p>
+    </header>
 
-<div class="clear" style="height:50px;"></div>
-
-<section class="itemBedetheque clearfix">
-    <h1><a href="<?php echo $this->customUrl(array('tag' => 'nouveautes'), 'listalbum') ?>">Nouveautés</a></h1>
-    <a class="show_all" href="<?php echo $this->customUrl(array('tag' => 'nouveautes'), 'listalbum') ?>">Tout afficher ></a>
-    <div class="separateur"></div>
-    <div class="albums-slider">
-        <?php echo $this->partial('partials/listingAlbum.phtml', array('albums' => $this->newAlbums)); ?>
+    <div class="col-xs-12 col-md-4">
+        <a class="btn col-xs-12" href="<?php echo $this->url(array(), 'listserie_page'); ?>">Les séries</a>
     </div>
-</section>
-
-<section class="itemBedetheque clearfix">
-    <h1>Derniers ajouts</h1>
-    <div class="separateur"></div>
-    <div class="albums-slider">
-        <?php echo $this->partial('partials/listingAlbum.phtml', array('albums' => $this->recentAlbums)); ?>
+    <div class="col-xs-12 col-md-4">
+        <a class="btn col-xs-12" href="<?php echo $this->url(array(), 'listalbum_page'); ?>">Les albums</a>
     </div>
-</section>
-
-<section class="itemBedetheque clearfix">
-    <h1><a href="<?php echo $this->customUrl(array(), 'coupdecoeur') ?>">Coup de coeur</a></h1>
-    <a class="show_all" href="<?php echo $this->customUrl(array(), 'coupdecoeur') ?>">Tout afficher ></a>
-    <div class="separateur"></div>
-    <div class="albums-slider">
-        <?php echo $this->partial('partials/listingAlbum.phtml', array('albums' => $this->coupsDeCoeurAlbums)); ?>
+    <div class="col-xs-12 col-md-4">
+        <a class="btn col-xs-12" href="<?php echo $this->url(array(), 'listauteur_page'); ?>">Les auteurs</a>
     </div>
-</section>
+        
+    <section class="itemBedetheque col-xs-12">
+        <h1><a href="<?php echo $this->customUrl(array('tag' => 'nouveautes'), 'listalbum') ?>">Nouveautés</a></h1>
+        <div class="albums-slider" data-mcs-theme="dark">
+            <?php echo $this->partial('partials/listingAlbum.phtml', array('albums' => $this->newAlbums)); ?>
+        </div>
+    </section>
 
-<section class="itemBedetheque clearfix">
-    <h1>Les plus vues</a></h1>
-    <div class="separateur"></div>
-    <div class="albums-slider">
-        <?php echo $this->partial('partials/listingAlbum.phtml', array('albums' => $this->mostViewedAlbums)); ?>
-    </div>
-</section>
+    <section class="itemBedetheque col-xs-12">
+        <h1>Derniers ajouts</h1>
+        <div class="albums-slider" data-mcs-theme="dark">
+            <?php echo $this->partial('partials/listingAlbum.phtml', array('albums' => $this->recentAlbums)); ?>
+        </div>
+    </section>
 
-<div class="clear"></div>
+    <section class="itemBedetheque col-xs-12">
+        <h1><a href="<?php echo $this->customUrl(array(), 'coupdecoeur') ?>">Coup de coeur</a></h1>
+        <div class="albums-slider" data-mcs-theme="dark">
+            <?php echo $this->partial('partials/listingAlbum.phtml', array('albums' => $this->coupsDeCoeurAlbums)); ?>
+        </div>
+    </section>
+
+    <section class="itemBedetheque col-xs-12">
+        <h1>Les plus vues</h1>
+        <div class="albums-slider" data-mcs-theme="dark">
+            <?php echo $this->partial('partials/listingAlbum.phtml', array('albums' => $this->mostViewedAlbums)); ?>
+        </div>
+    </section>
+</div>
