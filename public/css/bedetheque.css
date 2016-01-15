@@ -56,6 +56,10 @@
     .header-mauve select { max-width: 130px; }
 }
 
+
+section.itemBedetheque { margin-top: 30px; }
+section.itemBedetheque:first-of-type { margin-top: 40px; }
+
 section.itemBedetheque h1,
 section.itemBedetheque h1 a, section.itemBedetheque h1 a:hover {
 	font-size:16px;
