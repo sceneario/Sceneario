@@ -98,31 +98,49 @@ class SitemapController extends GlobalController
                 'sitemap' => 'expositions'
             ),
             array(
-                'link' => $url.'/bande-dessinee.html',
+                'link' => $url.'/bande-dessinee',
                 'freq' => 'weekly',
                 'priority' => '0.8',
                 'sitemap' => 'global'
             ),
             array(
-                'link' => $url.'/bande-dessinee/nouveautes.html',
+                'link' => $url.'/bande-dessinee/albums',
                 'freq' => 'weekly',
                 'priority' => '0.8',
                 'sitemap' => 'global'
             ),
             array(
-                'link' => $url.'/bande-dessinee/prochaines-parutions.html',
+                'link' => $url.'/bande-dessinee/series',
                 'freq' => 'weekly',
                 'priority' => '0.8',
                 'sitemap' => 'global'
             ),
             array(
-                'link' => $url.'/bande-dessinee/coupsdecoeur.html',
+                'link' => $url.'/bande-dessinee/auteurs',
                 'freq' => 'weekly',
                 'priority' => '0.8',
                 'sitemap' => 'global'
             ),
             array(
-                'link' => $url.'/bande-dessinee/recommandes.html',
+                'link' => $url.'/bande-dessinee/nouveautes',
+                'freq' => 'weekly',
+                'priority' => '0.8',
+                'sitemap' => 'global'
+            ),
+            array(
+                'link' => $url.'/bande-dessinee/prochaines-parutions',
+                'freq' => 'weekly',
+                'priority' => '0.8',
+                'sitemap' => 'global'
+            ),
+            array(
+                'link' => $url.'/bande-dessinee/coupsdecoeur',
+                'freq' => 'weekly',
+                'priority' => '0.8',
+                'sitemap' => 'global'
+            ),
+            array(
+                'link' => $url.'/bande-dessinee/recommandes',
                 'freq' => 'weekly',
                 'priority' => '0.8',
                 'sitemap' => 'global'
