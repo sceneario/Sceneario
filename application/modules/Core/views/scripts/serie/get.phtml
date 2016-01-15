@@ -74,7 +74,11 @@
                     <a itemprop="item" href="<?php echo $this->url(array(), 'listserie_page'); ?>">
                         <span itemprop="name">Séries</span>
                     </a>
-                    <span itemprop="position" content="3"></span>
+                    <span itemprop="position" content="3">&gt;</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <span itemprop="name"><?php echo $this->serie->getNomSerie(); ?></span>
+                    <span itemprop="position" content="4"></span>
                 </li>
             </ol>
         </div>
