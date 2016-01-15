@@ -54,6 +54,28 @@
         </div>
     <?php endif; ?>
     <div class="col-xs-12 col-md-8">
+        <div class="breadcrumb">
+            <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="/">
+                        <span itemprop="name">Accueil</span>
+                    </a>
+                    <span itemprop="position" content="1">&gt;</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="<?php echo $this->url(array(), 'bedetheque'); ?>">
+                        <span itemprop="name">Bédéthèque</span>
+                    </a>
+                    <span itemprop="position" content="2">&gt;</span>
+                </li>
+                <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                    <a itemprop="item" href="<?php echo $this->url(array(), 'listalbum_page'); ?>">
+                        <span itemprop="name">Albums</span>
+                    </a>
+                    <span itemprop="position" content="3"></span>
+                </li>
+            </ol>
+        </div>
         <div class="row separateur">
             <div class="col-xs-10 album-title">
                 <h1>

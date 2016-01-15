@@ -2,6 +2,22 @@
     <h1>Bédéthèque - Auteurs</h1>
 </div>
 <div class="recherche col-xs-12 col-md-8">
+    <div class="breadcrumb">
+        <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="/">
+                    <span itemprop="name">Accueil</span>
+                </a>
+                <span itemprop="position" content="1">&gt;</span>
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="<?php echo $this->url(array(), 'bedetheque'); ?>">
+                    <span itemprop="name">Bédéthèque</span>
+                </a>
+                <span itemprop="position" content="2"></span>
+            </li>
+        </ol>
+    </div>
     <div class="pagination pagination-top">
         <?php foreach (range('A', 'Z') as $l) : ?>
             <a class="page<?php echo !is_null($this->letter) && $l == $this->letter ? ' active' : ''?>" href="<?php echo $this->url(array('letter' => $l, 'page' => 1), 'listauteur_letter'); ?>"><?php echo $l; ?></a>

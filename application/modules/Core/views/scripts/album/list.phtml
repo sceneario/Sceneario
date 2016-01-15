@@ -2,6 +2,22 @@
     <h1>Bédéthèque - Albums</h1>
 </div>
 <div class="recherche col-xs-12 col-md-8">
+    <div class="breadcrumb">
+        <ol itemscope itemtype="http://schema.org/BreadcrumbList">
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="/">
+                    <span itemprop="name">Accueil</span>
+                </a>
+                <span itemprop="position" content="1">&gt;</span>
+            </li>
+            <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                <a itemprop="item" href="<?php echo $this->url(array(), 'bedetheque'); ?>">
+                    <span itemprop="name">Bédéthèque</span>
+                </a>
+                <span itemprop="position" content="2"></span>
+            </li>
+        </ol>
+    </div>
     <div class="pagination pagination-top">
         <?php for ($i = 0; $i < 10; $i++) : ?>
             <a class="page<?php echo !is_null($this->letter) && (string)$i == $this->letter ? ' active' : ''?>" href="<?php echo $this->url(array('letter' => $i, 'page' => 1), 'listalbum_letter'); ?>"><?php echo $i; ?></a>

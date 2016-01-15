@@ -68,6 +68,9 @@ a:hover { color:#414141; text-decoration: none; }
 }
 .row.separateur::after { margin-left: 15px; margin-right: 15px; }
 
+.breadcrumb ol { list-style: none; margin: 0 0 20px 0; padding: 0; }
+.breadcrumb li { display: inline; }
+
 .acheter .btn { outline: 0; font-size: 14px; padding: 5px 0; }
 .acheter ul {
     padding: 0;
