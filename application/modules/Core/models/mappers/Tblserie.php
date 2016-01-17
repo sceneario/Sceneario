@@ -81,16 +81,25 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
     public function fetchAll($limit = null, $offset = 0, $where = null, $order = null, $full = false, $count_only = false)
     {
         $table     = $this->getDbTable();
+
+        if ($count_only === true) {
+            $rows  = $table->fetchAll(
+                $table
+                    ->select()
+                    ->from($table, array('count(*) as c'))
+                    ->where($where)
+                    ->order($order)
+                    ->limit($limit, $offset)
+            );
+            return (int)$rows[0]->c;
+        }
+
         $resultSet = $table->fetchAll(
             $table->select()
                 ->where($where)
                 ->order($order)
                 ->limit($limit, $offset)
         );
-
-        if ($count_only === true) {
-            return count($resultSet);
-        }
 
         $entries   = array();
         foreach ($resultSet as $row) {
