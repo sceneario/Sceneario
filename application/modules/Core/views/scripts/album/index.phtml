@@ -258,7 +258,7 @@
                                 <h2>Résumé de l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
                                 <div itemprop="description"> <?php echo $this->textFormat($this->resume[0]->histoire, 'RESUME_TEXT') ?></div>
                                 <p class="right">
-                                    Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs"><?php echo $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                                    Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=redacteurs"><?php echo $this->textFormat($this->resume[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
                                     le <?php echo $this->dateFormat($this->resume[0]->dateHistoire, 'day_month_year_with_slash') ?>
                                 </p>
                             </div>
@@ -272,7 +272,7 @@
                                         <?php echo $this->textFormat($critique->critique, 'RESUME_TEXT')  ?>
                                     </p>
                                     <p class="right">
-                                        Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                                        Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=redacteurs" itemprop="author"><?php echo $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
                                         le <span itemprop="datePublished" content="<?php echo $critique->datecreation; ?>"><?php echo $this->dateFormat($critique->datecreation, 'day_month_year_with_slash') ?></span>
                                     </p>
                                 </div>

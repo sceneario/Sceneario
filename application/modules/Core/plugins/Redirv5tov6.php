@@ -136,7 +136,7 @@ class Core_Plugin_Redirv5tov6 extends Zend_Controller_Plugin_Abstract {
                     $s  = str_replace('.html', '', $queryParts[2]); 
                     //si $id vaut 0, le script continue sans actions
                     if(!empty($s)){
-                        $this->redirect301('/recherche/?tag='.$s.'&filter=Les+éditeurs') ; 
+                        $this->redirect301('/recherche/?tag='.$s.'&filter=editeurs') ; 
                     }
                 }
             }
@@ -175,7 +175,7 @@ class Core_Plugin_Redirv5tov6 extends Zend_Controller_Plugin_Abstract {
 		      $auteurMapper = new Core_Model_Mapper_Tblauteurs;
 		      $auteurInfos  = $auteurMapper->find($id, new Core_Model_Tblauteurs);
 		      if (!null == $auteurInfos) {
-                        $this->redirect301('/recherche/?tag='.$auteurInfos->getPrenomAuteur().' '.$auteurInfos->getNomAuteur().'&filter=Les+auteurs');
+                        $this->redirect301('/recherche/?tag='.$auteurInfos->getPrenomAuteur().' '.$auteurInfos->getNomAuteur().'&filter=auteurs');
 		      }
                     }
                 }

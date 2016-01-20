@@ -170,14 +170,15 @@ $(document).ready(function() {
         $(".album-details "+id).show();
     });
 
-    $(".header-mauve div.menu li").click(function() {
-        var val = $(this).text();
-        $(this).parent().parent().find("a").text(val);
-        $(this).parent().parent().animate({
-            height:23
-        }, 300);
-        $(this).parent().parent().find("a").attr('class','closed');
-        $("input[type='hidden']").val(val);
+    $('.form-input li').click(function() {
+        var val = $(this).attr('data-value');
+        $('.form-input').find("a").text($(this).text());
+        $(".form-input input[type='hidden']").val(val);
+    });
+    $('.form-genre li').click(function() {
+        var val = $(this).attr('data-value');
+        $('.form-genre').find("a").text($(this).text());
+        $(".form-genre input[name='tag']").val(val);
     });
 
     // Couvertures sur la page série

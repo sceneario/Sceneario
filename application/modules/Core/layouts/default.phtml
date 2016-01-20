@@ -175,7 +175,7 @@
                             <?php if (!$this->isMobile) : ?>
                             <div class="search pull-right">
                                 <form method='get' action="<?php echo $this->customUrl( array() , 'recherche') ?>">
-                                    <input type="text" name="tag" value='<?php echo isset($this->requeteUser)?$this->requeteUser:'' ?>' placeholder="Rechercher">
+                                    <input type="text" name="tag" value='<?php echo isset($this->requeteUser) && $this->userFilter != 'genres' ?$this->requeteUser:'' ?>' placeholder="Rechercher">
                                 </form>
                             </div>
                             <?php endif; ?>
