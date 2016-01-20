@@ -44,13 +44,15 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
             return;
         }
 
-        return $this->assoc($result->current());
+        return $this->_assoc($result->current());
     }
 
-    public function assoc($data) {
-        $items = array();
-        $rows  = !is_array($data) ? array($data) : $data;
+    private function _assoc($data)
+    {
+        $this->albums   = array();
+        $rows           = !is_array($data) ? array($data) : $data;
 
+        $idsEditeurs    = array();
         foreach ($rows as $row) {
             $tbl_Album = new Core_Model_Tblalbum();
             $tbl_Album->setIdAlbum(self::unescape($row->idAlbum));
@@ -80,14 +82,41 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
             $tbl_Album->setVisitesSemaine(self::unescape($row->visitesSemaine));
             $tbl_Album->setRecommande(self::unescape($row->recommande));
             $tbl_Album->setBandeAnnonce(self::unescape($row->bandeAnnonce));
-            
-            if (!is_array($data)) {
-                return $tbl_Album;
-            } else {
-                $items[] = $tbl_Album;
+
+            $tbl_Album->auteurs          = array();
+            $tbl_Album->motcles          = array();
+
+            $idsEditeurs[]               = $row->FKidEditeur;
+            $this->albums[$row->idAlbum] = $tbl_Album;
+        }
+
+        $auteurs     = $this->_getAuteurs();
+        $editeurs    = $this->_getEditeurs($idsEditeurs);
+        $genres      = $this->_getMotcles();
+
+        foreach ($this->albums as $idAlbum => $album) {
+            foreach ($auteurs as $idAuteur => $auteur) {
+                if (in_array($idAuteur, $album->idsAuteurs)) {
+                    $this->albums[$idAlbum]->auteurs[] = $auteur;
+                }
+            }
+            foreach ($editeurs as $editeur) {
+                if ($editeur->getIdEditeur() == $album->getFKidEditeur()) {
+                    $this->albums[$idAlbum]->editeur = $editeur;
+                }
+            }
+            foreach ($genres as $idGenre => $genre) {
+                if (!empty($album->idsGenres) && in_array($idGenre, $album->idsGenres)) {
+                    $this->albums[$idAlbum]->motcles[] = $genre;
+                }
             }
         }
-        return $items;
+
+        if (!is_array($data)) {
+            return $this->albums[$row->idAlbum];
+        }
+
+        return $this->albums;
     }
 
     public function fetchAll($limit = null, $offset = 0, $where = null, $order = null, $full = false, $count_only = false)
@@ -106,31 +135,75 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
             return (int)$rows[0]->c;
         }
 
-        $resultSet = $table->fetchAll($table
-            ->select()
-            ->where($where)
-            ->order($order)
-            ->limit($limit, $offset)
+        $resultSet = $table->fetchAll(
+            $table->select()
+                ->where($where)
+                ->order($order)
+                ->limit($limit, $offset)
         );
 
-        $entries = array();
-        foreach ($resultSet as $row) {
-            $tbl_Album = $this->assoc($row);
-
-            if ($full === true) {
-                $tbl_Album->coloristes   = $this->getAlbumColoristes($row->idAlbum);
-                $tbl_Album->scenaristes  = $this->getAlbumScenaristes($row->idAlbum);
-                $tbl_Album->dessinateurs = $this->getAlbumDessinateurs($row->idAlbum);
-                $tbl_Album->editeurs     = $this->getAlbumEditeur($row->FKidEditeur);
-                $tbl_Album->motcles      = $this->getAlbumKeywords($row->idAlbum);
-            }
-
-            $entries[] = $tbl_Album;
+        $tmp = array();
+        foreach ($resultSet as $r) {
+            $tmp[] = $r;
         }
 
-        return $entries;
+        return $this->_assoc($tmp);
     }
-    
+
+    private function _getAuteurs()
+    {
+        $sql = 'SELECT a.idAuteur, aa.idAlbum
+            FROM tbl_Auteurs a
+            LEFT JOIN tbl_Auteurs_Albums aa ON a.idAuteur = aa.idAuteur
+            WHERE aa.idAlbum IN ('.implode(',', array_keys($this->albums)).')
+            ORDER BY a.nomAuteur ASC';
+        $results = $this->getSqlResults($sql);
+
+        $idsAuteurs = array();
+        foreach ($results as $result) {
+            $idsAuteurs[]                          = $result->idAuteur;
+            $this->albums[$result->idAlbum]->idsAuteurs[] = $result->idAuteur;
+        }
+
+        $auteurs = array();
+        $mpAut   = new Core_Model_Mapper_Tblauteurs();
+        $rows    = $mpAut->fetchAll(null, 0, 'idAuteur IN ('.implode(',', $idsAuteurs).')');
+        foreach ($rows as $row) {
+            $auteurs[$row->getIdAuteur()] = $row;
+        }
+
+        return $auteurs;
+    }
+
+    private function _getEditeurs($idsEditeurs) {
+        $mpEditeur = new Core_Model_Mapper_Tblediteur();
+        return $mpEditeur->fetchAll(null, array('clause' => 'idEditeur IN (?)', 'params' => $idsEditeurs));
+    }
+
+    private function _getMotcles() {
+        $sql = 'SELECT DISTINCT g.idGenre, ga.idAlbum
+            FROM tbl_Genres g
+            LEFT JOIN tbl_Genres_Albums ga ON g.idGenre = ga.idGenre
+            WHERE ga.idAlbum IN ('.implode(',', array_keys($this->albums)).')
+            ORDER BY g.libelle';
+        $results = $this->getSqlResults($sql);
+
+        $idsGenres = array();
+        foreach ($results as $result) {
+            $idsGenres[]                                 = $result->idGenre;
+            $this->albums[$result->idAlbum]->idsGenres[] = $result->idGenre;
+        }
+
+        $genres = array();
+        $mpGenres = new Core_Model_Mapper_Tblgenres();
+        $rows = $mpGenres->fetchAll(null, array('clause' => 'idGenre IN (?)', 'params' => $idsGenres));
+        foreach ($rows as $row) {
+            $genres[$row->getIdGenre()] = $row;
+        }
+
+        return $genres;
+    }
+
     /*
      * Retourne le nbre d'album
      */
@@ -189,8 +262,7 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
                         AND t1.idAlbum = t3.idAlbum
                 ORDER BY t1.date desc " . $limit;
          
-        $results = $this->getSqlResults($sql, array(IS_PUBLISHED, IS_PUBLISHED));
-        return $results;
+        return $this->_assoc($this->getSqlResults($sql, array(IS_PUBLISHED, IS_PUBLISHED)));
     }
     
     /*
@@ -307,8 +379,7 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
                 WHERE t1.idAlbum = tbl_Coup_de_coeur.idAlbum AND tbl_Coup_de_coeur.idInternaute = t3.idInternaute 
                 ORDER BY t3.pseudo, collection, t1.tome, t1.date desc LIMIT 0, 20";
          
-        $results = $this->getSqlResults($sql, array(IS_PUBLISHED, IS_PUBLISHED));
-        return $results;
+        return $this->_assoc($this->getSqlResults($sql, array(IS_PUBLISHED, IS_PUBLISHED)));
     }
     
     
@@ -374,16 +445,7 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
                 FROM  tbl_Album t1 
                 WHERE t1.enligne = ? AND t1.nouveaute = 'N'
                 ORDER BY t1.date desc LIMIT 0, 20";
-        
-        /*
-        $sql = "SELECT t1.*, t2.nomSerie, t3.histoire
-                FROM tbl_Histoire t3, tbl_Album t1 
-                LEFT JOIN tbl_Serie t2 ON t1.idSerie = t2.idSerie
-                ORDER BY t1.date desc LIMIT 0, 100";
-        */
- 
-        $results = $this->getSqlResults($sql, array(IS_PUBLISHED));
-        return $results;
+        return $this->_assoc($this->getSqlResults($sql, array(IS_PUBLISHED)));
     }
     
     /*
@@ -493,7 +555,7 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
         ORDER BY t1.visites desc LIMIT 0, 20
         */
          
-        $results = $this->getSqlResults($sql, array(IS_PUBLISHED));
+        $results = $this->_assoc($this->getSqlResults($sql, array(IS_PUBLISHED)));
         return $results;
     }
     

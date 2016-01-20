@@ -44,7 +44,7 @@ class IndexController extends GlobalController
         /*
          * Derniers albums
          */ 
-        $this->view->newAlbums = $this->_mapperAlbums->assoc($this->_mapperAlbums->getNewAlbums());
+        $this->view->newAlbums = $this->_mapperAlbums->getNewAlbums();
         
         //$currentUserSession = new Zend_Session_Namespace ('currentUserSession');
         
@@ -61,7 +61,7 @@ class IndexController extends GlobalController
          */
         echo $this->view->partial(
             'partials/listingAlbum.phtml',
-            array('albums' => $this->_mapperAlbums->assoc($this->_mapperAlbums->getNewAlbums()))
+            array('albums' => $this->_mapperAlbums->getNewAlbums())
         );
     }
 
@@ -75,7 +75,7 @@ class IndexController extends GlobalController
          */
         echo $this->view->partial(
             'partials/listingAlbum.phtml',
-            array('albums' => $this->_mapperAlbums->assoc($this->_mapperAlbums->getCoupsdecoeurAlbums()))
+            array('albums' => $this->_mapperAlbums->getCoupsdecoeurAlbums())
         );
     }
 
@@ -89,7 +89,7 @@ class IndexController extends GlobalController
          */
         echo $this->view->partial(
             'partials/listingAlbum.phtml',
-            array('albums' => $this->_mapperAlbums->assoc($this->_mapperAlbums->getRecentAlbums()))
+            array('albums' => $this->_mapperAlbums->getRecentAlbums())
         );
     }
     
@@ -103,7 +103,7 @@ class IndexController extends GlobalController
          */
         echo $this->view->partial(
             'partials/listingAlbum.phtml',
-            array('albums' => $this->_mapperAlbums->assoc($this->_mapperAlbums->getMostViewedAlbums()))
+            array('albums' => $this->_mapperAlbums->getMostViewedAlbums())
         );
     }
     

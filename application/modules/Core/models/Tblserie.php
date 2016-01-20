@@ -57,10 +57,13 @@ class Core_Model_Tblserie
 	 */ 
 	private $_idUnivers ; 
 
-	public $albums;
-	public $coloristes;
-	public $scenaristes;
-	public $dessinateurs;
+	public $albums = array();
+    public $auteurs = array();
+    public $editeurs = array();
+    public $motcles = array();
+	public $coloristes = array();
+	public $scenaristes = array();
+	public $dessinateurs = array();
 
 	public function __get($name) {
 		return $this->$name;

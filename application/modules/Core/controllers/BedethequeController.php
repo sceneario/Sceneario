@@ -148,43 +148,22 @@ class BedethequeController extends GlobalController
      */
     private function getNewAlbums()
     {
-         /*
-         * REQUETE SQL 
-         * SELECT t1.*, t2.nomSerie, t3.histoire
-	 * FROM tbl_Histoire t3, tbl_Album t1 
-         * LEFT JOIN tbl_Serie t2 
-         * ON t1.idSerie = t2.idSerie
-	 * WHERE t1.nouveaute = 'O'
-         *      AND t1.enligne = 'O'
-         *      AND t1.idAlbum = t3.idAlbum
-         * ORDER BY t1.date desc
-         */
-        return $this->_mapperAlbum->assoc($this->_mapperAlbum->getNewAlbums());
+        return $this->_mapperAlbum->getNewAlbums();
     }
     
     private function getCoupsdecoeurAlbums()
     {
-         /*
-         * Recherche des coups de coeur de l'équipe sceneario
-	
-         * SELECT t3.pseudo, t1.idAlbum, t1.titre, t1.isbn, 
-         * IF(nomSerie is null,t1.collection,nomSerie) as collection, t1.tome, t1.couverture, t1.datecreation 
-         * FROM (tbl_Album t1, tbl_Coup_de_coeur, tbl_Internaute t3) 
-         * LEFT JOIN tbl_Serie t4 ON t1.idSerie = t4.idSerie 
-         * WHERE t1.idAlbum = tbl_Coup_de_coeur.idAlbum AND tbl_Coup_de_coeur.idInternaute = t3.idInternaute 
-         * ORDER BY t3.pseudo, collection, t1.tome";
-         */
-        return $this->_mapperAlbum->assoc($this->_mapperAlbum->getCoupsdecoeurAlbums());
+        return $this->_mapperAlbum->getCoupsdecoeurAlbums();
     }
     
     private function getRecentAlbums()
     {
-        return $this->_mapperAlbum->assoc($this->_mapperAlbum->getRecentAlbums());
+        return $this->_mapperAlbum->getRecentAlbums();
     }
     
     private function getMostViewedAlbums()
     {
-        return $this->_mapperAlbum->assoc($this->_mapperAlbum->getMostViewedAlbums());
+        return $this->_mapperAlbum->getMostViewedAlbums();
     }  
     
     /*

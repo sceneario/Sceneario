@@ -42,14 +42,8 @@
                             </hgroup>
                             <p>
                                 <?php $auteurs = array(); ?>
-                                <?php foreach($serie->dessinateurs as $dessinateur) : ?>
-                                    <?php $auteurs[] = trim($dessinateur->prenomAuteur. ' ' . $dessinateur->nomAuteur); ?>
-                                <?php endforeach; ?>
-                                <?php foreach($serie->coloristes as $coloriste) : ?>
-                                    <?php $auteurs[] = trim($coloriste->prenomAuteur. ' ' . $coloriste->nomAuteur); ?>
-                                <?php endforeach; ?>
-                                <?php foreach($serie->scenaristes as $scenariste) : ?>
-                                    <?php $auteurs[] = trim($scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur); ?>
+                                <?php foreach($serie->auteurs as $auteur) : ?>
+                                    <?php $auteurs[] = trim($auteur->getPrenomAuteur(). ' ' . $auteur->getNomAuteur()); ?>
                                 <?php endforeach; ?>
                                 <?php echo implode(' / ', $auteurs); ?>
                                 <br />Editions

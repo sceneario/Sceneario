@@ -95,8 +95,8 @@
                         <td class="label"><?php echo count($this->serie->dessinateurs) > 1 ? 'Dessinateurs' : 'Dessinateur'; ?>&nbsp;:</td>
                         <td class="info">
                              <?php foreach ($this->serie->dessinateurs as $dessinateur): ?>
-                                    <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $dessinateur->prenomAuteur. ' ' . $dessinateur->nomAuteur, 'idAuteur' => $dessinateur->idAuteur ),'auteur') ?>" itemprop="author">
-                                       <?php echo $dessinateur->prenomAuteur.' '.$dessinateur->nomAuteur?></a></h2><br />
+                                    <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $dessinateur->getPrenomAuteur(). ' ' . $dessinateur->getNomAuteur(), 'idAuteur' => $dessinateur->getIdAuteur() ),'auteur') ?>" itemprop="author">
+                                       <?php echo $dessinateur->getPrenomAuteur().' '.$dessinateur->getNomAuteur() ?></a></h2><br />
                                <?php endforeach; ?>
                         </td>
                     </tr>
@@ -106,8 +106,8 @@
                         <td class="label"><?php echo count($this->serie->scenaristes) > 1 ? 'Scénaristes' : 'Scénariste'; ?>&nbsp;:</td>
                         <td class="info">
                             <?php foreach ($this->serie->scenaristes as $scenariste): ?>
-                                <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur, 'idAuteur' => $scenariste->idAuteur),'auteur') ?>" itemprop="author">
-                                    <?php echo $scenariste->prenomAuteur.' '.$scenariste->nomAuteur ?></a></h2><br />
+                                <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $scenariste->getPrenomAuteur(). ' ' . $scenariste->getNomAuteur(), 'idAuteur' => $scenariste->getIdAuteur()),'auteur') ?>" itemprop="author">
+                                    <?php echo $scenariste->getPrenomAuteur().' '.$scenariste->getNomAuteur() ?></a></h2><br />
                             <?php endforeach; ?>
                         </td>
                     </tr>
@@ -117,8 +117,8 @@
                         <td class="label"><?php echo count($this->serie->coloristes) > 1 ? 'Coloristes' : 'Coloriste'; ?>&nbsp;:</td>
                         <td class="info">
                             <?php foreach ($this->serie->coloristes as $coloriste): ?>
-                                <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur, 'idAuteur' => $coloriste->idAuteur), 'auteur') ?>" itemprop="author">
-                                    <?php echo $coloriste->prenomAuteur . ' ' . $coloriste->nomAuteur ?></a></h2><br />
+                                <h2><a href="<?php echo $this->customUrl(array('nomAuteur'=> $coloriste->getPrenomAuteur() . ' ' . $coloriste->getNomAuteur(), 'idAuteur' => $coloriste->getIdAuteur()), 'auteur') ?>" itemprop="author">
+                                    <?php echo $coloriste->getPrenomAuteur() . ' ' . $coloriste->getNomAuteur() ?></a></h2><br />
                             <?php endforeach; ?>
                         </td>
                     </tr>

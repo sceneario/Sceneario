@@ -43,27 +43,18 @@
                             </hgroup>
                             <p>
                                 <?php $auteurs = array(); ?>
-                                <?php foreach($album->dessinateurs as $dessinateur) : ?>
-                                    <?php $auteurs[] = trim($dessinateur->prenomAuteur. ' ' . $dessinateur->nomAuteur); ?>
-                                <?php endforeach; ?>
-                                <?php foreach($album->coloristes as $coloriste) : ?>
-                                    <?php $auteurs[] = trim($coloriste->prenomAuteur. ' ' . $coloriste->nomAuteur); ?>
-                                <?php endforeach; ?>
-                                <?php foreach($album->scenaristes as $scenariste) : ?>
-                                    <?php $auteurs[] = trim($scenariste->prenomAuteur. ' ' . $scenariste->nomAuteur); ?>
+                                <?php foreach($album->auteurs as $auteur) : ?>
+                                    <?php $auteurs[] = trim($auteur->getPrenomAuteur(). ' ' . $auteur->getNomAuteur()); ?>
                                 <?php endforeach; ?>
                                 <?php echo implode(' / ', $auteurs); ?>
-                                <br />Editions
-                                <?php $editeurs = array(); ?>
-                                <?php foreach ($album->editeurs as $editeur) : ?>
-                                    <?php $editeurs[] = trim($editeur->prenomEditeur . ' ' . $editeur->nomEditeur); ?>
-                                <?php endforeach; ?>
-                                <?php echo implode(' / ', $editeurs); ?>
+                                <?php if (!empty($album->editeur)) : ?>
+                                    <br />Editions <?php echo trim($album->editeur->getPrenomEditeur() . ' ' . $album->editeur->getNomEditeur()); ?>
+                                <?php endif; ?>
                             </p>
                             <p>
                                 <?php $motcles = array(); ?>
                                 <?php foreach ($album->motcles as $motcle) : ?>
-                                    <?php $motcles[] = $motcle->libelle; ?>
+                                    <?php $motcles[] = $motcle->getLibelle(); ?>
                                 <?php endforeach; ?>
                                 <?php echo implode(' / ', $motcles); ?>
                             </p>
