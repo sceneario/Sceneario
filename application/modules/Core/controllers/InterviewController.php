@@ -73,14 +73,8 @@ class InterviewController extends GlobalController
 		            $idAuteur    = $auteurInterview->getIdAuteur();
 		
 		            $mapperTblAuteur = new Core_Model_Mapper_Tblauteurs();
-		            $auteurInfos = $mapperTblAuteur -> fetchAll(1, 
-		                                                        array(
-		                                                             'clause' => 'idAuteur = ?', 
-		                                                             'params' => $idAuteur
-		                                                             ) , null );
-		                                                             
-		       
-		            #foreach()
+                    $auteurInfos = $mapperTblAuteur -> fetchAll(1, 0, 'idAuteur = '.$idAuteur);
+
 		            $this->view->auteurs[] = $auteurInfos[0];
 		        }
 	        }
