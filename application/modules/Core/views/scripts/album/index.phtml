@@ -243,9 +243,6 @@
                 <div class="album-details-wrapper">
                     <ul class="nav nav-tabs call-sections" role="tablist">
                         <li><a href="#summary" class="active">Résumé & Chronique</a></li>
-                        <?php if (count($this->critique) > 1) : ?>
-                            <li><a href="#avis">Avis des internautes</a></li>
-                        <?php endif;?>
                         <?php if ('' != $this->albumInfos->getIdSerie()) : ?>
                             <li><a href="#serie">La série</a></li>
                         <?php endif; ?>
@@ -266,34 +263,21 @@
                                 </p>
                             </div>
                             <?php endif; ?>
-                            <?php if(isset($this->critique[0]->critique) && $this->critique[0]->critique != '') : ?>
-                              <h2>Notre avis sur l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
-                              <div itemprop="review" itemscope itemtype="http://schema.org/Review">
-                                <div itemprop="reviewBody"><?php echo $this->textFormat($this->critique[0]->critique, 'RESUME_TEXT') ?></div>
-                                <p class="right">
-                                  Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($this->critique[0]->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
-                                  le <span itemprop="datePublished" content="<?php echo $this->critique[0]->datecreation; ?>"><?php echo $this->dateFormat($this->critique[0]->datecreation, 'day_month_year_with_slash'); ?></span>
-                                </p>
-                              </div>
-                            <?php endif; ?>
+                            <?php foreach($this->critique as $key => $critique) : ?>
+                                <?php if ($key == 0) : ?>
+                                    <h2>Notre avis sur l'album <i><?php echo $this->albumInfos->getTitre() ?></i></h2>
+                                <?php endif; ?>
+                                <div itemprop="review" itemscope itemtype="http://schema.org/Review" class="<?php if ($key >= 0 && $key < count($this->critique)-1) : ?>separateur<?php endif; ?>">
+                                    <p class="justify" itemprop="reviewBody">
+                                        <?php echo $this->textFormat($critique->critique, 'RESUME_TEXT')  ?>
+                                    </p>
+                                    <p class="right">
+                                        Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
+                                        le <span itemprop="datePublished" content="<?php echo $critique->datecreation; ?>"><?php echo $this->dateFormat($critique->datecreation, 'day_month_year_with_slash') ?></span>
+                                    </p>
+                                </div>
+                            <?php endforeach;?>
                         </section>
-                        <?php if(count($this->critique) > 0): ?>
-                            <section id="avis" class="avis">
-                                <?php $critiques = $this->critique; ?>
-                                <?php array_shift($critiques); ?>
-                                <?php foreach($critiques as $key => $critique): ?>
-                                    <div itemprop="review" itemscope itemtype="http://schema.org/Review">
-                                        <p class="justify" itemprop="reviewBody">
-                                            <?php echo $this->textFormat($critique->critique, 'RESUME_TEXT')  ?>
-                                        </p>
-                                        <p class="right <?php if ($key >= 0 && $key < count($critiques)-1) : ?>separateur<?php endif; ?>">
-                                            Par <strong> <a href="/recherche?tag=<?php print $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR'); ?>&filter=Les+rédacteurs" itemprop="author"><?php echo $this->textFormat($critique->pseudo, 'PSEUDO_AUTEUR') ?></a></strong>,
-                                            le <span itemprop="datePublished" content="<?php echo $critique->datecreation; ?>"><?php echo $this->dateFormat($critique->datecreation, 'day_month_year_with_slash') ?></span>
-                                        </p>
-                                    </div>
-                                <?php endforeach;?>
-                            </section>
-                        <?php endif; ?>
                         <?php if( $this->albumInfos->getIdSerie() != "" ): ?>
                             <section id="serie" class="serie also-like clearfix">
                                 <h2>Les albums de la série <i><?php echo $this->serie->getNomSerie(); ?></i></h2>
