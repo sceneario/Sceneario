@@ -58,6 +58,14 @@ class Zend_View_Helper_CustomUrl extends Zend_View_Helper_Url
         return $this->customUrl($urlParams, 'serie');
     }
 
+    public function getAuteurUrl($auteur) {
+        $urlParams = array(
+            'nomAuteur' => $auteur->getPrenomAuteur() . ' ' . $auteur->getNomAuteur(),
+            'idAuteur'  => $auteur->getIdAuteur()
+        );
+        return $this->customUrl($urlParams,'auteur');
+    }
+
     /*
      * @todo implementer generecité
      * @var array $urlOptions
@@ -74,7 +82,7 @@ class Zend_View_Helper_CustomUrl extends Zend_View_Helper_Url
                     ->addFilter(new Zend_Filter_StringTrim()); //supprime les espace au début et a la fin
 
         foreach ($urlOptions as $key => &$urlOption){
-            if ($key != 'isbn' && in_array($name, array('couverture', 'planche', 'album', 'serie'))) {
+            if ($key != 'isbn' && in_array($name, array('couverture', 'planche', 'album', 'serie', 'auteur'))) {
                 $accents   = array('$', '@', '€', 'À','Á','Â','Ã','Ä','Å','Ç','È','É','Ê','Ë','Ì','Í','Î','Ï','Ò','Ó','Ô','Õ','Ö', 'Ù','Ú','Û','Ü','Ý','à','á','â','ã','ä','å','ç','è','é','ê','ë','ì','í','î','ï','ð','ò','ó','ô','õ','ö','ù','ú','û','ü','ý','ÿ');
                 $sans      = array('S', 'A', 'E', 'A','A','A','A','A','A','C','E','E','E','E','I','I','I','I','O','O','O','O','O', 'U','U','U','U','Y','a','a','a','a','a','a','c','e','e','e','e','i','i','i','i','o','o','o','o','o','o','u','u','u','u','y','y');
                 $urlOption = str_replace($accents, $sans, $urlOption);
