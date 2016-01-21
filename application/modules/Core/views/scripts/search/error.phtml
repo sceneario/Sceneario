@@ -1,8 +1,3 @@
-<?php echo $this->partial('partials/header_search.phtml'); ?>
-<div class="leftRecherche">
-    <div class="row recherche-header">
-        <p class="no-result">Votre recherche n'a retournée aucun résultat.</p>
-    </div>
-    <div class="separateur"></div>
-</div>
+<?php echo $this->partial('partials/header_search.phtml', $this); ?>
+<?php echo $this->partial('partials/album_list.phtml', $this); ?>
 <?php echo $this->partial('partials/sidebar.phtml'); ?>

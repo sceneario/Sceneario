@@ -15,8 +15,6 @@
             </select>
             résultats par page
         </p>
-        <?php else : ?>
-            <p class="no-result">Votre recherche n'a retournée aucun résultat.</p>
         <?php endif; ?>
     </div>
     <?php if (count($this->paginator)) : ?>
@@ -52,6 +50,8 @@
             </li>
             <?php endforeach; ?>
         </ul>
+    <?php else : ?>
+        <p class="no-result">Votre recherche n'a retournée aucun résultat.</p>
     <?php endif; ?>
     <?php echo $this->paginationControl($this->paginator, 'Sliding', 'paginationControl.phtml' ); ?>
 </div>

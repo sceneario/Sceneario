@@ -59,7 +59,7 @@ class SearchController extends GlobalController
             $this->_forward('error');
         }
         
-        $userFilter    = isset($_GET['filter']) ? strip_tags($_GET['filter']) : null;
+        $this->view->userFilter    = isset($_GET['filter']) ? strip_tags($_GET['filter']) : null;
         
         /*
          * On limite le nbre de résultat
@@ -101,38 +101,46 @@ class SearchController extends GlobalController
          */
         #print Zend_Search_Lucene_Search_QueryParser::getDefaultOperator();
         Zend_Search_Lucene_Search_QueryParser::setDefaultOperator($requestOperator);
-        
-        
-  
+
+        $this->view->searchFilter = array(
+            'all'         => 'Tout le site',
+            'titre_serie' => 'Titre ou série',
+            'auteurs'     => 'Les auteurs',
+            'editeurs'    => 'Les éditeurs',
+            'isbn'        => 'ISBN',
+            'redacteurs'  => 'Les rédacteurs'
+        );
+
         /*
-         * Si la recherche est complexe, 
-         * on cherche la correspondance dans les champs 
+         * Si la recherche est complexe,
+         * on cherche la correspondance dans les champs
          */
-        
-        
-        if(!null == $userFilter){
+        if(!null == $this->view->userFilter && $this->view->userFilter != 'all'){
             $mulipleUserQuery = new Zend_Search_Lucene_Search_Query_MultiTerm();
 
-            switch($userFilter){
-                case 'Les auteurs':
+            switch($this->view->userFilter){
+                case 'auteurs':
                     Zend_Search_Lucene_Search_QueryParser::setDefaultOperator(Zend_Search_Lucene_Search_QueryParser::B_OR);
                     $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedScenaristes'),null);
                     $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedDessinateurs'),null);
                     $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedColoristes'),null);
                     break;
-                case 'Les éditeurs':
-                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedEditeur'),true);
+                case 'editeurs':
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedEditeur'),null);
                     break;
-                case 'ISBN':
+                case 'isbn':
                     $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'isbn'),true);
                     break;
-                case 'Titre ou série':
-                     Zend_Search_Lucene_Search_QueryParser::setDefaultOperator(Zend_Search_Lucene_Search_QueryParser::B_OR);
+                case 'titre_serie':
+                    Zend_Search_Lucene_Search_QueryParser::setDefaultOperator(Zend_Search_Lucene_Search_QueryParser::B_OR);
                     $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedTitreSerie'),null);
                     $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedTitreAlbum'),null);
                     break;
-                case 'Les rédacteurs':
+                case 'redacteurs':
                     $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedRedacteurs'),null);
+                    break;
+                case 'genres':
+                    $mulipleUserQuery->addTerm(new Zend_Search_Lucene_Index_Term($userRequest, 'sanitizedGenres'),null);
                     break;
             }
             $userRequest = $mulipleUserQuery ;
@@ -164,6 +172,7 @@ class SearchController extends GlobalController
          * Gestion des exceptions
          */
         try {
+
 	    // $hits      = $index->find($userQuery, 'idAlbum', SORT_NUMERIC, SORT_DESC) ;  
 	    $hits = $index->find ($userQuery,
 			'titreSerieOnly', SORT_REGULAR, SORT_ASC,
@@ -757,7 +766,7 @@ class SearchController extends GlobalController
 
 		$text = mb_strtolower ($text, 'utf-8');
 
-		$text = preg_replace ('/[^a-z0-9]/', ' ', $text);
+		$text = preg_replace ('/[^a-z0-9\+]/', ' ', $text);
 
 		$text = preg_replace ('/[[:space:]]/', ' ', $text);
 

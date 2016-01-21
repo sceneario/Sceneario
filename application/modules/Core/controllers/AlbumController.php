@@ -137,7 +137,7 @@ class AlbumController extends GlobalController
                         $mailBody .= "\nCommentaire : " . $rawCritique;
                         $mailBody .= "\n";
                         $mailBody .= "\nPour valider cette critique, cliquer ici :"; 
-                        $mailBody .= "http://admin.sceneario.com/ActionBase.php?idObjet=$this->_album->getIdAlbum()&action=listecritiquesprov&type=album";
+                        $mailBody .= "http://admin.sceneario.com/ActionBase.php?idObjet=".$this->_album->getIdAlbum()."&action=listecritiquesprov&type=album";
       
                         $header ="From: critique_internaute@sceneario.com \nReply-To:critique_internaute@sceneario.com\n";
                         try {

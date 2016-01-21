@@ -81,7 +81,8 @@
                         </li>
                     <?php endforeach;?>
                 </ul>
-                <a href="<?php echo $this->customUrl(array('tag'=> $this->nomAuteur), 'recherche') ?>" class="button_large">Voir plus de série de <?php echo $this->nomAuteur ?></a>
+                <a href="/recherche?tag=<?php echo urlencode(str_replace(' ', '+', $this->nomAuteur)); ?>&filter=auteurs" class="button_large">Voir plus de série de <?php echo $this->nomAuteur ?>
+                </a>
             </div>
         </section>
         <?php foreach (array_chunk($this->blocDatas, 2) as $row) : ?>
