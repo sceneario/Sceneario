@@ -148,7 +148,7 @@ class Core_Plugin_Redirv5tov6 extends Zend_Controller_Plugin_Abstract {
 		    $s  = str_replace('.html', '', $queryParts[3]); 
                     //si $id vaut 0, le script continue sans actions
                     if(!empty($s)){
-                        $this->redirect301('/recherche/?tag='.$s) ; 
+                        $this->redirect301('/recherche/?tag='.$s.'&filter=genres') ; 
                     }
                 }
             }
@@ -186,7 +186,7 @@ class Core_Plugin_Redirv5tov6 extends Zend_Controller_Plugin_Abstract {
                 $queryParts = explode('_' , $this->_requestUri );
                 if(isset($queryParts[3])){
 		    $s  = str_replace('.html', '', $queryParts[3]); 
-		    $this->redirect301('/recherche/?tag='.$s);
+		    $this->redirect301('/recherche/?tag='.$s.'&filter=redacteurs');
                 }
             }
         }
@@ -210,15 +210,38 @@ class Core_Plugin_Redirv5tov6 extends Zend_Controller_Plugin_Abstract {
             if(strpos( $this->_requestUri , 'recherche_lettre_') !== false) {
                 $queryParts = explode('_' , $this->_requestUri ) ;
                 if(isset($queryParts[2])){
-		    $s = $queryParts[2]; 
+            $s = $queryParts[2]; 
                     //si $id vaut 0, le script continue sans actions
                     if(!empty($s)){
-                        $this->redirect301('/recherche/?tag='.$s);
+                        $this->redirect301('/bande-dessinee/albums/'.$s);
                     }
                 }
             }
         }
-       
+
+        if($this->_requestUri !== false){
+            if(strpos( $this->_requestUri , 'archives_') !== false) {
+                $queryParts = explode('_' , $this->_requestUri);
+                switch ($queryParts[1]) {
+                    case '12':
+                        $f   = 'all';
+                        $mpc = new Core_Model_Mapper_Tblcollections();
+                        $c   = $mpc->find((int)$queryParts[2], new Core_Model_Tblcollections());
+                        $s   = !empty($c) ? $c->getNomCollection() : '';
+                        break;
+                    case '15':
+                        $f = 'genres';
+                        $mpg = new Core_Model_Mapper_Tblgenres();
+                        $g   = $mpg->find((int)$queryParts[2], new Core_Model_Tblgenres());
+                        $s   = !empty($g) ? $g->getLibelle() : '';
+                        break;
+                }
+                if (!empty($s) && !empty($f)) {
+                    $this->redirect301('/recherche?tag='.$s.'&filter='.$f);
+                }
+            }
+        }
+
         //INTERVIEW REDIR 301
         //http://www.sceneario.com/sceneario_interview.php?idInterview=TAMIA
         if(strpos( $this->_requestUri , 'sceneario_interview') !== false){
