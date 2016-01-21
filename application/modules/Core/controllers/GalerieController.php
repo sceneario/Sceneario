@@ -128,6 +128,10 @@ class GalerieController extends GlobalController
         $mapperTblDossiers = new Core_Model_Mapper_Tbldossiers();
         $galerieInfos      = $mapperTblDossiers->find($idGalerie, new Core_Model_Tbldossiers) ;
 
+        if (empty($galerieInfos)) {
+            throw new Zend_Controller_Action_Exception('Cet galerie n\'existe pas', 404);
+        }
+
         $this->view->isPreview = (strtolower($galerieInfos->getTypeDossier()) == 'preview') ? true : false;
 
         $galDir = '/home/sceneari/images/galeries/' . $idGalerie;
