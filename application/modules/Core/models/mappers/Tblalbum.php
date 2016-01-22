@@ -157,21 +157,23 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
             LEFT JOIN tbl_Auteurs_Albums aa ON a.idAuteur = aa.idAuteur
             WHERE aa.idAlbum IN ('.implode(',', array_keys($this->albums)).')
             ORDER BY a.nomAuteur ASC';
+
         $results = $this->getSqlResults($sql);
 
-        $idsAuteurs = array();
-        foreach ($results as $result) {
-            $idsAuteurs[]                          = $result->idAuteur;
-            $this->albums[$result->idAlbum]->idsAuteurs[] = $result->idAuteur;
-        }
-
         $auteurs = array();
-        $mpAut   = new Core_Model_Mapper_Tblauteurs();
-        $rows    = $mpAut->fetchAll(null, 0, 'idAuteur IN ('.implode(',', $idsAuteurs).')');
-        foreach ($rows as $row) {
-            $auteurs[$row->getIdAuteur()] = $row;
-        }
+        if (!empty($results)) {
+            $idsAuteurs = array();
+            foreach ($results as $result) {
+                $idsAuteurs[]                          = $result->idAuteur;
+                $this->albums[$result->idAlbum]->idsAuteurs[] = $result->idAuteur;
+            }
 
+            $mpAut   = new Core_Model_Mapper_Tblauteurs();
+            $rows    = $mpAut->fetchAll(null, 0, 'idAuteur IN ('.implode(',', $idsAuteurs).')');
+            foreach ($rows as $row) {
+                $auteurs[$row->getIdAuteur()] = $row;
+            }
+        }
         return $auteurs;
     }
 
@@ -188,17 +190,20 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
             ORDER BY g.libelle';
         $results = $this->getSqlResults($sql);
 
-        $idsGenres = array();
-        foreach ($results as $result) {
-            $idsGenres[]                                 = $result->idGenre;
-            $this->albums[$result->idAlbum]->idsGenres[] = $result->idGenre;
-        }
-
         $genres = array();
-        $mpGenres = new Core_Model_Mapper_Tblgenres();
-        $rows = $mpGenres->fetchAll(null, array('clause' => 'idGenre IN (?)', 'params' => $idsGenres));
-        foreach ($rows as $row) {
-            $genres[$row->getIdGenre()] = $row;
+        if (!empty($results)) {
+            $idsGenres = array();
+            foreach ($results as $result) {
+                $idsGenres[]                                 = $result->idGenre;
+                $this->albums[$result->idAlbum]->idsGenres[] = $result->idGenre;
+            }
+
+            $genres = array();
+            $mpGenres = new Core_Model_Mapper_Tblgenres();
+            $rows = $mpGenres->fetchAll(null, array('clause' => 'idGenre IN (?)', 'params' => $idsGenres));
+            foreach ($rows as $row) {
+                $genres[$row->getIdGenre()] = $row;
+            }
         }
 
         return $genres;
