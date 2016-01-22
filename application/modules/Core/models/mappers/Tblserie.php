@@ -151,7 +151,7 @@ class Core_Model_Mapper_Tblserie extends Core_Model_DbTable_Db
                 }
             }
 
-            if (empty($tmpEditeurs[$album->getIdSerie()]) || !in_array($album->editeur->getIdEditeur(), $tmpEditeurs[$album->getIdSerie()])) {
+            if (!empty($album->editeur) && (empty($tmpEditeurs[$album->getIdSerie()]) || !in_array($album->editeur->getIdEditeur(), $tmpEditeurs[$album->getIdSerie()]))) {
                 $tmpEditeurs[$album->getIdSerie()][] = $album->editeur->getIdEditeur();
                 $this->series[$album->getIdSerie()]->editeurs[] = $album->editeur;
             }
