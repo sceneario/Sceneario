@@ -52,70 +52,71 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
         $this->albums   = array();
         $rows           = !is_array($data) ? array($data) : $data;
 
-        $idsEditeurs    = array();
-        foreach ($rows as $row) {
-            $tbl_Album = new Core_Model_Tblalbum();
-            $tbl_Album->setIdAlbum(self::unescape($row->idAlbum));
-            $tbl_Album->setTitre(self::unescape($row->titre));
-            $tbl_Album->setCollection(self::unescape($row->collection));
-            $tbl_Album->setSousTitre(self::unescape($row->sousTitre));
-            $tbl_Album->setTome(self::unescape($row->tome));
-            $tbl_Album->setCouverture(self::unescape($row->couverture));
-            $tbl_Album->setDroits(self::unescape($row->droits));
-            $tbl_Album->setEnligne(self::unescape($row->enligne));
-            $tbl_Album->setNouveaute(self::unescape($row->nouveaute));
-            $tbl_Album->setFKidEditeur(self::unescape($row->FKidEditeur));
-            $tbl_Album->setDatecreation(self::unescape($row->datecreation));
-            $tbl_Album->setIdCollection(self::unescape($row->idCollection));
-            $tbl_Album->setLienBDNet(self::unescape($row->lienBDNet));
-            $tbl_Album->setLienAmazon(self::unescape($row->lienAmazon));
-            $tbl_Album->setIdCouv(self::unescape($row->idCouv));
-            $tbl_Album->setIsbn(self::unescape($row->isbn));
-            $tbl_Album->setExtrait(self::unescape($row->extrait));
-            $tbl_Album->setIdSerie(self::unescape($row->idSerie));
-            $tbl_Album->setDate(self::unescape($row->date));
-            $tbl_Album->setIdUnivers(self::unescape($row->idUnivers));
-            $tbl_Album->setPresse(self::unescape($row->presse));
-            $tbl_Album->setTopic_id(self::unescape($row->topic_id));
-            $tbl_Album->setNbpages(self::unescape($row->nbpages));
-            $tbl_Album->setVisites(self::unescape($row->visites));
-            $tbl_Album->setVisitesSemaine(self::unescape($row->visitesSemaine));
-            $tbl_Album->setRecommande(self::unescape($row->recommande));
-            $tbl_Album->setBandeAnnonce(self::unescape($row->bandeAnnonce));
+        if (!empty($rows)) {
+            $idsEditeurs    = array();
+            foreach ($rows as $row) {
+                $tbl_Album = new Core_Model_Tblalbum();
+                $tbl_Album->setIdAlbum(self::unescape($row->idAlbum));
+                $tbl_Album->setTitre(self::unescape($row->titre));
+                $tbl_Album->setCollection(self::unescape($row->collection));
+                $tbl_Album->setSousTitre(self::unescape($row->sousTitre));
+                $tbl_Album->setTome(self::unescape($row->tome));
+                $tbl_Album->setCouverture(self::unescape($row->couverture));
+                $tbl_Album->setDroits(self::unescape($row->droits));
+                $tbl_Album->setEnligne(self::unescape($row->enligne));
+                $tbl_Album->setNouveaute(self::unescape($row->nouveaute));
+                $tbl_Album->setFKidEditeur(self::unescape($row->FKidEditeur));
+                $tbl_Album->setDatecreation(self::unescape($row->datecreation));
+                $tbl_Album->setIdCollection(self::unescape($row->idCollection));
+                $tbl_Album->setLienBDNet(self::unescape($row->lienBDNet));
+                $tbl_Album->setLienAmazon(self::unescape($row->lienAmazon));
+                $tbl_Album->setIdCouv(self::unescape($row->idCouv));
+                $tbl_Album->setIsbn(self::unescape($row->isbn));
+                $tbl_Album->setExtrait(self::unescape($row->extrait));
+                $tbl_Album->setIdSerie(self::unescape($row->idSerie));
+                $tbl_Album->setDate(self::unescape($row->date));
+                $tbl_Album->setIdUnivers(self::unescape($row->idUnivers));
+                $tbl_Album->setPresse(self::unescape($row->presse));
+                $tbl_Album->setTopic_id(self::unescape($row->topic_id));
+                $tbl_Album->setNbpages(self::unescape($row->nbpages));
+                $tbl_Album->setVisites(self::unescape($row->visites));
+                $tbl_Album->setVisitesSemaine(self::unescape($row->visitesSemaine));
+                $tbl_Album->setRecommande(self::unescape($row->recommande));
+                $tbl_Album->setBandeAnnonce(self::unescape($row->bandeAnnonce));
 
-            $tbl_Album->auteurs          = array();
-            $tbl_Album->motcles          = array();
+                $tbl_Album->auteurs          = array();
+                $tbl_Album->motcles          = array();
 
-            $idsEditeurs[]               = $row->FKidEditeur;
-            $this->albums[$row->idAlbum] = $tbl_Album;
-        }
+                $idsEditeurs[]               = $row->FKidEditeur;
+                $this->albums[$row->idAlbum] = $tbl_Album;
+            }
 
-        $auteurs     = $this->_getAuteurs();
-        $editeurs    = $this->_getEditeurs($idsEditeurs);
-        $genres      = $this->_getMotcles();
+            $auteurs     = $this->_getAuteurs();
+            $editeurs    = $this->_getEditeurs($idsEditeurs);
+            $genres      = $this->_getMotcles();
 
-        foreach ($this->albums as $idAlbum => $album) {
-            foreach ($auteurs as $idAuteur => $auteur) {
-                if (in_array($idAuteur, $album->idsAuteurs)) {
-                    $this->albums[$idAlbum]->auteurs[] = $auteur;
+            foreach ($this->albums as $idAlbum => $album) {
+                foreach ($auteurs as $idAuteur => $auteur) {
+                    if (in_array($idAuteur, $album->idsAuteurs)) {
+                        $this->albums[$idAlbum]->auteurs[] = $auteur;
+                    }
+                }
+                foreach ($editeurs as $editeur) {
+                    if ($editeur->getIdEditeur() == $album->getFKidEditeur()) {
+                        $this->albums[$idAlbum]->editeur = $editeur;
+                    }
+                }
+                foreach ($genres as $idGenre => $genre) {
+                    if (!empty($album->idsGenres) && in_array($idGenre, $album->idsGenres)) {
+                        $this->albums[$idAlbum]->motcles[] = $genre;
+                    }
                 }
             }
-            foreach ($editeurs as $editeur) {
-                if ($editeur->getIdEditeur() == $album->getFKidEditeur()) {
-                    $this->albums[$idAlbum]->editeur = $editeur;
-                }
-            }
-            foreach ($genres as $idGenre => $genre) {
-                if (!empty($album->idsGenres) && in_array($idGenre, $album->idsGenres)) {
-                    $this->albums[$idAlbum]->motcles[] = $genre;
-                }
+
+            if (!is_array($data)) {
+                return $this->albums[$row->idAlbum];
             }
         }
-
-        if (!is_array($data)) {
-            return $this->albums[$row->idAlbum];
-        }
-
         return $this->albums;
     }
 
