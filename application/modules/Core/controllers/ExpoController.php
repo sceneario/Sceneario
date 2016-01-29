@@ -4,6 +4,10 @@ require_once APPLICATION_PATH . '/modules/Core/controllers/GlobalController.php'
 
 class ExpoController extends GlobalController
 {
+    private $_mapperExpo;
+    private $_expo;
+    private $_id;
+
     public function init()
     {
         parent::init();
@@ -12,6 +16,8 @@ class ExpoController extends GlobalController
         $this->view->headMeta()->setName('keywords', 'Expos BD, Salons BD, Festivals BD');
         $this->view->headMeta()->setProperty('og:title', 'Expos BD, salons BD, festivals BD - Sceneario.com');
         $this->view->headMeta()->setProperty('og:description', 'Retrouvez en exclusivité nos reportages autour de l\'évennementiel spécialisé BD grâce à Sceneario.com');
+
+        $this->_mapperExpo = new Core_Model_Mapper_Tblexpos();
     }
     
     public function Out_listAction_Out ()
@@ -164,47 +170,52 @@ class ExpoController extends GlobalController
         $this->view->paginator   = $paginator;
 
     }
-    
+
+    private function _get() {
+        $this->_id = $this->getRequest()->getParam('idexpo');
+
+        if(!empty($this->_id)) {
+            $this->_expo = $this->_mapperExpo->find((int)$this->_id, new Core_Model_Tblexpos);
+
+            if (!empty($this->_expo)) {
+                $good_url = $this->view->customUrl(array('title' => $this->_expo->getTitre(), 'idexpo' => $this->_expo->get_id()), 'expo');
+
+                if ($this->getRequest()->getRequestUri() != $good_url) {
+                    $this->redirect301($good_url);
+                }
+                return true;
+            }
+        }
+        throw new Zend_Controller_Action_Exception('Cette exposition n\'existe pas', 404);
+    }
+
     public function expoAction()
     {
-     
-        $idExpo     = $this->getRequest()->getParam('idexpo') ;
-        
-        $expoMapper = new Core_Model_Mapper_Tblexpos;
-        $expoInfos  = $expoMapper->find($idExpo, new Core_Model_Tblexpos) ;
-        $utils      = new Core_Service_Utilities ;
-        if( (int) $idExpo !== 0 ){
-            if($expoInfos->getEnligne() == IS_NOT_PUBLISHED){
-                echo 'L\'exposition que vous demandez n\'est pas publié.' ;
-            }else{
+        $this->_get();
 
-                if(APPLICATION_ENV == 'development'){
-                    $this->view->imageUri      = 'http://images.sceneario.com/expos/images_index/' . $expoInfos->getImage();
-                }else{
-                    $this->view->imageUri      = '/images/expos/images_index/' . $expoInfos->getImage();
-                }
+        $utils = new Core_Service_Utilities ;
 
-                $this->view->titre         = str_replace('<br>', ' - ', strip_tags($expoInfos->getTitre(), '<br>'));
-                $this->view->soustitre     = strip_tags($expoInfos->getSousTitre(), '<br>');
-                $this->view->expo          = $expoInfos ;
-                
-                $this->view->expoHtml      = $utils->getTheExpoHtml($expoInfos->getIdExpo(), $expoInfos->getAnnee()) ;
-
-                $this->view->headTitle($this->view->titre.' - ', 'PREPEND');
-                $this->view->headMeta()->setName('description', $this->view->titre.'. Retrouvez en exclusivité nos reportages autour de l\'évennementiel spécialisé BD grâce à Sceneario.com');
-                $this->view->headMeta()->setName('keywords', $this->view->titre.', Expos BD, Salons BD, Festivals BD');
-                $this->view->headMeta()->setProperty('og:title', $this->view->titre);
-                $this->view->headMeta()->setProperty('og:image', $this->view->imageUri);
-                $this->view->headMeta()->setProperty('og:description', $this->view->titre.'. Retrouvez en exclusivité nos reportages autour de l\'évennementiel spécialisé BD grâce à Sceneario.com');
-
-                 #echo '<pre>';
-                #print_r($expoInfos);
-                #echo '</pre>';
+        if ($this->_expo->getEnligne() == IS_NOT_PUBLISHED) {
+            throw new Zend_Controller_Action_Exception('Cette exposition n\'existe pas', 404);
+        } else {
+            if (APPLICATION_ENV == 'development') {
+                $this->view->imageUri = 'http://images.sceneario.com/expos/images_index/' . $this->_expo->getImage();
+            } else {
+                $this->view->imageUri = '/images/expos/images_index/' . $this->_expo->getImage();
             }
-        }else{
-            echo 'L\exposition n\'existe pas.' ;
+
+            $this->view->titre     = str_replace('<br>', ' - ', strip_tags($this->_expo->getTitre(), '<br>'));
+            $this->view->soustitre = strip_tags($this->_expo->getSousTitre(), '<br>');
+            $this->view->expo      = $this->_expo ;
+
+            $this->view->expoHtml  = $utils->getTheExpoHtml($this->_expo->getIdExpo(), $this->_expo->getAnnee()) ;
+
+            $this->view->headTitle($this->view->titre.' - ', 'PREPEND');
+            $this->view->headMeta()->setName('description', $this->view->titre.'. Retrouvez en exclusivité nos reportages autour de l\'évennementiel spécialisé BD grâce à Sceneario.com');
+            $this->view->headMeta()->setName('keywords', $this->view->titre.', Expos BD, Salons BD, Festivals BD');
+            $this->view->headMeta()->setProperty('og:title', $this->view->titre);
+            $this->view->headMeta()->setProperty('og:image', $this->view->imageUri);
+            $this->view->headMeta()->setProperty('og:description', $this->view->titre.'. Retrouvez en exclusivité nos reportages autour de l\'évennementiel spécialisé BD grâce à Sceneario.com');
         }
     }
-    
-    
 }

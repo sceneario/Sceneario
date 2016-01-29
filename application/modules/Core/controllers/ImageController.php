@@ -22,8 +22,6 @@ class ImageController extends Zend_Controller_Action
      */
     public function init()
     {
-        header('Pragma: public');
-        header('Expires: '.gmdate('D, d M Y H:i:s \G\M\T', time() + 3600*24*30));
         header('Content-Type: image/jpeg');
 
         $this->_helper->layout()->disableLayout();

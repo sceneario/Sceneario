@@ -114,7 +114,7 @@ class AuteurController extends GlobalController
                 'couleur'    => 'white',
                 'lien'       => array(
                     'type'          => 'voir tout',
-                    'url'           => $this->view->customUrl(array('title' => $auteurExpo->titre, 'idexpo' => $auteurExpo->idexpo), 'expo'),
+                    'url'           => $this->view->customUrl(array('title' => $auteurExpo->titre, 'idexpo' => $auteurExpo->_id), 'expo'),
                     'tout_afficher' => ''
                 ),
             );

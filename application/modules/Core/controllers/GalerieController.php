@@ -4,6 +4,10 @@ require_once APPLICATION_PATH . '/modules/Core/controllers/GlobalController.php'
 
 class GalerieController extends GlobalController 
 {
+    private $_mapperGalerie;
+    private $_galerie;
+    private $_id;
+
     /*
      * @var object Core_Service_Utilities
      */
@@ -15,6 +19,8 @@ class GalerieController extends GlobalController
         parent::init();
         $this->_utils = new Core_Service_Utilities;
         $params = $this->getRequest()->getParams();
+        
+        $this->_mapperGalerie = new Core_Model_Mapper_Tbldossiers();
     }
     
     /**
@@ -40,7 +46,6 @@ class GalerieController extends GlobalController
              $this->render('list');
         }
     }
-    
     
     public function galerielistAction()
     {
@@ -117,42 +122,51 @@ class GalerieController extends GlobalController
    
         $this->view->paginator   = $paginator;
     }
-    
+
+    private function _get() {
+        $this->_id = $this->getRequest()->getParam('id');
+
+        if(!empty($this->_id)) {
+            $this->_galerie = $this->_mapperGalerie->find($this->_id, new Core_Model_Tbldossiers);
+
+            if (!empty($this->_galerie)) {
+                $good_url = $this->view->customUrl(array('nom' => $this->_galerie->getTitreDossier(), 'id' => $this->_galerie->getIdDossier()), 'galerie');
+
+                if ($this->getRequest()->getRequestUri() != $good_url) {
+                    $this->redirect301($good_url);
+                }
+                return true;
+            }
+        }
+        throw new Zend_Controller_Action_Exception('Cette exposition n\'existe pas', 404);
+    }
+
     /*
      * 
      */
     public function galerieAction()
     {
-        //
-        $idGalerie         = $this->getRequest()->getParam('id');
-        $mapperTblDossiers = new Core_Model_Mapper_Tbldossiers();
-        $galerieInfos      = $mapperTblDossiers->find($idGalerie, new Core_Model_Tbldossiers) ;
+        $this->_get();
 
-        if (empty($galerieInfos)) {
-            throw new Zend_Controller_Action_Exception('Cet galerie n\'existe pas', 404);
-        }
+        $this->view->isPreview = (strtolower($this->_galerie->getTypeDossier()) == 'preview') ? true : false;
 
-        $this->view->isPreview = (strtolower($galerieInfos->getTypeDossier()) == 'preview') ? true : false;
-
-        $galDir = '/home/sceneari/images/galeries/' . $idGalerie;
-        
-        $images = array();
-        
-        if(file_exists($galDir)){
+        $galDir = '/home/sceneari/images/galeries/' . $this->_id;
+        $images = array();        
+        if (file_exists($galDir)) {
             if (is_dir($galDir)) {
                 if ($dh = opendir($galDir)) {
                     while (($file = readdir($dh)) !== false) {
                         //echo "filename: $file : filetype: " . filetype($galDir . $file) . "<br />" . PHP_EOL;
                         if(!is_dir($galDir.'/'.$file)){
                     
-                            $imageFacebook = 'http://images.sceneario.com/galeries/'.$idGalerie.'/miniatures/'.$file ;
+                            $imageFacebook = 'http://images.sceneario.com/galeries/'.$this->_id.'/miniatures/'.$file ;
 
                             $image = array();
-                            $image['big'] = 'http://images.sceneario.com/galeries/'.$idGalerie.'/'.$file ;
+                            $image['big'] = 'http://images.sceneario.com/galeries/'.$this->_id.'/'.$file ;
                             if($this->view->isPreview){
-                                $image['med'] = 'http://images.sceneario.com/galeries/'.$idGalerie.'/'.$file ;
+                                $image['med'] = 'http://images.sceneario.com/galeries/'.$this->_id.'/'.$file ;
                             }else{
-                                $image['med'] = 'http://images.sceneario.com/galeries/'.$idGalerie.'/miniatures2/'.$file ;
+                                $image['med'] = 'http://images.sceneario.com/galeries/'.$this->_id.'/miniatures2/'.$file ;
                             }
                             $images[] = $image ;
                             
@@ -165,18 +179,17 @@ class GalerieController extends GlobalController
         }
         //tri des images par ordre croissant
         sort($images);
-        
-        
-        $this->view->headTitle($galerieInfos->getTitreDossier().' - ', 'PREPEND');
-        $this->view->headMeta()->setName('description', 'Découvrez la '.($this->view->isPreview ? 'preview de ' : 'galerie : '). $galerieInfos->getTitreDossier() . ' sur sceneario.com');
-        $this->view->headMeta()->setName('keywords', $galerieInfos->getTitreDossier().', Préviews BD, Galeries BD, Expositions, Photos planches BD');
-        $this->view->headMeta()->setProperty('og:title', $galerieInfos->getTitreDossier());
+
+        $this->view->headTitle($this->_galerie->getTitreDossier().' - ', 'PREPEND');
+        $this->view->headMeta()->setName('description', 'Découvrez la '.($this->view->isPreview ? 'preview de ' : 'galerie : '). $this->_galerie->getTitreDossier() . ' sur sceneario.com');
+        $this->view->headMeta()->setName('keywords', $this->_galerie->getTitreDossier().', Préviews BD, Galeries BD, Expositions, Photos planches BD');
+        $this->view->headMeta()->setProperty('og:title', $this->_galerie->getTitreDossier());
         if (isset($imageFacebook)) {
             $this->view->headMeta()->setProperty('og:image', $imageFacebook);
         }
-        $this->view->headMeta()->setProperty('og:description', 'Découvrez la '.($this->view->isPreview ? 'preview de ' : 'galerie : ').$galerieInfos->getTitreDossier().' sur sceneario.com');
+        $this->view->headMeta()->setProperty('og:description', 'Découvrez la '.($this->view->isPreview ? 'preview de ' : 'galerie : ').$this->_galerie->getTitreDossier().' sur sceneario.com');
 
-        $this->view->titre  = $galerieInfos->getTitreDossier();   
+        $this->view->titre  = $this->_galerie->getTitreDossier();   
         $this->view->images = $images;
     }  
 }
