@@ -2,7 +2,7 @@
 
 class Core_Service_ScenearioCache
 {
-    private static $_frontendOptions = array('lifetime' => 7200,  // temps de vie du cache de 2 heures
+    private static $_frontendOptions = array('lifetime' => 31536000,  // temps de vie du cache d'un an
                                              'automatic_serialization' => true
                                        );
      
@@ -62,7 +62,7 @@ class Core_Service_ScenearioCache
             //no cache
             $zendCache->save($content, $id);  
         }
-        print $content ; 
+        return $content;
     }
     
     /*
@@ -78,6 +78,6 @@ class Core_Service_ScenearioCache
             //no cache
             return false;
         }
-        print $zendCache->load($cacheId);  
+        return $zendCache->load($cacheId);
     }
 }
