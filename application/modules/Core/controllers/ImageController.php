@@ -31,22 +31,27 @@ class ImageController extends Zend_Controller_Action
     
     private function _get() {
         $params = $this->getRequest()->getParams();
-   
+
         if(isset($params['format']) && $params['format'] != ''){
             $this->_isbn     = $params['isbn'];
             $this->_format   = $params['format'];
             $this->_cacheId  = $this->_isbn . '_' . $this->_format . '_' . $this->_type;
 
             //verifier si l'image est en cache et renvoie l'image si elle existe
-            if($this->_cache->getCache($this->_cacheId) === false){
+            $cache = $this->_cache->getCache($this->_cacheId);
+            if (empty($cache)) {
                 if ($this->_type == 'couverture') {
                     $this->_fileName = $this->getFileName($params['isbn'], self::$_hostImagesCouv);
                 } else if ($this->_type == 'planche') {
                     $this->_fileName = $this->getFileName($params['idAlbum'], self::$_hostImagesPlanche);
                 }
-                call_user_func( array( $this , $params['format'] . 'Format'));
+                $image = call_user_func( array( $this , $params['format'] . 'Format'));
+                echo $image;
+            } else {
+                echo $cache;
             }
         }
+        die();
     }
 
     /*
@@ -90,7 +95,7 @@ class ImageController extends Zend_Controller_Action
      */
     public function largeFormat() //width:113; //height:150px;
     {
-        $img = $this->resize( $this->_fileName, null , 800 ); // L  x  H
+        return $this->resize( $this->_fileName, null , 800 ); // L  x  H
     }
     
     /*
@@ -98,7 +103,7 @@ class ImageController extends Zend_Controller_Action
      */
     public function bedethequeFormat() //width:113; //height:150px;
     {
-        $img = $this->resize( $this->_fileName, null, 150 ); // L  x  H     
+        return $this->resize( $this->_fileName, null, 150 ); // L  x  H     
     }
 
     /*
@@ -107,7 +112,7 @@ class ImageController extends Zend_Controller_Action
     public function coupdecoeurequipeFormat()
     {
         //121x167
-        $img = $this->resize( $this->_fileName, null, 230 ); // L  x  H
+        return $this->resize( $this->_fileName, null, 230 ); // L  x  H
 
     }
     
@@ -116,7 +121,7 @@ class ImageController extends Zend_Controller_Action
      */
     public function alsolikeFormat() //width:123px; //height:171px;
     {
-        $img = $this->resize( $this->_fileName, null, 230 ); // L  x  H
+        return $this->resize( $this->_fileName, null, 230 ); // L  x  H
     }
     
     /*
@@ -126,7 +131,7 @@ class ImageController extends Zend_Controller_Action
     {    
         //125x166
         //137x103
-        $img = $this->resize( $this->_fileName, 100, null );//137 // L  x  H
+        return $this->resize( $this->_fileName, 100, null );//137 // L  x  H
     }
 
 	/*
@@ -136,7 +141,7 @@ class ImageController extends Zend_Controller_Action
     public function interviewFormat()
     {
         //166x230
-        $img = $this->resize( $this->_fileName, 200 , null );//137 // L  x  H 103
+        return $this->resize( $this->_fileName, 200 , null );//137 // L  x  H 103
     }
     
     /*
@@ -146,7 +151,7 @@ class ImageController extends Zend_Controller_Action
     public function mediumFormat()
     {
         //166x230
-        $img = $this->resize( $this->_fileName, 166 , null );//137 // L  x  H 103
+        return $this->resize( $this->_fileName, 166 , null );//137 // L  x  H 103
     }
      
     /*
@@ -154,7 +159,7 @@ class ImageController extends Zend_Controller_Action
      */
     public function bigFormat()
     {
-        $img = $this->resize( $this->_fileName, 360, null ); //width:340px; // height:413px;
+        return $this->resize( $this->_fileName, 360, null ); //width:340px; // height:413px;
     }
     
     public function resize($filename, $newwidth, $newheight)
@@ -182,10 +187,6 @@ class ImageController extends Zend_Controller_Action
         $image = ob_get_contents();
         ob_end_clean();
 
-        echo $this->_cache->setCache( $this->_cacheId , $image ) ;
-
-        exit(0);
-      
+        return $this->_cache->setCache($this->_cacheId, $image);
     }
-    
 }
