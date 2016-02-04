@@ -179,6 +179,9 @@ class ExpoController extends GlobalController
 
             if (!empty($this->_expo)) {
                 $good_url = $this->view->customUrl(array('title' => $this->_expo->getTitre(), 'idexpo' => $this->_expo->get_id()), 'expo');
+                if (!empty($_GET)) {
+                    $good_url .= '?'.http_build_query($_GET);
+                }
 
                 if ($this->getRequest()->getRequestUri() != $good_url) {
                     $this->redirect301($good_url);
