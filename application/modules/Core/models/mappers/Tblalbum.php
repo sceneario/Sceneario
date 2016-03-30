@@ -120,6 +120,13 @@ class Core_Model_Mapper_Tblalbum extends Core_Model_DbTable_Db
         return $this->albums;
     }
 
+    public function fetchRow($where = null, $order = null, $full = false, $count_only = false)
+    {
+        $this->albums = $this->fetchAll(1, 0, $where, $order, $full, $count_only);
+        return $this->albums = array_shift($this->albums);
+    }
+
+
     public function fetchAll($limit = null, $offset = 0, $where = null, $order = null, $full = false, $count_only = false)
     {
         $table     = $this->getDbTable();
