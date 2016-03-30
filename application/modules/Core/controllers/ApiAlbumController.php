@@ -34,10 +34,12 @@ class ApiAlbumController extends ApiController
             $matches = $hashids->decode($id);
             if (isset($matches[0]) && !empty($matches[0])) {
                 $album = $this->_mapperAlbum->find((int)$matches[0], new Core_Model_Tblalbum);
+            } else {
+                $album = $this->_mapperAlbum->fetchRow('isbn = \''.$id.'\'');
+            }
 
-                if (!empty($album)) {
-                    $this->_helper->json($this->_getFullAlbumInfos($album));
-                }
+            if (!empty($album)) {
+                $this->_helper->json($this->_getFullAlbumInfos($album));
             }
         }
 
