@@ -109,7 +109,7 @@ class AuteurController extends GlobalController
                 'titre'      => $auteurExpo->titre,
                 'sous_titre' => $auteurExpo->sousTitre,
                 'text'       => $auteurExpo->date,
-                'image'      => $auteurExpo->image,
+                'image'      => '/images/expos/images_index/' . $auteurExpo->image,
                 'id'         => $auteurExpo->idexpo,
                 'couleur'    => 'white',
                 'lien'       => array(
