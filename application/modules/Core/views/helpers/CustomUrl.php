@@ -21,6 +21,11 @@ class Zend_View_Helper_CustomUrl extends Zend_View_Helper_Url
             'format' => $format
         );
 
+        $imageFileName = \Core_Service_Utilities::getAlbumImageFileName($urlParams['isbn'], \Core_Service_Utilities::$hostImagesCouv);
+        if (empty($imageFileName)) {
+            return false;
+        }
+
         if ($seo === true) {
             $urlParams['seo'] = ($album instanceof \Core_Model_Tblalbum ? $album->getCollection() : $album->collection).
                 ($album instanceof \Core_Model_Tblalbum && $album->getTome() ? '-tome-'.$album->getTome() : '').
@@ -38,6 +43,11 @@ class Zend_View_Helper_CustomUrl extends Zend_View_Helper_Url
             'idAlbum' => $album instanceof \Core_Model_Tblalbum ? $album->getIdAlbum() : $album->idAlbum,
             'format'  => $format
         );
+
+        $imageFileName = \Core_Service_Utilities::getAlbumImageFileName($urlParams['idAlbum'], \Core_Service_Utilities::$hostImagesPlanche);
+        if (empty($imageFileName)) {
+            return false;
+        }
 
         if ($seo === true) {
             $urlParams['seo'] = ($album instanceof \Core_Model_Tblalbum ? $album->getCollection() : $album->collection).

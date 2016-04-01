@@ -125,6 +125,9 @@ class ApiAlbumController extends ApiController
         $sousTitre = $album->getSousTitre();
         $tome = $album->getTome();
 
+        $cover  = $this->view->getHelper('customUrl')->getAlbumCoverUrl($album, 'small');
+        $sample = $this->view->getHelper('customUrl')->getAlbumPageUrl($album, 'small');
+
         return array(
             'id'         => $encodedId,
             'title'      => $album->getTitre(),
@@ -135,10 +138,11 @@ class ApiAlbumController extends ApiController
             'editor'     => $editor,
             'isbn'       => $album->getIsbn(),
             'pictures'   => array(
-                'cover'  => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->getHelper('customUrl')->getAlbumCoverUrl($album, 'small'),
-                'sample' => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->getHelper('customUrl')->getAlbumPageUrl($album, 'small'),
+                'cover'  => !empty($cover) ? $this->view->serverUrl() . $this->view->baseUrl() . $cover : null,
+                'sample' => !empty($sample) ? $this->view->serverUrl() . $this->view->baseUrl() . $sample : null,
             ),
-            'url'        => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->url(array('id' => $encodedId), "api_album_get", true),
+            'api_url'    => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->url(array('id' => $encodedId), "api_album_get", true),
+            'url'        => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->getHelper('customUrl')->getAlbumUrl($album),
             'genres'     => $keywords,
             'date'       => date('Y-m', strtotime($album->getDate()))
         );
@@ -168,9 +172,11 @@ class ApiAlbumController extends ApiController
             }
         }
 
+        $cover  = $this->view->getHelper('customUrl')->getAlbumCoverUrl($album);
+        $sample = $this->view->getHelper('customUrl')->getAlbumPageUrl($album);
         $ret['pictures'] = array(
-            'cover'  => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->getHelper('customUrl')->getAlbumCoverUrl($album),
-            'sample' => $this->view->serverUrl() . $this->view->baseUrl() . $this->view->getHelper('customUrl')->getAlbumPageUrl($album),
+            'cover'  => !empty($cover) ? $this->view->serverUrl() . $this->view->baseUrl() . $cover : null,
+            'sample' => !empty($sample) ? $this->view->serverUrl() . $this->view->baseUrl() . $sample : null,
         );
 
         return $ret;

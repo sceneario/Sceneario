@@ -7,9 +7,6 @@
  */
 class ImageController extends Zend_Controller_Action 
 {
-	private static $_hostImagesCouv    = '/home/sceneari/v6/public/images/couvertures';
-    private static $_hostImagesPlanche = '/home/sceneari/v6/public/images/planches';
-    
     private $_fileName;
     private $_fileUri;
     private $_isbn;
@@ -22,8 +19,6 @@ class ImageController extends Zend_Controller_Action
      */
     public function init()
     {
-        header('Content-Type: image/jpeg');
-
         $this->_helper->layout()->disableLayout();
         Zend_Controller_Front::getInstance()->setParam('noViewRenderer', true);
         $this->_cache = new Core_Service_ScenearioCache();
@@ -41,17 +36,24 @@ class ImageController extends Zend_Controller_Action
             $cache = $this->_cache->getCache($this->_cacheId);
             if (empty($cache)) {
                 if ($this->_type == 'couverture') {
-                    $this->_fileName = $this->getFileName($params['isbn'], self::$_hostImagesCouv);
+                    $this->_fileName = \Core_Service_Utilities::getAlbumImageFileName($params['isbn'], \Core_Service_Utilities::$hostImagesCouv);
                 } else if ($this->_type == 'planche') {
-                    $this->_fileName = $this->getFileName($params['idAlbum'], self::$_hostImagesPlanche);
+                    $this->_fileName = \Core_Service_Utilities::getAlbumImageFileName($params['idAlbum'], \Core_Service_Utilities::$hostImagesPlanche);
                 }
-                $image = call_user_func( array( $this , $params['format'] . 'Format'));
-                echo $image;
-            } else {
+                if (!empty($this->_fileName)) {
+                    $cache = call_user_func( array( $this , $params['format'] . 'Format'));
+                }
+            }
+
+            if (!empty($cache)) {
+                header('Content-Type: image/jpeg');
                 echo $cache;
+                die;
             }
         }
-        die();
+
+        header("HTTP/1.0 204 No Content");
+        die;
     }
 
     /*
@@ -70,24 +72,6 @@ class ImageController extends Zend_Controller_Action
     {
         $this->_type = 'planche';
         $this->_get();
-    }
-    
-    /*
-     * 
-     */
-    private function getFileName($id, $imgDirName)
-    {
-        $filename =  $imgDirName . DS . $id . '.jpg';
-
-		if(file_exists($filename)){
-            return $filename;
-        }else{
-            $filenameWithUnderScore = $imgDirName . DS . '_' .$id . '.jpg';
-            if(file_exists($filenameWithUnderScore)){
-                return $filenameWithUnderScore;
-            }
-        }
-        return 'no_image_found_file_name';
     }
 
     /*

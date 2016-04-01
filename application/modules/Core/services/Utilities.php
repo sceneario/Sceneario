@@ -8,6 +8,8 @@
 
 class Core_Service_Utilities 
 {
+    public static $hostImagesCouv    = '/home/sceneari/v6/public/images/couvertures';
+    public static $hostImagesPlanche = '/home/sceneari/v6/public/images/planches';
 
     /*
      * Set la vue
@@ -171,7 +173,26 @@ class Core_Service_Utilities
         }
         return false;  
     }
-    
+
+    /*
+     * 
+     */
+    public static function getAlbumImageFileName($id, $imgDirName)
+    {
+        $filename =  $imgDirName . DS . $id . '.jpg';
+
+        if (file_exists($filename)) {
+            return $filename;
+        } else {
+            $filenameWithUnderScore = $imgDirName . DS . '_' .$id . '.jpg';
+            if (file_exists($filenameWithUnderScore)) {
+                return $filenameWithUnderScore;
+            }
+        }
+
+        return false;
+    }
+
     /*
      * Retourne une url formatée 
      * en fonction de l'ID de l'album
