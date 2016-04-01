@@ -102,7 +102,7 @@
                     var js, fjs = d.getElementsByTagName(s)[0];
                     if (d.getElementById(id)) return;
                     js = d.createElement(s); js.id = id;js.async = true;
-                    js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=277280558967434";
+                    js.async=true; js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=277280558967434";
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
             </script>
@@ -260,7 +260,7 @@
                         <div class="col-xs-12 col-md-4">
                             <h3>Plan du site</h3>
                             <p class="text-justify">
-                                <a href="http://www.sceneario.com">Sceneario.com</a> est un site généraliste traitant de Bande Dessinée, spécialisé dans la critique de BD, de Comics et de Mangas. Avec plus de 20 000 fiches BDs résumant et analysant les parutions internationales, 550 interviews, 450 préviews, 270 comptes rendus d’expositions&nbsp;/&nbsp;salons, 180 galeries de croquis, des concours, Sceneario.com est un site de référence et un incontournable du monde de la Bande Dessinée.
+                                <a href="http://www.sceneario.com">Sceneario.com</a> est un site généraliste traitant de Bande Dessinée, spécialisé dans la critique de BD, de Comics et de Mangas. Avec plus de 23 500 fiches BDs résumant et analysant les parutions internationales, 600 interviews, 500 préviews, 320 comptes rendus d’expositions&nbsp;/&nbsp;salons, 200 galeries de croquis, des concours, Sceneario.com est un site de référence et un incontournable du monde de la Bande Dessinée.
                             </p>
                         </div>
                         <ul class="mainMenu col-md-7 col-md-offset-1">
@@ -322,16 +322,11 @@
         <script src="<?php echo BASE_URL ?>min/?g=js-vendor"></script>
         <script src="<?php echo BASE_URL ?>min/?g=js"></script>
         <?php echo implode('', $this->block_js); ?>
-        <script type="text/javascript">
-            sas_pageid='66595/511465';    // Page : Sceneario/sceneario-all
-            sas_formatid=29314;                // Format : Interstitiel 0x0
-            sas_target='';                                     // Ciblage
-            SmartAdServer(sas_pageid,sas_formatid,sas_target);
-        </script>
-        <noscript>
-            <a href="http://www3.smartadserver.com/call/pubjumpi/66595/511465/29314/S/<?php echo time(); ?>/?" target="_blank">
-            <img src="http://www3.smartadserver.com/call/pubi/66595/511465/29314/S/<?php echo time(); ?>/?" border="0" alt="" /></a>
-        </noscript>
+	<div id='div-gpt-ad-1457810657334-1'>
+	  <script type='text/javascript'>
+	    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1457810657334-1'); });
+	  </script>
+	</div>
         <?php if (APPLICATION_ENV != 'development' || APPLICATION_ENV != 'testing'): ?>
             <script>
                 var _gaq=[['_setAccount','UA-964631-1'],['_trackPageview']];
