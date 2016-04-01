@@ -21,7 +21,8 @@ class Zend_View_Helper_CustomUrl extends Zend_View_Helper_Url
             'format' => $format
         );
 
-        if (empty(\Core_Service_Utilities::getAlbumImageFileName($urlParams['isbn'], \Core_Service_Utilities::$hostImagesCouv))) {
+        $imageFileName = \Core_Service_Utilities::getAlbumImageFileName($urlParams['isbn'], \Core_Service_Utilities::$hostImagesCouv);
+        if (empty($imageFileName)) {
             return false;
         }
 
@@ -43,7 +44,8 @@ class Zend_View_Helper_CustomUrl extends Zend_View_Helper_Url
             'format'  => $format
         );
 
-        if (empty(\Core_Service_Utilities::getAlbumImageFileName($urlParams['idAlbum'], \Core_Service_Utilities::$hostImagesPlanche))) {
+        $imageFileName = \Core_Service_Utilities::getAlbumImageFileName($urlParams['idAlbum'], \Core_Service_Utilities::$hostImagesPlanche);
+        if (empty($imageFileName)) {
             return false;
         }
 
