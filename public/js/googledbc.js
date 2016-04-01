@@ -72,8 +72,13 @@ googletag.cmd.push(function() {
     googletag.enableServices();
 });
 
-sas_tmstp=Math.round(Math.random()*10000000000);sas_masterflag=1;
-function SmartAdServer(sas_pageid,sas_formatid,sas_target) {
- if (sas_masterflag==1) {sas_masterflag=0;sas_master='M';} else {sas_master='S';};
- document.write('<scr'+'ipt src="http://www3.smartadserver.com/call/pubj/' + sas_pageid + '/' + sas_formatid + '/' + sas_master + '/' + sas_tmstp + '/' + escape(sas_target) + '?"></scr'+'ipt>');
-}
+googletag.cmd.push(function() {
+    googletag.defineSlot('/5646810647/dfp-sceneario-habillage', [1, 1], 'div-gpt-ad-1457810657334-0').addService(googletag.pubads());
+    googletag.defineOutOfPageSlot('/5646810647/dfp-sceneario-interstitiel', 'div-gpt-ad-1457810657334-1').addService(googletag.pubads());
+    googletag.defineSlot('/5646810647/dfp-sceneario-pave-home', [300, 250], 'div-gpt-ad-1457810657334-2').addService(googletag.pubads());
+    googletag.defineSlot('/5646810647/dfp-sceneario-pave//GA', [[300, 600], [300, 250]], 'div-gpt-ad-1457810657334-3').addService(googletag.pubads());
+    googletag.pubads().enableSingleRequest();
+    googletag.pubads().collapseEmptyDivs();
+    googletag.pubads().enableSyncRendering();
+    googletag.enableServices();
+});
