@@ -313,33 +313,33 @@ class Core_Service_Utilities
         /*
          * Capture les images src=""
          */
-        preg_match_all('/src="([^"]*)"/i', $text, $images);
+        preg_match_all('/(src="([^"]*)")/i', $text, $images);
         
         /*
          * Capture les lien href=""
          */
-        preg_match_all('/href="([^"]*)"/i', $text, $links);
+        preg_match_all('/(href="([^"]*)")/i', $text, $links);
         
         #echo '<pre>';
         #print_r($links);
         #exit('</pre>');
      
         $newLinks = array();
-        foreach($links[1] as $link){
+        foreach($links[2] as $link){
         	if(!$this->linkIsExternal($link)){
 	            if(strstr( $link, 'jpg') == false && strstr( $link, 'bd_') == true){
 	                $linkParts = explode('_', $link);
 	                foreach($linkParts as $part){
 	                    if(is_numeric($part)){
-	                        $newLinks[] = $this->getAlbumUrlFromId($part);
+	                        $newLinks[] = 'href="'.$this->getAlbumUrlFromId($part).'"';
 	                    }
 	                }
 	            }
 	            else{
-	                 $newLinks[] = 'http://images.sceneario.com/' . $link .'" rel="lightbox[interview]"';
+	                 $newLinks[] = 'href="http://images.sceneario.com/' . $link .'" rel="lightbox[interview]"';
 	            }
             }else{
-	            $newLinks[] = $link;
+	            $newLinks[] = 'href="'.$link.'"';
             }
         }
         
@@ -348,10 +348,10 @@ class Core_Service_Utilities
          * Reecriture des liens images
          */
         $newImageUrls = array();
-        foreach($images[1] as $image){
+        foreach($images[2] as $image){
              #var_dump(strpos($image, 'Couverture_bd_'));
              if(strpos($image, 'Couverture_bd_')===false OR strpos($image, 'Planche_bd_')===false ){
-	             $newImageUrls[] = $this->getImages($image);
+	             $newImageUrls[] = 'src="'.$this->getImages($image).'"';
              }else{
                  $urlPieces      = explode('_', substr(strrchr($image, '/'), 1));
                  $isbnEtFormat   = $urlPieces[count($urlPieces)-2] ;
@@ -369,9 +369,9 @@ class Core_Service_Utilities
                      $type = 'planche';
                  }
                  
-                 $newImageUrls [] = $this->_getView()->customUrl( array('isbn'   => $isbn,
+                 $newImageUrls [] = 'src="'.$this->_getView()->customUrl( array('isbn'   => $isbn,
                                                                        'format' => 'interview') , 
-                                                                  $type );
+                                                                  $type ).'"';
              }     
         }
         
