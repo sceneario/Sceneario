@@ -123,7 +123,7 @@ class Core_Model_Mapper_Tblauteurs extends Core_Model_DbTable_Db
                         AND t1.enligne = 'O'
                 GROUP BY t1.collection
                 ORDER BY t1.idAlbum
-                LIMIT 0, 8";
+                ";
         
         $results = $this->getSqlResults($sql, array($idAuteur));
         return $results;
