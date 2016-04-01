@@ -27,7 +27,7 @@ class ApiController extends GlobalController
             if (!empty($app)) {
                 $tokens = array();
                 $now    = time();
-                for ($i = $now - 10; $i < $now; $i++) {
+                for ($i = $now - 5; $i < $now + 5; $i++) {
                     $tokens[] = md5($app->app_id . $app->app_secret . $i);
                 }
 
